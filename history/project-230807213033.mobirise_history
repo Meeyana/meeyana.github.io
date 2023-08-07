@@ -58,9 +58,7 @@
     "cookiesAlert": false,
     "gdpr": false,
     "pwa-switcher": false,
-    "screenshot": "screenshot.png",
-    "publishType": "local",
-    "publishPath": "file:///D:/project/hshsh"
+    "screenshot": "screenshot.png"
   },
   "pages": {
     "index.html": {

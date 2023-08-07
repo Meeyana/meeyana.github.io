@@ -786,9 +786,10 @@ a {
 }
 .cid-tJS6tZXiPa .navbar-nav .nav-item .nav-link {
   padding: 16px !important;
-  margin: 0 !important;
+  margin: 0 1rem !important;
   border-radius: 1rem !important;
   transition: .3s all !important;
+  font-size: large;
 }
 .cid-tJS6tZXiPa .navbar-nav .nav-item .nav-link:hover {
   background-color: rgba(27, 31, 10, 0.06);
