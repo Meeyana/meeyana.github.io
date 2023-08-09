@@ -28,7 +28,36 @@
 <link rel='stylesheet' id='mona-style-css-css'  href='mona-style-min.css' type='text/css' media='all' />
 <link rel='stylesheet' id='mona-custom-css'  href='mona-custom.css' type='text/css' media='all' />
   <!--end the head section 3 -->
+<!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
 
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "106051175777129");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v17.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
 
   
   
@@ -134,7 +163,7 @@
     <div class="pd__bot">
 
         <a href="https://meeyana.store/" title="Flower Cart Raglan Regular Tee/ Blue" class="pd__title hov-df">
-             Flower Cart Raglan Regular Tee/ Blue        </a>
+             Flower Mordern Regular Tee/ Pink        </a>
         <div class="pd__price" data-price="380000">
             <span class="big m-black"><span class="woocommerce-Price-amount amount"><bdi>380,000&nbsp;<span class="woocommerce-Price-currencySymbol">vnđ</span></bdi></span></span>        </div>
     </div>
@@ -161,7 +190,7 @@
     <div class="pd__bot">
 
         <a href="" title="Flower Cart Raglan Regular Tee/ Green" class="pd__title hov-df">
-            Flower Cart Raglan Regular Tee/ Green        </a>
+            Flower Mordern Regular Tee/ Black        </a>
         <div class="pd__price" data-price="380000">
             <span class="big m-black"><span class="woocommerce-Price-amount amount"><bdi>380,000&nbsp;<span class="woocommerce-Price-currencySymbol">vnđ</span></bdi></span></span>        </div>
     </div>
@@ -186,7 +215,7 @@
     <div class="pd__bot">
 
         <a href="" title="Flower Cart Raglan Regular Tee/ Black" class="pd__title hov-df">
-            Flower Cart Raglan Regular Tee/ Black        </a>
+            Flower Mordern Regular Tee/ Green       </a>
         <div class="pd__price" data-price="380000">
             <span class="big m-black"><span class="woocommerce-Price-amount amount"><bdi>380,000&nbsp;<span class="woocommerce-Price-currencySymbol">vnđ</span></bdi></span></span>        </div>
     </div>
@@ -212,7 +241,7 @@
     <div class="pd__bot">
 
         <a href="" title="Knit Tee/ Cream" class="pd__title hov-df">
-            Knit Tee/ Cream        </a>
+            Flower Mordern Regular Tee/ Red       </a>
         <div class="pd__price" data-price="530000">
             <span class="big m-black"><span class="woocommerce-Price-amount amount"><bdi>530,000&nbsp;<span class="woocommerce-Price-currencySymbol">vnđ</span></bdi></span></span>        </div>
     </div>
@@ -238,7 +267,7 @@
     <div class="pd__bot">
 
         <a href="" title="Knit Tee/ Brown" class="pd__title hov-df">
-            Knit Tee/ Brown        </a>
+            Flower Mordern Regular Tee/ White        </a>
         <div class="pd__price" data-price="530000">
             <span class="big m-black"><span class="woocommerce-Price-amount amount"><bdi>530,000&nbsp;<span class="woocommerce-Price-currencySymbol">vnđ</span></bdi></span></span>        </div>
     </div>
@@ -286,7 +315,7 @@
     <div class="pd__bot">
 
         <a href="" title="Pixel Flower Tee/ White" class="pd__title hov-df">
-            Pixel Flower Tee/ White        </a>
+            Flower Mordern Regular Tee/ Green       </a>
         <div class="pd__price" data-price="380000">
             <span class="big m-black"><span class="woocommerce-Price-amount amount"><bdi>380,000&nbsp;<span class="woocommerce-Price-currencySymbol">vnđ</span></bdi></span></span>        </div>
     </div>
