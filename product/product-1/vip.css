@@ -1,0 +1,288 @@
+img {
+	max-width: 50%;
+    height: auto;
+}
+
+ul li{
+	list-style-type: none;
+	text-align: right;	
+}
+
+/*ul{
+	padding-left: 160px;
+}*/
+
+.row{
+	padding-top:30px;
+}
+
+.detail {
+    font-size: 22px;
+    border-bottom: 1px #000 solid;
+    padding-bottom:10px;
+}
+
+.product-price{
+	font-size: 30px;
+    color: #F81F1F;
+}
+
+.old-price{
+	margin-left: 10px;
+}
+
+.product-price-old{
+	font-size: 20px;
+    font-weight: 500;
+    text-decoration: line-through;
+    color: #949494;
+}
+
+.product-summary{
+	color: #4F4F4F;
+    padding-top: 10px;
+}
+
+.form-product, .size-product{
+	color: #4F4F4F;
+    padding-top: 10px;
+
+}
+
+.pd__color{
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    max-width: 100%;
+    padding-top: 10px;
+}
+
+.fl-wrap{
+	flex-wrap: wrap;
+	display:flex;
+    padding: 0 0 0.5rem 0;
+}
+
+.icon-red {
+  color: red;
+}
+
+.icon{
+    cursor: pointer;
+}
+
+.pd__color .co__btn .pick-color {
+	    width: 12px;
+    height: 12px;
+    display: inline-block;
+}
+
+.pd__color .co__btn {
+    display: flex;
+}
+.pd__color .co__btn {
+    cursor: pointer;
+    padding: 0 2.5px;
+}
+
+.wrap-size {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item-radio {
+    margin-right: 0.5rem;
+    display: block;
+    margin-bottom: 2rem;
+    user-select: none;
+}
+
+.item-radio input {
+    display: none;
+    font-size: 1.4rem;
+}
+
+.item-radio .m-radio-label {
+    border: 1px solid rgba(112, 112, 112, 0.3);
+    padding: 0.3rem 1rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.cc{
+	text-align:right;
+	padding-bottom: 5px;
+}
+
+
+/* Media query chỉ cho kích thước màn hình dưới 768px (mobile) */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column; /* Sắp xếp dọc */
+  }
+
+  .col-md-2:nth-child(1) {
+    order: 2; /* Đặt thứ tự cho Section 2 */
+    padding-left: 0px;
+  }
+
+  .col-md-5:nth-child(2) {
+    order: 1; /* Đặt thứ tự cho Section 1 */
+  }
+  .col-md-5:nth-child(3) {
+  	order: 3;
+  }
+  .cc{
+	text-align:left;
+	display:inline;
+	width:30%;
+	padding-right:10px;
+	}
+	.icon{
+		width:40px;
+	}
+	.provip{
+		padding: 10px 0 10px 12px;
+	}
+}
+
+.m-btn-loading {
+    position: relative;
+}
+
+.m-btn-loading:hover {
+    box-shadow: 1rem 1rem 3rem rgba(0, 0, 0, 0.4);
+    border: 1px solid black;
+    transition: 0.3s linear;
+    background-color: black;  
+}
+.btn-pri:hover::after {
+    height: 102%;
+  }
+
+.btn-pri::after {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 0;
+  background-color: #000;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  transition: 0.5s ease;
+  z-index: -1;
+}
+
+.btn-pri {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  position: relative;
+  background-color: #47474c;
+  z-index: 1;
+  line-height: 1.5;
+  padding: 5px;
+  text-align: center;
+  border: 1px solid #47474c;
+}
+
+.shop-dt__btn {
+    padding: 5px;
+    width: 20rem;
+    color:#fff;
+}
+
+.open-modal-btn{
+    border:none;
+    padding:0;
+    color:#0158da;
+    background: none;
+}
+.open-modal-btn:hover{
+    color:red;
+    
+}
+
+
+/*popup*/
+.modal1{
+    position: fixed;
+    top:0;
+    /*height:100vh;
+    width: 100vw;*/
+    max-width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    text-align: left;
+    z-index: 1000 !important;
+
+}
+
+.modal_inner{
+    width:80%;
+    height:80%;
+    position:relative;
+    top:5%;
+    margin:auto;
+    background: white;
+    animation: modalShow 0.3s linear;
+    overflow:hidden;
+    overflow-y: scroll;
+}
+
+.modal_header{
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding:15px;
+    color: gray;
+}
+
+.modal_body{
+    padding: 15px;
+}
+
+.modal_body h2{
+    color:gray;
+    margin-bottom: 10px;
+}
+
+.modal_body #cc{
+    height: auto;
+    max-width:100%;
+    padding-top:1rem;
+}
+
+.modal_footer{
+    padding: 15px;
+    text-align: right;
+}
+
+.modal_footer button{
+    padding:10px 15px;
+    color:white;
+    background: gray;
+    border-radius: 10px;
+    border:none;
+    outline:none;
+    cursor: pointer;
+}
+
+.hide{
+    display: none;
+}
+
+@keyframes modalShow{
+    from{       
+        opacity:0;
+    }
+    to{     
+        opacity:1;
+    }
+}
+/*endpopup*/
