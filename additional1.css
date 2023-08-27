@@ -1,0 +1,67 @@
+@media screen and (min-width: 992px){
+	.navbar>.container-fluid{
+	display: block;
+	text-align: center;
+	}
+	.navbar-collapse{
+	justify-content: center;
+	}
+	.nav-item{
+		padding:10px 40px 10px 40px;
+		justify-content: center;
+	}
+
+}
+
+.navbar-collapse{
+	margin-left: 20px;
+}
+
+.cta-banner{
+	width: 100%;
+	height: 100vh;
+	background-image: url(https://meeyana.store/assets/images/background17.jpg);
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+	text-align: center;
+	padding-top:35%;
+}
+.title-cta-banner{
+	color:white;
+}
+.cta-banner>.title-cta-banner> h1{
+	font-size: 7rem;
+	padding:3rem;
+}
+.btn-banner1{
+	padding:8px 20px;
+	margin-top:2rem;
+}
+@media screen and (max-width: 920px){
+	.cta-banner{
+		padding-top:35%;
+		height:auto;
+		padding-bottom: 5%;
+		line-height: 1.2;
+	}
+	.cta-banner>.title-cta-banner> h1{
+	font-size: 5rem;
+	padding:2rem;
+	}
+	.btn-banner1{
+	padding:8px 20px;
+	margin-top:1rem;
+}
+@media screen and (max-width: 767px){
+	.cta-banner{
+		padding-top:25%;
+	}
+	.cta-banner>.title-cta-banner> h1{
+	font-size: 3rem;
+	padding:1rem;
+	}
+	.btn-banner1{
+	padding:8px 20px;
+	margin-top:1rem;
+}
+
