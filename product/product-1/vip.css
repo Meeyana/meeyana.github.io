@@ -329,3 +329,12 @@ h2,.col-md-5> h1,.special-price,.old-price,.product-summary> h5,.size-title>h5{
     width: 70%;
     }
 }
+
+@media (max-width: 768px) {
+    .bt-ft{
+        padding-left: 2rem;
+    }
+    .text-center{
+        text-align: left!important;
+    }
+}
