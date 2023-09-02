@@ -2661,3 +2661,101 @@ label.item-size.disabled {
     padding-top: 3rem;
 }
 
+/*navbar*/
+.blankbar{
+    margin: 2rem;
+    padding-top: 0.5rem;
+    padding-right: 1rem;
+}
+
+.navtest{
+/*    padding-top: 0.5rem;*/
+    margin: 1.5rem;
+}
+
+.navbar-brand{
+/*    padding-top: 5px;*/
+}
+.nav__bars-btn{
+    margin: 2rem;
+}
+.nav__link,.nav__list{
+    padding:0 2rem 2rem 2rem;
+    font-size: 16px;
+}
+.nav__link:hover{
+    color: #999999;
+}
+
+.nav__bars-btn i{
+    display: none;
+}
+
+@media screen and (max-width: 1023px) {
+    .nav__bars-btn i{
+    display: block;
+    }
+    .nav__category{
+        display: none;
+    }
+}
+
+.nav__overlay{
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.3);
+    z-index: 10 ;
+    display:none;
+    animation: fadeIN linear 0.3s;
+}
+
+.nav__mobile{
+    position: fixed;
+    top:0;
+    right: 0;
+    bottom: 0;
+    width: 320px;
+    max-width: 100%;
+    background-color: white;
+    z-index: 20;
+    transform: translateX(100%);
+    opacity:0;
+    transition: transform linear 0.2s, opacity linear 0.2s;
+}
+
+.nav__mobile-list{
+    margin: 2rem;
+/*    padding-top: 3rem;*/
+}
+
+.nav__mobile-list li{
+    line-height: 40px;
+}
+
+.nav__mobile-close{
+    margin:2rem;
+    padding-top:0.5rem;
+}
+.nav__input{
+    display: none;
+}
+.nav__input:checked ~ .nav__overlay{
+    display:block;
+}
+
+.nav__input:checked ~ .nav__mobile{
+    transform: translateX(0);
+    opacity: 1;
+}
+
+@keyframes fadeIN {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
