@@ -2661,6 +2661,15 @@ label.item-size.disabled {
     padding-top: 3rem;
 }
 
+@media (max-width: 768px) {
+    .bt-ft{
+        padding-left: 2rem;
+    }
+    .text-center{
+        text-align: left!important;
+    }
+}
+
 /*navbar*/
 .blankbar{
     margin: 2rem;
