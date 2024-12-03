@@ -1156,6 +1156,7 @@ a {
   cursor: pointer;
   position: relative;
   font-size: 1.6rem;
+  transition: all 0.3s ease;
 }
 .cid-uvlkcWvWQA .tab-links::after {
   content: "";
@@ -1166,6 +1167,9 @@ a {
   left: 0;
   bottom: -8px;
   transition: 0.5s;
+}
+.cid-uvlkcWvWQA .tab-links:hover {
+  color: #8b5cf6!important;
 }
 .cid-uvlkcWvWQA .tab-links.active-link::after {
   width: 50%;
@@ -1379,6 +1383,11 @@ a {
   padding-bottom: 30px;
   background-color: #232323;
   overflow: hidden;
+}
+@media (max-width: 450px) {
+  .cid-uvlEBN3KtK .rs-mbe {
+    font-size: 11px!important;
+  }
 }
 .cid-uvlgXaWB7O {
   z-index: 1000;
@@ -1743,4 +1752,9 @@ a {
   padding-bottom: 30px;
   background-color: #232323;
   overflow: hidden;
+}
+@media (max-width: 450px) {
+  .cid-uvlEBN3KtK .rs-mbe {
+    font-size: 11px!important;
+  }
 }
