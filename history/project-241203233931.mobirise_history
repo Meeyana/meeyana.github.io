@@ -71,7 +71,9 @@
     "cookiesAlert": false,
     "gdpr": false,
     "pwa-switcher": false,
-    "screenshot": "screenshot.png"
+    "screenshot": "screenshot.png",
+    "publishType": "local",
+    "publishPath": "@PROJECT_PATH@"
   },
   "pages": {
     "index.html": {
@@ -666,15 +668,12 @@
               },
               ".tab-titles": {
                 "padding": "0"
-              },
-              ".tab-contents": {
-                "padding": "0"
               }
             },
             "@media (max-width: 450px)": {
               ".tab-links": {
-                "margin-right": "1.5rem!important",
-                "font-size": "1.3rem!important"
+                "margin-right": "1.5rem",
+                "font-size": "1.3rem"
               }
             }
           },

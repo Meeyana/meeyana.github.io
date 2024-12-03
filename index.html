@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-grid.min.css">
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap-reboot.min.css">
   <link rel="stylesheet" href="assets/dropdown/css/style.css">
-  <link rel="stylesheet" href="assets/socicon/css/styles.css">
   <link rel="stylesheet" href="assets/theme/css/style.css">
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap"></noscript>
@@ -27,7 +26,7 @@
 </head>
 <body>
   
-  <section data-bs-version="5.1" class="menu menu2 cid-uvlgXaWB7O" once="menu" id="menu2-a">
+  <section data-bs-version="5.1" class="menu menu2 cid-uvlgXaWB7O" once="menu" id="menu2-r">
     
     <nav class="navbar navbar-dropdown navbar-fixed-top navbar-expand-lg">
         <div class="container">
@@ -88,7 +87,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 d-flex justify-content-center">
-              <div class="abt-me col-10">
+              <div class="abt-me col-lg-10 col-12">
                 <div class="text-wrapper">
                     <h3 class="mbr-section-title mbr-fonts-style mb-3 display-2">
                         <strong>About Me</strong></h3>
@@ -101,13 +100,13 @@
                 </div>
                 <div class="tab-contents active-tab mbr-text" id="skills">
                     <h3 class="mbr-section-title mbr-fonts-style mb-3 display-5">Technical Skills</h3>
-                    <ul class="tab-links mbr-fonts-style display-7">
+                    <ul class="mbr-fonts-style display-7">
                         <li>Programming and Query: SQL, Python, R, HTML, CSS</li>
                         <li>Data Cleanning: Handling missing values, data transformation, and preprocessing</li><li>Data Wrangling: Extracting, transforming, and loading (ETL) processes</li>
                         <li>Tools &amp; Technologies: Power BI, Google Data Studio, MS Excel, Basic API Intergration, CRM, Google Analytics</li>
                     </ul>
                     <h3 class="mbr-section-title mbr-fonts-style mb-3 display-5">Soft Skills</h3>
-                    <ul class="tab-links mbr-fonts-style display-7">
+                    <ul class="mbr-fonts-style display-7">
                         <li>Effective communication and teamwork</li>
                         <li>Problem-solving and critical thinking</li>
                         <li>Collaboration Tools: Microsoft Teams, Lark, Notion</li>
@@ -116,17 +115,17 @@
                 </div>
                 <div class="tab-contents mbr-text" id="experience">
                     <h3 class="mbr-section-title mbr-fonts-style mb-3 display-5">Jul 2023 - Present</h3>
-                    <ul class="tab-links mbr-fonts-style display-7">
+                    <ul class="mbr-fonts-style display-7">
                         <li>Digital Marketing Specialist - Anphabe</li>
                     </ul>
                     <h3 class="mbr-section-title mbr-fonts-style mb-3 display-5">Jul 2021 - Jun 2023</h3>
-                    <ul class="tab-links mbr-fonts-style display-7">
+                    <ul class="mbr-fonts-style display-7">
                         <li>Marketing Intern, Digital Marketing Executive - Massey University</li>
                     </ul>               
                 </div>
                 <div class="tab-contents mbr-text" id="education">
                     <h3 class="mbr-section-title mbr-fonts-style mb-3 display-5">Bachelor of E-Commerce</h3>
-                    <ul class="tab-links mbr-fonts-style display-7">
+                    <ul class="mbr-fonts-style display-7">
                         <li>UEH University | 2018 - 2022</li>
                     </ul>
                 </div>
@@ -150,6 +149,17 @@
       document.getElementById(tabname).classList.add("active-tab");
 
     }
+    const tabs = document.querySelectorAll(".tab-links");
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        // Xóa class active-link khỏi tất cả tabs
+        tabs.forEach(t => t.classList.remove("active-link"));
+        
+        // Thêm class active-link vào tab được click
+        tab.classList.add("active-link");
+      });
+    });
     
 
 </script>
@@ -295,7 +305,7 @@
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="h9RpE7qNwxRmWpRWycs1Wi08UQnPQOa5WVN1qvlROQv0hHHd7C7NY31h8cBxfGy6lF9ScfFL7r6mYQSu9mZaDDzifjYjRd6ILthmYj5e6QeW6zmjOpxytY6azXvQHA/N">
+                <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="JaW5o/Af00hohhDjOBn75W5fofVeVv8+SKOrmKM/P405MxTXCcxUpxg0e5I7GVin/DuLOi4fVJ8SHdin44Ho9t0iu3oreDiva8HYtLBRVnBtbC+HIrZ+MsbuGXUU3CA7">
                     <div class="row">
                         <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
                         <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
