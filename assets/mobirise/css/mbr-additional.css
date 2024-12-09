@@ -1223,6 +1223,11 @@ a {
     font-size: 1.3rem!important;
   }
 }
+@media (min-width: 1200px) and (max-width: 1400px) {
+  .cid-uvlkcWvWQA .md-down {
+    margin: 4rem 0 0 0!important;
+  }
+}
 .cid-uvlDu6qaU6 {
   padding-top: 2rem;
   padding-bottom: 2rem;
