@@ -78,7 +78,7 @@
       "settings": {
         "main": true,
         "title": "Tuan Phan's Page",
-        "meta_descr": "There is just a page for showing my Project and Certificates",
+        "meta_descr": "There is just a page for showing my Projects and Certificates",
         "header_custom": "<meta property=\"og:image\" content=\"https://tuanphangz.site/assets/images/index-meta.jpg\">",
         "footer_custom": "",
         "html_before": "",
