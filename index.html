@@ -312,25 +312,57 @@
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-lg-8 mx-auto mbr-form">
-                <form action="https://script.google.com/macros/s/AKfycbxwkmSHcFEEwKoy9_xTlhxUKKAv89yr5Vq9N8dJk7bmA2wWtGzIHHAUYP89Jb0-tcvMKA/exec" method="POST" class="mbr-form form-with-styler" data-verified="">
+                <form action="https://script.google.com/macros/s/AKfycbxYJpDLxf1pVR1WkYZwLc93ZYg7GNre4et_6qJp7IT8I-7AVnMkrlaXZVbNFqGc5C3zaA/exec" method="POST" class="mbr-form form-with-styler" data-verified="">
+
                     <div class="row">
                         
                         <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
-                            Oops...! some problem!
+                            Oops... Có lỗi xảy ra!
                         </div>
                     </div>
+
                     <div class="dragArea row">
+                        <!-- Họ tên -->
                         <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                            <input type="text" name="name" placeholder="Name" data-form-field="name" class="form-control" value="" id="name-contact">
+                            <input type="text" name="name" placeholder="Họ và tên" data-form-field="name" class="form-control" required="" id="name-contact">
                         </div>
+
+                        <!-- Số điện thoại -->
+                        <div class="col-md col-sm-12 form-group mb-3" data-for="phone">
+                            <input type="tel" name="phone" placeholder="Số điện thoại" data-form-field="phone" class="form-control" required="" id="phone-contact">
+                        </div>
+
+                        <!-- Email -->
                         <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                            <input type="email" name="email" placeholder="E-mail" data-form-field="email" class="form-control" value="" id="email-contact">
+                            <input type="email" name="email" placeholder="Email" data-form-field="email" class="form-control" required="" id="email-contact">
                         </div>
-                        
-                        <div class="col-12 form-group mb-3" data-for="textarea">
-                            <textarea name="textarea" placeholder="Message" data-form-field="textarea" class="form-control" id="textarea-contact"></textarea>
+
+                        <!-- Địa chỉ -->
+                        <div class="col-12 form-group mb-3" data-for="address">
+                            <input type="text" name="address" placeholder="Địa chỉ" data-form-field="address" class="form-control" id="address-contact">
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-danger display-7">Submit</button></div>
+
+                        <!-- Sản phẩm (Checkbox multiple) -->
+                        <div class="col-12 form-group mb-3" data-for="products">
+                            <label class="form-label mb-2">Chọn sản phẩm:</label><br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="products" value="A" id="products-contact">
+                                <label class="form-check-label" for="productA">Sản phẩm A</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="products" value="B" id="products-contact">
+                                <label class="form-check-label" for="productB">Sản phẩm B</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" name="products" value="C" id="products-contact">
+                                <label class="form-check-label" for="productC">Sản phẩm C</label>
+                            </div>
+                        </div>
+
+                        <!-- Nút gửi -->
+                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">
+                            <button type="submit" class="btn btn-danger">Gửi thông tin</button>
+                        </div>
                     </div>
                 </form>
             </div>
