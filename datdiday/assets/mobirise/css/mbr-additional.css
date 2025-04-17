@@ -1,6 +1,5 @@
 body {
   font-family: Jost;
-  overflow-x: hidden;
 }
 .display-1 {
   font-family: 'Inter', sans-serif;
@@ -683,100 +682,10 @@ body {
 a {
   transition: color 0.6s;
 }
-.cid-uICu9zQGuz {
-  overflow: hidden;
-}
-.cid-uICu9zQGuz .navbar {
-  min-height: 70px;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-  border-bottom: 1px solid transparent;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  background: #ffffff;
-  flex-wrap: nowrap;
-  opacity: 1;
-}
-.cid-uICu9zQGuz .navbar-dropdown {
-  padding: 0 1rem;
-}
-.cid-uICu9zQGuz .navbar-fixed-top {
-  position: fixed;
-  z-index: 1000;
-  width: 100%;
-}
-.cid-uICu9zQGuz .container,
-.cid-uICu9zQGuz .container-fluid {
-  display: flex;
-  margin: auto;
-  overflow-x: auto;
-  flex-wrap: nowrap;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-.cid-uICu9zQGuz .container::-webkit-scrollbar,
-.cid-uICu9zQGuz .container-fluid::-webkit-scrollbar {
-  display: none;
-}
-.cid-uICu9zQGuz .navbar-collapse {
-  display: flex !important;
-  flex-basis: auto;
-  justify-content: flex-end;
-  z-index: 1;
-}
-.cid-uICu9zQGuz .navbar-nav {
-  flex-direction: row;
-  flex-wrap: nowrap;
-  white-space: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  max-width: 100%;
-}
-.cid-uICu9zQGuz .navbar-nav::-webkit-scrollbar {
-  display: none;
-}
-.cid-uICu9zQGuz .navbar-nav .nav-item {
-  display: inline-block;
-  margin-right: 10px;
-}
-.cid-uICu9zQGuz .nav-dropdown .link {
-  padding: 0 0.3em !important;
-  margin: 0.667em 1em !important;
-}
-@media (max-width: 991px) {
-  .cid-uICu9zQGuz .navbar-nav {
-    flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    white-space: nowrap !important;
-    overflow-x: auto !important;
-    width: 100% !important;
-  }
-  .cid-uICu9zQGuz .nav-dropdown .link {
-    padding: 0 0.2em !important;
-    margin: 0.3em 0.5em !important;
-  }
-  .cid-uICu9zQGuz .navbar-collapse {
-    flex-grow: 1 !important;
-  }
-  .cid-uICu9zQGuz .nav-link {
-    white-space: nowrap !important;
-    display: inline-block !important;
-  }
-}
-@media (max-width: 576px) {
-  .cid-uICu9zQGuz .navbar-nav .nav-link {
-    font-size: 0.85rem !important;
-  }
-}
-.cid-uICu9zQGuz .navbar.show {
-  opacity: 1;
-  transform: translateY(0);
-}
 .cid-uIC7ThSp2c {
   padding-top: 0rem;
   padding-bottom: 0rem;
   background-color: #ffffff;
-  overflow-x: hidden;
 }
 @media (min-width: 992px) {
   .cid-uIC7ThSp2c .carousel {
