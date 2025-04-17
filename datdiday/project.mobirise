@@ -315,7 +315,8 @@
               "font-size": "14px",
               "border-radius": "20px",
               "z-index": "20"
-            }
+            },
+            "overflow-x": "hidden"
           },
           "_name": "slider2",
           "_sourceTheme": "mobirise5",
