@@ -65,7 +65,9 @@
     "gdpr": false,
     "witsec-white-label": false,
     "witsec-jquery": false,
-    "witsec-mailform": false
+    "witsec-mailform": false,
+    "publishType": "local",
+    "publishPath": "@PROJECT_PATH@"
   },
   "pages": {
     "index.html": {
@@ -626,7 +628,7 @@
           "_anchor": "form7-12",
           "_PHPplaceholders": [],
           "_JSplaceholders": [
-            "<script>\n\ndocument.getElementById(\"warrantyForm\").addEventListener(\"submit\", function(e) {\n    e.preventDefault();\n\n    const form = e.target;\n    const formData = new FormData(form);\n    const data = {};\n    formData.forEach((value, key) => data[key] = value);\n\n    fetch(\"\", {\n      method: \"POST\",\n      mode: \"cors\",\n      headers: {\n        \"Content-Type\": \"application/x-www-form-urlencoded\"\n      },\n      body: new URLSearchParams(data).toString()\n    })\n    .then(res => res.text())\n    .then(text => {\n      console.log(\"Phản hồi:\", text);\n      form.reset();\n\n      // Hiển thị pop-up cảm ơn\n      document.getElementById('thankYouOverlay').style.display = 'flex';\n    })\n    .catch(err => {\n      console.error(\"Lỗi fetch:\", err);\n      alert(\"Có lỗi xảy ra. Vui lòng thử lại.\");\n    });\n  });\n\n</script>"
+            "<script>\n\ndocument.getElementById(\"warrantyForm\").addEventListener(\"submit\", function(e) {\n    e.preventDefault();\n\n    const form = e.target;\n    const formData = new FormData(form);\n    const data = {};\n    formData.forEach((value, key) => data[key] = value);\n\n    fetch(\"https://script.google.com/macros/s/AKfycbxeQl1s60m1wyNIId2HpmZrH0JJQt_xZI49vDpLf2tifzdtvIbDWmree3VpI4ivu3Aj6Q/exec\", {\n      method: \"POST\",\n      mode: \"cors\",\n      headers: {\n        \"Content-Type\": \"application/x-www-form-urlencoded\"\n      },\n      body: new URLSearchParams(data).toString()\n    })\n    .then(res => res.text())\n    .then(text => {\n      console.log(\"Phản hồi:\", text);\n      form.reset();\n\n      // Hiển thị pop-up cảm ơn\n      document.getElementById('thankYouOverlay').style.display = 'flex';\n    })\n    .catch(err => {\n      console.error(\"Lỗi fetch:\", err);\n      alert(\"Có lỗi xảy ra. Vui lòng thử lại.\");\n    });\n  });\n\n</script>"
           ],
           "_protectedParams": [],
           "_global": false,
