@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Order Đồ Uống</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto;max-width:680px;margin:0 auto;padding:20px}
+    .card{border:1px solid #ddd;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
+    label{display:block;margin:10px 0 6px}
+    input,select,textarea,button{width:100%;padding:10px;border:1px solid #ccc;border-radius:10px}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+    .items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+    .success{color:#0a7a3d;margin-top:10px}
+    .error{color:#b30021;margin-top:10px}
+  </style>
+</head>
+<body>
+  <h1>Đặt Đồ Uống</h1>
+  <div class="card">
+    <form id="orderForm">
+      <div class="row">
+        <div>
+          <label>Showroom ID</label>
+          <input name="showroom_id" id="showroom_id" required placeholder="VD: HCM-01" />
+        </div>
+        <div>
+          <label>Phòng/Bàn/ Khu</label>
+          <input name="room_or_table" id="room_or_table" required placeholder="VD: Phòng VIP B / Bàn 5" />
+        </div>
+      </div>
+
+      <label>Tên khách (tùy chọn)</label>
+      <input name="customer_name" id="customer_name" placeholder="VD: Anh Minh" />
+
+      <label>Chọn đồ uống</label>
+      <div class="items">
+        <label><input type="checkbox" name="items" value='{"name":"Cà phê đen","qty":1}'> Cà phê đen</label>
+        <label><input type="checkbox" name="items" value='{"name":"Cà phê sữa","qty":1}'> Cà phê sữa</label>
+        <label><input type="checkbox" name="items" value='{"name":"Trà đá","qty":1}'> Trà đá</label>
+        <label><input type="checkbox" name="items" value='{"name":"Nước suối","qty":1}'> Nước suối</label>
+      </div>
+
+      <label>Ghi chú</label>
+      <textarea id="note" placeholder="Đá ít/Không đường..."></textarea>
+
+      <button type="submit">Gửi Order</button>
+      <div id="msg"></div>
+    </form>
+  </div>
+
+  <script>
+    // Lấy showroom từ QR: ?store=HCM-01
+    const params = new URLSearchParams(location.search);
+    const qsStore = params.get('store');
+    if (qsStore) document.getElementById('showroom_id').value = qsStore;
+
+    const FORM = document.getElementById('orderForm');
+    const MSG = document.getElementById('msg');
+
+    FORM.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const items = Array.from(document.querySelectorAll('input[name="items"]:checked')).map(x => JSON.parse(x.value));
+      if (items.length === 0){
+        MSG.textContent = 'Vui lòng chọn ít nhất 1 món';
+        MSG.className = 'error';
+        return;
+      }
+      const payload = {
+        showroom_id: document.getElementById('showroom_id').value.trim(),
+        room_or_table: document.getElementById('room_or_table').value.trim(),
+        customer_name: document.getElementById('customer_name').value.trim(),
+        items,
+        note: document.getElementById('note').value.trim(),
+        ts_client: new Date().toISOString(),
+        ua: navigator.userAgent
+      };
+
+      try{
+        MSG.textContent = 'Đang gửi...';
+        MSG.className = '';
+
+        const res = await fetch('https://script.google.com/macros/s/AKfycbyb8p-3e7j3PGLvAxDIfaClOB6KWtl5FrDt5VoAWjsZNibEUuI73DPT1FVJgTlZEY6Y/exec', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if(!res.ok) throw new Error(data.message || 'Gửi thất bại');
+        MSG.textContent = 'Đã gửi! Nhân viên sẽ phục vụ ngay.';
+        MSG.className = 'success';
+        FORM.reset();
+        // Giữ showroom/room
+        if(qsStore) document.getElementById('showroom_id').value = qsStore;
+      }catch(err){
+        MSG.textContent = 'Lỗi: ' + err.message;
+        MSG.className = 'error';
+      }
+    });
+  </script>
+</body>
+</html>
