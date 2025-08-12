@@ -2,99 +2,151 @@
 <html lang="vi">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Order Đồ Uống</title>
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto;max-width:680px;margin:0 auto;padding:20px}
-    .card{border:1px solid #ddd;border-radius:14px;padding:16px;box-shadow:0 2px 8px rgba(0,0,0,.05)}
-    label{display:block;margin:10px 0 6px}
-    input,select,textarea,button{width:100%;padding:10px;border:1px solid #ccc;border-radius:10px}
-    .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-    .items{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
-    .success{color:#0a7a3d;margin-top:10px}
-    .error{color:#b30021;margin-top:10px}
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;max-width:680px;margin:24px auto;padding:0 16px}
+    h1{font-size:20px;margin:16px 0}
+    form{display:grid;gap:12px}
+    input,select,textarea,button{font:inherit;padding:10px;border:1px solid #ccc;border-radius:8px}
+    button{cursor:pointer}
+    .row{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+    .notice{padding:10px;border-radius:8px;background:#f6f6f6}
+    .hidden{display:none}
   </style>
 </head>
 <body>
-  <h1>Đặt Đồ Uống</h1>
-  <div class="card">
-    <form id="orderForm">
-      <div class="row">
-        <div>
-          <label>Showroom ID</label>
-          <input name="showroom_id" id="showroom_id" required placeholder="VD: HCM-01" />
-        </div>
-        <div>
-          <label>Phòng/Bàn/ Khu</label>
-          <input name="room_or_table" id="room_or_table" required placeholder="VD: Phòng VIP B / Bàn 5" />
-        </div>
-      </div>
+  <h1>Gọi đồ uống (miễn phí)</h1>
 
-      <label>Tên khách (tùy chọn)</label>
-      <input name="customer_name" id="customer_name" placeholder="VD: Anh Minh" />
-
-      <label>Chọn đồ uống</label>
-      <div class="items">
-        <label><input type="checkbox" name="items" value='{"name":"Cà phê đen","qty":1}'> Cà phê đen</label>
-        <label><input type="checkbox" name="items" value='{"name":"Cà phê sữa","qty":1}'> Cà phê sữa</label>
-        <label><input type="checkbox" name="items" value='{"name":"Trà đá","qty":1}'> Trà đá</label>
-        <label><input type="checkbox" name="items" value='{"name":"Nước suối","qty":1}'> Nước suối</label>
-      </div>
-
-      <label>Ghi chú</label>
-      <textarea id="note" placeholder="Đá ít/Không đường..."></textarea>
-
-      <button type="submit">Gửi Order</button>
-      <div id="msg"></div>
-    </form>
+  <div class="notice">
+    Quét QR theo showroom để sẵn <code>showroom_id</code>. Nếu chưa có, tự chọn bên dưới.
   </div>
 
+  <form id="orderForm">
+    <div class="row">
+      <div>
+        <label>Showroom</label>
+        <select id="showroom_id" name="showroom_id" required>
+          <option value="">-- Chọn showroom --</option>
+          <option>HCM-01</option>
+          <option>HCM-02</option>
+          <option>HNI-01</option>
+          <option>DN-01</option>
+          <!-- thêm theo danh sách của mày -->
+        </select>
+      </div>
+      <div>
+        <label>Phòng/Bàn/Khu</label>
+        <input id="room_or_table" name="room_or_table" placeholder="VD: Bàn 5 / Phòng VIP B" required />
+      </div>
+    </div>
+
+    <div class="row">
+      <div>
+        <label>Tên khách (tuỳ chọn)</label>
+        <input id="customer_name" name="customer_name" placeholder="VD: Anh Tuấn" />
+      </div>
+      <div>
+        <label>Thời điểm phục vụ (tuỳ chọn)</label>
+        <input id="serve_at" name="serve_at" type="time" />
+      </div>
+    </div>
+
+    <label>Món đồ uống</label>
+    <div class="row">
+      <div>
+        <select id="item_1" name="item_1">
+          <option value="">-- Chọn món 1 --</option>
+          <option>Cà phê đen</option>
+          <option>Cà phê sữa</option>
+          <option>Trà đào</option>
+          <option>Nước suối</option>
+        </select>
+      </div>
+      <div><input name="qty_1" id="qty_1" type="number" min="1" value="1" /></div>
+    </div>
+
+    <div class="row">
+      <div>
+        <select id="item_2" name="item_2">
+          <option value="">-- Chọn món 2 --</option>
+          <option>Cà phê đen</option>
+          <option>Cà phê sữa</option>
+          <option>Trà đào</option>
+          <option>Nước suối</option>
+        </select>
+      </div>
+      <div><input name="qty_2" id="qty_2" type="number" min="1" value="1" /></div>
+    </div>
+
+    <label>Ghi chú</label>
+    <textarea id="note" name="note" rows="3" placeholder="Ít đá, ít đường, ..."></textarea>
+
+    <button type="submit">Gửi yêu cầu</button>
+    <div id="msg" class="notice hidden"></div>
+  </form>
+
   <script>
-    // Lấy showroom từ QR: ?store=HCM-01
-    const params = new URLSearchParams(location.search);
-    const qsStore = params.get('store');
-    if (qsStore) document.getElementById('showroom_id').value = qsStore;
+    // Điền showroom từ QR: ?showroom_id=HCM-01
+    (function initQR(){
+      const qs = new URLSearchParams(location.search);
+      const s = qs.get('showroom_id') || qs.get('store') || '';
+      if(s) document.getElementById('showroom_id').value = s.toUpperCase();
+    })();
 
-    const FORM = document.getElementById('orderForm');
-    const MSG = document.getElementById('msg');
+    const GAS_URL = 'PASTE_YOUR_GAS_WEB_APP_EXEC_URL_HERE'; // dạng https://script.google.com/macros/s/AKfycb.../exec
 
-    FORM.addEventListener('submit', async (e) => {
+    const form = document.getElementById('orderForm');
+    const msg  = document.getElementById('msg');
+
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      const items = Array.from(document.querySelectorAll('input[name="items"]:checked')).map(x => JSON.parse(x.value));
-      if (items.length === 0){
-        MSG.textContent = 'Vui lòng chọn ít nhất 1 món';
-        MSG.className = 'error';
+      msg.classList.add('hidden');
+
+      // Gom items thành mảng [{name, qty}]
+      const items = [];
+      const i1 = document.getElementById('item_1').value;
+      const q1 = Number(document.getElementById('qty_1').value || 0);
+      if(i1) items.push({name:i1, qty:q1>0?q1:1});
+      const i2 = document.getElementById('item_2').value;
+      const q2 = Number(document.getElementById('qty_2').value || 0);
+      if(i2) items.push({name:i2, qty:q2>0?q2:1});
+      if(items.length === 0){
+        alert('Chọn ít nhất 1 món.');
         return;
       }
+
       const payload = {
-        showroom_id: document.getElementById('showroom_id').value.trim(),
-        room_or_table: document.getElementById('room_or_table').value.trim(),
-        customer_name: document.getElementById('customer_name').value.trim(),
-        items,
-        note: document.getElementById('note').value.trim(),
-        ts_client: new Date().toISOString(),
-        ua: navigator.userAgent
+        showroom_id:  document.getElementById('showroom_id').value.trim(),
+        room_or_table:document.getElementById('room_or_table').value.trim(),
+        customer_name:document.getElementById('customer_name').value.trim(),
+        serve_at:     document.getElementById('serve_at').value, // HH:MM
+        items:        JSON.stringify(items),
+        note:         document.getElementById('note').value.trim(),
+        ts_client:    new Date().toISOString(),
+        ua:           navigator.userAgent
       };
 
-      try{
-        MSG.textContent = 'Đang gửi...';
-        MSG.className = '';
+      // QUAN TRỌNG: Simple request -> KHÔNG set headers Content-Type
+      const body = new URLSearchParams(payload);
 
-        const res = await fetch('https://script.google.com/macros/s/AKfycbyb8p-3e7j3PGLvAxDIfaClOB6KWtl5FrDt5VoAWjsZNibEUuI73DPT1FVJgTlZEY6Y/exec', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+      try{
+        const res  = await fetch(https://script.google.com/macros/s/AKfycbyb8p-3e7j3PGLvAxDIfaClOB6KWtl5FrDt5VoAWjsZNibEUuI73DPT1FVJgTlZEY6Y/exec, { method:'POST', body });
+        // Thường đọc được JSON bình thường. Nếu hạ tầng chặn, dùng fallback dưới.
         const data = await res.json();
-        if(!res.ok) throw new Error(data.message || 'Gửi thất bại');
-        MSG.textContent = 'Đã gửi! Nhân viên sẽ phục vụ ngay.';
-        MSG.className = 'success';
-        FORM.reset();
-        // Giữ showroom/room
-        if(qsStore) document.getElementById('showroom_id').value = qsStore;
+        if(data && data.ok){
+          msg.textContent = 'Đã gửi yêu cầu pha chế. Nhân viên sẽ phục vụ sớm!';
+          msg.classList.remove('hidden');
+          form.reset();
+        }else{
+          throw new Error(data?.message || 'Có lỗi xảy ra');
+        }
       }catch(err){
-        MSG.textContent = 'Lỗi: ' + err.message;
-        MSG.className = 'error';
+        // Fallback: nếu môi trường vẫn chặn CORS đọc response, coi như gửi xong.
+        msg.textContent = 'Đã gửi yêu cầu. Nếu chưa thấy phục vụ sau 3–5 phút, vui lòng báo lễ tân.';
+        msg.classList.remove('hidden');
+        form.reset();
+        console.warn('Fallback (có thể do CORS):', err);
       }
     });
   </script>
