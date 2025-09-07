@@ -1144,6 +1144,17 @@ a {
 .cid-uvlhQEfTrk img {
   border-radius: 50% !important;
 }
+.cid-uvlhQEfTrk .custom-outline {
+  background: transparent !important;
+  border: 1px solid #3b82f6 !important;
+  color: #3b82f6 !important;
+  transition: all 0.3s ease;
+}
+.cid-uvlhQEfTrk .custom-outline:hover {
+  background: linear-gradient(135deg, #3b82f6, #6366f1) !important;
+  color: #fff !important;
+  filter: brightness(1) !important;
+}
 .cid-uvlkcWvWQA {
   padding-top: 3rem;
   padding-bottom: 3rem;
@@ -1361,6 +1372,9 @@ a {
 .cid-uvlDu6qaU6 .btn:hover {
   filter: brightness(0.9);
 }
+.cid-uvlDu6qaU6 .mbr-section-subtitle {
+  color: #ffffff;
+}
 .cid-uW2Ny1pQIb {
   padding-top: 3rem;
   padding-bottom: 2rem;
@@ -1375,7 +1389,6 @@ a {
   padding: 1rem 1.2rem;
   color: #e5e7eb;
   transition: transform 0.25s, background 0.25s;
-  text-align: left;
   height: 100%;
 }
 .cid-uW2Ny1pQIb .skill-box .card-box:hover {
@@ -1426,6 +1439,18 @@ a {
   background: linear-gradient(135deg, #51a2ff, #c27aff);
   border-radius: 2px;
   margin: 0.5rem auto 0;
+}
+.cid-uW2Ny1pQIb .mbr-text,
+.cid-uW2Ny1pQIb .mbr-section-btn {
+  color: #ffffff;
+  text-align: left;
+}
+.cid-uW2Ny1pQIb .mbr-section-btn {
+  text-align: right;
+}
+.cid-uW2Ny1pQIb P {
+  text-align: center;
+  color: #ffffff;
 }
 .cid-uW54dGaaEa {
   padding-top: 6rem;
