@@ -1343,86 +1343,11 @@
             },
             ".mbr-section-subtitle": {
               "color": "#ffffff"
-            },
-            ".contacts1": {
-              "padding": "60px 0"
-            },
-            ".contact-box": {
-              "background": "#1e293b",
-              "padding": "20px",
-              "margin-bottom": "20px",
-              "border-radius": "12px",
-              "box-shadow": "0 3px 6px rgba(0, 0, 0, 0.2)"
-            },
-            ".contact-title": {
-              "font-size": "18px",
-              "font-weight": "600",
-              "margin-bottom": "15px",
-              "color": "#fff",
-              "display": "flex",
-              "align-items": "center"
-            },
-            ".contact-title .icon": {
-              "margin-right": "8px"
-            },
-            ".form-group": {
-              "margin-bottom": "15px",
-              "color": "#fff"
-            },
-            ".form-group input, .form-group textarea": {
-              "width": "100%",
-              "padding": "10px 12px",
-              "border-radius": "8px",
-              "border": "1px solid #475569",
-              "background": "#0f172a",
-              "color": "#fff"
-            },
-            ".form-row": {
-              "display": "flex",
-              "gap": "10px"
-            },
-            ".form-row .half": {
-              "flex": "1"
-            },
-            ".btn-primary": {
-              "background": "#2563eb",
-              "border": "none",
-              "padding": "10px 16px",
-              "border-radius": "8px",
-              "color": "#fff",
-              "font-weight": "600",
-              "cursor": "pointer",
-              "transition": "background 0.3s"
-            },
-            ".btn-primary:hover": {
-              "background": "#1d4ed8"
-            },
-            ".social-grid": {
-              "display": "grid",
-              "grid-template-columns": "repeat(2, 1fr)",
-              "gap": "10px"
-            },
-            ".social-btn": {
-              "display": "block",
-              "text-align": "center",
-              "padding": "10px",
-              "border-radius": "8px",
-              "background": "#334155",
-              "color": "#fff",
-              "text-decoration": "none",
-              "font-weight": "500",
-              "transition": "background 0.3s"
-            },
-            ".social-btn:hover": {
-              "background": "#475569"
-            },
-            "P": {
-              "color": "#ffffff"
             }
           },
           "_name": "form02",
           "_sourceTheme": "startm5",
-          "_customHTML": "<section data-bs-version=\"5.1\" class=\"form5\" group=\"Forms\" plugins=\"formstyler, datepicker\">\n    <mbr-parameters>\n        <header>Size</header>\n        <input type=\"checkbox\" title=\"Full Width\" name=\"fullWidth\">\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"10\" step=\"1\" value=\"3\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"10\" step=\"1\" value=\"3\">\n        <header>Show/Hide</header>\n        <input type=\"checkbox\" title=\"Title\" name=\"showTitle\" checked>\n        <input type=\"checkbox\" title=\"Subtitle\" name=\"showSubtitle\" checked>\n        <header>Background</header>\n        <fieldset type=\"background\" name=\"bg\">\n            <input type=\"image\" title=\"Image\" value=\"../_images/background1.jpg\">\n            <input type=\"color\" title=\"Color\" value=\"#232323\" selected>\n        </fieldset>\n        <input type=\"checkbox\" title=\"Overlay\" name=\"overlay\" condition=\"bg.type !== 'color'\" checked>\n        <input type=\"color\" title=\"Overlay Color\" name=\"overlayColor\" value=\"#ffffff\" condition=\"overlay && bg.type !== 'color'\">\n        <input type=\"range\" inline title=\"Opacity\" name=\"overlayOpacity\" min=\"0\" max=\"1\" step=\"0.1\" value=\"0.4\" condition=\"overlay && bg.type !== 'color'\">\n    </mbr-parameters>\n    <div class=\"mbr-overlay\" mbr-if=\"(overlay && bg.type=='image')\"></div>\n    <div mbr-class=\"{'container': !fullWidth, 'container-fluid': fullWidth}\">\n        <div class=\"mbr-section-head mb-5\" mbr-if=\"showTitle || showSubtitle\">\n            <h3 class=\"mbr-section-title mbr-fonts-style align-center mb-0\" mbr-theme-style=\"display-2\" mbr-if=\"showTitle\" data-app-selector=\".mbr-section-title\">\n                <b>Contacts</b>\n            </h3>\n            <h4 class=\"mbr-section-subtitle mbr-fonts-style align-center mb-0 mt-4\" mbr-theme-style=\"display-7\" mbr-if=\"showSubtitle\" data-app-selector=\".mbr-section-subtitle\">Feel free to Connect me<b>.&nbsp;</b>I'm open to Job opportunities where I can contribute, learn, and grow. If you have a good opportunity that matches my skills and experience then don't hesitate to contact me.</h4>\n        </div>\n        <div class=\"row justify-content-center mt-4\">\n            <!-- Form -->\n            <div class=\"col-lg-7\">\n              <div class=\"contact-box\">\n                <h5 class=\"contact-title\">\n                  <span class=\"icon\">📧</span> Send Message\n                </h5>\n                <form>\n                  <div class=\"alert success\" style=\"display:none;\">\n                    ✅ Message sent successfully! I'll get back to you soon.\n                  </div>\n                  \n                  <div class=\"form-group\">\n                    <label>Name</label>\n                    <input type=\"text\" placeholder=\"Your full name\" required>\n                  </div>\n                  \n                  <div class=\"form-row\">\n                    <div class=\"form-group half\">\n                      <label>Email</label>\n                      <input type=\"email\" placeholder=\"your.email@example.com\" required>\n                    </div>\n                  </div>\n                  \n                  <div class=\"form-group\">\n                    <label>Subject</label>\n                    <input type=\"text\" placeholder=\"What's this about?\">\n                  </div>\n                  \n                  <div class=\"form-group\">\n                    <label>Message</label>\n                    <textarea placeholder=\"Tell me about your project or opportunity...\" rows=\"4\"></textarea>\n                  </div>\n                  \n                  <button type=\"submit\" class=\"btn btn-primary\">Send Message</button>\n                </form>\n              </div>\n            </div>\n\n            <!-- Contact Info -->\n            <div class=\"col-lg-5\">\n              <div class=\"contact-box\">\n                <h5 class=\"contact-title\">📞 Contact Info</h5>\n                <p><b>Email:</b> yourmail@example.com</p>\n                <p><b>Location:</b> HCMC, Vietnam</p>\n                <p><b>Phone:</b> +84-123456789</p>\n              </div>\n\n              <div class=\"contact-box\">\n                <h5 class=\"contact-title\">🔗 Connect</h5>\n                <div class=\"social-grid\">\n                  <a href=\"#\" class=\"social-btn\">LinkedIn</a>\n                  <a href=\"#\" class=\"social-btn\">GitHub</a>\n                  <a href=\"#\" class=\"social-btn\">Instagram</a>\n                  <a href=\"#\" class=\"social-btn\">Email</a>\n                </div>\n              </div>\n            </div>\n        </div>\n    </div>\n</section>",
+          "_customHTML": "<section data-bs-version=\"5.1\" class=\"form5\" group=\"Forms\" plugins=\"formstyler, datepicker\">\n    <mbr-parameters>\n        <header>Size</header>\n        <input type=\"checkbox\" title=\"Full Width\" name=\"fullWidth\">\n        <input type=\"range\" inline title=\"Top\" name=\"paddingTop\" min=\"0\" max=\"10\" step=\"1\" value=\"3\">\n        <input type=\"range\" inline title=\"Bottom\" name=\"paddingBottom\" min=\"0\" max=\"10\" step=\"1\" value=\"3\">\n        <header>Show/Hide</header>\n        <input type=\"checkbox\" title=\"Title\" name=\"showTitle\" checked>\n        <input type=\"checkbox\" title=\"Subtitle\" name=\"showSubtitle\" checked>\n        <header>Background</header>\n        <fieldset type=\"background\" name=\"bg\">\n            <input type=\"image\" title=\"Image\" value=\"../_images/background1.jpg\">\n            <input type=\"color\" title=\"Color\" value=\"#232323\" selected>\n        </fieldset>\n        <input type=\"checkbox\" title=\"Overlay\" name=\"overlay\" condition=\"bg.type !== 'color'\" checked>\n        <input type=\"color\" title=\"Overlay Color\" name=\"overlayColor\" value=\"#ffffff\" condition=\"overlay && bg.type !== 'color'\">\n        <input type=\"range\" inline title=\"Opacity\" name=\"overlayOpacity\" min=\"0\" max=\"1\" step=\"0.1\" value=\"0.4\" condition=\"overlay && bg.type !== 'color'\">\n    </mbr-parameters>\n    <div class=\"mbr-overlay\" mbr-if=\"(overlay && bg.type=='image')\"></div>\n    <div mbr-class=\"{'container': !fullWidth, 'container-fluid': fullWidth}\">\n        <div class=\"mbr-section-head mb-5\" mbr-if=\"showTitle || showSubtitle\">\n            <h3 class=\"mbr-section-title mbr-fonts-style align-center mb-0\" mbr-theme-style=\"display-2\" mbr-if=\"showTitle\" data-app-selector=\".mbr-section-title\">\n                <b>Contacts</b>\n            </h3>\n            <h4 class=\"mbr-section-subtitle mbr-fonts-style align-center mb-0 mt-4\" mbr-theme-style=\"display-7\" mbr-if=\"showSubtitle\" data-app-selector=\".mbr-section-subtitle\">Feel free to Connect me<b>.&nbsp;</b>I'm open to Job opportunities where I can contribute, learn, and grow. If you have a good opportunity that matches my skills and experience then don't hesitate to contact me.</h4>\n        </div>\n        <div class=\"row justify-content-center mt-4\">\n            <div mbr-form class=\"col-lg-6 mx-auto mbr-form\">\n                <form action=\"https://script.google.com/macros/s/AKfycbxYJpDLxf1pVR1WkYZwLc93ZYg7GNre4et_6qJp7IT8I-7AVnMkrlaXZVbNFqGc5C3zaA/exec\" name=\"Form Name\" method=\"POST\" class=\"mbr-form form-with-styler\" data-verified=\"tuanphan1112.working@gmail.com\">\n\n                    <div class=\"row\">\n                        <div hidden=\"hidden\" data-form-alert class=\"alert alert-success col-12\">\n                            Cảm ơn bạn đã đăng ký!\n                        </div>\n                        <div hidden=\"hidden\" data-form-alert-danger class=\"alert alert-danger col-12\">\n                            Oops... Có lỗi xảy ra!\n                        </div>\n                    </div>\n\n                    <div class=\"dragArea row\">\n                        <!-- Họ tên -->\n                        <div class=\"col-md col-sm-12 form-group mb-3\" data-for=\"name\">\n                            <input type=\"text\" name=\"name\" placeholder=\"Họ và tên\" data-form-field=\"name\" class=\"form-control\" required>\n                        </div>\n\n                        <!-- Số điện thoại -->\n                        <div class=\"col-md col-sm-12 form-group mb-3\" data-for=\"phone\">\n                            <input type=\"tel\" name=\"phone\" placeholder=\"Số điện thoại\" data-form-field=\"phone\" class=\"form-control\" required>\n                        </div>\n\n                        <!-- Email -->\n                        <div class=\"col-md col-sm-12 form-group mb-3\" data-for=\"email\">\n                            <input type=\"email\" name=\"email\" placeholder=\"Email\" data-form-field=\"email\" class=\"form-control\" required>\n                        </div>\n\n                        <!-- Địa chỉ -->\n                        <div class=\"col-12 form-group mb-3\" data-for=\"address\">\n                            <input type=\"text\" name=\"address\" placeholder=\"Địa chỉ\" data-form-field=\"address\" class=\"form-control\">\n                        </div>\n\n                        <!-- Nút gửi -->\n                        <div mbr-buttons=\"true\" class=\"col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn\">\n                            <button type=\"submit\" class=\"btn btn-danger\">Submit</button>\n                        </div>\n                    </div>\n                </form>\n            </div>\n            <div mbr-form class=\"col-lg-6 mx-auto mbr-form\">\n                <form action=\"https://script.google.com/macros/s/AKfycbxYJpDLxf1pVR1WkYZwLc93ZYg7GNre4et_6qJp7IT8I-7AVnMkrlaXZVbNFqGc5C3zaA/exec\" name=\"Form Name\" method=\"POST\" class=\"mbr-form form-with-styler\" data-verified=\"tuanphan1112.working@gmail.com\">\n\n                    <div class=\"row\">\n                        <div hidden=\"hidden\" data-form-alert class=\"alert alert-success col-12\">\n                            Cảm ơn bạn đã đăng ký!\n                        </div>\n                        <div hidden=\"hidden\" data-form-alert-danger class=\"alert alert-danger col-12\">\n                            Oops... Có lỗi xảy ra!\n                        </div>\n                    </div>\n\n                    <div class=\"dragArea row\">\n                        <!-- Họ tên -->\n                        <div class=\"col-md col-sm-12 form-group mb-3\" data-for=\"name\">\n                            <input type=\"text\" name=\"name\" placeholder=\"Họ và tên\" data-form-field=\"name\" class=\"form-control\" required>\n                        </div>\n\n                        <!-- Số điện thoại -->\n                        <div class=\"col-md col-sm-12 form-group mb-3\" data-for=\"phone\">\n                            <input type=\"tel\" name=\"phone\" placeholder=\"Số điện thoại\" data-form-field=\"phone\" class=\"form-control\" required>\n                        </div>\n\n                        <!-- Email -->\n                        <div class=\"col-md col-sm-12 form-group mb-3\" data-for=\"email\">\n                            <input type=\"email\" name=\"email\" placeholder=\"Email\" data-form-field=\"email\" class=\"form-control\" required>\n                        </div>\n\n                        <!-- Địa chỉ -->\n                        <div class=\"col-12 form-group mb-3\" data-for=\"address\">\n                            <input type=\"text\" name=\"address\" placeholder=\"Địa chỉ\" data-form-field=\"address\" class=\"form-control\">\n                        </div>\n\n                        <!-- Nút gửi -->\n                        <div mbr-buttons=\"true\" class=\"col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn\">\n                            <button type=\"submit\" class=\"btn btn-danger\">Submit</button>\n                        </div>\n                    </div>\n                </form>\n            </div>\n        </div>\n    </div>\n</section>",
           "_cid": "uvlE9ZZ69m",
           "_anchor": "contact",
           "_PHPplaceholders": [],

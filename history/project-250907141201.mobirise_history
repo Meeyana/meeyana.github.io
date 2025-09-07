@@ -1415,9 +1415,6 @@
             },
             ".social-btn:hover": {
               "background": "#475569"
-            },
-            "P": {
-              "color": "#ffffff"
             }
           },
           "_name": "form02",
