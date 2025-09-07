@@ -33,6 +33,7 @@ body {
   background:
     radial-gradient(1000px 700px at -10% -10%, rgba(96,165,250,.25), transparent 50%), radial-gradient(900px 700px at 110% 0%, rgba(167,139,250,.25), transparent 50%), linear-gradient(135deg, #0f172a, #1e1b4b, #1e1b4b);
 }
+
 section {
   background: transparent !important;
 }
@@ -47,6 +48,28 @@ section {
     padding-left: 25px !important;
     padding-right: 25px !important;
   }
+}
+
+#starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0;
+  animation: twinkle 3s infinite;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0; }
+  50%      { opacity: 1; }
 }
 </style>
   
@@ -70,9 +93,9 @@ section {
                 </div>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-white display-4" href="#top">Home</a></li>
+                <ul class="navbar-nav nav-dropdown nav-right" data-app-modern-menu="true"><li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="index.html#about-me">About</a></li><li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="index.html#project">Projects</a>
-                    </li><li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="index.html#certificate">Certificates</a></li>
+                    </li><li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="index.html#skill_anchor">Skills</a></li><li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="index.html#cert_anchor">Certificates</a></li>
                     <li class="nav-item"><a class="nav-link link text-white text-primary display-4" href="index.html#contact">Contact</a></li></ul>
                 
                 
@@ -133,7 +156,25 @@ section {
   <script src="assets/dropdown/js/navbar-dropdown.js"></script>
   <script src="assets/theme/js/script.js"></script>
   
-  
+  <script>
+document.addEventListener("DOMContentLoaded", function() {
+  // Tạo div #starfield
+  const starfield = document.createElement("div");
+  starfield.id = "starfield";
+  document.body.appendChild(starfield);
+
+  // Tạo các ngôi sao
+  const numStars = 120; // số lượng sao
+  for (let i = 0; i < numStars; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.animationDelay = (Math.random() * 5) + "s";
+    starfield.appendChild(star);
+  }
+});
+</script>
   
 </body>
 </html>
