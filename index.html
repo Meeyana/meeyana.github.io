@@ -58,7 +58,7 @@ section {
 #starfield {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
 }
 
@@ -539,52 +539,102 @@ section {
             <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
                 <strong>Contacts</strong>
             </h3>
+            <div class="title-underline mb-4"></div>
             <h4 class="mbr-section-subtitle mbr-fonts-style align-center mb-0 mt-4 display-7">Feel free to Connect me<strong>.&nbsp;</strong>I'm open to Job opportunities where I can contribute, learn, and grow. If you have a good opportunity that matches my skills and experience then don't hesitate to contact me.</h4>
         </div>
         <div class="row justify-content-center mt-4">
-            <div class="col-lg-8 mx-auto mbr-form">
-                <form action="https://script.google.com/macros/s/AKfycbxYJpDLxf1pVR1WkYZwLc93ZYg7GNre4et_6qJp7IT8I-7AVnMkrlaXZVbNFqGc5C3zaA/exec" method="POST" class="mbr-form form-with-styler" data-verified="">
-
-                    <div class="row">
-                        
-                        <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
-                            Oops... Có lỗi xảy ra!
-                        </div>
+           <!-- Form -->
+              <div class="col-lg-7">
+                <div class="contact-box">
+                  <h5 class="contact-title display-7">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#3b82f6" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                      <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 
+                      1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 
+                      8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 
+                      0 1.808-1.144l-6.57-4.027L8 
+                      9.586zm3.436-.586L16 11.801V4.697z"></path>
+                    </svg>
+                    Send Message
+                  </h5>
+                  <form>
+                    <div class="form-group">
+                      <label class="display-4">Name</label>
+                      <input type="text" placeholder="Your full name" required="" class="display-4">
                     </div>
-
-                    <div class="dragArea row">
-                        <!-- Họ tên -->
-                        <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                            <input type="text" name="name" placeholder="Họ và tên" data-form-field="name" class="form-control" required="" id="name-contact">
-                        </div>
-
-                        <!-- Số điện thoại -->
-                        <div class="col-md col-sm-12 form-group mb-3" data-for="phone">
-                            <input type="tel" name="phone" placeholder="Số điện thoại" data-form-field="phone" class="form-control" required="" id="phone-contact">
-                        </div>
-
-                        <!-- Email -->
-                        <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                            <input type="email" name="email" placeholder="Email" data-form-field="email" class="form-control" required="" id="email-contact">
-                        </div>
-
-                        <!-- Địa chỉ -->
-                        <div class="col-12 form-group mb-3" data-for="address">
-                            <input type="text" name="address" placeholder="Địa chỉ" data-form-field="address" class="form-control" id="address-contact">
-                        </div>
-
-                        <!-- Nút gửi -->
-                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">
-                            <button type="submit" class="btn btn-danger">Submit</button>
-                        </div>
+                    
+                    <div class="form-group">
+                      <label class="display-4">Email</label>
+                      <input type="email" placeholder="your.email@example.com" required="" class="display-4">
                     </div>
-                </form>
-            </div>
+                    
+                    <div class="form-group">
+                      <label class="display-4">Subject</label>
+                      <input type="text" placeholder="What's this about?" class="display-4">
+                    </div>
+                    
+                    <div class="form-group">
+                      <label class="display-4">Message</label>
+                      <textarea placeholder="Tell me about your project or opportunity..." rows="4" class="display-4"></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary display-4">Send Message</button>
+                  </form>
+                </div>
+              </div>
+
+              <!-- Contact Info -->
+              <div class="col-lg-5">
+                <div class="contact-box">
+                  <h5 class="contact-title display-7">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#22c55e" class="bi bi-telephone-fill" viewBox="0 0 16 16">
+                      <path fill-rule="evenodd" d="M1.885.511a1.745 1.745 0 0 1 2.61.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.68.68 0 0 0 .178.643l2.457 2.457a.68.68 0 0 0 .644.178l2.189-.547a1.75 1.75 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.6 18.6 0 0 1-7.01-4.42 18.6 18.6 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877z"></path>
+                    </svg>
+                    Contact Info
+                  </h5>
+                  <p class="display-4">
+                    Email: yourmail@example.com
+                  </p>
+                  <p class="display-4">
+                  Location: HCMC, Vietnam
+                  </p>
+                  <p class="display-4">
+                   Phone: +84-123456789
+                  </p>
+                </div>
+
+                <!-- Connect -->
+                <div class="contact-box">
+                  <h5 class="contact-title display-7">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
+                      <path d="M4.715 6.542 3.343 7.914a3 3 0 1 0 4.243 4.243l1.828-1.829A3 3 0 0 0 8.586 5.5L8 6.086a1 1 0 0 0-.154.199 2 2 0 0 1 .861 3.337L6.88 11.45a2 2 0 1 1-2.83-2.83l.793-.792a4 4 0 0 1-.128-1.287z"></path>
+                      <path d="M6.586 4.672A3 3 0 0 0 7.414 9.5l.775-.776a2 2 0 0 1-.896-3.346L9.12 3.55a2 2 0 1 1 2.83 2.83l-.793.792c.112.42.155.855.128 1.287l1.372-1.372a3 3 0 1 0-4.243-4.243z"></path>
+                    </svg>
+                    Connect
+                  </h5>
+                  <div class="social-grid">
+                    
+                    <a href="https://linkedin.com/in/yourprofile" class="social-btn display-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#0A66C2" class="bi bi-linkedin" viewBox="0 0 16 16">
+                        <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854zm4.943 12.248V6.169H2.542v7.225zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248S2.4 3.226 2.4 3.934c0 .694.521 1.248 1.327 1.248zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016l.016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225z"></path>
+                      </svg>
+                      LinkedIn
+                    </a>
+                    
+                    <a href="mailto:yourmail@example.com" class="social-btn display-4">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#EA4335" class="bi bi-envelope-fill" viewBox="0 0 16 16">
+                        <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414zM0 4.697v7.104l5.803-3.558zM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586zm3.436-.586L16 11.801V4.697z"></path>
+                      </svg>
+                      Email
+                    </a>
+                    
+                  </div>
+                </div>
+              </div>
         </div>
     </div>
 </section>
 
-<section data-bs-version="5.1" class="footer7 cid-uvlEBN3KtK" once="footers" id="footer7-s">
+<section data-bs-version="5.1" class="footer7 cid-uvlEBN3KtK" once="footers" id="footer7-10">
 
     
 
@@ -628,6 +678,7 @@ document.addEventListener("DOMContentLoaded", function() {
     starfield.appendChild(star);
   }
 });
+
 </script>
   
 </body>
