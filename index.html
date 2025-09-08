@@ -127,8 +127,8 @@ section {
                         <strong>Hi, I'm</strong><br><strong><b class="txcolor">Tuan Phan</b></strong></h1>
                     <p class="mbr-text mbr-fonts-style display-7">
                         A Passionate Digital Marketer - Data Analyst Ready to Transform Insights into Action</p>
-                    <div class="mbr-section-btn mt-3 d-flex"><a class="btn btn-warning display-7" href="index.html#project">View My Projects</a>
-                      <a class="btn btn-warning custom-outline display-7" href="">My CV</a></div>
+                    <div class="mbr-section-btn mt-3 d-flex"><a class="btn btn-warning display-7" href="index.html#project">See My Projects</a>
+                      <a class="btn btn-warning custom-outline display-7" href="">View Resume</a></div>
 
                 </div>
 
@@ -398,12 +398,30 @@ section {
     });
   }
 
-  // Khi load trang, chạy filter theo nút đang active (Performance)
+  // Hàm đếm số lượng box theo category
+  function updateCounts() {
+    filterBtns.forEach(btn => {
+      const filter = btn.dataset.filter;
+      let count = 0;
+
+      if (filter === 'all') {
+        count = boxes.length;
+      } else {
+        count = document.querySelectorAll(`.skill-box.${filter}`).length;
+      }
+
+      // Thêm số lượng vào nút (ví dụ: "Performance Marketing (5)")
+      btn.textContent = btn.textContent.replace(/\(\d+\)$/, ''); // xóa số cũ
+      btn.textContent = `${btn.textContent.trim()} (${count})`;
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     const activeBtn = document.querySelector('.filter-btn.active');
     if (activeBtn) {
       applyFilter(activeBtn.dataset.filter);
     }
+    updateCounts();
   });
 
   filterBtns.forEach(btn => {
@@ -414,6 +432,7 @@ section {
     });
   });
 </script>
+
 
 
 </section>
@@ -639,6 +658,111 @@ section {
               </div>
         </div>
     </div>
+</section>
+
+<section class="mbr-section mbr-section--no-padding cid-uWdbNJnsQL" id="witsec-html-block-19">
+
+
+
+
+
+<!-- Place your own code below -->
+<div class="container">
+	<img src="assets/images/edit.jpg" class="mx-auto d-block" title="Use a Code Editor to edit the HTML and CSS of this block">
+</div>
+<!-- Chat Widget Button -->
+    <button id="chat-widget-button">💬</button>
+
+    <!-- Chat Widget -->
+    <div id="chat-widget-container">
+        <div id="chat-widget-header">
+            <span>Chat</span>
+            <button onclick="closeChatWidget()">✖</button>
+        </div>
+        <div id="chat-widget-body">
+            <p style="margin-bottom: 20px;"><strong>Hi 👋, how can we help?</strong></p>
+        </div>
+        <div id="chat-widget-footer">
+            <input type="text" id="chat-widget-input" placeholder="Type your message here...">
+            <button id="chat-widget-send">Send</button>
+        </div>
+    </div>
+<!-- Place your own code above -->
+<script>
+        window.ChatWidgetConfig = {
+            webhook: {
+                url: 'https://n8n.n8ntuanphangz.xyz/webhook/56fc4316-2d69-4810-9db1-9c8ee63fc106/chat',
+                route: 'general'
+            },
+            style: {
+                primaryColor: '#854fff',
+                secondaryColor: '#6b3fd4',
+                position: 'right',
+                backgroundColor: '#ffffff',
+                fontColor: '#333333'
+            }
+        };
+
+        // Function to generate or retrieve a unique chat ID
+        function getChatId() {
+            let chatId = sessionStorage.getItem("chatId");
+            if (!chatId) {
+                chatId = "chat_" + Math.random().toString(36).substr(2, 9); // Unique ID
+                sessionStorage.setItem("chatId", chatId);
+            }
+            return chatId;
+        }
+
+        // Show chat widget and hide bubble
+        document.getElementById("chat-widget-button").addEventListener("click", function() {
+            document.getElementById("chat-widget-container").style.display = "flex";
+            document.getElementById("chat-widget-button").style.display = "none";
+        });
+
+        // Close chat widget and show bubble
+        function closeChatWidget() {
+            document.getElementById("chat-widget-container").style.display = "none";
+            document.getElementById("chat-widget-button").style.display = "flex";
+        }
+
+        // Send message to n8n webhook
+        document.getElementById("chat-widget-send").addEventListener("click", function() {
+            let message = document.getElementById("chat-widget-input").value;
+            if (message.trim() === "") return;
+
+            let chatBody = document.getElementById("chat-widget-body");
+            let newMessage = document.createElement("p");
+            newMessage.textContent = message;
+            newMessage.style.color = "#333";
+            newMessage.style.background = "#f1f1f1";
+            chatBody.appendChild(newMessage);
+
+            let chatId = getChatId(); // Retrieve the session chat ID
+
+            fetch(window.ChatWidgetConfig.webhook.url, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    chatId: chatId,  // Attach chat ID for memory tracking
+                    message: message,
+                    route: window.ChatWidgetConfig.webhook.route
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                let botMessage = document.createElement("p");
+                botMessage.innerHTML = data.output || "Sorry, I couldn't understand that.";
+                botMessage.style.color = "#fff";
+                botMessage.style.background = "#854fff";
+                botMessage.style.marginTop = "10px";
+                chatBody.appendChild(botMessage);
+            })
+            .catch(error => console.error("Error:", error));
+
+            document.getElementById("chat-widget-input").value = "";
+        });
+    </script>
+
 </section>
 
 <section data-bs-version="5.1" class="footer7 cid-uvlEBN3KtK" once="footers" id="footer7-10">
