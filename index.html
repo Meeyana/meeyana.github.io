@@ -671,97 +671,114 @@ section {
 	<img src="assets/images/edit.jpg" class="mx-auto d-block" title="Use a Code Editor to edit the HTML and CSS of this block">
 </div>
 <!-- Chat Widget Button -->
-    <button id="chat-widget-button">💬</button>
+<button id="chat-widget-button">💬</button>
 
-    <!-- Chat Widget -->
-    <div id="chat-widget-container">
-        <div id="chat-widget-header">
-            <span>Chat</span>
-            <button onclick="closeChatWidget()">✖</button>
-        </div>
-        <div id="chat-widget-body">
-            <p style="margin-bottom: 20px;"><strong>Hi 👋, how can we help?</strong></p>
-        </div>
-        <div id="chat-widget-footer">
-            <input type="text" id="chat-widget-input" placeholder="Type your message here...">
-            <button id="chat-widget-send">Send</button>
-        </div>
+<!-- Chat Widget -->
+<div id="chat-widget-container">
+  <div id="chat-widget-header">
+    <span>Chat</span>
+    <button onclick="closeChatWidget()">✖</button>
+  </div>
+  <div id="chat-widget-body">
+    <div class="bot-message">
+      <div class="avatar">🤖</div>
+      <div class="message">Xin chào! Mình là trợ lý AI. Rất vui được hỗ trợ bạn 😊</div>
     </div>
+  </div>
+  <div id="chat-widget-footer">
+    <input type="text" id="chat-widget-input" placeholder="Nhập tin nhắn...">
+    <button id="chat-widget-send">➤</button>
+  </div>
+</div>
+
 <!-- Place your own code above -->
 <script>
-        window.ChatWidgetConfig = {
-            webhook: {
-                url: 'https://n8n.n8ntuanphangz.xyz/webhook/56fc4316-2d69-4810-9db1-9c8ee63fc106/chat',
-                route: 'general'
-            },
-            style: {
-                primaryColor: '#854fff',
-                secondaryColor: '#6b3fd4',
-                position: 'right',
-                backgroundColor: '#ffffff',
-                fontColor: '#333333'
-            }
-        };
+window.ChatWidgetConfig = {
+  webhook: {
+    url: 'https://n8n.n8ntuanphangz.xyz/webhook/56fc4316-2d69-4810-9db1-9c8ee63fc106/chat',
+    route: 'general'
+  }
+};
 
-        // Function to generate or retrieve a unique chat ID
-        function getChatId() {
-            let chatId = sessionStorage.getItem("chatId");
-            if (!chatId) {
-                chatId = "chat_" + Math.random().toString(36).substr(2, 9); // Unique ID
-                sessionStorage.setItem("chatId", chatId);
-            }
-            return chatId;
-        }
+// Unique chat ID per session
+function getChatId() {
+  let chatId = sessionStorage.getItem("chatId");
+  if (!chatId) {
+    chatId = "chat_" + Math.random().toString(36).substr(2, 9);
+    sessionStorage.setItem("chatId", chatId);
+  }
+  return chatId;
+}
 
-        // Show chat widget and hide bubble
-        document.getElementById("chat-widget-button").addEventListener("click", function() {
-            document.getElementById("chat-widget-container").style.display = "flex";
-            document.getElementById("chat-widget-button").style.display = "none";
-        });
+// Toggle widget
+document.getElementById("chat-widget-button").addEventListener("click", function() {
+  document.getElementById("chat-widget-container").style.display = "flex";
+  document.getElementById("chat-widget-button").style.display = "none";
+});
+function closeChatWidget() {
+  document.getElementById("chat-widget-container").style.display = "none";
+  document.getElementById("chat-widget-button").style.display = "flex";
+}
 
-        // Close chat widget and show bubble
-        function closeChatWidget() {
-            document.getElementById("chat-widget-container").style.display = "none";
-            document.getElementById("chat-widget-button").style.display = "flex";
-        }
+// Append message to chat
+function appendMessage(sender, text) {
+  const body = document.getElementById("chat-widget-body");
+  const msgDiv = document.createElement("div");
 
-        // Send message to n8n webhook
-        document.getElementById("chat-widget-send").addEventListener("click", function() {
-            let message = document.getElementById("chat-widget-input").value;
-            if (message.trim() === "") return;
+  if (sender === "bot") {
+    msgDiv.classList.add("bot-message");
+    msgDiv.innerHTML = `
+      <div class="avatar">🤖</div>
+      <div class="message">${text}</div>
+    `;
+  } else {
+    msgDiv.classList.add("user-message");
+    msgDiv.innerHTML = `<div class="message">${text}</div>`;
+  }
 
-            let chatBody = document.getElementById("chat-widget-body");
-            let newMessage = document.createElement("p");
-            newMessage.textContent = message;
-            newMessage.style.color = "#333";
-            newMessage.style.background = "#f1f1f1";
-            chatBody.appendChild(newMessage);
+  body.appendChild(msgDiv);
+  body.scrollTop = body.scrollHeight;
+}
 
-            let chatId = getChatId(); // Retrieve the session chat ID
+// Send message to n8n
+function sendMessage() {
+  let message = document.getElementById("chat-widget-input").value;
+  if (message.trim() === "") return;
 
-            fetch(window.ChatWidgetConfig.webhook.url, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                    chatId: chatId,  // Attach chat ID for memory tracking
-                    message: message,
-                    route: window.ChatWidgetConfig.webhook.route
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                let botMessage = document.createElement("p");
-                botMessage.innerHTML = data.output || "Sorry, I couldn't understand that.";
-                botMessage.style.color = "#fff";
-                botMessage.style.background = "#854fff";
-                botMessage.style.marginTop = "10px";
-                chatBody.appendChild(botMessage);
-            })
-            .catch(error => console.error("Error:", error));
+  appendMessage("user", message);
 
-            document.getElementById("chat-widget-input").value = "";
-        });
-    </script>
+  let chatId = getChatId();
+  fetch(window.ChatWidgetConfig.webhook.url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chatId: chatId,
+      message: message,
+      route: window.ChatWidgetConfig.webhook.route
+    })
+  })
+  .then(response => response.json())
+  .then(data => {
+    appendMessage("bot", data.output || "Xin lỗi, mình chưa hiểu câu hỏi.");
+  })
+  .catch(error => console.error("Error:", error));
+
+  document.getElementById("chat-widget-input").value = "";
+}
+
+// Button click
+document.getElementById("chat-widget-send").addEventListener("click", sendMessage);
+
+// Enter = Send
+const chatInput = document.getElementById("chat-widget-input");
+chatInput.addEventListener("keypress", function (e) {
+  if (e.key === "Enter") {
+    e.preventDefault();
+    sendMessage();
+  }
+});
+</script>
+
 
 </section>
 
