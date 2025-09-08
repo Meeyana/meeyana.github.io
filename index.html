@@ -77,6 +77,8 @@ section {
   50%      { opacity: 1; }
 }
 </style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+
   <meta property="og:image" content="https://tuanphangz.site/assets/images/index-meta.jpg">
 </head>
 <body>
@@ -667,8 +669,8 @@ section {
 
 
 <!-- Place your own code below -->
-<div class="container">
-	<img src="assets/images/edit.jpg" class="mx-auto d-block" title="Use a Code Editor to edit the HTML and CSS of this block">
+<div class="container ">
+	<img src="assets/images/edit.jpg" class="mx-auto d-none" title="Use a Code Editor to edit the HTML and CSS of this block">
 </div>
 
 <!-- Chat Widget Button -->
@@ -683,7 +685,7 @@ section {
   <div id="chat-widget-body">
     <div class="bot-message">
       <div class="avatar">🤖</div>
-      <div class="message">Xin chào! Mình là trợ lý AI. Rất vui được hỗ trợ bạn 😊</div>
+      <div class="message">Xin chào! Mình là trợ lý AI của Tuấn Phan. Bạn có câu hỏi gì cho Tuấn Phan không? Rất vui được hỗ trợ bạn 😊</div>
     </div>
   </div>
   <div id="chat-widget-footer">
@@ -778,6 +780,30 @@ chatInput.addEventListener("keypress", function (e) {
     sendMessage();
   }
 });
+
+const chatWidget = document.getElementById("chat-widget-container");
+const chatButton = document.getElementById("chat-widget-button");
+
+// Mở chat
+chatButton.addEventListener("click", function() {
+  document.body.classList.add("no-scroll"); // khóa scroll
+  chatWidget.style.display = "flex";
+  chatWidget.classList.remove("close");
+  chatWidget.classList.add("open");
+  chatButton.style.display = "none";
+});
+
+// Đóng chat
+function closeChatWidget() {
+  chatWidget.classList.remove("open");
+  chatWidget.classList.add("close");
+
+  setTimeout(() => {
+    chatWidget.style.display = "none";
+    chatButton.style.display = "flex";
+    document.body.classList.remove("no-scroll"); // bật lại scroll
+  }, 400);
+}
 </script>
 
 

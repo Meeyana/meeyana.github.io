@@ -1784,8 +1784,8 @@ a {
   margin: 0.5rem auto 0;
 }
 .cid-uWdbNJnsQL {
-  padding-top: 90px;
-  padding-bottom: 90px;
+  padding-top: 0px;
+  padding-bottom: 0px;
   background-color: #efefef;
 }
 .cid-uWdbNJnsQL img {
@@ -1884,7 +1884,7 @@ a {
   border: 1px solid #ddd;
   border-radius: 20px;
   outline: none;
-  font-size: 14px;
+  font-size: 16px;
 }
 .cid-uWdbNJnsQL #chat-widget-send {
   background: #854fff;
@@ -1946,22 +1946,27 @@ a {
     border-radius: 0;
     z-index: 9999;
     animation: slideUp 0.4s ease;
+    overscroll-behavior: contain;
   }
 }
 @keyframes slideUp {
   from {
     transform: translateY(100%);
+    opacity: 0;
   }
   to {
     transform: translateY(0);
+    opacity: 1;
   }
 }
 @keyframes slideDown {
   from {
     transform: translateY(0);
+    opacity: 1;
   }
   to {
     transform: translateY(100%);
+    opacity: 0;
   }
 }
 .cid-uWdbNJnsQL #chat-widget-container.open {
@@ -1969,7 +1974,13 @@ a {
   animation: slideUp 0.4s ease forwards;
 }
 .cid-uWdbNJnsQL #chat-widget-container.close {
+  display: flex;
   animation: slideDown 0.4s ease forwards;
+}
+.cid-uWdbNJnsQL body.no-scroll {
+  overflow: hidden;
+  height: 100vh;
+  touch-action: none;
 }
 .cid-uvlEBN3KtK {
   padding-top: 30px;
