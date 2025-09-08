@@ -1977,15 +1977,6 @@ a {
   display: flex;
   animation: slideDown 0.4s ease forwards;
 }
-.cid-uWdbNJnsQL html.no-scroll,
-.cid-uWdbNJnsQL body.no-scroll {
-  overflow: hidden !important;
-  height: 100%;
-  position: fixed;
-  width: 100%;
-  touch-action: none;
-  -ms-touch-action: none;
-}
 .cid-uvlEBN3KtK {
   padding-top: 30px;
   padding-bottom: 30px;
