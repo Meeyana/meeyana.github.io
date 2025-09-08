@@ -713,17 +713,22 @@ function getChatId() {
   return chatId;
 }
 
-// Toggle widget
-document.getElementById("chat-widget-button").addEventListener("click", function() {
-  document.getElementById("chat-widget-container").style.display = "flex";
-  document.getElementById("chat-widget-button").style.display = "none";
-});
-function closeChatWidget() {
-  document.getElementById("chat-widget-container").style.display = "none";
-  document.getElementById("chat-widget-button").style.display = "flex";
+const chatWidget = document.getElementById("chat-widget-container");
+const chatButton = document.getElementById("chat-widget-button");
+const chatInput = document.getElementById("chat-widget-input");
+const chatSend = document.getElementById("chat-widget-send");
+
+// ===== Scroll Lock Helpers =====
+function lockScroll() {
+  document.documentElement.classList.add("no-scroll");
+  document.body.classList.add("no-scroll");
+}
+function unlockScroll() {
+  document.documentElement.classList.remove("no-scroll");
+  document.body.classList.remove("no-scroll");
 }
 
-// Append message to chat
+// ===== Append message to chat =====
 function appendMessage(sender, text) {
   const body = document.getElementById("chat-widget-body");
   const msgDiv = document.createElement("div");
@@ -743,9 +748,9 @@ function appendMessage(sender, text) {
   body.scrollTop = body.scrollHeight;
 }
 
-// Send message to n8n
+// ===== Send message to n8n =====
 function sendMessage() {
-  let message = document.getElementById("chat-widget-input").value;
+  let message = chatInput.value;
   if (message.trim() === "") return;
 
   appendMessage("user", message);
@@ -766,14 +771,11 @@ function sendMessage() {
   })
   .catch(error => console.error("Error:", error));
 
-  document.getElementById("chat-widget-input").value = "";
+  chatInput.value = "";
 }
 
-// Button click
-document.getElementById("chat-widget-send").addEventListener("click", sendMessage);
-
-// Enter = Send
-const chatInput = document.getElementById("chat-widget-input");
+// ===== Events =====
+chatSend.addEventListener("click", sendMessage);
 chatInput.addEventListener("keypress", function (e) {
   if (e.key === "Enter") {
     e.preventDefault();
@@ -781,19 +783,16 @@ chatInput.addEventListener("keypress", function (e) {
   }
 });
 
-const chatWidget = document.getElementById("chat-widget-container");
-const chatButton = document.getElementById("chat-widget-button");
-
-// Mở chat
+// ===== Open Chat =====
 chatButton.addEventListener("click", function() {
-  document.body.classList.add("no-scroll"); // khóa scroll
   chatWidget.style.display = "flex";
   chatWidget.classList.remove("close");
   chatWidget.classList.add("open");
   chatButton.style.display = "none";
+  lockScroll(); // khóa scroll website
 });
 
-// Đóng chat
+// ===== Close Chat =====
 function closeChatWidget() {
   chatWidget.classList.remove("open");
   chatWidget.classList.add("close");
@@ -801,9 +800,10 @@ function closeChatWidget() {
   setTimeout(() => {
     chatWidget.style.display = "none";
     chatButton.style.display = "flex";
-    document.body.classList.remove("no-scroll"); // bật lại scroll
-  }, 400);
+    unlockScroll(); // mở lại scroll website
+  }, 400); // khớp thời gian animation
 }
+
 </script>
 
 
