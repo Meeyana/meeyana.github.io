@@ -77,14 +77,6 @@ section {
   50%      { opacity: 1; }
 }
 
-html.no-scroll, body.no-scroll {
-  overflow: hidden !important;
-  height: 100%;
-  position: fixed;
-  width: 100%;
-  touch-action: none;
-  -ms-touch-action: none;
-}
 </style>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
 
@@ -725,20 +717,14 @@ const chatButton = document.getElementById("chat-widget-button");
 const chatInput = document.getElementById("chat-widget-input");
 const chatSend = document.getElementById("chat-widget-send");
 
-let scrollPosition = 0;
-
+// ===== Scroll Lock Helpers =====
 function lockScroll() {
-  scrollPosition = window.scrollY;
-  document.body.style.top = `-${scrollPosition}px`;
   document.documentElement.classList.add("no-scroll");
   document.body.classList.add("no-scroll");
 }
-
 function unlockScroll() {
   document.documentElement.classList.remove("no-scroll");
   document.body.classList.remove("no-scroll");
-  document.body.style.top = "";
-  window.scrollTo(0, scrollPosition); // về đúng vị trí cũ
 }
 
 // ===== Append message to chat =====
@@ -796,25 +782,24 @@ chatInput.addEventListener("keypress", function (e) {
   }
 });
 
-// ===== Open Chat =====
+// Mở chat
 chatButton.addEventListener("click", function() {
-  chatWidget.style.display = "flex";
+  chatWidget.style.display = "flex"; // đảm bảo hiển thị
   chatWidget.classList.remove("close");
   chatWidget.classList.add("open");
   chatButton.style.display = "none";
-  lockScroll(); // khóa scroll website
 });
 
-// ===== Close Chat =====
+// Đóng chat
 function closeChatWidget() {
   chatWidget.classList.remove("open");
   chatWidget.classList.add("close");
 
+  // đợi animation chạy xong mới ẩn
   setTimeout(() => {
     chatWidget.style.display = "none";
     chatButton.style.display = "flex";
-    unlockScroll(); // mở lại scroll website
-  }, 400); // khớp thời gian animation
+  }, 400); // khớp thời gian với CSS (0.4s)
 }
 
 </script>
