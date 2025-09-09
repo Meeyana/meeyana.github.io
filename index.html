@@ -565,8 +565,6 @@ html.no-scroll, body.no-scroll {
     </div>
 </section>
 
-
-
 <section data-bs-version="5.1" class="form5 cid-uvlE9ZZ69m" id="contact">
     
     
@@ -727,14 +725,20 @@ const chatButton = document.getElementById("chat-widget-button");
 const chatInput = document.getElementById("chat-widget-input");
 const chatSend = document.getElementById("chat-widget-send");
 
-// ===== Scroll Lock Helpers =====
+let scrollPosition = 0;
+
 function lockScroll() {
+  scrollPosition = window.scrollY;
+  document.body.style.top = `-${scrollPosition}px`;
   document.documentElement.classList.add("no-scroll");
   document.body.classList.add("no-scroll");
 }
+
 function unlockScroll() {
   document.documentElement.classList.remove("no-scroll");
   document.body.classList.remove("no-scroll");
+  document.body.style.top = "";
+  window.scrollTo(0, scrollPosition); // về đúng vị trí cũ
 }
 
 // ===== Append message to chat =====
