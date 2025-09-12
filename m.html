@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kia Morning</title>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      font-family: Arial, sans-serif;
+      color: #fff;
+      background: #000; /* nền đen ngoài video */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .video-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      max-width: 480px; /* fix khung tối đa trên tablet/desktop */
+      overflow: hidden;
+    }
+
+    /* Video nền */
+    .video-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .video-bg iframe {
+      position: absolute;
+      top: 50%; left: 50%;
+      width: 130%; height: 130%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 1;
+    }
+
+    /* Content */
+    .content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    /* Header căn giữa */
+    .header {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .header h1 {
+      font-size: clamp(20px, 5vw, 26px);
+      margin: 0 0 8px;
+      font-weight: 700;
+    }
+    .header h2 {
+      font-size: clamp(15px, 4vw, 18px);
+      margin: 0 0 10px;
+      font-weight: 500;
+    }
+    .header p {
+      font-size: clamp(13px, 3.5vw, 15px);
+      line-height: 1.5;
+      color: #ddd;
+      margin: 0;
+    }
+
+    /* Versions */
+    .bottom-section {
+      margin-top: auto;
+    }
+    .versions {
+      margin-bottom: 15px;
+    }
+    .version-item {
+      font-size: clamp(13px, 3.5vw, 15px);
+      display: flex;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding: 10px 0;
+    }
+
+    /* CTA */
+    .footer-cta {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .footer-cta a {
+      flex: 1;
+      text-decoration: none;
+      padding: 14px;
+      border-radius: 6px;
+      border: 1px solid #fff;
+      text-align: center;
+      font-weight: 600;
+      color: #fff;
+      background: transparent;
+      transition: all .3s ease;
+      font-size: clamp(14px, 4vw, 16px);
+    }
+    .footer-cta a:hover {
+      background: #fff;
+      color: #000;
+    }
+  </style>
+</head>
+<body>
+  <div class="video-container">
+    <!-- Video nền -->
+    <div class="video-bg">
+      <iframe src="https://www.youtube.com/embed/l2NAAIt3B_4?autoplay=1&mute=1&loop=1&playlist=l2NAAIt3B_4&controls=0&modestbranding=1&showinfo=0" 
+        frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Nội dung -->
+    <div class="content">
+      <!-- Header -->
+      <div class="header">
+        <h1>Kia Morning</h1>
+        <h2>Công nghệ trong tầm tay</h2>
+        <p>Mẫu hatchback đô thị với thiết kế trẻ trung, tiện nghi hiện đại và khả năng vận hành tiết kiệm.</p>
+      </div>
+
+      <!-- Phiên bản + Giá + CTA -->
+      <div class="bottom-section">
+        <div class="versions">
+          <div class="version-item"><span>MT</span><span>389.000.000₫</span></div>
+          <div class="version-item"><span>X-Line</span><span>459.000.000₫</span></div>
+        </div>
+        <div class="footer-cta">
+          <a href="#">📄 Xem Brochure</a>
+          <a href="#">🚗 Xem Chi Tiết</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
