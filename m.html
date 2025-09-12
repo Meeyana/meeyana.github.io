@@ -121,6 +121,27 @@
       background: #fff;
       color: #000;
     }
+/* Padding an toàn cho notch (iOS, Android) */
+:root {
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+  --safe-left: env(safe-area-inset-left);
+  --safe-right: env(safe-area-inset-right);
+}
+
+/* Header fix che notch */
+.header {
+  text-align: center;
+  padding-top: calc(10px + var(--safe-top));
+}
+
+/* CTA fix dính sát đáy */
+.footer-cta {
+  display: flex;
+  gap: 12px;
+  margin-bottom: calc(20px + var(--safe-bottom));
+}
+
   </style>
 </head>
 <body>
