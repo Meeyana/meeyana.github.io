@@ -12,23 +12,19 @@
       width: 100%;
       font-family: Arial, sans-serif;
       color: #fff;
-      background: #000; /* nền đen ngoài video */
-      display: flex;
-      justify-content: center;
-      align-items: center;
+      background: #000;
     }
 
-    .video-container {
+    .page {
       position: relative;
       width: 100%;
-      height: 100vh;
-      max-width: 480px; /* fix khung tối đa trên tablet/desktop */
-      overflow: hidden;
+      min-height: 100vh;
+      overflow-x: hidden;
     }
 
-    /* Video nền */
+    /* Video background */
     .video-bg {
-      position: absolute;
+      position: fixed;
       inset: 0;
       z-index: 0;
       overflow: hidden;
@@ -43,28 +39,25 @@
 
     /* Overlay */
     .overlay {
-      position: absolute;
+      position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.55);
       z-index: 1;
     }
 
-    /* Content */
+    /* Content scroll */
     .content {
       position: relative;
       z-index: 2;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
       padding: 20px;
+      padding-bottom: 180px; /* chừa chỗ cho footer-fixed */
       box-sizing: border-box;
     }
 
-    /* Header căn giữa */
+    /* Header */
     .header {
       text-align: center;
-      margin-top: 10px;
+      padding-top: calc(10px + env(safe-area-inset-top));
     }
     .header h1 {
       font-size: clamp(20px, 5vw, 26px);
@@ -83,26 +76,31 @@
       margin: 0;
     }
 
-    /* Versions */
-    .bottom-section {
-      margin-top: auto;
+    /* Bottom fixed */
+    .bottom-fixed {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 3;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(4px);
+      padding: 10px 20px calc(10px + env(safe-area-inset-bottom));
+      box-sizing: border-box;
     }
+
     .versions {
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
     .version-item {
       font-size: clamp(13px, 3.5vw, 15px);
       display: flex;
       justify-content: space-between;
       border-bottom: 1px solid rgba(255,255,255,0.2);
-      padding: 10px 0;
+      padding: 8px 0;
     }
 
-    /* CTA */
     .footer-cta {
       display: flex;
       gap: 12px;
-      margin-bottom: 20px;
     }
     .footer-cta a {
       flex: 1;
@@ -121,57 +119,42 @@
       background: #fff;
       color: #000;
     }
-/* Padding an toàn cho notch (iOS, Android) */
-:root {
-  --safe-top: env(safe-area-inset-top);
-  --safe-bottom: env(safe-area-inset-bottom);
-  --safe-left: env(safe-area-inset-left);
-  --safe-right: env(safe-area-inset-right);
-}
-
-/* Header fix che notch */
-.header {
-  text-align: center;
-  padding-top: calc(10px + var(--safe-top));
-}
-
-/* CTA fix dính sát đáy */
-.footer-cta {
-  display: flex;
-  gap: 12px;
-  margin-bottom: calc(20px + var(--safe-bottom));
-}
-
   </style>
 </head>
 <body>
-  <div class="video-container">
-    <!-- Video nền -->
+  <div class="page">
+    <!-- Video -->
     <div class="video-bg">
       <iframe src="https://www.youtube.com/embed/l2NAAIt3B_4?autoplay=1&mute=1&loop=1&playlist=l2NAAIt3B_4&controls=0&modestbranding=1&showinfo=0" 
         frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
     </div>
     <div class="overlay"></div>
 
-    <!-- Nội dung -->
+    <!-- Scrollable content -->
     <div class="content">
-      <!-- Header -->
       <div class="header">
         <h1>Kia Morning</h1>
         <h2>Công nghệ trong tầm tay</h2>
         <p>Mẫu hatchback đô thị với thiết kế trẻ trung, tiện nghi hiện đại và khả năng vận hành tiết kiệm.</p>
       </div>
+      <p style="margin-top:40px;">
+        Nội dung dài thử nghiệm...<br/>
+        Thêm đoạn text để test scroll.<br/>
+        Nội dung dài thử nghiệm...<br/>
+        Nội dung dài thử nghiệm...<br/>
+        Nội dung dài thử nghiệm...<br/>
+      </p>
+    </div>
 
-      <!-- Phiên bản + Giá + CTA -->
-      <div class="bottom-section">
-        <div class="versions">
-          <div class="version-item"><span>MT</span><span>389.000.000₫</span></div>
-          <div class="version-item"><span>X-Line</span><span>459.000.000₫</span></div>
-        </div>
-        <div class="footer-cta">
-          <a href="#">📄 Xem Brochure</a>
-          <a href="#">🚗 Xem Chi Tiết</a>
-        </div>
+    <!-- Fixed footer -->
+    <div class="bottom-fixed">
+      <div class="versions">
+        <div class="version-item"><span>MT</span><span>389.000.000₫</span></div>
+        <div class="version-item"><span>X-Line</span><span>459.000.000₫</span></div>
+      </div>
+      <div class="footer-cta">
+        <a href="#">📄 Xem Brochure</a>
+        <a href="#">🚗 Xem Chi Tiết</a>
       </div>
     </div>
   </div>
