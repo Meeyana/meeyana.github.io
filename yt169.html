@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kia Morning</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
+      background: #000;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Background video blur */
+    .ytwrapper-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+      filter: blur(20px) brightness(0.5);
+    }
+    .ytcontainer-bg {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      padding-top: 25px;
+      width: 500%;
+      left: -200%;
+      overflow: hidden;
+      height: 100%;
+    }
+    .ytplayer-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    /* Video chính */
+    .video-main {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      max-width: 100%;
+      z-index: 1;
+    }
+    .video-main iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: none;
+      pointer-events: none;
+    }
+
+    /* Content */
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      padding-bottom: 180px;
+      text-align: center;
+    }
+
+    /* Logo group */
+    .logo-group {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-group img {
+      height: 90px;
+      object-fit: contain;
+    }
+    .logo-group .divider {
+      width: 2px;
+      height: 24px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 2px;
+    }
+
+    .header h1 {
+      font-size: clamp(24px, 6vw, 36px);
+      margin: 0 0 8px;
+      font-weight: 700;
+    }
+    .header h2 {
+      font-size: clamp(15px, 4vw, 18px);
+      margin: 0 0 10px;
+      font-weight: 500;
+    }
+    .header p {
+      font-size: clamp(13px, 3.5vw, 15px);
+      line-height: 1.5;
+      color: #ddd;
+      margin: 0;
+    }
+
+    /* Footer fixed */
+    .bottom-fixed {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 3;
+      backdrop-filter: blur(6px);
+      background: rgba(0,0,0,0.5);
+      padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+      box-sizing: border-box;
+    }
+    .versions { margin-bottom: 10px; }
+    .version-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      font-size: clamp(13px, 3.5vw, 15px);
+    }
+    .footer-cta {
+      display: flex;
+      gap: 12px;
+    }
+    .footer-cta a {
+      flex: 1;
+      padding: 14px;
+      border: 1px solid #fff;
+      text-align: center;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      font-size: clamp(14px, 4vw, 16px);
+      transition: all .3s ease;
+      border-radius: 4px;
+    }
+    .footer-cta a:hover { background:#fff; color:#000; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Background video blur -->
+    <div class="ytwrapper-bg">
+      <div class="ytcontainer-bg">
+        <iframe class="ytplayer-bg" 
+          src="https://www.youtube-nocookie.com/embed/5KMX9MTJq2w?controls=0&autoplay=1&mute=1&loop=1&playlist=5KMX9MTJq2w&showinfo=0&modestbranding=1&fs=0&playsinline=1&autohide=1&rel=0" 
+          frameborder="0" allow="autoplay; fullscreen"></iframe>
+      </div>
+    </div>
+
+    <!-- Video chính -->
+    <div class="video-main">
+      <iframe 
+        src="https://www.youtube-nocookie.com/embed/5KMX9MTJq2w?controls=0&autoplay=1&mute=1&loop=1&playlist=5KMX9MTJq2w&showinfo=0&modestbranding=1&fs=0&playsinline=1&autohide=1&rel=0" 
+        frameborder="0" allow="autoplay; fullscreen"></iframe>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+      <div class="header">
+        <div class="logo-group">
+          <img src="logo-thaco-auto.png" alt="THACO AUTO" />
+          <div class="divider"></div>
+          <img src="https://thacoauto.vn/storage/brands/kia-motors-new-2021.png" alt="KIA logo" />
+        </div>
+        <h1>Kia Morning</h1>
+        <h2>Công nghệ trong tầm tay</h2>
+        <p>Mẫu hatchback đô thị với thiết kế trẻ trung, tiện nghi hiện đại và khả năng vận hành tiết kiệm.</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="bottom-fixed">
+      <div class="versions">
+        <div class="version-item"><span>MT</span><span>389.000.000₫</span></div>
+        <div class="version-item"><span>X-Line</span><span>459.000.000₫</span></div>
+      </div>
+      <div class="footer-cta">
+        <a href="#">📄 Xem Brochure</a>
+        <a href="#">🚗 Xem Chi Tiết</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
