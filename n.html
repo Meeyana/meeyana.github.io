@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Link</title>
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
+      background: #000;
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+
+    .page {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* Background video blur */
+    .ytwrapper-bg {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+      /* filter: blur(20px) brightness(0.5); */
+    }
+    .ytcontainer-bg {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      padding-top: 25px;
+      width: 500%;
+      left: -200%;
+      overflow: hidden;
+      height: 100%;
+    }
+    .ytplayer-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+    }
+
+    /* Video chính */
+    .video-main {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      max-width: 100%;
+      z-index: 1;
+    }
+    .video-main iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: none;
+      pointer-events: none;
+    }
+
+    /* Content */
+    .content {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      padding-bottom: 200px;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.5);
+    }
+	.loader {
+	Background:white;
+	width:100vw;
+	height:100vh;
+	z-index:10000;
+	position:absolute;
+	top:0px;
+	left:0px;
+	}
+.header { 
+padding-top:20px !important;
+    position: fixed;
+    width: 90%;
+    padding: 0;
+    margin: 0;
+    top: 0;
+    left: 5%;
+}
+    /* Logo group */
+    .logo-group {
+      display: flex;
+justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .logo-group img {
+          object-fit: contain;
+    width: 30%;
+ 
+    max-width: 130px;
+    }
+	.logo-invert {
+	 filter: invert(100%);
+	}
+    .logo-group .divider {
+      width: 2px;
+      height: 24px;
+      background: rgba(255,255,255,0.7);
+      border-radius: 2px;
+    }
+
+    .header h1 {
+	padding-top: 10px;
+      font-size: clamp(24px, 6vw, 36px);
+      margin: 0 0 8px;
+      font-weight: 700;
+    }
+    .header h2 {
+      font-size: clamp(15px, 4vw, 18px);
+      margin: 0 0 10px;
+      font-weight: 500;
+    }
+    .header p {
+      font-size: clamp(13px, 3.5vw, 15px);
+      line-height: 1.5;
+      color: #ddd;
+      margin: 0;
+    }
+
+    /* Footer fixed */
+    .bottom-fixed {
+      position: fixed;
+      left: 0; right: 0; bottom: 0;
+      z-index: 3;
+      backdrop-filter: blur(6px);
+      background: rgba(0,0,0,0.5);
+      padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
+      box-sizing: border-box;
+    }
+    .versions { margin-bottom: 10px; }
+    .version-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      font-size: clamp(13px, 3.5vw, 15px);
+    }
+    .footer-cta {
+      display: flex;
+      gap: 12px;
+    }
+    .footer-cta a {
+      flex: 1;
+      padding: 14px;
+      border: 1px solid #fff;
+      text-align: center;
+      text-decoration: none;
+      color: #fff;
+      font-weight: 600;
+      font-size: clamp(14px, 4vw, 16px);
+      transition: all .3s ease;
+      border-radius: 4px;
+    }
+    .footer-cta a:hover { background:#fff; color:#000; }
+  </style>
+  <link rel="stylesheet" href="https://thaco.link/scanning.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
+  <script>
+function loadthongtin(c){
+ 
+
+   // $.ajax({url: "https://docs.google.com/spreadsheets/u/1/d/1yD6O5Ppf7_BDiKKToEcwtRv1yyXyY-ej850g-Us745Q/gviz/tq?tqx=out:html&gid=0&tq=select B where A='" + c + "'", success:    function(result){
+  //$.ajax({url: "https://script.google.com/macros/s/AKfycbyWkUoqU_zhWA55Ls1uTWgWlj8HAcODxzgzKZA4432aioFtOYNlqjMQ6R2zfeggbxly/exec?id=" + c, success:    function(result){
+  $.ajax({url: "https://docs.google.com/spreadsheets/d/1ukpMWNglDFkEYkhd77_MOKa9WZFIztYrHX6y8O7a0lM/gviz/tq?sheet=details&tqx=out:html&tq=select * where E='" + c + "'", success:    function(result){
+ //var datafull =JSON.parse(JSON.stringify(result));
+ var data =JSON.parse(JSON.stringify(result));
+      console.log(JSON.stringify(result));
+      if(data.car.length>0) {
+	  localStorage.setItem('elink',JSON.stringify(result));
+	  $('.header h1').text(data.car[0]);
+	   $('.header h2').text(data.car[5]);
+	    $('.header p').text('');
+		$('.cta-brochure').attr('href',data.car[3]);
+		$('.cta-website').attr('href',data.car[4]);
+		$('.brand-logo').attr('src',data.car[2]);
+		//if ()
+$('iframe').attr('src',$('iframe').attr('src').replaceAll('utnrNxHAssM',data.car[1].substring(data.car[1].length-11)));
+$('.loader').hide(500);
+
+//5KMX9MTJq2w
+	  }
+	   $('.versions').html('');
+	  if(data.details.length>0) {
+	  for(var i=0;i<data.details.length;i++) {
+		if(data.details[i][0]==$('.header h1').text()) {
+		 $('.versions').prepend ( $('<div class="version-item"><span>'+data.details[i][2]+'</span><span>'+(data.details[i][3]).toLocaleString('it-IT', {style : 'currency', currency : 'VND'})+'</span></div>'));
+		
+		}
+	  }
+	  }
+  }});
+  }
+ 
+ $(document).ready(function(){
+    var x = window.location.href;
+  var url = new URL(x);
+  var c = url.searchParams.get("id");
+   loadthongtin(c);
+});
+  //alert(21);
+  </script>
+</head>
+<body>
+  <div class="page">
+    <!-- Background video blur -->
+    <div class="ytwrapper-bg">
+      <div class="ytcontainer-bg">
+        <iframe class="ytplayer-bg" 
+        src="https://www.youtube-nocookie.com/embed/utnrNxHAssM?controls=0&autoplay=1&mute=1&loop=1&playlist=utnrNxHAssM&showinfo=0&modestbranding=1&fs=0&playsinline=1&autohide=1&rel=0" 
+          frameborder="0" allow="autoplay; fullscreen"></iframe>
+      </div>
+    </div>
+
+    <!-- Video chính -->
+    <div class="video-main">
+      <iframe 
+        src="https://www.youtube-nocookie.com/embed/utnrNxHAssM?controls=0&autoplay=1&mute=1&loop=1&playlist=utnrNxHAssM&showinfo=0&modestbranding=1&fs=0&playsinline=1&autohide=1&rel=0" 
+        frameborder="0" allow="autoplay; fullscreen"></iframe>
+    </div>
+
+    <!-- Content -->
+    <div class="content">
+      <div class="header">
+        <div class="logo-group">
+          <img src="auto2.png" alt="THACO AUTO" />
+         
+          <img class='brand-logo' src="https://thacoauto.vn/storage/brands/kia-motors-new-2021.png" alt="KIA logo" class='logo-invert' />
+        </div>
+        <h1>E-link</h1>
+        <h2>Giải pháp kết nối thông tin sản phẩm tới Khách hàng</h2>
+        <p></p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="bottom-fixed">
+      <div class="versions">
+        
+      </div>
+      <div class="footer-cta">
+        <a class='cta-brochure' href="#">📄 Xem Brochure</a>
+        <a class='cta-website' href="#">🚗 Xem Chi Tiết</a>
+      </div>
+    </div>
+  </div>
+  <div  class='loader'>
+  <div class="ocrloader">
+  <em></em>
+  <div>
+    <i></i>
+  </div>
+  <span></span>
+  <p style="
+    text-align: center;
+    position: absolute;
+    width: 100%;
+    bottom: -20px;
+    color: #0d2d8d;
+    font-size: 10pt;
+">e-Link - Martech</p>
+</div></div>
+</body>
+</html>
