@@ -26,7 +26,7 @@
       inset: 0;
       overflow: hidden;
       z-index: 0;
-      /* filter: blur(20px) brightness(0.5); */
+      filter: blur(20px) brightness(0.5);
     }
     .ytcontainer-bg {
       position: relative;
@@ -67,7 +67,7 @@
       padding: 20px;
       padding-bottom: 200px;
       text-align: center;
-      background: rgba(0, 0, 0, 0.5);
+/*      background: rgba(0, 0, 0, 0.5);*/
     }
 	.loader {
 	Background:white;
@@ -133,8 +133,8 @@ justify-content: space-between;
       position: fixed;
       left: 0; right: 0; bottom: 0;
       z-index: 3;
-      backdrop-filter: blur(6px);
-      background: rgba(0,0,0,0.5);
+      /*backdrop-filter: blur(6px);
+      background: rgba(0,0,0,0.5);*/
       padding: 12px 20px calc(12px + env(safe-area-inset-bottom));
       box-sizing: border-box;
     }
@@ -163,83 +163,125 @@ justify-content: space-between;
       border-radius: 4px;
     }
     .footer-cta a:hover { background:#fff; color:#000; }
+
+/* Default: không blur */
+.ytwrapper-bg {
+  filter: blur(0px) brightness(0.5);
+}
+
+/* Nếu là video ngang thì thêm blur */
+.ytwrapper-bg.blurred {
+  filter: blur(20px) brightness(0.5)!important;
+}
+    }
   </style>
   <link rel="stylesheet" href="https://thaco.link/scanning.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
   <script>
-function parseGvizResult(result) {
-  // Cắt bỏ prefix/suffix để parse JSON
-  var dataText = result.substring(47, result.length - 2);
-  return JSON.parse(dataText);
-}
-
-function loadthongtin(c) {
-
-  // --- Lấy sheet "elink" ---
-  $.ajax({
-    url: "https://docs.google.com/spreadsheets/d/1ukpMWNglDFkEYkhd77_MOKa9WZFIztYrHX6y8O7a0lM/gviz/tq?sheet=elink&tqx=out:html&tq=select%20*%20where%20H%20='" + c + "'",
-    success: function (result) {
-      var dataJson = parseGvizResult(result);
-
-      if (dataJson.table.rows.length > 0) {
-        var car = dataJson.table.rows[0].c.map(x => x ? x.v : "");
-
-        // Lưu vào localStorage (nếu cần)
-        localStorage.setItem('elink', JSON.stringify(car));
-
-        // Gán UI
-        $('.header h1').text(car[0]);
-        $('.header h2').text(car[5]);
-        $('.header p').text('');
-        $('.cta-brochure').attr('href', car[3]);
-        $('.cta-website').attr('href', car[4]);
-        $('.brand-logo').attr('src', car[2]);
-        $('iframe').attr(
-          'src',
-          $('iframe').attr('src').replaceAll('utnrNxHAssM', car[1].substring(car[1].length - 11))
-        );
-        $('.loader').hide(500);
-
-        // Sau khi load elink xong thì gọi details (truyền tên xe)
-        loadDetails(car[0]);
-      }
+    function parseGvizResult(result) {
+      var dataText = result.substring(47, result.length - 2);
+      return JSON.parse(dataText);
     }
-  });
-}
 
-function loadDetails(carName) {
-  // --- Lấy sheet "details" ---
-  $.ajax({
-    url: "https://docs.google.com/spreadsheets/d/1ukpMWNglDFkEYkhd77_MOKa9WZFIztYrHX6y8O7a0lM/gviz/tq?sheet=details&tqx=out:html&tq=select%20*%20where%20E%20='" + carName + "'",
-    success: function (result) {
-      var dataJson = parseGvizResult(result);
+    function loadthongtin(c) {
+      // --- Lấy sheet "elink" ---
+      $.ajax({
+        url: "https://docs.google.com/spreadsheets/d/1ukpMWNglDFkEYkhd77_MOKa9WZFIztYrHX6y8O7a0lM/gviz/tq?sheet=elink&tq=select%20*%20where%20H='" + c + "'",
+        success: function (result) {
+          var dataJson = parseGvizResult(result);
+          if (dataJson.table.rows.length > 0) {
+            var car = dataJson.table.rows[0].c.map(x => x ? x.v : "");
 
-      $('.versions').html('');
-      if (dataJson.table.rows.length > 0) {
-        for (var i = 0; i < dataJson.table.rows.length; i++) {
-          var r = dataJson.table.rows[i].c.map(x => x ? x.v : "");
+             // ✅ Xử lý video ngay tại đây
+            var youtubeUrl = car[1];
+            var videoId = "";
 
-          // Giả sử: cột 0 = Tên xe, cột 2 = tên phiên bản, cột 3 = giá
-          if (r[0] == carName) {
-            $('.versions').prepend(
-              $('<div class="version-item"><span>' + r[2] + '</span><span>' +
-                Number(r[3]).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) +
-                '</span></div>')
+            // Detect loại video
+            if (youtubeUrl.includes("shorts/")) {
+              videoId = youtubeUrl.split("shorts/")[1].split("?")[0];
+              console.log("Detected Shorts:", videoId);
+
+              // Ẩn video-main
+              $('.video-main').hide();
+
+              // Bỏ blur cho background
+              $('.ytwrapper-bg').removeClass("blurred");
+
+            } else if (youtubeUrl.includes("v=")) {
+              videoId = youtubeUrl.split("v=")[1].substring(0, 11);
+              console.log("Detected Normal:", videoId);
+
+              // Hiện video-main
+              $('.video-main').show();
+
+              // Background có blur
+              $('.ytwrapper-bg').addClass("blurred");
+            }
+
+            // Update URL cho cả 2 iframe
+            if (videoId) {
+              var embedUrl = "https://www.youtube-nocookie.com/embed/" + videoId +
+                "?controls=0&autoplay=1&mute=1&loop=1&playlist=" + videoId +
+                "&modestbranding=1&playsinline=1&rel=0";
+
+              $('.ytplayer-bg').attr('src', embedUrl);
+              $('.video-main iframe').attr('src', embedUrl);
+            }
+
+
+            $('.header h1').text(car[0]);
+            $('.header h2').text(car[5]);
+            $('.cta-brochure').attr('href', car[3]);
+            $('.cta-website').attr('href', car[4]);
+            $('.brand-logo').attr('src', car[2]);
+            $('iframe').attr(
+              'src',
+              $('iframe').attr('src').replaceAll('utnrNxHAssM', car[1].substring(car[1].length - 11))
             );
+            $('.loader').hide(500);
+
+            // Gọi tiếp sheet details
+            loadDetails(car[0]);
           }
         }
-      }
+      });
     }
-  });
-}
 
-$(document).ready(function () {
-  var url = new URL(window.location.href);
-  var c = url.searchParams.get("id");
-  loadthongtin(c);
-});
-  //alert(21);
+    function loadDetails(carName) {
+      // --- Lấy sheet "details" ---
+      $.ajax({
+        url: "https://docs.google.com/spreadsheets/d/1ukpMWNglDFkEYkhd77_MOKa9WZFIztYrHX6y8O7a0lM/gviz/tq?sheet=details&tq=select%20*%20where%20A='" + carName + "'",
+        success: function (result) {
+          var dataJson = parseGvizResult(result);
+
+          $('.versions').html('');
+          if (dataJson.table.rows.length > 0) {
+            for (var i = 0; i < dataJson.table.rows.length; i++) {
+              var r = dataJson.table.rows[i].c.map(x => x ? x.v : "");
+
+              // cột 0 = Tên xe, cột 2 = phiên bản, cột 3 = giá
+              if (r[0] == carName) {
+                $('.versions').prepend(
+                  $('<div class="version-item"><span>' + r[2] + '</span><span>' +
+                    Number(r[3]).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) +
+                    '</span></div>')
+                );
+              }
+            }
+          }
+        }
+      });
+    }
+
+    $(document).ready(function () {
+      var url = new URL(window.location.href);
+      var c = url.searchParams.get("id");
+      loadthongtin(c);
+    });
+
+
   </script>
+
 </head>
 <body>
   <div class="page">
