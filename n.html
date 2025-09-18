@@ -146,6 +146,12 @@ justify-content: space-between;
       border-bottom: 1px solid rgba(255,255,255,0.2);
       font-size: clamp(13px, 3.5vw, 15px);
     }
+
+    .version-item span {
+      color: rgba(255,255,255,0.85);
+    }
+
+
     .footer-cta {
       display: flex;
       gap: 12px;
@@ -166,7 +172,7 @@ justify-content: space-between;
 
 /* Default: không blur */
 .ytwrapper-bg {
-  filter: blur(0px) brightness(0.5);
+  filter: blur(0px) brightness(0.7);
 }
 
 /* Nếu là video ngang thì thêm blur */
@@ -254,6 +260,8 @@ justify-content: space-between;
         success: function (result) {
           var dataJson = parseGvizResult(result);
 
+
+
           $('.versions').html('');
           if (dataJson.table.rows.length > 0) {
             for (var i = 0; i < dataJson.table.rows.length; i++) {
@@ -305,7 +313,7 @@ justify-content: space-between;
     <div class="content">
       <div class="header">
         <div class="logo-group">
-          <img src="auto2.png" alt="THACO AUTO" />
+          <img src="https://d.thaco.link/elink/auto2.png" alt="THACO AUTO" />
          
           <img class='brand-logo' src="https://thacoauto.vn/storage/brands/kia-motors-new-2021.png" alt="KIA logo" class='logo-invert' />
         </div>
