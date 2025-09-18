@@ -167,46 +167,76 @@ justify-content: space-between;
   <link rel="stylesheet" href="https://thaco.link/scanning.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>  
   <script>
-function loadthongtin(c){
- 
+function parseGvizResult(result) {
+  // Cắt bỏ prefix/suffix để parse JSON
+  var dataText = result.substring(47, result.length - 2);
+  return JSON.parse(dataText);
+}
 
-   // $.ajax({url: "https://docs.google.com/spreadsheets/u/1/d/1yD6O5Ppf7_BDiKKToEcwtRv1yyXyY-ej850g-Us745Q/gviz/tq?tqx=out:html&gid=0&tq=select B where A='" + c + "'", success:    function(result){
-  //$.ajax({url: "https://script.google.com/macros/s/AKfycbyWkUoqU_zhWA55Ls1uTWgWlj8HAcODxzgzKZA4432aioFtOYNlqjMQ6R2zfeggbxly/exec?id=" + c, success:    function(result){
-  $.ajax({url: "https://docs.google.com/spreadsheets/d/1ukpMWNglDFkEYkhd77_MOKa9WZFIztYrHX6y8O7a0lM/gviz/tq?sheet=details&tqx=out:html&tq=select * where E='" + c + "'", success:    function(result){
- //var datafull =JSON.parse(JSON.stringify(result));
- var data =JSON.parse(JSON.stringify(result));
-      console.log(JSON.stringify(result));
-      if(data.car.length>0) {
-	  localStorage.setItem('elink',JSON.stringify(result));
-	  $('.header h1').text(data.car[0]);
-	   $('.header h2').text(data.car[5]);
-	    $('.header p').text('');
-		$('.cta-brochure').attr('href',data.car[3]);
-		$('.cta-website').attr('href',data.car[4]);
-		$('.brand-logo').attr('src',data.car[2]);
-		//if ()
-$('iframe').attr('src',$('iframe').attr('src').replaceAll('utnrNxHAssM',data.car[1].substring(data.car[1].length-11)));
-$('.loader').hide(500);
+function loadthongtin(c) {
 
-//5KMX9MTJq2w
-	  }
-	   $('.versions').html('');
-	  if(data.details.length>0) {
-	  for(var i=0;i<data.details.length;i++) {
-		if(data.details[i][0]==$('.header h1').text()) {
-		 $('.versions').prepend ( $('<div class="version-item"><span>'+data.details[i][2]+'</span><span>'+(data.details[i][3]).toLocaleString('it-IT', {style : 'currency', currency : 'VND'})+'</span></div>'));
-		
-		}
-	  }
-	  }
-  }});
-  }
- 
- $(document).ready(function(){
-    var x = window.location.href;
-  var url = new URL(x);
+  // --- Lấy sheet "elink" ---
+  $.ajax({
+    url: "https://docs.google.com/spreadsheets/d/1ukpMWNglDFkEYkhd77_MOKa9WZFIztYrHX6y8O7a0lM/gviz/tq?sheet=elink&tqx=out:html&tq=select%20*%20where%20H%20='" + c + "'",
+    success: function (result) {
+      var dataJson = parseGvizResult(result);
+
+      if (dataJson.table.rows.length > 0) {
+        var car = dataJson.table.rows[0].c.map(x => x ? x.v : "");
+
+        // Lưu vào localStorage (nếu cần)
+        localStorage.setItem('elink', JSON.stringify(car));
+
+        // Gán UI
+        $('.header h1').text(car[0]);
+        $('.header h2').text(car[5]);
+        $('.header p').text('');
+        $('.cta-brochure').attr('href', car[3]);
+        $('.cta-website').attr('href', car[4]);
+        $('.brand-logo').attr('src', car[2]);
+        $('iframe').attr(
+          'src',
+          $('iframe').attr('src').replaceAll('utnrNxHAssM', car[1].substring(car[1].length - 11))
+        );
+        $('.loader').hide(500);
+
+        // Sau khi load elink xong thì gọi details (truyền tên xe)
+        loadDetails(car[0]);
+      }
+    }
+  });
+}
+
+function loadDetails(carName) {
+  // --- Lấy sheet "details" ---
+  $.ajax({
+    url: "https://docs.google.com/spreadsheets/d/1ukpMWNglDFkEYkhd77_MOKa9WZFIztYrHX6y8O7a0lM/gviz/tq?sheet=details&tqx=out:html&tq=select%20*%20where%20E%20='" + carName + "'",
+    success: function (result) {
+      var dataJson = parseGvizResult(result);
+
+      $('.versions').html('');
+      if (dataJson.table.rows.length > 0) {
+        for (var i = 0; i < dataJson.table.rows.length; i++) {
+          var r = dataJson.table.rows[i].c.map(x => x ? x.v : "");
+
+          // Giả sử: cột 0 = Tên xe, cột 2 = tên phiên bản, cột 3 = giá
+          if (r[0] == carName) {
+            $('.versions').prepend(
+              $('<div class="version-item"><span>' + r[2] + '</span><span>' +
+                Number(r[3]).toLocaleString('it-IT', { style: 'currency', currency: 'VND' }) +
+                '</span></div>')
+            );
+          }
+        }
+      }
+    }
+  });
+}
+
+$(document).ready(function () {
+  var url = new URL(window.location.href);
   var c = url.searchParams.get("id");
-   loadthongtin(c);
+  loadthongtin(c);
 });
   //alert(21);
   </script>
