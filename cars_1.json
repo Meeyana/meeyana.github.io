@@ -1,0 +1,3597 @@
+[
+  {
+    "active": 1,
+    "brand": "kia",
+    "name": "Kia Morning",
+    "img": "https://thacoauto.vn/storage/kia/lineup-2022/kia-new-morningjpg.png",
+    "video": "https://www.youtube.com/watch?v=9IkExBSPdxs",
+    "type": "Hatchback",
+    "banner": "https://drive.google.com/thumbnail?id=1-pZb6K0no0KVcMq1SjeBS_OUmGU6Fe_W&sz=w1080",
+    "brochure": "https://drive.google.com/file/d/1p6AeDcNu-IY9vT4-hnLX8WIKwiPN0R9c/view?usp=drive_link",
+    "website_url": "https://kiavietnam.com.vn/chi-tiet-san-pham/new-morning",
+    "highlight": true,
+    "new": true,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "1PVhs7XcjpLGFHw3_36wTQI9nWF1LcoHt",
+    "gallery": [
+      "1BDiaRY5uVfPNDBlRQgE0dHSVzsH8qv5i",
+      "1J6xHXGMB-uqqXmpl5fNY5myHutzEgZxW",
+      "1PCb4FaeWp2bWeGUet_UCutc4Ps0QqZxp",
+      "1VU2S7hdbHr_RLPDGJUrl3KarR67qbLau",
+      "1_FlzlNnc-lN_JHPW0twJNTOWtIDb5wXL",
+      "1c6Uw0QQmtCwkYHzwqlBF55J_MMuWJdHr",
+      "1fGjbW8sN7zvQsGJ_ELLAJkEWjFiMHvhK",
+      "1jL_dc7yr0ibeXfllaWlmponB9mXqlZ27",
+      "1wN0bL5UHXTUO4ey2MFNFtaXLjGOIOr4j",
+      "1-enW8eHr7QDSltWT8lxy-vptlNGUi0nM",
+      "1Id72-pWJ0tlDIC4NZRC-NBQMdfBjCiAh",
+      "1L4ceY0Pi2qrfC6t3IGWVrOnGonkdYJDi",
+      "1RPB4S4SS7L6gSiW5dGR6MHZpBcMisMRq",
+      "1S4sYWuMK98JIDBi0x1E1OvBLkYrvrWyk",
+      "1VPN2hlUpqUzpQ4gzFYpEvclNV26guIZ1",
+      "1_Dpnq0MFcjkygR9J-GxHJIwZRI25wkP7",
+      "1k1XlFKO7uajxn18EzQNHyUDdxXVUuQMr",
+      "1w36Kvd_FEucvA3BK_mYhDIVBlY4TIxFT"
+    ],
+    "versions": [
+      {
+        "id": "kia-morning-mt",
+        "name": "MT",
+        "originalPrice": 439000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đen/Nâu",
+            "code": [
+              "#000000",
+              "#8B4513"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "kia-morning-xline",
+        "name": "X-Line",
+        "originalPrice": 489000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Vàng",
+            "code": "#FFD700"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đen/Đỏ",
+            "code": [
+              "#000000",
+              "#FF0000"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 2,
+    "brand": "kia",
+    "name": "Kia Soluto",
+    "img": "https://thacoauto.vn/storage/kia/lineup-2022/kia-solutojpg.png",
+    "video": "https://youtube.com/embed/yyy?loop=1",
+    "type": "Sedan",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1ReGA_5atfxGqeDNBx4D0JvB4mUMVscdz/view?usp=drive_link",
+    "website_url": "https://kiavietnam.com.vn/chi-tiet-san-pham/soluto",
+    "highlight": false,
+    "new": false,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "1VPLnFwr8xwRGGbS9E5ahHzN3V9pApnOv",
+    "gallery": [
+      "1cAjKBK5jIkKvgSCZKzDEoK8yODHTm2_S",
+      "16_pcwCFydtm0Td48lHaF0BDVG3QnG_gn",
+      "1BgkO3aw1oWV3nAdFO4UYWP2GLedIOMmQ",
+      "1OuSywAMZ0aZ9lAM3nfqJx2H0BUUHyd_Q",
+      "182A6ct6SW5p0NOrymP359FZW0dkQIhkR",
+      "1a39D6A-MQr5DxLIVth3E0kzxOKFCBRDR",
+      "1FlPWUiBw6Es1keqiP9Zz_spoAUfbIKL7",
+      "1_rF27lNK9_PNjH-3WkIi1IQj4nGruP9o",
+      "16urK757Qm8lfi8mqF9JQkKlDCV4sONK3",
+      "1DMvOhm2EXQDjPg9Y2xXLCwADGwIaNkKs",
+      "1gn45bcMCwxP_TqK-SWgzTB6xYoF0XQ6x",
+      "1ixknRrkTSJ9CuFz04ceaVXdk6QU_JJdj",
+      "1io2WtLTMlnT5_Oe6O7ybLz8uKsWMMiQv",
+      "1r8lzC46C5OdOk2Q7PmnRF1pW2fb6GfLh",
+      "1stSFeU6Q7gk1SL5UBlse3bWJ8UT6jcpA",
+      "1c2-j_9sL7hhq9CdEln16-aCj9soB8Ujv",
+      "1ImFef_NJxcCJNcQx5b-RVG8Ye9a4N_Vf",
+      "1r_sskhH8Clz0ofuuk1eejIWG-LlXDl9s",
+      "1UYNZkBisVbDBUPxbuYAHsT3O-Sm6HOMV",
+      "1vHkYIHEBY_3vPrb1eJe8m6B0qcosShmN",
+      "1NGTtMCpS7EVKsTkoEGV1KheQrGxBRmh4",
+      "1bXirvQxQXZCSjWICOmsO3Fap6E0heq_B",
+      "1TbO569YzhZUjiJ3C9ydNJUoCkRI4C_wd",
+      "1A3VsMMaC5c_Jesn3omr4gvisHCn1I2yo",
+      "199MmgD7gcrhlk41KNm9kHWPA-FE57BlB",
+      "1uZOfr4AkMiBkYglexcZo2GLDPALN7MAt",
+      "1Jp29vdValLcgFZ1B_NpaaLmQRBIl8wwG",
+      "1zsENN4vYKrMq23xkpBJ5nF4z1NklfA9u",
+      "1X17AFJK7-6QOw-xUtgT9uJeu3y72jY1G",
+      "1QC2QHHKgqW01n74BA0jJTktrXjzLTzwu",
+      "1TG539KV98kxipzXnBCeJMwlE5TLolDvt",
+      "15fhs20ymeyEy4e5SanbnTxP02tfsBa6J",
+      "1iaOxLYX8rKwhox2sFrnMCuqveO674Fr8"
+    ],
+    "versions": [
+      {
+        "id": "kia-soluto-mt",
+        "name": "MT",
+        "originalPrice": 429000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          }
+        ]
+      },
+      {
+        "id": "kia-soluto-at",
+        "name": "AT Deluxe",
+        "originalPrice": 479000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 2,
+    "brand": "mazda",
+    "name": "Mazda2",
+    "img": "https://thacoauto.vn/storage/mazda/hinh-dai-dien/new-mazda-2.jpg",
+    "video": "",
+    "type": "Sedan",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1OkQUVGoSEWOXDXiSigJaG-_Si-PZpxpi/view?usp=drive_link",
+    "website_url": "https://mazdamotors.vn/vehicles/new-mazda2",
+    "highlight": false,
+    "new": true,
+    "bestseller": true,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab3",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "mazda2-at",
+        "name": "AT Deluxe",
+        "originalPrice": 489000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      },
+      {
+        "id": "mazda2-luxury",
+        "name": "Luxury",
+        "originalPrice": 529000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 1,
+    "brand": "mazda",
+    "name": "Mazda2 Sport",
+    "img": "https://thacoauto.vn/storage/mazda/hinh-dai-dien/new-mazda-2-sport.jpg",
+    "video": "",
+    "type": "Hatchback",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1tZ-gac4WmX00lF9kiMt2fIEuO5sPKZot/view?usp=drive_link",
+    "website_url": "https://mazdamotors.vn/vehicles/mazda2-sport",
+    "highlight": true,
+    "new": false,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab4",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "mazda2-sport-at",
+        "name": "Sport AT",
+        "originalPrice": 499000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "mazda2-sport-premium",
+        "name": "Sport Premium",
+        "originalPrice": 549000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 2,
+    "brand": "kia",
+    "name": "Kia K3",
+    "img": "https://thacoauto.vn/storage/kia/lineup-2022/kia-the-new-k3jpg.png",
+    "video": "",
+    "type": "Sedan",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/146KR9_qSuxq_lVGIuSxSaDgpQWL_juvL/view?usp=drive_link",
+    "website_url": "https://kiavietnam.com.vn/chi-tiet-san-pham/the-new-k3",
+    "highlight": true,
+    "new": true,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "1oITQGU8Lwud8zMW07UrC7NBeDNeQKDp1",
+    "gallery": [
+      "1Gjys7uD_vB72jrD-0WqrNMMzJ7q5MHXg",
+      "1ZM021mEg6PN5vBcbbwQvFqYmVVgmFb2U",
+      "108eS9M9TVTGT1-ZIfPmxi7V5ZJCUhtJx",
+      "1q74Kpxdb9wkxCFGhIgsKOKL6iKKImVmc",
+      "1x8c6OksD1eENGWbjyf8SnfMaW-FCDx66",
+      "1KUKXDajW3A5n7A5vLOjDTHn_gj2PTI1n",
+      "15fhjh62eHs2iJAwhGmsKGA7XJGl2k3SD",
+      "1WIRdOqaHp_vSadJAWhd58F00Mc8alpo0",
+      "1r1L2Lr1ur5lgz7a0OC53OTnRDCwqIdFX",
+      "1BH5zn94rgWLfCKP9AV9ev9prYWL7ONT8",
+      "1O8FfsHOM_L36ZiH6v8CBwz2v1wczyT_a",
+      "1yexiwFOd6144dZpqawX4tORS81X5w54f",
+      "1zeGEbxCEyeC_6v6OFqB48hJTg430I1Zq",
+      "1DizBbvFmXIGjt64TZpuVgza2JtnKdqnQ",
+      "1UOivcG3PYeTKu7UPHoQpShmuhboGNjjX",
+      "1XSuAZ7Z2KGs6npXVpLgxsG1JTHPnXncR",
+      "1frXt50mE1yi8QDOSgxBkZmTawjdvG3Oz",
+      "1XdWrAzgojrWEIHI0splfyzu372AU_Ecg",
+      "1adVuZMDWM3uAetktnPQH3Xtfj9siBV0E",
+      "1o04nAf1qKyZznE_S6NMM2AitTC_A_ZB9",
+      "1ur39XVVu_6TRY5cGi4Qyoh-78tS1B661",
+      "16-214w8Mei0ouX8ob47-nkZJdjapi10C",
+      "1BqWoo-7GTACATdR6qiy1QfRyJhMgiqw2",
+      "1JYh_F0UiH8GnoAd5b3oAMcPpSNmTVfvu",
+      "1rG91MwSFDNYnRMpYelTiqQ-K9MMZsOL9",
+      "1zl467wHEiEMuvfG_eMa4FMVYBKtMqFd_",
+      "1Gp-dMi3pNpM4jVUbu15CyzmlzUByjoUp",
+      "1OGk7c8Cxxa1lpRJL6CDFmQz9XFcMGkrO",
+      "1W_pTQBtxEPyaUyD9LHM5fP58z7jqq0t3",
+      "1YnT9BR4e-Y7Pr0zJ7hrbjrLgeql5Nl2J",
+      "1ru_2bAkRzYNZuzMlrW7cXZRtGCeshr2j",
+      "1t-jYsdRYicEAPZpksaoVhTusYCPsyF7h",
+      "1w97EqvQkvWRB1P0-K2K0yVaJnRwrYfdP",
+      "1gIbiwHZUzQUUuPvk-0oSAschipZQPAOQ",
+      "1ggdMwr2QWWZg98brgvupdvFIyqYUSFjO",
+      "14tmXCuiQFXswAWrSQkkMqTGIjeyER_zJ",
+      "1OpnuDVM2H74dMt4D49h9IkobRwfeJ22k"
+    ],
+    "versions": [
+      {
+        "id": "kia-k3-16luxury",
+        "name": "1.6 Luxury",
+        "originalPrice": 629000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "kia-k3-20premium",
+        "name": "2.0 Premium",
+        "originalPrice": 699000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 6,
+    "brand": "kia",
+    "name": "Kia New Sonet",
+    "img": "https://thacoauto.vn/storage/kia/kia-new-sonet/hinh-dai-dien-kia-new-sonet.jpg",
+    "video": "",
+    "type": "B-SUV",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1mWrJeQ3d6j08gkOC2-wiJiCspj1pDXF4/view?usp=drive_link",
+    "website_url": "https://newsonet.kiavietnam.com.vn/",
+    "highlight": false,
+    "new": false,
+    "bestseller": true,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "1lSGElTk3BEh88BmI7d3OToUbhZXVOEt_",
+    "gallery": [
+      "11tO46paxlLAPdg_S2gL_lzZeWxxXMtRR",
+      "16zIFUbLV-BDQCpsj1nLmVG47G5SnI_ff",
+      "18HTiBxaxkmy4uvqbHZLFynLjwc6i4KLf",
+      "1D4YDTtA7LnAkeVmRzOJRamdLr0Ls9_Ev",
+      "1EF1MuzmRDB1Hz3cDKgkcF87_K7T1QzXl",
+      "1NIupI2_n_xVjwIAuU7gTeCxUOA4yBLE1",
+      "1R1S9SOeQ2rixu9kpeKQVOJdI6UwvTe-5",
+      "1XMdg6esnC33EFy_auv26FXXZKMon0KBK",
+      "1aFgFhaqLxNavOK3Gvz8-8RkjiiFeJXnk",
+      "1chkihLjjdK-_WE_Au5J-lzvzFXHY4fz8",
+      "1xbpAilKOvxAE2ZGHHnLKFTta4iVcIo08",
+      "1ydvRbjyortoCfsfg0ZF9CwV5O-FQqy-C",
+      "1aNcYHvvSmxhbyPD-wd-TYQ38HlslO1p2",
+      "1yyenNWBEVu8NlSvAfATXo8sgGZH87SM8",
+      "1zzz39O3K-L8pa11wfS68aUz5_5AezZ_E",
+      "18xVL_8iN7kEs4jbTXESngVwBKpba9RWw",
+      "1ZlhZAjhIk6S7e7pasogeq-rEIzOabObF",
+      "1jEctKRVkFa5PZ7Zg_sYQJmOk1qD6z66J",
+      "1jvoadVdMOg5qaAmzuuHIasoMzX-cQ1_h",
+      "1n06BiRqLNgwH8UQ3bt-B9oM-Bey90cNa",
+      "1psQCcuieB3QEApsXL79wNFvzddZof3a4",
+      "1qW4ZU1JmGMbptN16PV3fAKeUft9DED59",
+      "1qpLmfEjwG5gCvEn2IQquGBKihAoqnXhg",
+      "1rxWxMKc1g7YKhzPgGDvQjbkwdAqU3zTX",
+      "1sL8zuxAcFsbpVWfzOXfh6icAsD2IMYYN",
+      "1Amw_lgP3GZ5z7B8SJYHmwDQ3sjFhTZbj",
+      "1OR-Rwq65cMzA9uhH1CpUwGVju3cf_GoZ",
+      "1TPTLZu7XWLWCuWqeHQ35wYDeKAwLx9uC",
+      "1Wn62FEUbclUV5Zvj04-16G_6cfzB86ME",
+      "1j6vxX0pmWs8SahhJFyCDBWBz4aEM8A43",
+      "1sBOedTfAFc0RfpBMElPecL6LWqfF29CL",
+      "1w-FZu2TUUMjz_eUIVN04aIITs60kOAiE",
+      "1ORmTrOu-Qwz5VKdCprWHyX_44muVLrc-",
+      "1V4eWbKMiwrSuwmhlrztucRqM-5UMNlRG",
+      "1We-Y13Zy9au48TlxWiB-_KIM_ruJMc7p",
+      "1bYt9jT3PGqHAkPyAacXvjtF_UzPIlCud",
+      "1cFbn4mDCO-c0dQDMxyf0p3oAhXi84R3V",
+      "1gbfh_FOikJYUTrSx_LiPtklw-2w4_R3B",
+      "1n2DqYncmXQct4eSKq5lqqek_KOVsUxl1",
+      "1rISzTIJiKpGpWESOA_Mnw_Rgr3xet2-t",
+      "1s17lBXia-JzYhlzyNA-O1uu8DcNJiY4S",
+      "1y7_F4KX-aIk0snk0GjxfyN13yUvuOp-i",
+      "1-9CnJNMZI-dPhLe1PVXfaAUjLOJUmHRY",
+      "1-fi2uwvKiKWNcF27-5eoLLg0SZSmw1Uz",
+      "1-rCA8MLwhEkXl9PO5z_lJ4b9tyPtFOKq",
+      "109ukz_qJBrnuUOirp50h4XHMGUaoAUCW",
+      "12hzsgUT5K5kTups1bqFAdnXqZenibBp1",
+      "14AokMO6GvFJkr_h8IoCjYu3c40V1d74I",
+      "15pSXgLuL15DkH6dLQfYUGAJ4KTkhbbK5",
+      "1FwukOe5-1JHzV2e93eOHpHDfnI61tfef",
+      "1GIvA-U-wBKtzJbGq0EBy2ur2DTIizUxa",
+      "1GNGirvlvCG7uXttaIaV3skYbxh5Mxplu",
+      "1L28RLQluTeLVaFGdigNKHV44HzsvlI8r",
+      "1RbLtRGBrYjyDeRLc2_9jczRSmcM4mEeu",
+      "1Vcifw0FQKSsBw-tmXWerNZsiX0p7kYXQ",
+      "1e04Bh1dqr7S5UGJRW8AhZ8lcOdnJyH9r",
+      "1faXALwvy1Msoex0RjwYznMR1p0BE__5h",
+      "1fuaDQ_A_IJUl1-fxUY_cDQIXa9Yc89WQ",
+      "1gp5a5WDdwPUyDfn1iw-rGe5a6nIgo1Jm",
+      "1hDuKMMJuCa8OHpeCR8Vfm-K3WGSRz35U",
+      "1hTaJnsXwhUXdx4crLaa3-lUOZ6-IC42o",
+      "1he7ZNGe1tEgfxPIQvPP7vf-nxgDeTSKY",
+      "1hfNR_DFzmzlGh9qgQ0ANZV9i6njD_4Sv",
+      "1i4-JPGZGSI8BUdadtHJl8rl4dq3fxrKT",
+      "1jEGKb0LYdOzJAHo5i7Csp3Ro760pMxbJ",
+      "1juGAg_6U9NyXREiyjiRAsj5v_Sg9YBYT",
+      "1jurdH-U2y8da5xppMfKhmdYpFing5W-6",
+      "1m0ZZDqC61dZ2bi2AdkQKUSiBF9GEZPMh",
+      "1vyT2nZcJh_2-bC6_XSxbEtjpWLyVTLV2",
+      "1-Dv9faLkC4185h5lYhrT_uSZNgTEkIwc",
+      "1-OZ8dww_usS345SFNiaEzmjpJHjqHtV9",
+      "1-bJxBrhFaDgKzMMTnRCqMhQy8YjH9jEO",
+      "10YmOAswmmDhhrFhMvR1vNVnlEs_YM5D-",
+      "17I4OTQNgiEN_d1gvAu6RTQqhV-PsX4B4",
+      "17hEaTO9_KQEABkzGkPAPsveTdyoSwiA1",
+      "1KaW2rJ-OyFczwyyMg25fsC-Lt4G-qZRG",
+      "1MvywuDIjfkLWe8Qd05-SvLFIirGfPsYj",
+      "1N5kYijJuwK9CIDEU38i5xWmWgGjA4rtZ",
+      "1OVJyA5d_WPYZrHcyL1QfGNNaGJKnm4gl",
+      "1U0ZiWBWpViopbU2hilluPeFctUcEZrzV",
+      "1UfwAblLrnRbVwh9d0HhcK5qfGcwkj92d",
+      "1V-RsfG1W8-ODyM_YBJVDntDDkGHTbrqr",
+      "1WWIUcKZIUj7GSXiWQ9PypWgzQQIFE7Gs",
+      "1Yi8e67gzMsA4HP78qCKaFg6rvTwwSk2G",
+      "1cNjWxm17orNOGZB65vPvTqNzf5S4o3Ah",
+      "1dlbhQbPVB93gsm6lIoTobEExcq7G8WSm",
+      "1hjvKlcCFE_I6ZRsN7HY9vIPD-9ARFoAp",
+      "1mXy62oWq00XOEvNR3MLNzsMXefaGWMhD",
+      "1nM40rEnG2PN0JJQQWEu8bjnF5fMss9cs",
+      "1vODXjSFJ8HJs9f_JkYeuQcJ2XEXr4cgw",
+      "1whofG3shjUhX6jo_PQYquoj-4k9f9zM6",
+      "1xayzX5mgqh8N3J6h9a8oregka5m68X4o"
+    ],
+    "versions": [
+      {
+        "id": "kia-sonet-deluxe",
+        "name": "1.5L Deluxe",
+        "originalPrice": 549000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "kia-sonet-premium",
+        "name": "1.5L Premium",
+        "originalPrice": 629000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 6,
+    "brand": "mazda",
+    "name": "Mazda CX-3",
+    "img": "https://thacoauto.vn/storage/new-cx-3/new-mazda-cx-3-v1.png",
+    "video": "",
+    "type": "B-SUV",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1g37efyi3U1wpfs_ZfUj07KBii_veDbDD/view?usp=drive_link",
+    "website_url": "https://mazdamotors.vn/vehicles/new-mazda-cx-3",
+    "highlight": false,
+    "new": true,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab7",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "mazda-cx3-luxury",
+        "name": "1.5 Luxury",
+        "originalPrice": 629000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      },
+      {
+        "id": "mazda-cx3-premium",
+        "name": "1.5 Premium",
+        "originalPrice": 689000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 2,
+    "brand": "mazda",
+    "name": "Mazda3",
+    "img": "https://thacoauto.vn/storage/mazda/hinh-dai-dien/new-mazda-3.jpg",
+    "video": "",
+    "type": "Sedan",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1ZTx1l0HYy5-kqzF3LyFEqMs-4f7DVAEq/view?usp=sharing",
+    "website_url": "https://mazdamotors.vn/vehicles/mazda3-1",
+    "highlight": true,
+    "new": false,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab8",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "mazda3-15luxury",
+        "name": "1.5 Luxury",
+        "originalPrice": 689000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "mazda3-20premium",
+        "name": "2.0 Premium",
+        "originalPrice": 759000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 5,
+    "brand": "kia",
+    "name": "Kia Carens",
+    "img": "https://thacoauto.vn/storage/kia/360/caren/xanh-dam/6-deep-chroma-blue.png",
+    "video": "",
+    "type": "C-SUV",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/172tuPnblWx9oazOHhBzgAUxxKfoGhcMa/view?usp=drive_link",
+    "website_url": "https://kiavietnam.com.vn/chi-tiet-san-pham/carens",
+    "highlight": false,
+    "new": true,
+    "bestseller": true,
+    "seats": [
+      7
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab9",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "kia-carens-at",
+        "name": "1.5L AT",
+        "originalPrice": 649000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "kia-carens-luxury",
+        "name": "1.5L Luxury",
+        "originalPrice": 699000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 6,
+    "brand": "kia",
+    "name": "Kia New Seltos",
+    "img": "https://thacoauto.vn/storage/kia/hinh-sp-moi/new-kia-seltos.jpg",
+    "video": "",
+    "type": "B-SUV",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1tak1-XvNKOj2c3V8vdpZHTQdqwpkICfa/view?usp=drive_link",
+    "website_url": "https://newseltos.kiavietnam.com.vn/",
+    "highlight": true,
+    "new": false,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab10",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "kia-seltos-at",
+        "name": "1.5L AT",
+        "originalPrice": 659000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "kia-seltos-premium",
+        "name": "1.5L Premium",
+        "originalPrice": 749000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 1,
+    "brand": "mazda",
+    "name": "Mazda3 Sport",
+    "img": "https://thacoauto.vn/storage/mazda/hinh-dai-dien/new-mazda-3-sport.jpg",
+    "video": "",
+    "type": "Hatchback",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1pTtecxB5Fko8j-xRI-wPuVauE1u3IZFh/view?usp=sharing",
+    "website_url": "https://mazdamotors.vn/vehicles/mazda3-sport",
+    "highlight": false,
+    "new": true,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab11",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "mazda3-sport-15",
+        "name": "1.5 Sport",
+        "originalPrice": 729000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "mazda3-sport-20",
+        "name": "2.0 Sport Premium",
+        "originalPrice": 799000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 5,
+    "brand": "mazda",
+    "name": "Mazda CX-30",
+    "img": "https://thacoauto.vn/storage/mazda/hinh-dai-dien/mazda-cx-30.jpg",
+    "video": "",
+    "type": "C-SUV",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1AAiJBOnZsOVc-1T9HDMiIqiTzBQiJ2f7/view?usp=drive_link",
+    "website_url": "https://mazdamotors.vn/vehicles/mazda-cx-30",
+    "highlight": true,
+    "new": false,
+    "bestseller": true,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab12",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "mazda-cx30-luxury",
+        "name": "2.0 Luxury",
+        "originalPrice": 769000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "mazda-cx30-premium",
+        "name": "2.0 Premium",
+        "originalPrice": 829000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 5,
+    "brand": "mazda",
+    "name": "Mazda CX-5",
+    "img": "https://thacoauto.vn/storage/mazda/hinh-dai-dien/new-mazda-cx-5-1.jpg",
+    "video": "",
+    "type": "C-SUV",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1iIFt6Ad0cDEw0QUytlYFco64ZD--IhEg/view?usp=drive_link",
+    "website_url": "https://mazdamotors.vn/vehicles/mazda-cx-5",
+    "highlight": true,
+    "new": true,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab13",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "mazda-cx5-20luxury",
+        "name": "2.0 Luxury",
+        "originalPrice": 799000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      },
+      {
+        "id": "mazda-cx5-25signature",
+        "name": "2.5 Signature",
+        "originalPrice": 879000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 3,
+    "brand": "mazda",
+    "name": "Mazda6",
+    "img": "https://thacoauto.vn/storage/mazda/hinh-dai-dien/mazda-6.jpg",
+    "video": "",
+    "type": "D-Sedan",
+    "banner": "",
+    "brochure": "https://mazdamotors.vn/media/dpso0moc/e-brochure-mazda6-0611.pdf",
+    "website_url": "https://mazdamotors.vn/vehicles/mazda6-1",
+    "highlight": false,
+    "new": false,
+    "bestseller": true,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab14",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "mazda6-20luxury",
+        "name": "2.0 Luxury",
+        "originalPrice": 879000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "mazda6-25signature",
+        "name": "2.5 Signature",
+        "originalPrice": 999000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 6,
+    "brand": "peugeot",
+    "name": "Peugeot 2008",
+    "img": "https://thacoauto.vn/storage/peugeot/lineup/new-25-03-25/ban-sao-cua-900x563px-2-new-2008-gt.png",
+    "video": "",
+    "type": "B-SUV",
+    "banner": "",
+    "brochure": "",
+    "website_url": "https://www.peugeotvietnam.vn/san-pham/2008.html",
+    "highlight": true,
+    "new": false,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab15",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "peugeot-2008-active",
+        "name": "Active",
+        "originalPrice": 839000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "peugeot-2008-gt",
+        "name": "GT",
+        "originalPrice": 909000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 5,
+    "brand": "kia",
+    "name": "Kia Sportage",
+    "img": "https://thacoauto.vn/storage/kia/lineup-2022/kia-sportage.png",
+    "video": "",
+    "type": "C-SUV",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1MsDjhC6Y-ijdWTx5J5We-fkU0U92u8Tp/view?usp=drive_link",
+    "website_url": "https://kiavietnam.com.vn/chi-tiet-san-pham/kia-sportage",
+    "highlight": false,
+    "new": true,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab16",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "kia-sportage-premium",
+        "name": "2.0G Premium",
+        "originalPrice": 929000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "kia-sportage-signature",
+        "name": "1.6T Signature",
+        "originalPrice": 1049000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 5,
+    "brand": "peugeot",
+    "name": "New Peugeot 2008",
+    "img": "https://thacoauto.vn/storage/peugeot/lineup/new-25-03-25/ban-sao-cua-900x563px-2-new-2008-gt.png",
+    "video": "",
+    "type": "C-SUV",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1u20EeO2NKfZkc5UYyoKdnzu5kaV-isap/view?usp=drive_link",
+    "website_url": "https://www.peugeotvietnam.vn/san-pham/peugeot-20081.html",
+    "highlight": true,
+    "new": false,
+    "bestseller": true,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab17",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "new-peugeot-2008-gt",
+        "name": "GT Line",
+        "originalPrice": 889000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 3,
+    "brand": "kia",
+    "name": "Kia K5",
+    "img": "https://thacoauto.vn/storage/kia/lineup-2022/kia-the-new-k5jpg.png",
+    "video": "",
+    "type": "D-Sedan",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1x7MzoqjYD0Aqx3Q-rXEXbShi4xhUf7j3/view?usp=drive_link",
+    "website_url": "https://kiavietnam.com.vn/chi-tiet-san-pham/kia-k5",
+    "highlight": false,
+    "new": true,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "1zTorevGibt1Cfnag2dfaIZc7w7JW-loI",
+    "gallery": [
+      "1kLFDoM_2GhPxAMVGPXnCayl8zliPk47H",
+      "1_nXykW4Ed7BuRYIsgw4b4kMj9XZrp8Ad",
+      "1b8rbGg0DDHC7ZAQB25srxfq9DPDeEfni",
+      "1hTb2MsEB8wvU2ob0YP8yf-GlSAZX7evv",
+      "1lzPfuErYtx-AFEDHjmHqxkApMHag5hqR",
+      "1KuVfAiKf8KrfUY-3WVfPXnYM5NgXwBOh",
+      "1hlASTrV921kwVam-zokGrD8Ma1mlFhMA",
+      "1wnRs7T_rmd266dxQShRxvk1ZPq1sTXNQ",
+      "1Qn_Z4McoTjek6F-0pzoT0Q1ML3hoH0cj",
+      "1kzi9TJv_50siXJ1T97z6AB2OriCEz_lm",
+      "1wVQtqVFmZF3hxinivh-8NFY53EyJf0Mf",
+      "1T_0na_fnhHNnCjOoLQid8wLalH64XNxu",
+      "1264wHCN_SxKwGr9zm6aO8LzEOowKM0Rl",
+      "14yGGpg_rfAh64dC1DvsK-rfo0d3qAkdR",
+      "1o6LCDN_bCTMbojBCcYexNywUzyG1Mem1",
+      "17xP8BvrUX8GOMY-YROQ0nT1LTwyGWFTC",
+      "1YjybTkDg_Qd7eIaUT7y2eUauKEMA5rzx",
+      "11aSVK8YMnW0mrYOZa7TW-XmFHLVUeJe9",
+      "1a4B8BWBa4WJj6ZZp46qvxY5VsPbT6xtc",
+      "1fQDu8BXqGrV5pqcrQBXJAXx7Xy2tIFIf",
+      "1wl3Pm3ik-5lsFYW6bfjp5AJE6UyrEmh6",
+      "1nZZtcoFfti6fb4eBInVAgUIiIj4jcOiD",
+      "1oRiL1SxIQ5DZ0FQyg1VeqSWXNpCdKJ5X",
+      "1Vkvc8ehCpRvvzjFiNK8snKm1wbWDDdS_"
+    ],
+    "versions": [
+      {
+        "id": "kia-k5-20luxury",
+        "name": "2.0 Luxury",
+        "originalPrice": 1029000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      },
+      {
+        "id": "kia-k5-25gtline",
+        "name": "2.5 GT-Line",
+        "originalPrice": 1199000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 8,
+    "brand": "mazda",
+    "name": "New Mazda CX-8",
+    "img": "https://thacoauto.vn/storage/mazda/new-mazda-cx-8/anh-xe/mazda-cx-8.jpg",
+    "video": "",
+    "type": "D-SUV",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1iBhzweJlK_kzAH_s-WOH-r2QzdF0-LI-/view?usp=drive_link",
+    "website_url": "https://mazdamotors.vn/vehicles/new-mazda-cx-8",
+    "highlight": true,
+    "new": false,
+    "bestseller": true,
+    "seats": [
+      7
+    ],
+    "fuel": [
+      "Xăng",
+      "Dầu"
+    ],
+    "gallery_folder_id": "abab19",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "new-mazda-cx8-luxury",
+        "name": "2.5 Luxury",
+        "originalPrice": 1129000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "new-mazda-cx8-premium",
+        "name": "2.5 Premium",
+        "originalPrice": 1229000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 5,
+    "brand": "peugeot",
+    "name": "Peugeot 3008",
+    "img": "https://thacoauto.vn/storage/peugeot/lineup/new-25-03-25/ban-sao-cua-900x563px-2-3008-gt.png",
+    "video": "",
+    "type": "C-SUV",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1DIIs8CXDoNTc8_qozrznbV-hGqFa7T25/view?usp=drive_link",
+    "website_url": "https://www.peugeotvietnam.vn/san-pham/3008.html",
+    "highlight": true,
+    "new": true,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab20",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "peugeot-3008-active",
+        "name": "Active",
+        "originalPrice": 969000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      },
+      {
+        "id": "peugeot-3008-gt",
+        "name": "GT",
+        "originalPrice": 1199000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 7,
+    "brand": "peugeot",
+    "name": "New Peugeot 408",
+    "img": "https://thacoauto.vn/storage/peugeot/lineup/new-25-03-25/ban-sao-cua-900x563px-2-408-gt.png",
+    "video": "",
+    "type": "SUV Coupe",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1oW5Ks04BLSQbR0NQkM-uI98IfBi3U2M0/view?usp=drive_link",
+    "website_url": "https://www.peugeotvietnam.vn/san-pham/408.html",
+    "highlight": false,
+    "new": false,
+    "bestseller": true,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab21",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "new-peugeot-408-allure",
+        "name": "Allure",
+        "originalPrice": 999000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "new-peugeot-408-gt",
+        "name": "GT",
+        "originalPrice": 1149000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 8,
+    "brand": "kia",
+    "name": "Kia Sorento",
+    "img": "https://thacoauto.vn/storage/kia/lineup-2022/kia-sorento-allnewjpg.png",
+    "video": "",
+    "type": "D-SUV",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1kuN3MqicB9jNcCfw_uAKlXDL7sN1-75v/view?usp=drive_link",
+    "website_url": "https://kiavietnam.com.vn/chi-tiet-san-pham/kia-sorento-all-new",
+    "highlight": true,
+    "new": false,
+    "bestseller": false,
+    "seats": [
+      7
+    ],
+    "fuel": [
+      "Dầu"
+    ],
+    "gallery_folder_id": "abab22",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "kia-sorento-luxury",
+        "name": "2.2D Luxury",
+        "originalPrice": 1249000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      },
+      {
+        "id": "kia-sorento-signature",
+        "name": "2.2D Signature",
+        "originalPrice": 1399000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 8,
+    "brand": "peugeot",
+    "name": "Peugeot 5008",
+    "img": "https://thacoauto.vn/storage/peugeot/lineup/new-25-03-25/ban-sao-cua-900x563px-2-5008-gt.png",
+    "video": "",
+    "type": "D-SUV",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1Vk_fc_SLgBSpuy4MCRwx8yeV48YbhVl9/view?usp=drive_link",
+    "website_url": "https://www.peugeotvietnam.vn/san-pham/5008.html",
+    "highlight": false,
+    "new": true,
+    "bestseller": true,
+    "seats": [
+      7
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab23",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "peugeot-5008-active",
+        "name": "Active",
+        "originalPrice": 1199000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "peugeot-5008-gt",
+        "name": "GT",
+        "originalPrice": 1399000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 8,
+    "brand": "kia",
+    "name": "Kia New Carnival",
+    "img": "https://thacoauto.vn/storage/kia/hinh-sp-moi/hdd-kia-new-carnival.jpg",
+    "video": "https://newcarnival.kiavietnam.com.vn/storage/video/clip-suv-new-carnival-1.mp4",
+    "type": "D-SUV",
+    "banner": "https://drive.google.com/thumbnail?id=1MTvquDO4LprHdHiIGrhVS9xmCn-zhMg2&sz=w1080",
+    "brochure": "https://drive.google.com/file/d/1535eSik9XgOL9Zl6-jafQkURiZJUvm3O/view?usp=drive_link",
+    "website_url": "https://newcarnival.kiavietnam.com.vn/",
+    "highlight": true,
+    "new": false,
+    "bestseller": false,
+    "url_360": "https://thacoauto.vn/storage/kia/360/new-carnival/[mau]",
+    "seats": [
+      7
+    ],
+    "fuel": [
+      "Dầu"
+    ],
+    "gallery_folder_id": "1WRu5GBwCu84F9SIgp7ZFNLDeb3_FiA2d",
+    "gallery": [
+      "1yPOiHkj5z3TZbcY_TGOudLQnsBWJFuuD",
+      "1-DANjnqNZgsYkwsI32mpSRZIA7QzpOvM",
+      "1-PiHzPUlEHOBJMlN4-753xqbPhEuIZWU",
+      "13nPWBEiKv7IYYd6xZBu539iwKqh0QyEi",
+      "16QZ6tpuS2lF4EV8LgCyiy9Yx-UCCJt2l",
+      "16zz5wyEp-m07x368QD9v8_91oSIe_bzm",
+      "17wI5O2Vo0aYdFXHXe2uyW6pph2P69ymM",
+      "19bxoescxXi8KHpqC4xMzXuNs2N-dTSs9",
+      "1EgPJKnxe1ZhPqr_2Gp8eJ9BgUFAEEg3L",
+      "1FZj19QhNxpSIYN6zhWfoNBW7lILUZUGn",
+      "1G1zJBMDkmrtcrBa_eL15UpsTl1YTTrGB",
+      "1G_Tflek9kG4S_cCNEck97UJGHf4nxmyq",
+      "1HsrEwvhed8OJN91XuVDy1U0ZdSWacBVn",
+      "1JI-mM7NIqqM2A3YaiApmwurkfh-JsVtN",
+      "1K8LzjABvA-QArYlXOGeR_rfSHM_KIxf3",
+      "1KpOCZjCc1HfCSQ202TI7WgbYHNAC7Y8b",
+      "1LduOYWWJPj4N-xfNMQ01wUNVh_7R8ZPF",
+      "1QOD0UcxuSZYrrkh-_0cerJiAn4uoHzT5",
+      "1Sd3e_AcbQkoADBz_yWB2JDNft_-WtYEN",
+      "1U86gbStvTF-Tm9xYx0BLj2podcc4tEr4",
+      "1UB38axNOnxIrTvQrfzc54AzOntJTFe4n",
+      "1UGLYnJUv0fzyMQgwFbLQLPHdAZJJnAkL",
+      "1WCDA8JZ0stPDBxYNWJusR7jFTvBhgUfU",
+      "1WrDatATHpifVtDMvACNkt291tFatZ_5b",
+      "1aCmzHODPKr-KLUALKeH6Lbw-T8yDeBIV",
+      "1ey5SdFCUI4bY08txUsWxRdxHP7ssehJo",
+      "1jQ11Bn1JKhDm8GhONv5nIoB-lW0IyumF",
+      "1jlhqQHr6DEvAJVpACUovypx5vcXSPbF_",
+      "1orsW6K0_2wC-hsCdOB-m-888KDXAR2Y_",
+      "1rKWA-i7jTbG1w-gWode3roOL02GdpbWv",
+      "1tXMAfdesTiWvnxDiCFWg0FjZQVopR3on",
+      "1wSKm9YynX7KF4WwDMy2RhZHWD2SzDsLF",
+      "1x2RQ0FW20qrtnvVsdAFTH33n-R80TH47",
+      "1xjyd2cRjO3GPPRM0fWe7zf2PvaS8pz7V",
+      "1yb3FwRr5Hj462peQbtO8Yi5sa3jVq0l5",
+      "18bVYXEPNIx1CVELZcNVk-w_PRKmeDa4R",
+      "19159Hyo1OTOTlpDee4yZFxvypSCXDMRc",
+      "19SWwuG_j9f_nV0Z7EL3dIL_A4yWwvlTz",
+      "1Ack_8oO6hwedM9mGxBHDTsOL_QPeYzkd",
+      "1Czz0PrT-S4mLCsS5_P5oBGN33f5L1H0q",
+      "1FfGx2CkJAYfMg7STp93fIiPrt9wRdX9e",
+      "1HrkXmLYcKq-UeZN3yIDxInMLXaXj7qLA",
+      "1Io3awQy7YIp_xGHGHb6emonMmWbqkpcv",
+      "1KFz5JT49n_aWynFzN-QWmlati4YtCvxI",
+      "1LwcNeCeqrFh_UVP0G3bVpfZa-Kz6O8NG",
+      "1OBSr3qFMLPVDBTs1VkjAq6R3lRDH4whl",
+      "1P9iv5Ae7UwSWvaL-_z-_KP5t53rIr3LM",
+      "1PIXxuMl3H50N1DbE6q9afpyq03aksIiJ",
+      "1QsIQFd1xfXTfrm1SCbRZ8CfuCFinao7g",
+      "1ngF2a0TB9aJmHxzCHR0Csc_qH5UQkbAU",
+      "1oAq18zxOT1VVpwSSbE24_ah8kRhNfMMp",
+      "1reEhuSmEXIgBkQiMX0xMMmNfdzMHGt7f",
+      "19lnxh6PAHG-csAUDQBabQPdGeuTKkA2_",
+      "1Bq7yG3W-AzdQfdvUwK4FOoux19jKrvXb",
+      "1I0Xx5S0zhxnVJ9jii4A9w4ySCyvPzwV_",
+      "1O_QunjcV1E1Mis4TNAJ3d3GNDLBG42bE",
+      "1ckU2CKyimewbye0zG5Dcmb1ihFttYEPg",
+      "1l9_7ToZYAHWVGm3ZoqqUkYAeS52GWVpP",
+      "16g-W-B21nqoiihpqG6G6F6e3tBY5c965"
+    ],
+
+    "versions": [
+      {
+        "id": "kia-carnival-luxury",
+        "name": "2.2D Luxury",
+        "originalPrice": 1289000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#672023"
+          },
+          {
+            "name": "Xanh lá",
+            "code": "#5b695b"
+          },
+{
+            "name": "Xanh sẫm",
+            "code": "#252a4f"
+          },
+{
+            "name": "Xanh xám",
+            "code": "#495d74"
+          },
+{
+            "name": "Nâu",
+            "code": "#663131"
+          },
+{
+            "name": "Xanh mineral",
+            "code": "#1e6ca6"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "kia-carnival-premium",
+        "name": "3.5G Premium",
+        "originalPrice": 1489000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#672023"
+          },
+          {
+            "name": "Xanh lá",
+            "code": "#5b695b"
+          },
+          {
+            "name": "Xanh sẫm",
+            "code": "#252a4f"
+          },
+          {
+            "name": "Xanh xám",
+            "code": "#495d74"
+          },
+          {
+            "name": "Nâu",
+            "code": "#663131"
+          },
+          {
+            "name": "Xanh mineral",
+            "code": "#1e6ca6"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 9,
+    "brand": "kia",
+    "name": "Kia Sorento Hybrid",
+    "img": "https://thacoauto.vn/storage/kia/360/sorento-hybrid/3f92c6fc-a4f3-4fbe-84cc-3cd32e03ef42.jpeg",
+    "video": "",
+    "type": "Hybrid",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/184eUyd3_xXcdvqfPVE7BDvLpAoSUsGT3/view?usp=drive_link",
+    "website_url": "https://sorentohybrid.kiavietnam.com.vn/",
+    "highlight": false,
+    "new": true,
+    "bestseller": false,
+    "seats": [
+      7
+    ],
+    "fuel": [
+      "Hybrid"
+    ],
+    "gallery_folder_id": "abab25",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "kia-sorento-hev-luxury",
+        "name": "HEV Luxury",
+        "originalPrice": 1399000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "kia-sorento-hev-premium",
+        "name": "HEV Premium",
+        "originalPrice": 1549000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 9,
+    "brand": "kia",
+    "name": "Kia New Carnival Hybrid",
+    "img": "https://thacoauto.vn/storage/kia/hinh-sp-moi/new-carnival-hybrid-astra-blue.png",
+    "video": "https://newcarnival.kiavietnam.com.vn/storage/video/clip-suv-new-carnival-1.mp4",
+    "type": "Hybrid",
+    "banner": "",
+    "brochure": "https://drive.google.com/file/d/1w1LW5KZcVyB-6QtSD6QAmgpjUmkygjxT/view?usp=drive_link",
+    "website_url": "https://kiavietnam.com.vn/chi-tiet-san-pham/new-carnival-hybrid",
+    "highlight": true,
+    "new": false,
+    "bestseller": true,
+    "seats": [
+      7
+    ],
+    "fuel": [
+      "Hybrid"
+    ],
+    "gallery_folder_id": "1WRu5GBwCu84F9SIgp7ZFNLDeb3_FiA2d",
+    "gallery": [
+    ],
+    "versions": [
+      {
+        "id": "kia-carnival-hev-premium",
+        "name": "HEV Premium",
+        "originalPrice": 1649000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      },
+      {
+        "id": "kia-carnival-hev-luxury",
+        "name": "HEV Luxury",
+        "originalPrice": 1749000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 1,
+    "brand": "bmw",
+    "name": "BMW X4",
+    "img": "https://thacoauto.vn/storage/bmw/hinh-dai-dien/bmw-x4.jpg",
+    "video": "",
+    "type": "SUV Coupe",
+    "banner": "",
+    "brochure": "",
+    "website_url": "",
+    "highlight": false,
+    "new": false,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab27",
+    "gallery": [
+      "1BDiaRY5uVfPNDBlRQgE0dHSVzsH8qv5i",
+      "1J6xHXGMB-uqqXmpl5fNY5myHutzEgZxW",
+      "1PCb4FaeWp2bWeGUet_UCutc4Ps0QqZxp",
+      "1VU2S7hdbHr_RLPDGJUrl3KarR67qbLau",
+      "1_FlzlNnc-lN_JHPW0twJNTOWtIDb5wXL",
+      "1c6Uw0QQmtCwkYHzwqlBF55J_MMuWJdHr",
+      "1fGjbW8sN7zvQsGJ_ELLAJkEWjFiMHvhK",
+      "1jL_dc7yr0ibeXfllaWlmponB9mXqlZ27",
+      "1wN0bL5UHXTUO4ey2MFNFtaXLjGOIOr4j",
+      "1-enW8eHr7QDSltWT8lxy-vptlNGUi0nM",
+      "1Id72-pWJ0tlDIC4NZRC-NBQMdfBjCiAh",
+      "1L4ceY0Pi2qrfC6t3IGWVrOnGonkdYJDi",
+      "1RPB4S4SS7L6gSiW5dGR6MHZpBcMisMRq",
+      "1S4sYWuMK98JIDBi0x1E1OvBLkYrvrWyk",
+      "1VPN2hlUpqUzpQ4gzFYpEvclNV26guIZ1",
+      "1_Dpnq0MFcjkygR9J-GxHJIwZRI25wkP7",
+      "1k1XlFKO7uajxn18EzQNHyUDdxXVUuQMr",
+      "1w36Kvd_FEucvA3BK_mYhDIVBlY4TIxFT"
+    ],
+    "versions": [
+      {
+        "id": "bmw-x4-sdrive18i",
+        "name": "sDrive18i",
+        "originalPrice": 1859000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      },
+      {
+        "id": "bmw-x4-sdrive20i",
+        "name": "sDrive20i",
+        "originalPrice": 2099000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 2,
+    "brand": "bmw",
+    "name": "BMW X3",
+    "img": "https://thacoauto.vn/storage/bmw/hinh-dai-dien/bmw-x3.jpg",
+    "video": "",
+    "type": "C-SUV",
+    "banner": "",
+    "brochure": "",
+    "website_url": "",
+    "highlight": false,
+    "new": false,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab28",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "bmw-x3-xdrive20i",
+        "name": "xDrive20i",
+        "originalPrice": 2299000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      },
+      {
+        "id": "bmw-x3-xdrive30i",
+        "name": "xDrive30i",
+        "originalPrice": 2599000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 3,
+    "brand": "bmw",
+    "name": "BMW X5",
+    "img": "https://thacoauto.vn/storage/bmw/hinh-dai-dien/bmw-x5.jpg",
+    "video": "",
+    "type": "D-SUV",
+    "banner": "",
+    "brochure": "",
+    "website_url": "",
+    "highlight": true,
+    "new": false,
+    "bestseller": false,
+    "seats": [
+      7
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab29",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "bmw-x5-xdrive40i-xline",
+        "name": "xDrive40i xLine",
+        "originalPrice": 4199000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      },
+      {
+        "id": "bmw-x5-xdrive40i-msport",
+        "name": "xDrive40i M Sport",
+        "originalPrice": 4399000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 4,
+    "brand": "bmw",
+    "name": "BMW 3 Series",
+    "img": "https://thacoauto.vn/storage/bmw/the-new-3/bmw-the-new-3-320i-m-sport.png",
+    "video": "",
+    "type": "Sedan",
+    "banner": "",
+    "brochure": "",
+    "website_url": "",
+    "highlight": false,
+    "new": true,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab30",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "bmw-3series-320i-sportline",
+        "name": "320i Sport Line",
+        "originalPrice": 1899000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      },
+      {
+        "id": "bmw-3series-320i-msport",
+        "name": "320i M Sport",
+        "originalPrice": 1999000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 5,
+    "brand": "bmw",
+    "name": "BMW 7 Series",
+    "img": "https://thacoauto.vn/storage/bmw/hinh-dai-dien/bmw-7-series.jpg",
+    "video": "",
+    "type": "D-Sedan",
+    "banner": "",
+    "brochure": "",
+    "website_url": "",
+    "highlight": false,
+    "new": false,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab31",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "bmw-7series-740li-excel",
+        "name": "740Li Pure Excellence",
+        "originalPrice": 5899000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      },
+      {
+        "id": "bmw-7series-740li-msport",
+        "name": "740Li M Sport",
+        "originalPrice": 6099000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 6,
+    "brand": "mini",
+    "name": "MINI 3 Door",
+    "img": "https://thacoauto.vn/storage/mini/lineup/2022/mini-3-door.png",
+    "video": "",
+    "type": "Hatchback",
+    "banner": "",
+    "brochure": "",
+    "website_url": "",
+    "highlight": true,
+    "new": true,
+    "bestseller": false,
+    "seats": [
+      4
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab32",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "mini-3door-cooper-classic",
+        "name": "Cooper Classic",
+        "originalPrice": 1550000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          }
+        ]
+      },
+      {
+        "id": "mini-3door-cooper-sport",
+        "name": "Cooper Sport",
+        "originalPrice": 1750000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 7,
+    "brand": "mini",
+    "name": "MINI 5 Door",
+    "img": "https://thacoauto.vn/storage/mini/lineup/2022/mini-5-door.png",
+    "video": "",
+    "type": "Hatchback",
+    "banner": "",
+    "brochure": "",
+    "website_url": "",
+    "highlight": false,
+    "new": true,
+    "bestseller": true,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab33",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "mini-5door-cooper-classic",
+        "name": "Cooper Classic",
+        "originalPrice": 1590000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "mini-5door-cooper-sport",
+        "name": "Cooper Sport",
+        "originalPrice": 1790000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 8,
+    "brand": "mini",
+    "name": "MINI Convertible",
+    "img": "https://thacoauto.vn/storage/mini/lineup/2022/mini-convertible.png",
+    "video": "",
+    "type": "Hatchback",
+    "banner": "",
+    "brochure": "",
+    "website_url": "",
+    "highlight": false,
+    "new": false,
+    "bestseller": false,
+    "seats": [
+      4
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab34",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "mini-convertible-cooper",
+        "name": "Cooper Convertible",
+        "originalPrice": 1690000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "mini-convertible-cooper-sport",
+        "name": "Cooper S Convertible",
+        "originalPrice": 1890000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Vàng",
+            "code": "#FFD700"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 9,
+    "brand": "mini",
+    "name": "MINI Clubman",
+    "img": "https://thacoauto.vn/storage/mini/lineup/2022/mini-clubman.png",
+    "video": "",
+    "type": "Hatchback",
+    "banner": "",
+    "brochure": "",
+    "website_url": "",
+    "highlight": true,
+    "new": false,
+    "bestseller": true,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng"
+    ],
+    "gallery_folder_id": "abab35",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "mini-clubman-cooper",
+        "name": "Cooper Clubman",
+        "originalPrice": 1690000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          }
+        ]
+      },
+      {
+        "id": "mini-clubman-cooper-s",
+        "name": "Cooper S Clubman",
+        "originalPrice": 1990000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "active": 10,
+    "brand": "mini",
+    "name": "MINI Countryman",
+    "img": "https://thacoauto.vn/storage/mini/lineup/2022/mini-countryman.png",
+    "video": "",
+    "type": "B-SUV",
+    "banner": "",
+    "brochure": "",
+    "website_url": "",
+    "highlight": false,
+    "new": true,
+    "bestseller": false,
+    "seats": [
+      5
+    ],
+    "fuel": [
+      "Xăng",
+      "Hybrid"
+    ],
+    "gallery_folder_id": "abab36",
+    "gallery": [],
+    "versions": [
+      {
+        "id": "mini-countryman-cooper",
+        "name": "Cooper Countryman",
+        "originalPrice": 1790000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Đỏ",
+            "code": "#FF0000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      },
+      {
+        "id": "mini-countryman-cooper-s",
+        "name": "Cooper S Countryman",
+        "originalPrice": 2090000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          },
+          {
+            "name": "Bạc",
+            "code": "#C0C0C0"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Be",
+            "code": "#F5F5DC"
+          }
+        ]
+      },
+      {
+        "id": "mini-countryman-hybrid",
+        "name": "Cooper SE Countryman ALL4",
+        "originalPrice": 2290000000,
+        "color_exterior": [
+          {
+            "name": "Trắng",
+            "code": "#FFFFFF"
+          },
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Xanh",
+            "code": "#0000FF"
+          },
+          {
+            "name": "Xám",
+            "code": "#808080"
+          }
+        ],
+        "color_interior": [
+          {
+            "name": "Đen",
+            "code": "#000000"
+          },
+          {
+            "name": "Nâu",
+            "code": "#8B4513"
+          }
+        ]
+      }
+    ]
+  }
+]
