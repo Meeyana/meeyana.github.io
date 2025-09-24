@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>English Vocabulary Learning</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <style>
+    body {
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+    .fade-in {
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    section {
+      padding: 60px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="text-center">
+    <div class="container">
+      <h1 class="display-4 fw-bold mb-4">📚 Learn English Vocabulary</h1>
+      <p class="lead mb-5">Type a word and get its meaning, type, synonyms, antonyms, examples and usage frequency instantly.</p>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <input type="text" id="wordInput" class="form-control form-control-lg" placeholder="Enter a word (e.g., courage)">
+            <button class="btn btn-light btn-lg" onclick="sendWord()">Học ngay</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Result Section -->
+  <section class="bg-light text-dark">
+    <div class="container">
+      <h2 class="text-center text-primary mb-4">🔍 Result</h2>
+      <div id="result" class="p-4 bg-white rounded shadow-sm"></div>
+    </div>
+  </section>
+
+  <!-- History Section -->
+  <section>
+    <div class="container">
+      <h2 class="text-center mb-4">📖 Search History</h2>
+      <div id="history" class="bg-white text-dark rounded p-3 shadow-sm" style="max-height:300px; overflow-y:auto;"></div>
+    </div>
+  </section>
+
+  <!-- Modal xem chi tiết -->
+  <div class="modal fade" id="historyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Vocabulary Detail</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="modalContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function sendWord() {
+      const word = document.getElementById("wordInput").value.trim();
+      if (!word) {
+        alert("Please enter a word!");
+        return;
+      }
+
+      const webhookUrl = "https://n8n.n8ntuanphangz.xyz/webhook/7e21246e-516c-4f35-b005-ed6c1de52b3e"; // đổi link webhook của bạn
+
+      document.getElementById("result").innerHTML = `
+        <div class="text-center text-muted">
+          <div class="spinner-border text-primary" role="status"></div>
+          <p>Loading...</p>
+        </div>
+      `;
+
+      try {
+        const response = await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ vocabulary: word })
+        });
+
+        const data = await response.json();
+
+        // Render kết quả
+        let examplesList = "";
+        if (Array.isArray(data.examples)) {
+          examplesList = data.examples.map(e => `<li class="list-group-item">${e}</li>`).join("");
+        } else if (typeof data.examples === "string") {
+          examplesList = data.examples.split(";").map(e => `<li class="list-group-item">${e.trim()}</li>`).join("");
+        }
+
+        document.getElementById("result").innerHTML = `
+          <div class="fade-in">
+            <h3 class="text-success">${data.vocabulary}</h3>
+            <p><b>Type:</b> <span class="badge bg-info text-dark">${data.type || "?"}</span></p>
+            <p><b>Meaning:</b> ${data.meaning}</p>
+            <p><b>Synonyms:</b> <span class="text-success">${data.synonyms}</span></p>
+            <p><b>Antonyms:</b> <span class="text-danger">${data.antonyms}</span></p>
+            <h5 class="mt-3 text-primary">Examples:</h5>
+            <ul class="list-group mb-3">${examplesList}</ul>
+            <p class="small text-muted">Usage frequency level: <b>${data.level}</b> / 5</p>
+            <p class="small text-muted">⏰ Added: ${data.timestamp || ""}</p>
+          </div>
+        `;
+
+        addToHistory(data);
+      }
+      catch (err) {
+        document.getElementById("result").innerHTML = `
+          <div class="alert alert-danger">❌ Error: ${err.message}</div>
+        `;
+      }
+    }
+
+    // Lịch sử từ localStorage
+    let historyData = JSON.parse(localStorage.getItem("vocabHistory")) || [];
+
+    function renderHistory() {
+      const historyBox = document.getElementById("history");
+      if (historyData.length === 0) {
+        historyBox.innerHTML = "<p class='text-muted'>No history yet.</p>";
+        return;
+      }
+
+      historyBox.innerHTML = historyData.map((item, index) => `
+        <div class="border-bottom py-2 history-item" style="cursor:pointer;" data-index="${index}">
+          <b class="text-primary">${item.vocabulary}</b> 
+          <span class="badge bg-info text-dark">${item.type || ""}</span>
+          <span class="text-muted small">- ${item.meaning}</span>
+        </div>
+      `).join("");
+
+      document.querySelectorAll(".history-item").forEach(el => {
+        el.addEventListener("click", () => {
+          const idx = el.getAttribute("data-index");
+          showHistoryDetail(historyData[idx]);
+        });
+      });
+    }
+
+    function addToHistory(wordObj) {
+      if (!historyData.find(item => item.vocabulary === wordObj.vocabulary)) {
+        historyData.unshift(wordObj);
+        if (historyData.length > 50) historyData.pop();
+        localStorage.setItem("vocabHistory", JSON.stringify(historyData));
+      }
+      renderHistory();
+    }
+
+    function showHistoryDetail(item) {
+      let examplesList = "";
+      if (item.examples) {
+        if (Array.isArray(item.examples)) {
+          examplesList = item.examples.map(e => `<li class="list-group-item">${e}</li>`).join("");
+        } else if (typeof item.examples === "string") {
+          examplesList = item.examples.split(";").map(e => `<li class="list-group-item">${e.trim()}</li>`).join("");
+        }
+      }
+
+      document.getElementById("modalContent").innerHTML = `
+        <h4 class="text-success">${item.vocabulary}</h4>
+        <p><b>Type:</b> <span class="badge bg-info text-dark">${item.type || "?"}</span></p>
+        <p><b>Meaning:</b> ${item.meaning || ""}</p>
+        <p><b>Synonyms:</b> <span class="text-success">${item.synonyms || ""}</span></p>
+        <p><b>Antonyms:</b> <span class="text-danger">${item.antonyms || ""}</span></p>
+        <h5 class="mt-3 text-primary">Examples:</h5>
+        <ul class="list-group mb-3">${examplesList}</ul>
+        <p class="small text-muted">Usage frequency level: <b>${item.level || "?"}</b> / 5</p>
+        <p class="small text-muted">⏰ Added: ${item.timestamp || ""}</p>
+      `;
+
+      const modal = new bootstrap.Modal(document.getElementById('historyModal'));
+      modal.show();
+    }
+
+    document.addEventListener("DOMContentLoaded", renderHistory);
+  </script>
+</body>
+</html>
