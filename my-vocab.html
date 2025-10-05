@@ -331,7 +331,8 @@ quizBtn.addEventListener("click", async () => {
 
   try {
     const res = await fetch("https://n8n.n8ntuanphangz.xyz/webhook-test/eng-quiz-start", {
-      method: "POST"
+      method: "POST",
+      mode: "no-cors"
     });
     const data = await res.json();
     renderQuiz(data);
