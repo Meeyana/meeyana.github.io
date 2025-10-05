@@ -59,7 +59,10 @@ body.dark-mode .btn-outline-secondary:hover {
 <div class="container py-1">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2 id="titleBox">📖 Sổ tay đã có ... từ</h2>
-    <button id="darkToggle" class="btn btn-sm btn-outline-secondary">🌓 Dark Mode</button>
+    <div>
+      <button id="quizBtn" class="btn btn-sm btn-success">🎯 Làm Quiz</button>
+      <button id="darkToggle" class="btn btn-sm btn-outline-secondary">🌓 Dark Mode</button>
+    </div>
   </div>
 
   <!-- Search -->
@@ -107,25 +110,60 @@ body.dark-mode .btn-outline-secondary:hover {
   </div>
 </div>
 
+<!-- Quiz Section -->
+<div class="container my-5" id="quizSection" style="display:none;">
+  <h3 class="mb-4">🎯 Bài kiểm tra từ vựng</h3>
+  <div id="quizBox" class="bg-white text-dark p-4 rounded shadow-sm"></div>
+  <button class="btn btn-primary mt-3" id="submitQuiz" style="display:none;">Nộp bài</button>
+  <div id="quizResult" class="mt-4"></div>
+</div>
+
+
 <script>
-const apiUrl = "https://script.google.com/macros/s/AKfycbx7Vsf4h43neWE9wukSsQ_tMcrN-0MF4m58Jay_0S5-9m-umAPM0UfL-lM8wdbTdQvK/exec"; 
+const apiUrl = "https://docs.google.com/spreadsheets/d/1TWtEIzObve8g9FnsRiFQeAiwI5viw---CArhmpofnzY/gviz/tq?sheet=JSON&tqx=out:json&tq=SELECT%20B%20where%20A%20=%20%22english%22"; 
 let vocabData = [];
 let chart;
 let activeLevel = 1;
 
+// Load dữ liệu từ GViz
 async function loadData() {
-  const res = await fetch(apiUrl);
-  vocabData = await res.json();
+  try {
+    const res = await fetch(apiUrl);
+    const text = await res.text();
+    const match = text.match(/google.visualization.Query.setResponse\(([\s\S]*)\);/);
+    if (!match) return console.error("❌ Không tìm thấy JSON trong GViz response");
 
-  vocabData = vocabData.map(item => {
-    item.learnscale = item.learnscale && item.learnscale.toString().trim() !== "" ? Number(item.learnscale) : 1;
-    return item;
-  });
+    const gvizData = JSON.parse(match[1]);
+    const rawJson = gvizData.table.rows[0].c[0]?.v || "[]";
+    let rawData = JSON.parse(rawJson);
 
-  document.getElementById("titleBox").innerText = `📖 Sổ tay đã có ${vocabData.length} từ`;
+    // Chuẩn hóa dữ liệu để giống Apps Script
+    vocabData = rawData.map(item => ({
+      vocabulary: item.vocabulary || "",
+      type: item.type || "",
+      meaning: item.meaning || "",
+      synonyms: Array.isArray(item.synonyms)
+        ? item.synonyms
+        : (item.synonyms ? item.synonyms.split(",").map(s => s.trim()) : []),
+      antonyms: Array.isArray(item.antonyms)
+        ? item.antonyms
+        : (item.antonyms ? item.antonyms.split(",").map(s => s.trim()) : []),
+      examples: Array.isArray(item.examples)
+        ? item.examples
+        : (item.examples ? item.examples.split(";").map(e => e.trim()) : []),
+      learnscale: item.learnscale ? Number(item.learnscale) : 1,
+      level: item.level || "?"
+    }));
 
-  renderChart();
-  renderList(activeLevel);
+    document.getElementById("titleBox").innerText =
+      `📖 Sổ tay đã có ${vocabData.length} từ`;
+
+    renderChart();
+    renderList(activeLevel);
+
+  } catch (err) {
+    console.error("❌ Lỗi loadData:", err);
+  }
 }
 
 // Chart
@@ -210,7 +248,7 @@ const suggestBox = document.getElementById("suggestBox");
 searchInput.addEventListener("input", e => {
   const keyword = e.target.value.trim().toLowerCase();
 
-  if (keyword.length >= 2) {
+  if (keyword.length >= 3) {
     const suggestions = vocabData.filter(item =>
       item.vocabulary.toLowerCase().includes(keyword)
     ).slice(0, 10);
@@ -275,6 +313,79 @@ function updateChartColors(isDark) {
   }
   chart.update();
 }
+
+// ========================
+// 🎯 Quiz Feature
+// ========================
+const quizBtn = document.getElementById("quizBtn");
+const quizSection = document.getElementById("quizSection");
+const quizBox = document.getElementById("quizBox");
+const submitQuiz = document.getElementById("submitQuiz");
+const quizResult = document.getElementById("quizResult");
+
+quizBtn.addEventListener("click", async () => {
+  quizSection.style.display = "block";
+  quizBox.innerHTML = `<div class='text-center text-muted'><div class='spinner-border text-primary'></div><p>Đang tải câu hỏi...</p></div>`;
+  quizResult.innerHTML = "";
+  submitQuiz.style.display = "none";
+
+  try {
+    const res = await fetch("https://n8n.n8ntuanphangz.xyz/webhook-test/eng-quiz-start", {
+      method: "POST"
+    });
+    const data = await res.json();
+    renderQuiz(data);
+  } catch (err) {
+    quizBox.innerHTML = `<div class='alert alert-danger'>❌ Lỗi tải câu hỏi: ${err.message}</div>`;
+  }
+});
+
+let quizData = [];
+
+function renderQuiz(data) {
+  quizData = data.quiz || data;
+  quizBox.innerHTML = quizData.map(q => `
+    <div class="mb-4">
+      <p><b>${q.id}. ${q.question}</b></p>
+      ${q.options.map(opt => `
+        <div>
+          <input type="radio" name="q${q.id}" value="${opt}" id="q${q.id}_${opt}">
+          <label for="q${q.id}_${opt}">${opt}</label>
+        </div>
+      `).join("")}
+    </div>
+  `).join("");
+  submitQuiz.style.display = "inline-block";
+}
+
+// Nộp bài
+submitQuiz.addEventListener("click", () => {
+  const answers = [];
+  quizData.forEach(q => {
+    const selected = document.querySelector(`input[name="q${q.id}"]:checked`);
+    answers.push({
+      vocabulary: q.vocabulary,
+      questionId: q.id,
+      answer: selected ? selected.value : null,
+      correct: q.correct
+    });
+  });
+
+  const correctCount = answers.filter(a => a.answer === a.correct).length;
+  quizResult.innerHTML = `
+    <div class="alert alert-info">
+      ✅ Bạn trả lời đúng <b>${correctCount}</b> / ${answers.length} câu.
+    </div>
+  `;
+
+  // Gửi kết quả về n8n (nếu sau này cần update Learnscale)
+  fetch("https://n8n.n8ntuanphangz.xyz/webhook-test/eng-quiz-submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ answers })
+  });
+});
+
 
 
 loadData();
