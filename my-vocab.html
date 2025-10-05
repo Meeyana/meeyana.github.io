@@ -330,8 +330,11 @@ quizBtn.addEventListener("click", async () => {
   submitQuiz.style.display = "none";
 
   try {
-    const res = await fetch("https://n8n.n8ntuanphangz.xyz/webhook-test/eng-quiz-start", {
-      method: "POST"
+    const res = await fetch("https://n8n.n8ntuanphangz.xyz/webhook-test/7ce99e53-cf0a-41a7-b31c-f61bdd1fc532", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({}),
+      mode: "no-cors"
     });
     const data = await res.json();
     renderQuiz(data);
