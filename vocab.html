@@ -1,309 +1,195 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Sổ tay từ vựng</title>
+  <title>English Vocabulary Learning</title>
+  <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
-    body.dark-mode {
-  background-color: #121212 !important;
-  color: #e0e0e0 !important;
-}
-
-body.dark-mode .card,
-body.dark-mode .list-group-item,
-body.dark-mode .modal-content {
-  background-color: #1e1e1e !important;
-  color: #e0e0e0 !important;
-  border: 1px solid #333 !important;
-}
-
-body.dark-mode .nav-tabs .nav-link.active {
-  background-color: #4CAF50 !important;
-  color: #fff !important;
-  border-color: #4CAF50 !important;
-}
-
-body.dark-mode .nav-tabs .nav-link {
-  color: #bbb !important;
-}
-
-body.dark-mode h4,
-body.dark-mode h5,
-body.dark-mode .modal-title {
-  color: #4CAF50 !important;
-}
-
-body.dark-mode .badge {
-  background-color: #64B5F6 !important;
-  color: #000 !important;
-}
-
-body.dark-mode .btn-outline-secondary {
-  border-color: #64B5F6 !important;
-  color: #64B5F6 !important;
-}
-
-body.dark-mode .btn-outline-secondary:hover {
-  background-color: #64B5F6 !important;
-  color: #000 !important;
-}
-
-    #suggestBox { z-index: 1000; }
+    body {
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      font-family: Arial, sans-serif;
+      color: #fff;
+    }
+    .fade-in {
+      animation: fadeIn 0.8s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    section {
+      padding: 60px 0;
+    }
   </style>
 </head>
-<body class="bg-light">
+<body>
 
-<div class="container py-1">
-  <div class="d-flex justify-content-between align-items-center mb-3">
-    <h2 id="titleBox">📖 Sổ tay đã có ... từ</h2>
-    <button id="darkToggle" class="btn btn-sm btn-outline-secondary">🌓 Dark Mode</button>
-  </div>
-
-  <!-- Search -->
-  <div class="input-group mb-3">
-    <span class="input-group-text bg-white">🔍</span>
-    <input type="text" id="searchInput" class="form-control" placeholder="Gõ từ bạn muốn tra cứu">
-  </div>
-  <div id="suggestBox" class="list-group position-absolute w-50"
-       style="display:none; max-height:200px; overflow-y:auto;"></div>
-
-  <!-- Chart -->
-  <div class="row mb-4">
-    <div class="col-12 col-md-6 mx-auto">
-      <div class="card">
-        <div class="card-body">
-          <canvas id="learnChart" style="max-height:300px;"></canvas>
+  <!-- Hero Section -->
+  <section class="text-center">
+    <div class="container">
+      <h1 class="display-4 fw-bold mb-4">📚 Learn English Vocabulary</h1>
+      <p class="lead mb-5">Type a word and get its meaning, type, synonyms, antonyms, examples and usage frequency instantly.</p>
+      <div class="row justify-content-center">
+        <div class="col-md-6">
+          <div class="input-group mb-3">
+            <input type="text" id="wordInput" class="form-control form-control-lg" placeholder="Enter a word (e.g., courage)">
+            <button class="btn btn-light btn-lg" onclick="sendWord()">Học ngay</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </section>
 
-  <!-- Tabs -->
-  <div id="levelBox">
-    <ul class="nav nav-tabs mb-3" id="levelTabs">
-      <li class="nav-item"><button class="nav-link active" data-level="1">Mức 1</button></li>
-      <li class="nav-item"><button class="nav-link" data-level="2">Mức 2</button></li>
-      <li class="nav-item"><button class="nav-link" data-level="3">Mức 3</button></li>
-      <li class="nav-item"><button class="nav-link" data-level="4">Mức 4</button></li>
-      <li class="nav-item"><button class="nav-link" data-level="5">Mức 5</button></li>
-    </ul>
-    <div id="wordList" class="list-group"></div>
-  </div>
-</div>
+  <!-- Result Section -->
+  <section class="bg-light text-dark">
+    <div class="container">
+      <h2 class="text-center text-primary mb-4">🔍 Result</h2>
+      <div id="result" class="p-4 bg-white rounded shadow-sm"></div>
+    </div>
+  </section>
 
-<!-- Modal chi tiết -->
-<div class="modal fade" id="wordModal" tabindex="-1">
-  <div class="modal-dialog modal-lg modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title">Chi tiết từ vựng</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+  <!-- History Section -->
+  <section>
+    <div class="container">
+      <h2 class="text-center mb-4">📖 Search History</h2>
+      <div id="history" class="bg-white text-dark rounded p-3 shadow-sm" style="max-height:300px; overflow-y:auto;"></div>
+    </div>
+  </section>
+
+  <!-- Modal xem chi tiết -->
+  <div class="modal fade" id="historyModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Vocabulary Detail</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body" id="modalContent"></div>
       </div>
-      <div class="modal-body" id="modalContent"></div>
     </div>
   </div>
-</div>
 
-<script>
-const apiUrl = "https://docs.google.com/spreadsheets/d/1TWtEIzObve8g9FnsRiFQeAiwI5viw---CArhmpofnzY/gviz/tq?sheet=JSON&tqx=out:json&tq=SELECT%20B%20where%20A%20=%20%22english%22"; 
-let vocabData = [];
-let chart;
-let activeLevel = 1;
+  <script>
+    async function sendWord() {
+      const word = document.getElementById("wordInput").value.trim();
+      if (!word) {
+        alert("Please enter a word!");
+        return;
+      }
 
-// Load dữ liệu từ GViz
-async function loadData() {
-  try {
-    const res = await fetch(apiUrl);
-    const text = await res.text();
-    const match = text.match(/google.visualization.Query.setResponse\(([\s\S]*)\);/);
-    if (!match) return console.error("❌ Không tìm thấy JSON trong GViz response");
+      const webhookUrl = "https://n8n.n8ntuanphangz.xyz/webhook/7e21246e-516c-4f35-b005-ed6c1de52b3e"; // đổi link webhook của bạn
 
-    const gvizData = JSON.parse(match[1]);
-    const rawJson = gvizData.table.rows[0].c[0]?.v || "[]";
-    let rawData = JSON.parse(rawJson);
+      document.getElementById("result").innerHTML = `
+        <div class="text-center text-muted">
+          <div class="spinner-border text-primary" role="status"></div>
+          <p>Loading...</p>
+        </div>
+      `;
 
-    // Chuẩn hóa dữ liệu để giống Apps Script
-    vocabData = rawData.map(item => ({
-      vocabulary: item.vocabulary || "",
-      type: item.type || "",
-      meaning: item.meaning || "",
-      synonyms: Array.isArray(item.synonyms)
-        ? item.synonyms
-        : (item.synonyms ? item.synonyms.split(",").map(s => s.trim()) : []),
-      antonyms: Array.isArray(item.antonyms)
-        ? item.antonyms
-        : (item.antonyms ? item.antonyms.split(",").map(s => s.trim()) : []),
-      examples: Array.isArray(item.examples)
-        ? item.examples
-        : (item.examples ? item.examples.split(";").map(e => e.trim()) : []),
-      learnscale: item.learnscale ? Number(item.learnscale) : 1,
-      level: item.level || "?"
-    }));
+      try {
+        const response = await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ vocabulary: word })
+        });
 
-    document.getElementById("titleBox").innerText =
-      `📖 Sổ tay đã có ${vocabData.length} từ`;
+        const data = await response.json();
 
-    renderChart();
-    renderList(activeLevel);
+        // Render kết quả
+        let examplesList = "";
+        if (Array.isArray(data.examples)) {
+          examplesList = data.examples.map(e => `<li class="list-group-item">${e}</li>`).join("");
+        } else if (typeof data.examples === "string") {
+          examplesList = data.examples.split(";").map(e => `<li class="list-group-item">${e.trim()}</li>`).join("");
+        }
 
-  } catch (err) {
-    console.error("❌ Lỗi loadData:", err);
-  }
-}
+        document.getElementById("result").innerHTML = `
+          <div class="fade-in">
+            <h3 class="text-success">${data.vocabulary}</h3>
+            <p><b>Type:</b> <span class="badge bg-info text-dark">${data.type || "?"}</span></p>
+            <p><b>Meaning:</b> ${data.meaning}</p>
+            <p><b>Synonyms:</b> <span class="text-success">${data.synonyms}</span></p>
+            <p><b>Antonyms:</b> <span class="text-danger">${data.antonyms}</span></p>
+            <h5 class="mt-3 text-primary">Examples:</h5>
+            <ul class="list-group mb-3">${examplesList}</ul>
+            <p class="small text-muted">Usage frequency level: <b>${data.level}</b> / 5</p>
+            <p class="small text-muted">⏰ Added: ${data.timestamp || ""}</p>
+          </div>
+        `;
 
-// Chart
-function renderChart() {
-  const counts = [0,0,0,0,0];
-  vocabData.forEach(item => {
-    const lvl = Math.min(5, Math.max(1, item.learnscale));
-    counts[lvl-1]++;
-  });
-
-  const ctx = document.getElementById('learnChart').getContext('2d');
-  if (chart) chart.destroy();
-  chart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['Mức 1','Mức 2','Mức 3','Mức 4','Mức 5'],
-      datasets: [{
-        label: 'Số từ',
-        data: counts,
-        backgroundColor: 'rgba(54, 162, 235, 0.6)'
-      }]
-    },
-    options: { responsive: true, plugins:{legend:{display:false}} }
-  });
-}
-
-// Render list theo level
-function renderList(level) {
-  activeLevel = level;
-  const listBox = document.getElementById("wordList");
-  const filtered = vocabData.filter(item => item.learnscale == level);
-
-  if (filtered.length === 0) {
-    listBox.innerHTML = `<p class="text-muted">Không có từ nào.</p>`;
-    return;
-  }
-
-  listBox.innerHTML = filtered.map(item => `
-    <button class="list-group-item list-group-item-action" onclick="showDetail(${vocabData.indexOf(item)})">
-      <b>${item.vocabulary}</b> <span class="badge bg-info">${item.type || ""}</span>
-    </button>
-  `).join("");
-}
-
-// Modal chi tiết
-function showDetail(index) {
-  const item = vocabData[index];
-  let examples = "";
-  if (item.examples) {
-    if (Array.isArray(item.examples)) {
-      examples = item.examples.map(e => `<li>${e}</li>`).join("");
-    } else {
-      examples = item.examples.split(";").map(e => `<li>${e.trim()}</li>`).join("");
+        addToHistory(data);
+      }
+      catch (err) {
+        document.getElementById("result").innerHTML = `
+          <div class="alert alert-danger">❌ Error: ${err.message}</div>
+        `;
+      }
     }
-  }
 
-  document.getElementById("modalContent").innerHTML = `
-    <h4 class="text-success">${item.vocabulary}</h4>
-    <p><b>Type:</b> ${item.type || ""}</p>
-    <p><b>Meaning:</b> ${item.meaning || ""}</p>
-    <p><b>Synonyms:</b> ${Array.isArray(item.synonyms) ? item.synonyms.join(", ") : item.synonyms || ""}</p>
-    <p><b>Antonyms:</b> ${Array.isArray(item.antonyms) ? item.antonyms.join(", ") : item.antonyms || ""}</p>
-    <h5>Examples:</h5><ul>${examples}</ul>
-    <p><b>Common use:</b> ${item.level || "?"}/5</p>
-  `;
-  new bootstrap.Modal(document.getElementById('wordModal')).show();
-}
+    // Lịch sử từ localStorage
+    let historyData = JSON.parse(localStorage.getItem("vocabHistory")) || [];
 
-// Tab event
-document.querySelectorAll("#levelTabs button").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll("#levelTabs button").forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    renderList(Number(btn.dataset.level));
-  });
-});
+    function renderHistory() {
+      const historyBox = document.getElementById("history");
+      if (historyData.length === 0) {
+        historyBox.innerHTML = "<p class='text-muted'>No history yet.</p>";
+        return;
+      }
 
-// Search + Suggestion (popup only)
-const searchInput = document.getElementById("searchInput");
-const suggestBox = document.getElementById("suggestBox");
-
-searchInput.addEventListener("input", e => {
-  const keyword = e.target.value.trim().toLowerCase();
-
-  if (keyword.length >= 3) {
-    const suggestions = vocabData.filter(item =>
-      item.vocabulary.toLowerCase().includes(keyword)
-    ).slice(0, 10);
-
-    if (suggestions.length > 0) {
-      suggestBox.style.display = "block";
-      suggestBox.innerHTML = suggestions.map(item => `
-        <button class="list-group-item list-group-item-action" onclick="selectSuggestion(${vocabData.indexOf(item)})">
-          ${item.vocabulary}
-        </button>
+      historyBox.innerHTML = historyData.map((item, index) => `
+        <div class="border-bottom py-2 history-item" style="cursor:pointer;" data-index="${index}">
+          <b class="text-primary">${item.vocabulary}</b> 
+          <span class="badge bg-info text-dark">${item.type || ""}</span>
+          <span class="text-muted small">- ${item.meaning}</span>
+        </div>
       `).join("");
-    } else {
-      suggestBox.style.display = "none";
+
+      document.querySelectorAll(".history-item").forEach(el => {
+        el.addEventListener("click", () => {
+          const idx = el.getAttribute("data-index");
+          showHistoryDetail(historyData[idx]);
+        });
+      });
     }
-  } else {
-    suggestBox.style.display = "none";
-  }
-});
 
-function selectSuggestion(index) {
-  suggestBox.style.display = "none";
-  showDetail(index);
-}
+    function addToHistory(wordObj) {
+      if (!historyData.find(item => item.vocabulary === wordObj.vocabulary)) {
+        historyData.unshift(wordObj);
+        if (historyData.length > 50) historyData.pop();
+        localStorage.setItem("vocabHistory", JSON.stringify(historyData));
+      }
+      renderHistory();
+    }
 
-// Dark mode toggle + localStorage
-const darkToggle = document.getElementById("darkToggle");
-function applyDarkMode(state) {
-  if (state) {
-    document.body.classList.add("dark-mode");
-    localStorage.setItem("darkMode", "true");
-  } else {
-    document.body.classList.remove("dark-mode");
-    localStorage.setItem("darkMode", "false");
-  }
-}
-darkToggle.addEventListener("click", () => {
-  const isDark = !document.body.classList.contains("dark-mode");
-  applyDarkMode(isDark);
-  updateChartColors(isDark);
-});
+    function showHistoryDetail(item) {
+      let examplesList = "";
+      if (item.examples) {
+        if (Array.isArray(item.examples)) {
+          examplesList = item.examples.map(e => `<li class="list-group-item">${e}</li>`).join("");
+        } else if (typeof item.examples === "string") {
+          examplesList = item.examples.split(";").map(e => `<li class="list-group-item">${e.trim()}</li>`).join("");
+        }
+      }
 
-// khi load lại trạng thái
-if (localStorage.getItem("darkMode") === "true") {
-  document.body.classList.add("dark-mode");
-  updateChartColors(true);
-}
+      document.getElementById("modalContent").innerHTML = `
+        <h4 class="text-success">${item.vocabulary}</h4>
+        <p><b>Type:</b> <span class="badge bg-info text-dark">${item.type || "?"}</span></p>
+        <p><b>Meaning:</b> ${item.meaning || ""}</p>
+        <p><b>Synonyms:</b> <span class="text-success">${item.synonyms || ""}</span></p>
+        <p><b>Antonyms:</b> <span class="text-danger">${item.antonyms || ""}</span></p>
+        <h5 class="mt-3 text-primary">Examples:</h5>
+        <ul class="list-group mb-3">${examplesList}</ul>
+        <p class="small text-muted">Usage frequency level: <b>${item.level || "?"}</b> / 5</p>
+        <p class="small text-muted">⏰ Added: ${item.timestamp || ""}</p>
+      `;
 
-function updateChartColors(isDark) {
-  if (!chart) return;
-  if (isDark) {
-    chart.data.datasets[0].backgroundColor = 'rgba(100, 181, 246, 0.8)'; // xanh dương sáng
-    chart.options.scales.x.ticks.color = "#eee";
-    chart.options.scales.y.ticks.color = "#eee";
-    chart.options.scales.x.grid.color = "#333";
-    chart.options.scales.y.grid.color = "#333";
-  } else {
-    chart.data.datasets[0].backgroundColor = 'rgba(54, 162, 235, 0.6)';
-    chart.options.scales.x.ticks.color = "#000";
-    chart.options.scales.y.ticks.color = "#000";
-    chart.options.scales.x.grid.color = "#ccc";
-    chart.options.scales.y.grid.color = "#ccc";
-  }
-  chart.update();
-}
+      const modal = new bootstrap.Modal(document.getElementById('historyModal'));
+      modal.show();
+    }
 
-
-loadData();
-</script>
+    document.addEventListener("DOMContentLoaded", renderHistory);
+  </script>
 </body>
 </html>
