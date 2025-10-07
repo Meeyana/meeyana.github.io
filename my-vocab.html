@@ -142,7 +142,6 @@ async function loadData() {
     const rawJson = `[${nonEmptyChunks.join(',')}]`;
     
     // Tại đây, `rawJson` sẽ chứa tất cả các object, kể cả những object có vocabulary rỗng.
-    console.log("1. Dữ liệu THÔ đọc từ Sheet:", rawJson);
 
     let rawData = JSON.parse(rawJson);
 
@@ -151,8 +150,6 @@ async function loadData() {
     // Nó tạo ra một mảng MỚI, loại bỏ tất cả các object có `vocabulary` rỗng.
     const filteredData = rawData.filter(item => item.vocabulary && item.vocabulary.trim() !== '');
     // =================================================================
-
-    console.log("2. Dữ liệu SAU KHI LỌC (đã loại bỏ object rỗng):", filteredData);
 
     // Từ đây, code chỉ làm việc với dữ liệu đã được lọc sạch.
     vocabData = filteredData.map(item => ({
@@ -171,8 +168,6 @@ async function loadData() {
       learnscale: item.learnscale ? Number(item.learnscale) : 1,
       level: item.level || "?"
     }));
-
-    console.log("3. Dữ liệu CUỐI CÙNG (để hiển thị):", vocabData);
 
     document.getElementById("titleBox").innerText =
       `📖 Sổ tay đã có ${vocabData.length} từ`;
