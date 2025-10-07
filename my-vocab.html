@@ -120,12 +120,11 @@ body.dark-mode .btn-outline-secondary:hover {
 
 
 <script>
-const apiUrl = "https://docs.google.com/spreadsheets/d/1TWtEIzObve8g9FnsRiFQeAiwI5viw---CArhmpofnzY/gviz/tq?sheet=JSON&tqx=out:json&tq=SELECT%20B%20where%20A%20=%20%22english%22"; 
+const apiUrl = "https://docs.google.com/spreadsheets/d/1TWtEIzObve8g9FnsRiFQeAiwI5viw---CArhmpofnzY/gviz/tq?sheet=JSON&tqx=out:json&tq=SELECT%20B%20OFFSET%201";
 let vocabData = [];
 let chart;
 let activeLevel = 1;
 
-// Load dữ liệu từ GViz
 async function loadData() {
   try {
     const res = await fetch(apiUrl);
@@ -134,11 +133,29 @@ async function loadData() {
     if (!match) return console.error("❌ Không tìm thấy JSON trong GViz response");
 
     const gvizData = JSON.parse(match[1]);
-    const rawJson = gvizData.table.rows[0].c[0]?.v || "[]";
+    const jsonChunks = gvizData.table.rows.map(row => row.c[0]?.v || "");
+    
+    // Bước này chỉ loại bỏ các Ô TRỐNG HOÀN TOÀN. 
+    // Các ô chứa '{"vocabulary":""...}' vẫn được giữ lại.
+    const nonEmptyChunks = jsonChunks.filter(chunk => chunk && chunk.trim() !== '');
+
+    const rawJson = `[${nonEmptyChunks.join(',')}]`;
+    
+    // Tại đây, `rawJson` sẽ chứa tất cả các object, kể cả những object có vocabulary rỗng.
+    console.log("1. Dữ liệu THÔ đọc từ Sheet:", rawJson);
+
     let rawData = JSON.parse(rawJson);
 
-    // Chuẩn hóa dữ liệu để giống Apps Script
-    vocabData = rawData.map(item => ({
+    // =================================================================
+    // ===== ĐÂY LÀ BƯỚC LỌC QUAN TRỌNG NHẤT MÀ BẠN CẦN =====
+    // Nó tạo ra một mảng MỚI, loại bỏ tất cả các object có `vocabulary` rỗng.
+    const filteredData = rawData.filter(item => item.vocabulary && item.vocabulary.trim() !== '');
+    // =================================================================
+
+    console.log("2. Dữ liệu SAU KHI LỌC (đã loại bỏ object rỗng):", filteredData);
+
+    // Từ đây, code chỉ làm việc với dữ liệu đã được lọc sạch.
+    vocabData = filteredData.map(item => ({
       vocabulary: item.vocabulary || "",
       type: item.type || "",
       meaning: item.meaning || "",
@@ -154,6 +171,8 @@ async function loadData() {
       learnscale: item.learnscale ? Number(item.learnscale) : 1,
       level: item.level || "?"
     }));
+
+    console.log("3. Dữ liệu CUỐI CÙNG (để hiển thị):", vocabData);
 
     document.getElementById("titleBox").innerText =
       `📖 Sổ tay đã có ${vocabData.length} từ`;
