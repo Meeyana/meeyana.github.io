@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Voting nội bộ (App Script Backend)</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; }
+    input, select, button { padding: 8px; margin: 6px 0; width: 100%; }
+    .ok { color: green; }
+    .err { color: red; }
+  </style>
+</head>
+<body>
+  <h2>Voting nội bộ</h2>
+
+  <label>Email:</label>
+  <input type="email" id="email" placeholder="email@domain.com">
+
+  <label>Chọn phương án vote:</label>
+  <select id="voteChoice">
+    <option value="A">A</option>
+    <option value="B">B</option>
+    <option value="C">C</option>
+  </select>
+
+  <button onclick="sendOtp()">Gửi OTP</button>
+  <p id="sendResult"></p>
+
+  <hr>
+
+  <label>Nhập lại email:</label>
+  <input type="email" id="verifyEmail" placeholder="email@domain.com">
+
+  <label>Nhập mã OTP:</label>
+  <input type="text" id="otp" placeholder="123456">
+
+  <button onclick="verifyOtp()">Xác minh & Ghi vote</button>
+  <p id="verifyResult"></p>
+
+  <script>
+    const API_URL = "https://script.google.com/macros/s/AKfycbyJ_WEwiG1WouDOPj-Rm5e8OA2yRSaS5-0ppN1hSn3phmKLs8e2qJiJHPV5Rg0iClSx/exec"; // ← URL Apps Script của mày
+
+    async function sendOtp() {
+      const email = document.getElementById('email').value.trim();
+      const voteChoice = document.getElementById('voteChoice').value;
+      document.getElementById('sendResult').textContent = "Đang gửi...";
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'sendOtp', email, voteChoice })
+        });
+        const data = await res.json();
+        document.getElementById('sendResult').innerHTML = data.success
+          ? `<span class="ok">${data.message}</span>`
+          : `<span class="err">${data.message}</span>`;
+      } catch (err) {
+        document.getElementById('sendResult').innerHTML = `<span class="err">${err.message}</span>`;
+      }
+    }
+
+    async function verifyOtp() {
+      const email = document.getElementById('verifyEmail').value.trim();
+      const otp = document.getElementById('otp').value.trim();
+      document.getElementById('verifyResult').textContent = "Đang xác minh...";
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ action: 'verifyOtp', email, otp })
+        });
+        const data = await res.json();
+        document.getElementById('verifyResult').innerHTML = data.success
+          ? `<span class="ok">${data.message}</span>`
+          : `<span class="err">${data.message}</span>`;
+      } catch (err) {
+        document.getElementById('verifyResult').innerHTML = `<span class="err">${err.message}</span>`;
+      }
+    }
+  </script>
+</body>
+</html>
