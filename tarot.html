@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trải Bài Tarot Cùng AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
+
+    <style>
+        :root {
+            --bg-color: #0c0a09;
+            --text-color: #e2e0dd;
+            --title-color: #d4af37;
+            --card-back-bg: #1e1b18;
+            --card-back-border: #443c2d;
+            --button-bg: #292524;
+            --button-hover-bg: #44403c;
+            --font-title: 'Playfair Display', serif;
+            --font-body: 'Quicksand', sans-serif;
+        }
+
+        /* --- Cài đặt chung --- */
+        * { box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            text-align: center;
+            overflow-x: hidden; /* Ngăn cuộn ngang */
+        }
+        
+        /* --- Quản lý các màn hình --- */
+        .screen {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 1rem;
+            width: 100%;
+            position: relative;
+        }
+        .screen.active {
+            display: flex;
+        }
+        
+        /* --- Tiêu đề câu hỏi --- */
+        .question-display-header {
+            font-family: var(--font-title);
+            color: var(--title-color);
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            margin-bottom: 1rem;
+            padding: 0 1rem;
+            position: absolute;
+            top: 3rem; 
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 800px;
+            line-height: 1.3;
+        }
+
+        /* --- Màn hình 1: Đặt câu hỏi --- */
+        #question-screen .title {
+            font-family: var(--font-title);
+            color: var(--title-color);
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            letter-spacing: 2px;
+            margin-bottom: 2rem;
+        }
+
+        /* --- (CẬP NHẬT) Áp dụng chung cho ô nhập liệu --- */
+        .question-input-area {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--button-bg);
+            border-radius: 12px;
+            padding: 8px;
+            border: 1px solid var(--card-back-border);
+        }
+
+        .question-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            color: var(--text-color);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            padding: 12px;
+            resize: none;
+            min-height: 80px;
+        }
+        .question-input:focus { outline: none; }
+
+        .suggested-questions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            width: 100%;
+            max-width: 600px;
+            margin: 1.5rem 0;
+        }
+
+        .suggested-questions button {
+            background-color: var(--button-bg);
+            border: 1px solid var(--card-back-border);
+            color: var(--text-color);
+            padding: 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            height: 100%;
+        }
+
+        .suggested-questions button:hover {
+            background-color: var(--button-hover-bg);
+        }
+        
+        #submit-question-btn {
+            background: none;
+            border: none;
+            color: var(--title-color);
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            text-decoration: underline;
+        }
+        
+        /* --- Màn hình 2: Xáo bài --- */
+        #shuffling-screen {
+            justify-content: center;
+        }
+
+        .shuffling-animation-container {
+            position: relative;
+            width: 100px;
+            height: 150px;
+            margin-top: 10rem; 
+        }
+
+        .shuffle-card {
+            position: absolute;
+            width: 100px;
+            height: 150px;
+            background-color: var(--card-back-bg);
+            border: 1px solid var(--card-back-border);
+            border-radius: 8px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath d='M40 20C40 20 40 40 40 40C40 40 40 60 40 60C40 60 40 40 40 40M20 40C20 40 40 40 40 40C40 40 60 40 60 40C60 40 40 40 40 40' stroke='%23d4af37' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='40' cy='40' r='10' stroke='%23d4af37' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+            background-size: 40%;
+            background-repeat: no-repeat;
+            background-position: center;
+            animation: shuffle 1.5s ease-in-out infinite;
+        }
+
+        .shuffle-card:nth-child(1) { animation-delay: 0s; }
+        .shuffle-card:nth-child(2) { animation-delay: -0.5s; }
+        .shuffle-card:nth-child(3) { animation-delay: -1s; }
+        
+        @keyframes shuffle {
+            0%, 100% { transform: translateX(-30px) rotate(-5deg); z-index: 1;}
+            50% { transform: translateX(30px) rotate(5deg); z-index: 3;}
+        }
+
+
+        /* --- Màn hình 3: Chọn bài --- */
+        #drawing-screen {
+            justify-content: flex-start; 
+            padding-top: 12rem; 
+            padding-bottom: 3rem; 
+            height: auto; 
+            min-height: 100vh; 
+        }
+
+        .drawing-subheader {
+            font-family: var(--font-body);
+            font-weight: 600;
+            color: var(--text-color);
+            margin-bottom: 2rem; 
+            font-size: 1.2rem;
+            transition: opacity 0.5s ease, transform 0.5s ease, height 0.5s ease, margin 0.5s ease;
+        }
+
+        #chosen-cards-display {
+            display: flex;
+            gap: 1.5rem;
+            height: 250px;
+            align-items: center;
+            margin-bottom: 2.5rem; 
+            transition: height 0.8s ease; /* (ĐIỀU CHỈNH) Chậm hơn */
+        }
+        
+        .chosen-card-placeholder {
+            width: 120px;
+            height: 180px;
+            border: 2px dashed var(--card-back-border);
+            border-radius: 10px;
+            transition: all 1s ease; /* (ĐIỀU CHỈNH) Chậm hơn */
+        }
+
+        .chosen-card-item {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: revealCard 0.5s forwards;
+            width: 120px; /* Thêm width cố định */
+            transition: width 1s ease-in-out, opacity 1s, transform 1s; /* (ĐIỀU CHỈNH) Chậm hơn */
+        }
+        @keyframes revealCard {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chosen-card-item img {
+            width: 100%; /* Đổi từ 120px sang 100% */
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: flipIn 0.8s forwards;
+            transition: width 1s ease-in-out; /* (ĐIỀU CHỈNH) Chậm hơn */
+        }
+
+        @keyframes flipIn {
+            from { transform: rotateY(180deg); }
+            to { transform: rotateY(0deg); }
+        }
+        .chosen-card-item img.reversed { transform: rotate(180deg)!important; }
+        .chosen-card-item .card-info { margin-top: 0.75rem; }
+        .chosen-card-item .card-name { font-weight: 600; }
+        .chosen-card-item .card-orientation { font-size: 0.8rem; color: var(--title-color); }
+        
+        /* --- Bộ bài --- */
+        #card-spread-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 2.5rem; 
+            transition: opacity 0.5s ease, transform 0.5s ease, height 0.5s ease, margin 0.5s ease; /* Thêm transition */
+        }
+        .card-row {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 0 10%; 
+        }
+         .facedown-card {
+            flex-shrink: 0;
+            width: 80px;
+            aspect-ratio: 2/3;
+            background-color: var(--card-back-bg);
+            border: 1px solid var(--card-back-border);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: transform 0.2s ease, border-color 0.2s ease, opacity 0.3s ease;
+            margin-left: -55px;
+            position: relative;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath d='M40 20C40 20 40 40 40 40C40 40 40 60 40 60C40 60 40 40 40 40M20 40C20 40 40 40 40 40C40 40 60 40 60 40C60 40 40 40 40 40' stroke='%23d4af37' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='40' cy='40' r='10' stroke='%23d4af37' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+            background-size: 40%;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0; 
+            transform: translateY(30px) scale(0.8);
+        }
+        .facedown-card:first-child { margin-left: 0; }
+
+        .facedown-card:hover {
+            transform: translateY(-15px)!important; 
+            border-color: var(--title-color);
+        }
+
+        .facedown-card.is-chosen {
+            opacity: 0!important; 
+            pointer-events: none;
+        }
+        
+        @keyframes dealCardIn {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        /* (MỚI) CSS CHO HÀNG MOBILE */
+        .mobile-row {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .facedown-card {
+                width: 50px;
+                margin-left: -35px;
+            }
+            
+            /* (MỚI) Ẩn hàng desktop, hiện hàng mobile */
+            #card-row-1, #card-row-2 {
+                display: none;
+            }
+            .mobile-row {
+                display: flex;
+            }
+        }
+        
+        /* --- Nút CTA và Kết quả --- */
+        
+        #action-button-container {
+            height: 60px;
+            margin-top: 1rem;
+        }
+
+        .action-button {
+            display: none; /* Ẩn ban đầu */
+            background-color: var(--title-color);
+            color: var(--bg-color);
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.8s ease, transform 0.8s ease; /* (ĐIỀU CHỈNH) Chậm hơn */
+            transform: scale(0.9);
+            opacity: 0;
+        }
+
+        .action-button.visible {
+            display: inline-block;
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* Nơi hiển thị kết quả */
+        #interpretation-results-display {
+            display: none; /* Ẩn ban đầu */
+            background-color: var(--button-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: left;
+            line-height: 1.8;
+            max-width: 800px;
+            width: 100%;
+            margin: 2rem 0;
+        }
+        #interpretation-results-display h1, 
+        #interpretation-results-display h2, 
+        #interpretation-results-display h3 {
+            font-family: var(--font-title);
+            color: var(--title-color);
+        }
+
+        /* CSS cho trạng thái xem kết quả */
+        #drawing-screen.results-active .drawing-subheader {
+            opacity: 0;
+            transform: translateY(-20px);
+            height: 0; 
+            margin-bottom: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        #drawing-screen.results-active #card-spread-container {
+            opacity: 0;
+            transform: translateY(30px);
+            pointer-events: none;
+            height: 0; 
+            margin-bottom: 0;
+            overflow: hidden;
+        }
+        
+        #drawing-screen.results-active #chosen-cards-display {
+            height: auto; 
+            margin-bottom: 1.5rem; 
+        }
+        
+        #drawing-screen.results-active .chosen-card-placeholder {
+            width: 0;
+            height: 0;
+            border: none;
+            margin: 0;
+            padding: 0;
+            opacity: 0;
+        }
+        
+        #drawing-screen.results-active .chosen-card-item {
+            width: 150px; 
+            animation: none; 
+            opacity: 1; 
+            transform: none; 
+        }
+        #drawing-screen.results-active .chosen-card-item img {
+            width: 100%;
+            animation: none; 
+        }
+
+        /* --- (MỚI) CSS CHO KHU VỰC HỎI TIẾP --- */
+        #follow-up-question-container {
+            display: none; /* Ẩn ban đầu */
+            width: 100%;
+            max-width: 600px;
+            margin-top: 2.5rem;
+            text-align: center;
+        }
+        #follow-up-question-container h3 {
+            font-family: var(--font-title);
+            color: var(--title-color);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        /* Nút "Gửi câu hỏi mới" */
+        #submit-follow-up-btn {
+            display: inline-block; /* Luôn hiển thị */
+            opacity: 1;
+            transform: scale(1);
+            margin-top: 1rem;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Màn hình 1: Đặt câu hỏi -->
+    <div id="question-screen" class="screen active">
+        <h1 class="title">Đặt câu hỏi cho trải bài Tarot</h1>
+        <div id="question-input-area" class="question-input-area">
+            <textarea id="question-input" class="question-input" placeholder="Khi nào tôi sẽ gặp được tình yêu mới?"></textarea>
+        </div>
+        <div class="suggested-questions">
+            <button data-question="Người tiếp theo bước vào cuộc đời tôi sẽ có tính cách như thế nào?">Người tiếp theo bước vào cuộc đời tôi sẽ có tính cách như thế nào?</button>
+            <button data-question="Tôi có nên cố gắng níu kéo mối quan hệ này không?">Tôi có nên cố gắng níu kéo mối quan hệ này không?</button>
+            <button data-question="Tôi cần chuẩn bị như thế nào để đón nhận tương lai một cách tích cực?">Tôi cần chuẩn bị như thế nào để đón nhận tương lai một cách tích cực?</button>
+            <button data-question="Tôi có nên đầu tư vào dự án hoặc cơ hội này không?">Tôi có nên đầu tư vào dự án hoặc cơ hội này không?</button>
+        </div>
+        <button id="submit-question-btn">Nhấn gửi câu hỏi để bắt đầu xáo bài</button>
+    </div>
+
+    <!-- Màn hình 2: Xáo bài -->
+    <div id="shuffling-screen" class="screen">
+        <div id="shuffling-question-display" class="question-display-header"></div>
+        <div class="shuffling-animation-container">
+            <div class="shuffle-card"></div>
+            <div class="shuffle-card"></div>
+            <div class="shuffle-card"></div>
+        </div>
+    </div>
+
+    <!-- Màn hình 3: Chọn bài -->
+    <div id="drawing-screen" class="screen">
+        <div id="drawing-question-display" class="question-display-header"></div>
+        <h2 class="drawing-subheader">Hãy chọn 3 lá bài</h2>
+        
+        <div id="chosen-cards-display">
+            <div class="chosen-card-placeholder"></div>
+            <div class="chosen-card-placeholder"></div>
+            <div class="chosen-card-placeholder"></div>
+        </div>
+        
+        <div id="card-spread-container">
+            <!-- Hàng 1 & 2 cho Desktop -->
+            <div class="card-row" id="card-row-1"></div>
+            <div class="card-row" id="card-row-2"></div>
+            <!-- (MỚI) Hàng 3 & 4 cho Mobile -->
+            <div class="card-row mobile-row" id="card-row-3"></div>
+            <div class="card-row mobile-row" id="card-row-4"></div>
+        </div>
+        
+        <div id="action-button-container">
+            <button id="get-interpretation-button" class="action-button">Xem ý nghĩa</button>
+        </div>
+        
+        <div id="interpretation-results-display"></div>
+        
+        <!-- (MỚI) KHU VỰC HỎI TIẾP -->
+        <div id="follow-up-question-container">
+            <h3>Bạn có câu hỏi nào khác không?</h3>
+            <div id="follow-up-input-area" class="question-input-area">
+                <textarea id="follow-up-question-input" class="question-input" placeholder="Đặt câu hỏi tiếp theo..."></textarea>
+            </div>
+            <button id="submit-follow-up-btn" class="action-button">
+                Xáo bài cho câu hỏi mới
+            </button>
+        </div>
+    </div>
+    
+
+    <script>
+        const N8N_WEBHOOK_URL = 'https://n8n.n8ntuanphangz.xyz/webhook/2a1c95d5-dd30-4710-9f1c-f9c45686f218'; // !!! THAY THẾ URL CỦA BẠN !!!
+
+        // DOM Elements
+        const screens = document.querySelectorAll('.screen');
+        const questionInput = document.getElementById('question-input');
+        const submitQuestionBtn = document.getElementById('submit-question-btn');
+        const suggestedQuestionBtns = document.querySelectorAll('.suggested-questions button');
+        const cardRow1 = document.getElementById('card-row-1');
+        const cardRow2 = document.getElementById('card-row-2');
+        const cardRow3 = document.getElementById('card-row-3'); // (MỚI)
+        const cardRow4 = document.getElementById('card-row-4'); // (MỚI)
+        const chosenCardsDisplay = document.getElementById('chosen-cards-display'); 
+        const shufflingQuestionDisplay = document.getElementById('shuffling-question-display');
+        const drawingQuestionDisplay = document.getElementById('drawing-question-display');
+        const getInterpretationButton = document.getElementById('get-interpretation-button');
+        const mainResultsDisplay = document.getElementById('interpretation-results-display');
+        
+        // (MỚI) DOM Elements cho khu vực hỏi tiếp
+        const followUpContainer = document.getElementById('follow-up-question-container');
+        const followUpInput = document.getElementById('follow-up-question-input');
+        const followUpSubmitBtn = document.getElementById('submit-follow-up-btn');
+
+
+        // State
+        let cardData = [];
+        let selectedCards = [];
+        let userQuestion = '';
+
+        // === Functions ===
+        
+        function showScreen(screenId) {
+            screens.forEach(screen => screen.classList.remove('active'));
+            document.getElementById(screenId).classList.add('active');
+        }
+
+        async function initialize() {
+            const SHEET_ID = '1Bqu2RBPRH-YeCOiX_5SjmQP8GETpKkqBZhMPZwqm_ig';
+            try {
+                const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=Cards&tqx=out:json&tq=SELECT%20*%20OFFSET%201`;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const text = await response.text();
+                const jsonText = text.substring(text.indexOf('(') + 1, text.lastIndexOf(')'));
+                const table = JSON.parse(jsonText).table;
+
+                cardData = table.rows.map((row, index) => ({
+                    id: index,
+                    name: row.c[0]?.v || 'Unknown Card',
+                    image: row.c[1]?.v || 'https://placehold.co/200x340'
+                }));
+            } catch (error) {
+                console.error("Lỗi khi tải lá bài:", error);
+                document.getElementById('card-spread-container').innerHTML = '<p>Lỗi tải bộ bài. Vui lòng tải lại trang.</p>';
+            }
+        }
+
+        function handleQuestionSubmit() {
+            const questionFromInput = questionInput.value.trim();
+            if (!questionFromInput) {
+                questionInput.style.borderColor = 'red';
+                setTimeout(() => { questionInput.style.borderColor = ''; }, 2000);
+                return;
+            }
+            userQuestion = questionFromInput;
+            
+            startNewReadingFlow();
+        }
+        
+        // (MỚI) Hàm xử lý câu hỏi tiếp theo
+        function handleFollowUpSubmit() {
+            const questionFromInput = followUpInput.value.trim();
+            if (!questionFromInput) {
+                followUpInput.style.borderColor = 'red';
+                setTimeout(() => { followUpInput.style.borderColor = ''; }, 2000);
+                return;
+            }
+            userQuestion = questionFromInput; // Cập nhật câu hỏi
+            followUpInput.value = ''; // Xóa nội dung
+            
+            startNewReadingFlow(); // Bắt đầu luồng mới
+        }
+        
+        // (MỚİ) Tách luồng bắt đầu trải bài ra hàm riêng
+        function startNewReadingFlow() {
+            // Cập nhật câu hỏi lên các tiêu đề
+            shufflingQuestionDisplay.textContent = userQuestion;
+            drawingQuestionDisplay.textContent = userQuestion;
+
+            // Chuyển sang màn hình xáo bài
+            showScreen('shuffling-screen');
+            
+            // Hẹn giờ để chuyển sang màn hình chọn bài
+            setTimeout(() => {
+                populateCardDeck(); // Hàm này sẽ reset màn hình chọn bài
+                showScreen('drawing-screen');
+            }, 2500); 
+        }
+
+
+        // (CẬP NHẬT) Reset trạng thái khi chia bài
+        function populateCardDeck() {
+            cardRow1.innerHTML = '';
+            cardRow2.innerHTML = '';
+            cardRow3.innerHTML = ''; // (MỚI)
+            cardRow4.innerHTML = ''; // (MỚI)
+            selectedCards = []; 
+            mainResultsDisplay.style.display = 'none'; // Ẩn kết quả cũ
+            mainResultsDisplay.innerHTML = '';
+            updateChosenCardsDisplay(); // Reset lại placeholder
+
+            const drawingScreen = document.getElementById('drawing-screen');
+            drawingScreen.classList.remove('results-active');
+            
+            getInterpretationButton.classList.remove('visible');
+            getInterpretationButton.style.display = 'none';
+            
+            // (MỚI) Ẩn khu vực hỏi tiếp
+            followUpContainer.style.display = 'none';
+
+            // (CẬP NHẬT) Tạo và phân phối lá bài cho cả desktop và mobile
+            for (let i = 0; i < 78; i++) {
+                const cardElementDesktop = document.createElement('div');
+                cardElementDesktop.className = 'facedown-card';
+                cardElementDesktop.dataset.positionIndex = i;
+                cardElementDesktop.style.animation = `dealCardIn 0.3s ease-out forwards ${i * 30}ms`;
+                
+                // (MỚI) Sao chép cho mobile
+                const cardElementMobile = cardElementDesktop.cloneNode(true);
+                
+                // (MỚI) Thêm listener cho cả hai
+                cardElementDesktop.addEventListener('click', () => handleCardSelection(cardElementDesktop));
+                cardElementMobile.addEventListener('click', () => handleCardSelection(cardElementMobile));
+
+                // Phân phối cho 2 hàng desktop
+                if (i < 39) {
+                    cardRow1.appendChild(cardElementDesktop);
+                } else {
+                    cardRow2.appendChild(cardElementDesktop);
+                }
+                
+                // (MỚI) Phân phối cho 2(x2) hàng mobile (logic: 40/38)
+                if (i < 20) {
+                    cardRow3.appendChild(cardElementMobile);
+                } else if (i < 40) {
+                    cardRow4.appendChild(cardElementMobile);
+                } else if (i < 60) {
+                    cardRow3.appendChild(cardElementMobile);
+                } else {
+                    cardRow4.appendChild(cardElementMobile);
+                }
+            }
+        }
+
+        // (CẬP NHẬT) Đồng bộ hóa lá bài được chọn
+        function handleCardSelection(clickedElement) {
+            if (selectedCards.length >= 3) return;
+
+            const posIndex = clickedElement.dataset.positionIndex;
+            const allCardsWithIndex = document.querySelectorAll(`.facedown-card[data-position-index="${posIndex}"]`);
+
+            // Kiểm tra xem đã chọn chưa
+            let alreadyChosen = false;
+            allCardsWithIndex.forEach(card => {
+                if (card.classList.contains('is-chosen')) {
+                    alreadyChosen = true;
+                }
+            });
+            if (alreadyChosen) return;
+
+            // (MỚI) Thêm class 'is-chosen' cho cả 2 phiên bản (desktop/mobile)
+            allCardsWithIndex.forEach(card => card.classList.add('is-chosen'));
+
+            // Logic chọn lá bài (như cũ)
+            const availableCards = cardData.filter(card => !selectedCards.some(sc => sc.id === card.id));
+            const randomCard = availableCards[Math.floor(Math.random() * availableCards.length)];
+
+            const isReversed = Math.random() < 0.5;
+            const orientation = isReversed ? 'Ngược' : 'Xuôi';
+
+            const chosenCard = { ...randomCard, isReversed, orientation };
+            selectedCards.push(chosenCard);
+
+            updateChosenCardsDisplay(); // Cập nhật placeholder
+
+            if (selectedCards.length === 3) {
+                transitionToResultsView();
+            }
+        }
+
+        // Cập nhật placeholder
+        function updateChosenCardsDisplay() {
+            chosenCardsDisplay.innerHTML = '';
+            selectedCards.forEach(card => {
+                const cardItem = document.createElement('div');
+                cardItem.className = 'chosen-card-item';
+                cardItem.innerHTML = `
+                    <div class="card-image-wrapper">
+                        <img src="${card.image}" alt="${card.name}" class="${card.isReversed ? 'reversed' : ''}">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-name">${card.name}</div>
+                        ${card.isReversed ? '<div class="card-orientation">(Lá bài Ngược)</div>' : ''}
+                    </div>
+                `;
+                chosenCardsDisplay.appendChild(cardItem);
+            });
+            for (let i = 0; i < 3 - selectedCards.length; i++) {
+                chosenCardsDisplay.innerHTML += '<div class="chosen-card-placeholder"></div>';
+            }
+        }
+
+        // Hàm chuyển đổi sang chế độ xem kết quả
+        function transitionToResultsView() {
+            const drawingScreen = document.getElementById('drawing-screen');
+            drawingScreen.classList.add('results-active');
+            
+            getInterpretationButton.style.display = 'inline-block'; 
+            setTimeout(() => {
+                getInterpretationButton.classList.add('visible');
+            }, 300); // (ĐIỀU CHỈNH) Delay 1 chút cho mượt
+        }
+
+        // (CẬP NHẬT) Hàm lấy luận giải (không modal)
+        async function handleGetInterpretation() {
+            mainResultsDisplay.style.display = 'block';
+            mainResultsDisplay.innerHTML = '<p>Đang luận giải, vui lòng chờ trong giây lát...</p>';
+            
+            getInterpretationButton.classList.remove('visible');
+            setTimeout(() => {
+                getInterpretationButton.style.display = 'none';
+            }, 300);
+            
+            const payload = {
+                question: userQuestion,
+                cards: selectedCards.map(c => ({ name: c.name, orientation: c.orientation }))
+            };
+
+            try {
+                const response = await fetch(N8N_WEBHOOK_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                if (!response.ok) throw new Error(`Lỗi từ server: ${response.statusText}`);
+
+                const result = await response.json();
+                
+                if (result && result.length > 0 && result[0].interpretation) {
+                    const converter = new showdown.Converter();
+                    const htmlContent = converter.makeHtml(result[0].interpretation);
+                    mainResultsDisplay.innerHTML = htmlContent; 
+                } else {
+                    throw new Error("Dữ liệu trả về không đúng định dạng.");
+                }
+            } catch (error) {
+                console.error("Lỗi khi gọi Webhook:", error);
+                mainResultsDisplay.innerHTML = `<p>Đã xảy ra lỗi: ${error.message}. Vui lòng thử lại sau.</p>`;
+            }
+            
+            // Cuộn xuống kết quả
+            mainResultsDisplay.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            
+            // (MỚI) Hiển thị khu vực hỏi tiếp
+            followUpContainer.style.display = 'block';
+        }
+
+        // === Event Listeners ===
+        document.addEventListener('DOMContentLoaded', initialize);
+        submitQuestionBtn.addEventListener('click', handleQuestionSubmit);
+        suggestedQuestionBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                questionInput.value = btn.dataset.question;
+            });
+        });
+        
+        getInterpretationButton.addEventListener('click', handleGetInterpretation);
+        
+        // (MỚI) Event Listener cho nút hỏi tiếp
+        followUpSubmitBtn.addEventListener('click', handleFollowUpSubmit);
+
+    </script>
+</body>
+</html>
+
