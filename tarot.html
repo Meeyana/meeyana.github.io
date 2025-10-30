@@ -436,8 +436,13 @@
 
             .chosen-card-item, .chosen-card-placeholder {
                 width: 100px; /* <-- THAY ĐỔI KÍCH THƯỚC */
-                height: 150px; /* Đặt chiều cao tương ứng (tỷ lệ 2:3) */
+                /* height: 150px; */ /* <-- GỠ BỎ CHIỀU CAO CỐ ĐỊNH CHUNG */
                 flex-shrink: 0; 
+            }
+            
+            /* (SỬA LỖI) Chỉ đặt chiều cao cố định cho placeholder */
+            .chosen-card-placeholder {
+                height: 150px; /* Đặt chiều cao tương ứng (tỷ lệ 2:3) */
             }
             
             /* Xóa bỏ margin âm */
@@ -609,7 +614,7 @@
             const questionFromInput = followUpInput.value.trim();
             if (!questionFromInput) {
                 followUpInput.style.borderColor = 'red';
-                setTimeout(() => { followUpInput.style.borderColor = ''; }, 2000);
+                setTimeout(() => { questionInput.style.borderColor = ''; }, 2000);
                 return;
             }
             userQuestion = questionFromInput;
@@ -798,3 +803,4 @@
     </script>
 </body>
 </html>
+
