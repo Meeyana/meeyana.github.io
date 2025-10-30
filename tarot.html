@@ -337,7 +337,7 @@
         }
 
         .facedown-card.is-chosen {
-            opacity: 0!important; 
+            opacity: 0!important; /* Giữ !important như file của bạn */
             pointer-events: none;
         }
         
@@ -717,8 +717,22 @@
                 
                 const cardElementMobile = cardElementDesktop.cloneNode(true);
                 
-                cardElementDesktop.addEventListener('click', () => handleCardSelection(cardElementDesktop));
-                cardElementMobile.addEventListener('click', () => handleCardSelection(cardElementMobile));
+                // (SỬA LỖI 1) Thêm trình dọn dẹp animation
+                const animationEndCallback = (e) => {
+                    if (e.animationName === 'dealCardIn') {
+                        e.target.style.animation = ''; // Xóa style để opacity: 0 hoạt động
+                    }
+                };
+                cardElementDesktop.addEventListener('animationend', animationEndCallback);
+                cardElementMobile.addEventListener('animationend', animationEndCallback);
+                
+                // (SỬA LỖI 2) Thêm 'click' và 'touchstart' cho mobile
+                cardElementDesktop.addEventListener('click', (e) => handleCardSelection(e, cardElementDesktop));
+                cardElementMobile.addEventListener('click', (e) => handleCardSelection(e, cardElementMobile));
+                
+                cardElementDesktop.addEventListener('touchstart', (e) => handleCardSelection(e, cardElementDesktop));
+                cardElementMobile.addEventListener('touchstart', (e) => handleCardSelection(e, cardElementMobile));
+
 
                 // Phân phối cho 2 hàng desktop
                 if (i < 39) {
@@ -741,7 +755,10 @@
         }
 
         // (CHỈNH SỬA) Đồng bộ hóa lá bài được chọn
-        function handleCardSelection(clickedElement) {
+        function handleCardSelection(event, clickedElement) {
+            // (SỬA LỖI 2) Ngăn :hover giả lập trên mobile
+            event.preventDefault();
+            
             // (CHỈNH SỬA) Thêm 2 cờ kiểm tra: Đã đủ 3 lá HOẶC đang có lá bài bay
             if (selectedCards.length >= 3 || isAnimating) return;
 
@@ -756,6 +773,11 @@
                 }
             });
             if (alreadyChosen) return;
+
+            // (SỬA LỖI 3 - RACE CONDITION)
+            // Đặt cờ `isAnimating` thành true NGAY LẬP TỨC
+            // để ngăn chặn cú click thứ 4 trong khi ảnh đang tải.
+            isAnimating = true; 
 
             // (MỚI) Thêm class 'is-chosen' cho cả 2 phiên bản (desktop/mobile)
             allCardsWithIndex.forEach(card => card.classList.add('is-chosen'));
@@ -773,6 +795,10 @@
             
             if (targetPlaceholder) {
                 animateCardFlight(clickedElement, targetPlaceholder, chosenCard);
+            } else {
+                // Đề phòng trường hợp không tìm thấy placeholder (dù không thể xảy ra)
+                // Phải reset cờ lại
+                isAnimating = false;
             }
         }
 
@@ -784,8 +810,8 @@
             
             const onImageLoaded = () => {
                 // --- Toàn bộ logic cũ sẽ nằm trong này ---
-                isAnimating = true; // Bật cờ, chặn click mới
-                
+                // isAnimating = true; // (SỬA LỖI 3) Dời cờ này lên handleCardSelection
+
                 const startRect = startEl.getBoundingClientRect();
                 const endRect = endEl.getBoundingClientRect();
                 
@@ -825,8 +851,17 @@
                 });
 
                 // 4. Lắng nghe khi animation kết thúc
+                // (SỬA LỖI 4) Sửa logic transitionend bị kẹt
+                let flightHasEnded = false;
+                
                 const onFlightEnd = (event) => {
-                    if (event.propertyName !== 'top') return; 
+                    // Chỉ chạy khi event từ lá bài bay (không phải 'inner')
+                    // Và chỉ chạy 1 lần duy nhất
+                    if (event.target !== flyingCard || flightHasEnded) {
+                        return;
+                    }
+                    flightHasEnded = true; // Đánh dấu đã chạy
+
                     flyingCard.removeEventListener('transitionend', onFlightEnd);
                     flyingCard.remove();
                     
@@ -954,4 +989,5 @@
     </script>
 </body>
 </html>
+
 
