@@ -31,7 +31,7 @@
             font-family: var(--font-body);
             margin: 0;
             padding: 0;
-            height: 100vh;
+            min-height: 100vh;
             text-align: center;
             overflow-x: hidden; /* Ngăn cuộn ngang */
         }
@@ -76,7 +76,6 @@
             margin-bottom: 2rem;
         }
 
-        /* --- (CẬP NHẬT) Áp dụng chung cho ô nhập liệu --- */
         .question-input-area {
             width: 100%;
             max-width: 600px;
@@ -194,8 +193,9 @@
             gap: 1.5rem;
             height: 250px;
             align-items: center;
+            justify-content: center;
             margin-bottom: 2.5rem; 
-            transition: height 0.8s ease; /* (ĐIỀU CHỈNH) Chậm hơn */
+            transition: all 0.8s ease;
         }
         
         .chosen-card-placeholder {
@@ -203,7 +203,7 @@
             height: 180px;
             border: 2px dashed var(--card-back-border);
             border-radius: 10px;
-            transition: all 1s ease; /* (ĐIỀU CHỈNH) Chậm hơn */
+            transition: all 1s ease;
         }
 
         .chosen-card-item {
@@ -211,19 +211,19 @@
             opacity: 0;
             transform: translateY(20px);
             animation: revealCard 0.5s forwards;
-            width: 120px; /* Thêm width cố định */
-            transition: width 1s ease-in-out, opacity 1s, transform 1s; /* (ĐIỀU CHỈNH) Chậm hơn */
+            width: 120px; 
+            transition: width 1s ease-in-out, opacity 1s, transform 1s;
         }
         @keyframes revealCard {
             to { opacity: 1; transform: translateY(0); }
         }
 
         .chosen-card-item img {
-            width: 100%; /* Đổi từ 120px sang 100% */
+            width: 100%;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             animation: flipIn 0.8s forwards;
-            transition: width 1s ease-in-out; /* (ĐIỀU CHỈNH) Chậm hơn */
+            transition: width 1s ease-in-out;
         }
 
         @keyframes flipIn {
@@ -231,7 +231,10 @@
             to { transform: rotateY(0deg); }
         }
         .chosen-card-item img.reversed { transform: rotate(180deg)!important; }
-        .chosen-card-item .card-info { margin-top: 0.75rem; }
+        .chosen-card-item .card-info { 
+            margin-top: 0.75rem; 
+            word-wrap: break-word; /* Đảm bảo chữ xuống hàng */
+        }
         .chosen-card-item .card-name { font-weight: 600; }
         .chosen-card-item .card-orientation { font-size: 0.8rem; color: var(--title-color); }
         
@@ -243,7 +246,7 @@
             align-items: center;
             gap: 0.5rem;
             margin-bottom: 2.5rem; 
-            transition: opacity 0.5s ease, transform 0.5s ease, height 0.5s ease, margin 0.5s ease; /* Thêm transition */
+            transition: opacity 0.5s ease, transform 0.5s ease, height 0.5s ease, margin 0.5s ease;
         }
         .card-row {
             display: flex;
@@ -289,35 +292,18 @@
             }
         }
         
-        /* (MỚI) CSS CHO HÀNG MOBILE */
         .mobile-row {
             display: none;
         }
 
-        @media (max-width: 768px) {
-            .facedown-card {
-                width: 50px;
-                margin-left: -35px;
-            }
-            
-            /* (MỚI) Ẩn hàng desktop, hiện hàng mobile */
-            #card-row-1, #card-row-2 {
-                display: none;
-            }
-            .mobile-row {
-                display: flex;
-            }
-        }
-        
         /* --- Nút CTA và Kết quả --- */
-        
         #action-button-container {
             height: 60px;
             margin-top: 1rem;
         }
 
         .action-button {
-            display: none; /* Ẩn ban đầu */
+            display: none;
             background-color: var(--title-color);
             color: var(--bg-color);
             border: none;
@@ -327,7 +313,7 @@
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: opacity 0.8s ease, transform 0.8s ease; /* (ĐIỀU CHỈNH) Chậm hơn */
+            transition: opacity 0.8s ease, transform 0.8s ease;
             transform: scale(0.9);
             opacity: 0;
         }
@@ -340,7 +326,7 @@
 
         /* Nơi hiển thị kết quả */
         #interpretation-results-display {
-            display: none; /* Ẩn ban đầu */
+            display: none;
             background-color: var(--button-bg);
             padding: 2rem;
             border-radius: 8px;
@@ -400,9 +386,9 @@
             animation: none; 
         }
 
-        /* --- (MỚI) CSS CHO KHU VỰC HỎI TIẾP --- */
+        /* --- CSS CHO KHU VỰC HỎI TIẾP --- */
         #follow-up-question-container {
-            display: none; /* Ẩn ban đầu */
+            display: none;
             width: 100%;
             max-width: 600px;
             margin-top: 2.5rem;
@@ -414,12 +400,71 @@
             margin-bottom: 1rem;
             font-size: 1.5rem;
         }
-        /* Nút "Gửi câu hỏi mới" */
         #submit-follow-up-btn {
-            display: inline-block; /* Luôn hiển thị */
+            display: inline-block;
             opacity: 1;
             transform: scale(1);
             margin-top: 1rem;
+        }
+
+        /* =================================== */
+        /* === MEDIA QUERY FOR MOBILE ======== */
+        /* =================================== */
+        @media (max-width: 768px) {
+            .facedown-card {
+                width: 50px;
+                margin-left: -35px;
+            }
+            
+            #card-row-1, #card-row-2 {
+                display: none;
+            }
+            .mobile-row {
+                display: flex;
+            }
+
+            /* --- (CHỈNH SỬA) Giao diện 3 lá bài đã chọn ở trên --- */
+            #chosen-cards-display {
+                height: auto;
+                min-height: 180px; /* Giữ không gian */
+                margin-bottom: 2rem;
+                width: 100%; /* <-- ĐẶT LẠI 100% */
+                transform: none; /* <-- XÓA BỎ SCALE */
+                gap: 0.5rem; /* <-- DÙNG GAP THAY VÌ MARGIN ÂM */
+                padding: 0 0.5rem; /* Thêm chút padding cho an toàn */
+            }
+
+            .chosen-card-item, .chosen-card-placeholder {
+                width: 100px; /* <-- THAY ĐỔI KÍCH THƯỚC */
+                height: 150px; /* Đặt chiều cao tương ứng (tỷ lệ 2:3) */
+                flex-shrink: 0; 
+            }
+            
+            /* Xóa bỏ margin âm */
+            .chosen-card-item:not(:first-child),
+            .chosen-card-placeholder:not(:first-child) {
+                margin-left: 0; 
+            }
+
+            /* --- (CHỈNH SỬA) Giao diện khi xem kết quả trên Mobile --- */
+            #drawing-screen.results-active #chosen-cards-display {
+                width: 100%; /* <-- ĐẶT LẠI 100% */
+                transform: none; /* <-- XÓA BỎ SCALE */
+                margin-bottom: 2rem;
+                gap: 0.5rem; /* <-- ĐỒNG BỘ GAP */
+            }
+            #drawing-screen.results-active .chosen-card-item {
+                width: 100px; /* <-- GIỮ KÍCH THƯỚC NHỎ ĐỂ RÕ RÀNG */
+            }
+            /* Xóa bỏ margin âm */
+            #drawing-screen.results-active .chosen-card-item:not(:first-child) {
+                margin-left: 0; 
+            }
+            
+            /* (CHỈNH SỬA) Đảm bảo text không bị co lại */
+            #drawing-screen.results-active .chosen-card-item .card-info {
+                width: 100px; /* Giữ cho text box cùng độ rộng */
+            }
         }
 
     </style>
@@ -466,9 +511,11 @@
             <!-- Hàng 1 & 2 cho Desktop -->
             <div class="card-row" id="card-row-1"></div>
             <div class="card-row" id="card-row-2"></div>
-            <!-- (MỚI) Hàng 3 & 4 cho Mobile -->
+            <!-- 4 hàng cho Mobile -->
             <div class="card-row mobile-row" id="card-row-3"></div>
             <div class="card-row mobile-row" id="card-row-4"></div>
+            <div class="card-row mobile-row" id="card-row-5"></div>
+            <div class="card-row mobile-row" id="card-row-6"></div>
         </div>
         
         <div id="action-button-container">
@@ -477,7 +524,6 @@
         
         <div id="interpretation-results-display"></div>
         
-        <!-- (MỚI) KHU VỰC HỎI TIẾP -->
         <div id="follow-up-question-container">
             <h3>Bạn có câu hỏi nào khác không?</h3>
             <div id="follow-up-input-area" class="question-input-area">
@@ -500,15 +546,15 @@
         const suggestedQuestionBtns = document.querySelectorAll('.suggested-questions button');
         const cardRow1 = document.getElementById('card-row-1');
         const cardRow2 = document.getElementById('card-row-2');
-        const cardRow3 = document.getElementById('card-row-3'); // (MỚI)
-        const cardRow4 = document.getElementById('card-row-4'); // (MỚI)
+        const cardRow3 = document.getElementById('card-row-3'); 
+        const cardRow4 = document.getElementById('card-row-4');
+        const cardRow5 = document.getElementById('card-row-5');
+        const cardRow6 = document.getElementById('card-row-6');
         const chosenCardsDisplay = document.getElementById('chosen-cards-display'); 
         const shufflingQuestionDisplay = document.getElementById('shuffling-question-display');
         const drawingQuestionDisplay = document.getElementById('drawing-question-display');
         const getInterpretationButton = document.getElementById('get-interpretation-button');
         const mainResultsDisplay = document.getElementById('interpretation-results-display');
-        
-        // (MỚI) DOM Elements cho khu vực hỏi tiếp
         const followUpContainer = document.getElementById('follow-up-question-container');
         const followUpInput = document.getElementById('follow-up-question-input');
         const followUpSubmitBtn = document.getElementById('submit-follow-up-btn');
@@ -541,7 +587,8 @@
                     name: row.c[0]?.v || 'Unknown Card',
                     image: row.c[1]?.v || 'https://placehold.co/200x340'
                 }));
-            } catch (error) {
+            } catch (error)
+            {
                 console.error("Lỗi khi tải lá bài:", error);
                 document.getElementById('card-spread-container').innerHTML = '<p>Lỗi tải bộ bài. Vui lòng tải lại trang.</p>';
             }
@@ -555,11 +602,9 @@
                 return;
             }
             userQuestion = questionFromInput;
-            
             startNewReadingFlow();
         }
         
-        // (MỚI) Hàm xử lý câu hỏi tiếp theo
         function handleFollowUpSubmit() {
             const questionFromInput = followUpInput.value.trim();
             if (!questionFromInput) {
@@ -567,39 +612,32 @@
                 setTimeout(() => { followUpInput.style.borderColor = ''; }, 2000);
                 return;
             }
-            userQuestion = questionFromInput; // Cập nhật câu hỏi
-            followUpInput.value = ''; // Xóa nội dung
-            
-            startNewReadingFlow(); // Bắt đầu luồng mới
+            userQuestion = questionFromInput;
+            followUpInput.value = '';
+            startNewReadingFlow();
         }
         
-        // (MỚİ) Tách luồng bắt đầu trải bài ra hàm riêng
         function startNewReadingFlow() {
-            // Cập nhật câu hỏi lên các tiêu đề
             shufflingQuestionDisplay.textContent = userQuestion;
             drawingQuestionDisplay.textContent = userQuestion;
-
-            // Chuyển sang màn hình xáo bài
             showScreen('shuffling-screen');
-            
-            // Hẹn giờ để chuyển sang màn hình chọn bài
             setTimeout(() => {
-                populateCardDeck(); // Hàm này sẽ reset màn hình chọn bài
+                populateCardDeck();
                 showScreen('drawing-screen');
             }, 2500); 
         }
 
-
-        // (CẬP NHẬT) Reset trạng thái khi chia bài
         function populateCardDeck() {
             cardRow1.innerHTML = '';
             cardRow2.innerHTML = '';
-            cardRow3.innerHTML = ''; // (MỚI)
-            cardRow4.innerHTML = ''; // (MỚI)
+            cardRow3.innerHTML = '';
+            cardRow4.innerHTML = '';
+            cardRow5.innerHTML = '';
+            cardRow6.innerHTML = '';
             selectedCards = []; 
-            mainResultsDisplay.style.display = 'none'; // Ẩn kết quả cũ
+            mainResultsDisplay.style.display = 'none';
             mainResultsDisplay.innerHTML = '';
-            updateChosenCardsDisplay(); // Reset lại placeholder
+            updateChosenCardsDisplay();
 
             const drawingScreen = document.getElementById('drawing-screen');
             drawingScreen.classList.remove('results-active');
@@ -607,20 +645,16 @@
             getInterpretationButton.classList.remove('visible');
             getInterpretationButton.style.display = 'none';
             
-            // (MỚI) Ẩn khu vực hỏi tiếp
             followUpContainer.style.display = 'none';
 
-            // (CẬP NHẬT) Tạo và phân phối lá bài cho cả desktop và mobile
             for (let i = 0; i < 78; i++) {
                 const cardElementDesktop = document.createElement('div');
                 cardElementDesktop.className = 'facedown-card';
                 cardElementDesktop.dataset.positionIndex = i;
                 cardElementDesktop.style.animation = `dealCardIn 0.3s ease-out forwards ${i * 30}ms`;
                 
-                // (MỚI) Sao chép cho mobile
                 const cardElementMobile = cardElementDesktop.cloneNode(true);
                 
-                // (MỚI) Thêm listener cho cả hai
                 cardElementDesktop.addEventListener('click', () => handleCardSelection(cardElementDesktop));
                 cardElementMobile.addEventListener('click', () => handleCardSelection(cardElementMobile));
 
@@ -631,27 +665,25 @@
                     cardRow2.appendChild(cardElementDesktop);
                 }
                 
-                // (MỚI) Phân phối cho 2(x2) hàng mobile (logic: 40/38)
+                // Phân phối cho 4 hàng mobile
                 if (i < 20) {
                     cardRow3.appendChild(cardElementMobile);
                 } else if (i < 40) {
                     cardRow4.appendChild(cardElementMobile);
                 } else if (i < 60) {
-                    cardRow3.appendChild(cardElementMobile);
+                    cardRow5.appendChild(cardElementMobile);
                 } else {
-                    cardRow4.appendChild(cardElementMobile);
+                    cardRow6.appendChild(cardElementMobile);
                 }
             }
         }
 
-        // (CẬP NHẬT) Đồng bộ hóa lá bài được chọn
         function handleCardSelection(clickedElement) {
             if (selectedCards.length >= 3) return;
 
             const posIndex = clickedElement.dataset.positionIndex;
             const allCardsWithIndex = document.querySelectorAll(`.facedown-card[data-position-index="${posIndex}"]`);
 
-            // Kiểm tra xem đã chọn chưa
             let alreadyChosen = false;
             allCardsWithIndex.forEach(card => {
                 if (card.classList.contains('is-chosen')) {
@@ -660,10 +692,8 @@
             });
             if (alreadyChosen) return;
 
-            // (MỚI) Thêm class 'is-chosen' cho cả 2 phiên bản (desktop/mobile)
             allCardsWithIndex.forEach(card => card.classList.add('is-chosen'));
 
-            // Logic chọn lá bài (như cũ)
             const availableCards = cardData.filter(card => !selectedCards.some(sc => sc.id === card.id));
             const randomCard = availableCards[Math.floor(Math.random() * availableCards.length)];
 
@@ -673,14 +703,13 @@
             const chosenCard = { ...randomCard, isReversed, orientation };
             selectedCards.push(chosenCard);
 
-            updateChosenCardsDisplay(); // Cập nhật placeholder
+            updateChosenCardsDisplay();
 
             if (selectedCards.length === 3) {
                 transitionToResultsView();
             }
         }
 
-        // Cập nhật placeholder
         function updateChosenCardsDisplay() {
             chosenCardsDisplay.innerHTML = '';
             selectedCards.forEach(card => {
@@ -702,7 +731,6 @@
             }
         }
 
-        // Hàm chuyển đổi sang chế độ xem kết quả
         function transitionToResultsView() {
             const drawingScreen = document.getElementById('drawing-screen');
             drawingScreen.classList.add('results-active');
@@ -710,10 +738,9 @@
             getInterpretationButton.style.display = 'inline-block'; 
             setTimeout(() => {
                 getInterpretationButton.classList.add('visible');
-            }, 300); // (ĐIỀU CHỈNH) Delay 1 chút cho mượt
+            }, 300);
         }
 
-        // (CẬP NHẬT) Hàm lấy luận giải (không modal)
         async function handleGetInterpretation() {
             mainResultsDisplay.style.display = 'block';
             mainResultsDisplay.innerHTML = '<p>Đang luận giải, vui lòng chờ trong giây lát...</p>';
@@ -750,10 +777,8 @@
                 mainResultsDisplay.innerHTML = `<p>Đã xảy ra lỗi: ${error.message}. Vui lòng thử lại sau.</p>`;
             }
             
-            // Cuộn xuống kết quả
             mainResultsDisplay.scrollIntoView({ behavior: 'smooth', block: 'start' });
             
-            // (MỚI) Hiển thị khu vực hỏi tiếp
             followUpContainer.style.display = 'block';
         }
 
@@ -768,10 +793,8 @@
         
         getInterpretationButton.addEventListener('click', handleGetInterpretation);
         
-        // (MỚI) Event Listener cho nút hỏi tiếp
         followUpSubmitBtn.addEventListener('click', handleFollowUpSubmit);
 
     </script>
 </body>
 </html>
-
