@@ -208,7 +208,6 @@
 
         .chosen-card-item {
             text-align: center;
-            
             width: 120px; 
             /* (SỬA LỖI) Bỏ 'opacity' và 'transform' khỏi transition */
             transition: width 1s ease-in-out; 
@@ -775,73 +774,77 @@
             }
         }
 
-        // (MỚI) Hàm Animation Lá Bài Bay
+        // (SỬA LỖI) Hàm Animation Lá Bài Bay (với Preload)
         function animateCardFlight(startEl, endEl, cardData) {
-            isAnimating = true; // (MỚI) Bật cờ, chặn click mới
             
-            const startRect = startEl.getBoundingClientRect();
-            const endRect = endEl.getBoundingClientRect();
+            // (MỚI) Tải trước hình ảnh
+            const img = new Image();
             
-            // 1. Tạo lá bài bay
-            const flyingCard = document.createElement('div');
-            flyingCard.className = 'flying-card-animator';
-            
-            // (SỬA LỖI) Đảm bảo class 'reversed' được thêm vào
-            const reversedClass = cardData.isReversed ? 'reversed' : '';
-            flyingCard.innerHTML = `
-                <div class="flying-card-inner">
-                    <div class="flying-card-back"></div>
-                    <div class="flying-card-front">
-                        <img src="${cardData.image}" alt="${cardData.name}" class="${reversedClass}">
+            const onImageLoaded = () => {
+                // --- Toàn bộ logic cũ sẽ nằm trong này ---
+                isAnimating = true; // Bật cờ, chặn click mới
+                
+                const startRect = startEl.getBoundingClientRect();
+                const endRect = endEl.getBoundingClientRect();
+                
+                // 1. Tạo lá bài bay
+                const flyingCard = document.createElement('div');
+                flyingCard.className = 'flying-card-animator';
+                
+                const reversedClass = cardData.isReversed ? 'reversed' : '';
+                flyingCard.innerHTML = `
+                    <div class="flying-card-inner">
+                        <div class="flying-card-back"></div>
+                        <div class="flying-card-front">
+                            <img src="${cardData.image}" alt="${cardData.name}" class="${reversedClass}">
+                        </div>
                     </div>
-                </div>
-            `;
-            
-            // 2. Set vị trí ban đầu
-            flyingCard.style.top = `${startRect.top}px`;
-            flyingCard.style.left = `${startRect.left}px`;
-            flyingCard.style.width = `${startRect.width}px`;
-            flyingCard.style.height = `${startRect.height}px`;
-            
-            document.body.appendChild(flyingCard);
-            
-            // 3. Set vị trí cuối và trigger animation
-            // Dùng requestAnimationFrame để đảm bảo trình duyệt đã render lá bài trước khi bay
-            requestAnimationFrame(() => {
-                const inner = flyingCard.querySelector('.flying-card-inner');
+                `;
                 
-                flyingCard.style.top = `${endRect.top}px`;
-                flyingCard.style.left = `${endRect.left}px`;
-                flyingCard.style.width = `${endRect.width}px`;
-                flyingCard.style.height = `${endRect.height}px`;
+                // 2. Set vị trí ban đầu
+                flyingCard.style.top = `${startRect.top}px`;
+                flyingCard.style.left = `${startRect.left}px`;
+                flyingCard.style.width = `${startRect.width}px`;
+                flyingCard.style.height = `${startRect.height}px`;
                 
-                // Xoay lá bài
-                inner.style.transform = 'rotateY(180deg)';
-            });
+                document.body.appendChild(flyingCard);
+                
+                // 3. Set vị trí cuối và trigger animation
+                requestAnimationFrame(() => {
+                    const inner = flyingCard.querySelector('.flying-card-inner');
+                    
+                    flyingCard.style.top = `${endRect.top}px`;
+                    flyingCard.style.left = `${endRect.left}px`;
+                    flyingCard.style.width = `${endRect.width}px`;
+                    flyingCard.style.height = `${endRect.height}px`;
+                    
+                    // Xoay lá bài
+                    inner.style.transform = 'rotateY(180deg)';
+                });
 
-            // 4. (SỬA LỖI) Lắng nghe khi animation kết thúc
-            const onFlightEnd = (event) => {
-                // Chỉ chạy 1 lần khi 'top' property kết thúc
-                if (event.propertyName !== 'top') return; 
-                
-                // Gỡ bỏ listener này đi
-                flyingCard.removeEventListener('transitionend', onFlightEnd);
-                
-                // Xóa lá bài bay
-                flyingCard.remove();
-                
-                // Bây giờ mới cập nhật state và UI thật
-                selectedCards.push(cardData);
-                updateChosenCardsDisplay(); // Cập nhật placeholder
+                // 4. Lắng nghe khi animation kết thúc
+                const onFlightEnd = (event) => {
+                    if (event.propertyName !== 'top') return; 
+                    flyingCard.removeEventListener('transitionend', onFlightEnd);
+                    flyingCard.remove();
+                    
+                    selectedCards.push(cardData);
+                    updateChosenCardsDisplay(); 
 
-                if (selectedCards.length === 3) {
-                    transitionToResultsView();
-                }
+                    if (selectedCards.length === 3) {
+                        transitionToResultsView();
+                    }
+                    
+                    isAnimating = false; // Tắt cờ, cho phép click tiếp
+                };
                 
-                isAnimating = false; // (MỚI) Tắt cờ, cho phép click tiếp
+                flyingCard.addEventListener('transitionend', onFlightEnd);
+                // --- Hết logic cũ ---
             };
-            
-            flyingCard.addEventListener('transitionend', onFlightEnd);
+
+            img.onload = onImageLoaded; // Chạy khi ảnh tải xong
+            img.onerror = onImageLoaded; // Chạy ngay cả khi ảnh lỗi (để app không bị treo)
+            img.src = cardData.image; // Bắt đầu tải
         }
 
 
