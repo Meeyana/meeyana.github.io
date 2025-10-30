@@ -326,7 +326,7 @@
         }
 
         .facedown-card.is-chosen {
-            opacity: 0!important; 
+            opacity: 0; /* (SỬA LỖI) Đã gỡ bỏ !important để fix lỗi transition trên iOS */
             pointer-events: none;
         }
         
