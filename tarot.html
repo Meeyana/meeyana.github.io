@@ -209,7 +209,6 @@
         .chosen-card-item {
             text-align: center;
             width: 120px; 
-            /* (SỬA LỖI) Bỏ 'opacity' và 'transform' khỏi transition */
             transition: width 1s ease-in-out; 
         }
         @keyframes revealCard {
@@ -223,7 +222,6 @@
             transition: width 1s ease-in-out;
         }
 
-        /* Đây là quy tắc cho lá bài THẬT (real card) sau khi bay */
         .chosen-card-item img.reversed { 
             transform: rotate(180deg)!important; 
         }
@@ -235,12 +233,11 @@
         .chosen-card-item .card-name { font-weight: 600; }
         .chosen-card-item .card-orientation { font-size: 0.8rem; color: var(--title-color); }
         
-        /* --- (MỚI) CSS Cho Hiệu Ứng Bay Của Lá Bài --- */
+        /* --- CSS Cho Hiệu Ứng Bay Của Lá Bài --- */
         .flying-card-animator {
-            position: fixed; /* Dùng fixed để tính toán vị trí dễ dàng */
+            position: fixed; 
             z-index: 1000;
             transition: all 1s ease-in-out;
-            /* preserve-3d để xoay 3D */
             transform-style: preserve-3d;
         }
 
@@ -252,7 +249,6 @@
             transition: transform 1s ease-in-out;
         }
 
-        /* Định nghĩa mặt trước và mặt sau */
         .flying-card-back,
         .flying-card-front {
             position: absolute;
@@ -264,7 +260,6 @@
             overflow: hidden;
         }
 
-        /* Mặt sau (giống lá bài úp) */
         .flying-card-back {
             background-color: var(--card-back-bg);
             border: 1px solid var(--card-back-border);
@@ -274,9 +269,8 @@
             background-position: center;
         }
 
-        /* Mặt trước (sẽ chứa hình ảnh) */
         .flying-card-front {
-            background-color: var(--card-back-bg); /* Nền mờ */
+            background-color: var(--card-back-bg);
             transform: rotateY(180deg);
         }
         .flying-card-front img {
@@ -285,12 +279,9 @@
             object-fit: cover;
         }
         
-        /* (SỬA LỖI) Thêm quy tắc này để lật ngược hình ảnh BÊN TRONG lá bài bay */
         .flying-card-front img.reversed {
             transform: rotate(180deg);
         }
-        
-        /* --- Kết thúc CSS Hiệu Ứng Bay --- */
         
         /* --- Bộ bài --- */
         #card-spread-container {
@@ -477,52 +468,43 @@
                 display: flex;
             }
 
-            /* --- (CHỈNH SỬA) Giao diện 3 lá bài đã chọn ở trên --- */
             #chosen-cards-display {
-                /* height: auto; */ /* Gỡ bỏ */
-                /* min-height: 180px; */ /* Gỡ bỏ */
                 margin-bottom: 2rem;
-                width: 100%; /* <-- ĐẶT LẠI 100% */
-                transform: none; /* <-- XÓA BỎ SCALE */
-                gap: 0.5rem; /* <-- DÙNG GAP THAY VÌ MARGIN ÂM */
-                padding: 0 0.5rem; /* Thêm chút padding cho an toàn */
+                width: 100%; 
+                transform: none; 
+                gap: 0.5rem; 
+                padding: 0 0.5rem;
             }
 
             .chosen-card-item, .chosen-card-placeholder {
-                width: 100px; /* <-- THAY ĐỔI KÍCH THƯỚC */
-                /* height: 150px; */ /* <-- GỠ BỎ CHIỀU CAO CỐ ĐỊNH CHUNG */
+                width: 100px; 
                 flex-shrink: 0; 
             }
             
-            /* (SỬA LỖI) Chỉ đặt chiều cao cố định cho placeholder */
             .chosen-card-placeholder {
-                height: 150px; /* Đặt chiều cao tương ứng (tỷ lệ 2:3) */
+                height: 150px; /* Tỷ lệ 2:3 */
             }
             
-            /* Xóa bỏ margin âm */
             .chosen-card-item:not(:first-child),
             .chosen-card-placeholder:not(:first-child) {
                 margin-left: 0; 
             }
 
-            /* --- (CHỈNH SỬA) Giao diện khi xem kết quả trên Mobile --- */
             #drawing-screen.results-active #chosen-cards-display {
-                width: 100%; /* <-- ĐẶT LẠI 100% */
-                transform: none; /* <-- XÓA BỎ SCALE */
+                width: 100%; 
+                transform: none;
                 margin-bottom: 2rem;
-                gap: 0.5rem; /* <-- ĐỒNG BỘ GAP */
+                gap: 0.5rem;
             }
             #drawing-screen.results-active .chosen-card-item {
-                width: 100px; /* <-- GIỮ KÍCH THƯỚC NHỎ ĐỂ RÕ RÀNG */
+                width: 100px; 
             }
-            /* Xóa bỏ margin âm */
             #drawing-screen.results-active .chosen-card-item:not(:first-child) {
                 margin-left: 0; 
             }
             
-            /* (CHỈNH SỬA) Đảm bảo text không bị co lại */
             #drawing-screen.results-active .chosen-card-item .card-info {
-                width: 100px; /* Giữ cho text box cùng độ rộng */
+                width: 100px;
             }
         }
 
@@ -687,6 +669,8 @@
             }, 2500); 
         }
 
+        
+
         function populateCardDeck() {
             cardRow1.innerHTML = '';
             cardRow2.innerHTML = '';
@@ -715,8 +699,13 @@
                 
                 const cardElementMobile = cardElementDesktop.cloneNode(true);
                 
-                cardElementDesktop.addEventListener('click', () => handleCardSelection(cardElementDesktop));
-                cardElementMobile.addEventListener('click', () => handleCardSelection(cardElementMobile));
+                // (SỬA LỖI UX MOBILE) Thêm (e) và lắng nghe 'touchstart'
+                cardElementDesktop.addEventListener('click', (e) => handleCardSelection(e, cardElementDesktop));
+                cardElementMobile.addEventListener('click', (e) => handleCardSelection(e, cardElementMobile));
+                
+                cardElementDesktop.addEventListener('touchstart', (e) => handleCardSelection(e, cardElementDesktop));
+                cardElementMobile.addEventListener('touchstart', (e) => handleCardSelection(e, cardElementMobile));
+
 
                 // Phân phối cho 2 hàng desktop
                 if (i < 39) {
@@ -738,9 +727,11 @@
             }
         }
 
-        // (CHỈNH SỬA) Đồng bộ hóa lá bài được chọn
-        function handleCardSelection(clickedElement) {
-            // (CHỈNH SỬA) Thêm 2 cờ kiểm tra: Đã đủ 3 lá HOẶC đang có lá bài bay
+        // (SỬA LỖI UX MOBILE) Thêm 'event' làm tham số
+        function handleCardSelection(event, clickedElement) {
+            // (SỬA LỖI UX MOBILE) Ngăn hành vi mặc định (như :hover giả lập)
+            event.preventDefault();
+
             if (selectedCards.length >= 3 || isAnimating) return;
 
             const posIndex = clickedElement.dataset.positionIndex;
@@ -755,18 +746,17 @@
             });
             if (alreadyChosen) return;
 
-            // (MỚI) Thêm class 'is-chosen' cho cả 2 phiên bản (desktop/mobile)
+            // Thêm class 'is-chosen' cho cả 2 phiên bản (desktop/mobile)
             allCardsWithIndex.forEach(card => card.classList.add('is-chosen'));
 
-            // Logic chọn lá bài (như cũ)
+            // Logic chọn lá bài
             const availableCards = cardData.filter(card => !selectedCards.some(sc => sc.id === card.id));
             const randomCard = availableCards[Math.floor(Math.random() * availableCards.length)];
             const isReversed = Math.random() < 0.5;
             const orientation = isReversed ? 'Ngược' : 'Xuôi';
             const chosenCard = { ...randomCard, isReversed, orientation };
 
-            // (MỚI) Gọi hàm animation bay
-            // Tìm placeholder tiếp theo còn trống
+            // Gọi hàm animation bay
             const targetPlaceholder = document.querySelectorAll('#chosen-cards-display .chosen-card-placeholder')[0];
             
             if (targetPlaceholder) {
@@ -774,15 +764,13 @@
             }
         }
 
-        // (SỬA LỖI) Hàm Animation Lá Bài Bay (với Preload)
+        // Hàm Animation Lá Bài Bay (với Preload)
         function animateCardFlight(startEl, endEl, cardData) {
             
-            // (MỚI) Tải trước hình ảnh
             const img = new Image();
             
             const onImageLoaded = () => {
-                // --- Toàn bộ logic cũ sẽ nằm trong này ---
-                isAnimating = true; // Bật cờ, chặn click mới
+                isAnimating = true; 
                 
                 const startRect = startEl.getBoundingClientRect();
                 const endRect = endEl.getBoundingClientRect();
@@ -818,13 +806,24 @@
                     flyingCard.style.width = `${endRect.width}px`;
                     flyingCard.style.height = `${endRect.height}px`;
                     
-                    // Xoay lá bài
                     inner.style.transform = 'rotateY(180deg)';
                 });
 
                 // 4. Lắng nghe khi animation kết thúc
+                // (SỬA LỖI LOGIC) Thêm cờ `flightHasEnded`
+                let flightHasEnded = false;
+                
                 const onFlightEnd = (event) => {
-                    if (event.propertyName !== 'top') return; 
+                    // (SỬA LỖI LOGIC) Chỉ chạy logic khi:
+                    // 1. Event xảy ra trên `flyingCard` (không phải 'inner')
+                    // 2. Logic chưa chạy lần nào (tránh 4 event top/left/width/height)
+                    if (event.target !== flyingCard || flightHasEnded) {
+                        return;
+                    }
+
+                    // (SỬA LỖI LOGIC) Đánh dấu đã chạy
+                    flightHasEnded = true; 
+                    
                     flyingCard.removeEventListener('transitionend', onFlightEnd);
                     flyingCard.remove();
                     
@@ -835,23 +834,22 @@
                         transitionToResultsView();
                     }
                     
-                    isAnimating = false; // Tắt cờ, cho phép click tiếp
+                    isAnimating = false; 
                 };
                 
                 flyingCard.addEventListener('transitionend', onFlightEnd);
-                // --- Hết logic cũ ---
             };
 
-            img.onload = onImageLoaded; // Chạy khi ảnh tải xong
-            img.onerror = onImageLoaded; // Chạy ngay cả khi ảnh lỗi (để app không bị treo)
-            img.src = cardData.image; // Bắt đầu tải
+            img.onload = onImageLoaded;
+            img.onerror = onImageLoaded; 
+            img.src = cardData.image; 
         }
 
 
         // Cập nhật placeholder
         function updateChosenCardsDisplay() {
             chosenCardsDisplay.innerHTML = '';
-            let cardItemElements = []; // (MỚI) Mảng tạm để lưu các lá bài
+            let cardItemElements = []; 
             
             selectedCards.forEach(card => {
                 const cardItem = document.createElement('div');
@@ -865,17 +863,13 @@
                         ${card.isReversed ? '<div class="card-orientation">(Lá bài Ngược)</div>' : ''}
                     </div>
                 `;
-                cardItemElements.push(cardItem); // Thêm vào mảng tạm
+                cardItemElements.push(cardItem); 
             });
             
-            // (CHỈNH SỬA) Thêm các lá bài vào UI
             cardItemElements.forEach(item => {
                 chosenCardsDisplay.appendChild(item);
-                // Trigger animation xuất hiện
-                // Dùng setTimeout 0 để đảm bảo nó chạy sau khi DOM được cập nhật
                 setTimeout(() => {
                     item.style.opacity = '1';
-                    /* item.style.transform = 'translateY(0)'; */ /* Tắt transform */
                 }, 0);
             });
 
