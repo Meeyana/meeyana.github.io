@@ -329,9 +329,11 @@
         }
         .facedown-card:first-child { margin-left: 0; }
 
-        .facedown-card:hover {
-            transform: translateY(-15px)!important; 
-/*            border-color: var(--title-color);*/
+        @media (min-width: 768px){
+                .facedown-card:hover {
+                transform: translateY(-15px)!important; 
+                border-color: var(--title-color);
+            }
         }
 
         .facedown-card.is-chosen {
