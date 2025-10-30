@@ -192,7 +192,7 @@
             display: flex;
             gap: 1.5rem;
             height: 250px;
-            align-items: flex-start ;
+            align-items: flex-start;
             justify-content: center;
             margin-bottom: 2.5rem; 
             transition: all 0.8s ease;
@@ -208,11 +208,10 @@
 
         .chosen-card-item {
             text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: revealCard 0.5s forwards;
+            
             width: 120px; 
-            transition: width 1s ease-in-out, opacity 1s, transform 1s;
+            /* (SỬA LỖI) Bỏ 'opacity' và 'transform' khỏi transition */
+            transition: width 1s ease-in-out; 
         }
         @keyframes revealCard {
             to { opacity: 1; transform: translateY(0); }
@@ -222,21 +221,77 @@
             width: 100%;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            animation: flipIn 0.8s forwards;
             transition: width 1s ease-in-out;
         }
 
-        @keyframes flipIn {
-            from { transform: rotateY(180deg); }
-            to { transform: rotateY(0deg); }
+        /* Đây là quy tắc cho lá bài THẬT (real card) sau khi bay */
+        .chosen-card-item img.reversed { 
+            transform: rotate(180deg)!important; 
         }
-        .chosen-card-item img.reversed { transform: rotate(180deg)!important; }
+        
         .chosen-card-item .card-info { 
             margin-top: 0.75rem; 
             word-wrap: break-word; /* Đảm bảo chữ xuống hàng */
         }
         .chosen-card-item .card-name { font-weight: 600; }
         .chosen-card-item .card-orientation { font-size: 0.8rem; color: var(--title-color); }
+        
+        /* --- (MỚI) CSS Cho Hiệu Ứng Bay Của Lá Bài --- */
+        .flying-card-animator {
+            position: fixed; /* Dùng fixed để tính toán vị trí dễ dàng */
+            z-index: 1000;
+            transition: all 1s ease-in-out;
+            /* preserve-3d để xoay 3D */
+            transform-style: preserve-3d;
+        }
+
+        .flying-card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transform-style: preserve-3d;
+            transition: transform 1s ease-in-out;
+        }
+
+        /* Định nghĩa mặt trước và mặt sau */
+        .flying-card-back,
+        .flying-card-front {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden; /* Safari */
+            backface-visibility: hidden;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        /* Mặt sau (giống lá bài úp) */
+        .flying-card-back {
+            background-color: var(--card-back-bg);
+            border: 1px solid var(--card-back-border);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath d='M40 20C40 20 40 40 40 40C40 40 40 60 40 60C40 60 40 40 40 40M20 40C20 40 40 40 40 40C40 40 60 40 60 40C60 40 40 40 40 40' stroke='%23d4af37' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3Ccircle cx='40' cy='40' r='10' stroke='%23d4af37' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+            background-size: 40%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+
+        /* Mặt trước (sẽ chứa hình ảnh) */
+        .flying-card-front {
+            background-color: var(--card-back-bg); /* Nền mờ */
+            transform: rotateY(180deg);
+        }
+        .flying-card-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* (SỬA LỖI) Thêm quy tắc này để lật ngược hình ảnh BÊN TRONG lá bài bay */
+        .flying-card-front img.reversed {
+            transform: rotate(180deg);
+        }
+        
+        /* --- Kết thúc CSS Hiệu Ứng Bay --- */
         
         /* --- Bộ bài --- */
         #card-spread-container {
@@ -425,8 +480,8 @@
 
             /* --- (CHỈNH SỬA) Giao diện 3 lá bài đã chọn ở trên --- */
             #chosen-cards-display {
-                /* height: auto; */ /* <-- GỠ BỎ */
-                /* min-height: 180px; */ /* <-- GỠ BỎ */
+                /* height: auto; */ /* Gỡ bỏ */
+                /* min-height: 180px; */ /* Gỡ bỏ */
                 margin-bottom: 2rem;
                 width: 100%; /* <-- ĐẶT LẠI 100% */
                 transform: none; /* <-- XÓA BỎ SCALE */
@@ -569,6 +624,7 @@
         let cardData = [];
         let selectedCards = [];
         let userQuestion = '';
+        let isAnimating = false; // (MỚI) Thêm cờ (flag) chống spam click
 
         // === Functions ===
         
@@ -614,7 +670,7 @@
             const questionFromInput = followUpInput.value.trim();
             if (!questionFromInput) {
                 followUpInput.style.borderColor = 'red';
-                setTimeout(() => { questionInput.style.borderColor = ''; }, 2000);
+                setTimeout(() => { followUpInput.style.borderColor = ''; }, 2000);
                 return;
             }
             userQuestion = questionFromInput;
@@ -683,12 +739,15 @@
             }
         }
 
+        // (CHỈNH SỬA) Đồng bộ hóa lá bài được chọn
         function handleCardSelection(clickedElement) {
-            if (selectedCards.length >= 3) return;
+            // (CHỈNH SỬA) Thêm 2 cờ kiểm tra: Đã đủ 3 lá HOẶC đang có lá bài bay
+            if (selectedCards.length >= 3 || isAnimating) return;
 
             const posIndex = clickedElement.dataset.positionIndex;
             const allCardsWithIndex = document.querySelectorAll(`.facedown-card[data-position-index="${posIndex}"]`);
 
+            // Kiểm tra xem đã chọn chưa
             let alreadyChosen = false;
             allCardsWithIndex.forEach(card => {
                 if (card.classList.contains('is-chosen')) {
@@ -697,26 +756,100 @@
             });
             if (alreadyChosen) return;
 
+            // (MỚI) Thêm class 'is-chosen' cho cả 2 phiên bản (desktop/mobile)
             allCardsWithIndex.forEach(card => card.classList.add('is-chosen'));
 
+            // Logic chọn lá bài (như cũ)
             const availableCards = cardData.filter(card => !selectedCards.some(sc => sc.id === card.id));
             const randomCard = availableCards[Math.floor(Math.random() * availableCards.length)];
-
             const isReversed = Math.random() < 0.5;
             const orientation = isReversed ? 'Ngược' : 'Xuôi';
-
             const chosenCard = { ...randomCard, isReversed, orientation };
-            selectedCards.push(chosenCard);
 
-            updateChosenCardsDisplay();
-
-            if (selectedCards.length === 3) {
-                transitionToResultsView();
+            // (MỚI) Gọi hàm animation bay
+            // Tìm placeholder tiếp theo còn trống
+            const targetPlaceholder = document.querySelectorAll('#chosen-cards-display .chosen-card-placeholder')[0];
+            
+            if (targetPlaceholder) {
+                animateCardFlight(clickedElement, targetPlaceholder, chosenCard);
             }
         }
 
+        // (MỚI) Hàm Animation Lá Bài Bay
+        function animateCardFlight(startEl, endEl, cardData) {
+            isAnimating = true; // (MỚI) Bật cờ, chặn click mới
+            
+            const startRect = startEl.getBoundingClientRect();
+            const endRect = endEl.getBoundingClientRect();
+            
+            // 1. Tạo lá bài bay
+            const flyingCard = document.createElement('div');
+            flyingCard.className = 'flying-card-animator';
+            
+            // (SỬA LỖI) Đảm bảo class 'reversed' được thêm vào
+            const reversedClass = cardData.isReversed ? 'reversed' : '';
+            flyingCard.innerHTML = `
+                <div class="flying-card-inner">
+                    <div class="flying-card-back"></div>
+                    <div class="flying-card-front">
+                        <img src="${cardData.image}" alt="${cardData.name}" class="${reversedClass}">
+                    </div>
+                </div>
+            `;
+            
+            // 2. Set vị trí ban đầu
+            flyingCard.style.top = `${startRect.top}px`;
+            flyingCard.style.left = `${startRect.left}px`;
+            flyingCard.style.width = `${startRect.width}px`;
+            flyingCard.style.height = `${startRect.height}px`;
+            
+            document.body.appendChild(flyingCard);
+            
+            // 3. Set vị trí cuối và trigger animation
+            // Dùng requestAnimationFrame để đảm bảo trình duyệt đã render lá bài trước khi bay
+            requestAnimationFrame(() => {
+                const inner = flyingCard.querySelector('.flying-card-inner');
+                
+                flyingCard.style.top = `${endRect.top}px`;
+                flyingCard.style.left = `${endRect.left}px`;
+                flyingCard.style.width = `${endRect.width}px`;
+                flyingCard.style.height = `${endRect.height}px`;
+                
+                // Xoay lá bài
+                inner.style.transform = 'rotateY(180deg)';
+            });
+
+            // 4. (SỬA LỖI) Lắng nghe khi animation kết thúc
+            const onFlightEnd = (event) => {
+                // Chỉ chạy 1 lần khi 'top' property kết thúc
+                if (event.propertyName !== 'top') return; 
+                
+                // Gỡ bỏ listener này đi
+                flyingCard.removeEventListener('transitionend', onFlightEnd);
+                
+                // Xóa lá bài bay
+                flyingCard.remove();
+                
+                // Bây giờ mới cập nhật state và UI thật
+                selectedCards.push(cardData);
+                updateChosenCardsDisplay(); // Cập nhật placeholder
+
+                if (selectedCards.length === 3) {
+                    transitionToResultsView();
+                }
+                
+                isAnimating = false; // (MỚI) Tắt cờ, cho phép click tiếp
+            };
+            
+            flyingCard.addEventListener('transitionend', onFlightEnd);
+        }
+
+
+        // Cập nhật placeholder
         function updateChosenCardsDisplay() {
             chosenCardsDisplay.innerHTML = '';
+            let cardItemElements = []; // (MỚI) Mảng tạm để lưu các lá bài
+            
             selectedCards.forEach(card => {
                 const cardItem = document.createElement('div');
                 cardItem.className = 'chosen-card-item';
@@ -729,8 +862,21 @@
                         ${card.isReversed ? '<div class="card-orientation">(Lá bài Ngược)</div>' : ''}
                     </div>
                 `;
-                chosenCardsDisplay.appendChild(cardItem);
+                cardItemElements.push(cardItem); // Thêm vào mảng tạm
             });
+            
+            // (CHỈNH SỬA) Thêm các lá bài vào UI
+            cardItemElements.forEach(item => {
+                chosenCardsDisplay.appendChild(item);
+                // Trigger animation xuất hiện
+                // Dùng setTimeout 0 để đảm bảo nó chạy sau khi DOM được cập nhật
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    /* item.style.transform = 'translateY(0)'; */ /* Tắt transform */
+                }, 0);
+            });
+
+            // Thêm placeholder
             for (let i = 0; i < 3 - selectedCards.length; i++) {
                 chosenCardsDisplay.innerHTML += '<div class="chosen-card-placeholder"></div>';
             }
@@ -803,5 +949,4 @@
     </script>
 </body>
 </html>
-
 
