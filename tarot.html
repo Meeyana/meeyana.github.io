@@ -278,8 +278,8 @@
         /* Mặt trước (sẽ chứa hình ảnh) */
         .flying-card-front {
             background-color: var(--card-back-bg); /* Nền mờ */
-            transform: rotateY(180deg);
-            transform: translateZ(0); /* (SỬA LỖI 2) Ép tăng tốc phần cứng */
+            /* (SỬA LỖI) Kết hợp 2 thuộc tính transform làm 1 */
+            transform: rotateY(180deg) translateZ(0); 
         }
         .flying-card-front img {
             width: 100%;
@@ -1004,6 +1004,7 @@
     </script>
 </body>
 </html>
+
 
 
 
