@@ -36,6 +36,176 @@
             overflow-x: hidden; /* Ngăn cuộn ngang */
         }
         
+        /* --- NÚT LỊCH SỬ --- */
+        #history-btn {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1500;
+            background-color: var(--button-bg);
+            border: 1px solid var(--card-back-border);
+            color: var(--title-color);
+            font-family: var(--font-body);
+            font-weight: 600;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+        #history-btn:hover {
+            background-color: var(--button-hover-bg);
+        }
+
+        /* --- (CHỈNH SỬA) MODAL LỊCH SỬ --- */
+        .modal-backdrop {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 2000;
+        }
+        .modal-content {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2001;
+            background-color: var(--card-back-bg);
+            border: 1px solid var(--card-back-border);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            color: var(--text-color);
+            /* (THAY ĐỔI) Tách layout bằng flex để sửa lỗi scrollbar */
+            display: flex;
+            flex-direction: column;
+            overflow: hidden; /* Ẩn overflow ở đây */
+            padding: 0; /* Xóa padding ở đây */
+        }
+        
+        /* (MỚI) Header của Modal */
+        .modal-header {
+            position: relative;
+            padding: 1.5rem 1.5rem 0 1.5rem;
+            flex-shrink: 0; /* Không co lại */
+        }
+        .modal-close-btn {
+            position: absolute;
+            top: 0.75rem; /* Điều chỉnh vị trí */
+            right: 1rem; /* Điều chỉnh vị trí */
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            opacity: 0.7;
+        }
+        .modal-close-btn:hover { opacity: 1; }
+        .modal-content h2 {
+            font-family: var(--font-title);
+            color: var(--title-color);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        
+        /* (MỚI) Wrapper cuộn nội dung */
+        .modal-scroll-wrapper {
+            overflow-y: auto; /* Đặt thanh cuộn ở đây */
+            padding: 0 1.5rem 1.5rem 1.5rem;
+            flex-grow: 1;
+        }
+
+        #history-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .history-item {
+            border-bottom: 1px solid var(--card-back-border);
+            padding-bottom: 1.5rem;
+            text-align: left; /* (MỚI) Căn lề trái cho nội dung */
+        }
+        .history-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        .history-item h3 {
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin: 0 0 0.5rem 0;
+        }
+        .history-item .history-date {
+            font-size: 0.8rem;
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+        .history-cards-container {
+            display: flex;
+            gap: 1rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+            justify-content: center; /* (MỚI) Căn giữa các lá bài */
+        }
+        .history-card-item {
+            width: 80px;
+            flex-shrink: 0;
+            text-align: center;
+        }
+        .history-card-item img {
+            width: 100%;
+            border-radius: 5px;
+        }
+        .history-card-item img.reversed {
+            transform: rotate(180deg);
+        }
+        .history-card-item .card-name {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            word-wrap: break-word;
+        }
+        .history-card-item .card-orientation {
+            font-size: 0.7rem;
+            color: var(--title-color);
+            opacity: 0.9;
+        }
+
+        /* (MỚI) Nút chia sẻ trong lịch sử */
+        .history-share-btn {
+            display: inline-block;
+            background-color: var(--button-bg);
+            border: 1px solid var(--card-back-border);
+            color: var(--title-color);
+            padding: 0.5rem 1rem;
+            margin-top: 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+            font-family: var(--font-body);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .history-share-btn:hover {
+            background-color: var(--button-hover-bg);
+        }
+        .history-share-btn.success {
+            background-color: #22c55e; /* Màu xanh lá */
+            border-color: #16a34a;
+            color: var(--bg-color);
+        }
+         .history-share-btn.error {
+            background-color: #ef4444; /* Màu đỏ */
+            border-color: #dc2626;
+            color: var(--bg-color);
+        }
+
+
         /* --- Quản lý các màn hình --- */
         .screen {
             display: none;
@@ -209,7 +379,6 @@
         .chosen-card-item {
             text-align: center;
             width: 120px; 
-            /* (SỬA LỖI) Bỏ 'opacity' và 'transform' khỏi transition */
             transition: width 1s ease-in-out; 
         }
         @keyframes revealCard {
@@ -222,25 +391,23 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             transition: width 1s ease-in-out;
         }
-
-        /* Đây là quy tắc cho lá bài THẬT (real card) sau khi bay */
+ 
         .chosen-card-item img.reversed { 
             transform: rotate(180deg)!important; 
         }
         
         .chosen-card-item .card-info { 
             margin-top: 0.75rem; 
-            word-wrap: break-word; /* Đảm bảo chữ xuống hàng */
+            word-wrap: break-word; 
         }
         .chosen-card-item .card-name { font-weight: 600; }
         .chosen-card-item .card-orientation { font-size: 0.8rem; color: var(--title-color); }
         
-        /* --- (MỚI) CSS Cho Hiệu Ứng Bay Của Lá Bài --- */
+        /* --- CSS Cho Hiệu Ứng Bay Của Lá Bài --- */
         .flying-card-animator {
-            position: absolute; /* (SỬA LỖI 1) Đổi từ 'fixed' sang 'absolute' */
+            position: absolute; 
             z-index: 1000;
             transition: all 1s ease-in-out;
-            /* preserve-3d để xoay 3D */
             transform-style: preserve-3d;
         }
 
@@ -250,10 +417,9 @@
             height: 100%;
             transform-style: preserve-3d;
             transition: transform 1s ease-in-out;
-            transform: translateZ(0); /* (SỬA LỖI 1) Thêm ép render 3D cho inner */
+            transform: translateZ(0); 
         }
 
-        /* Định nghĩa mặt trước và mặt sau */
         .flying-card-back,
         .flying-card-front {
             position: absolute;
@@ -265,7 +431,6 @@
             overflow: hidden;
         }
 
-        /* Mặt sau (giống lá bài úp) */
         .flying-card-back {
             background-color: var(--card-back-bg);
             border: 1px solid var(--card-back-border);
@@ -273,13 +438,11 @@
             background-size: 40%;
             background-repeat: no-repeat;
             background-position: center;
-            transform: translateZ(0); /* (SỬA LỖI 2) Ép tăng tốc phần cứng */
+            transform: translateZ(0); 
         }
 
-        /* Mặt trước (sẽ chứa hình ảnh) */
         .flying-card-front {
-            background-color: var(--card-back-bg); /* Nền mờ */
-            /* (SỬA LỖI) Kết hợp 2 thuộc tính transform làm 1 */
+            background-color: var(--card-back-bg); 
             transform: rotateY(180deg) translateZ(0); 
         }
         .flying-card-front img {
@@ -288,12 +451,9 @@
             object-fit: cover;
         }
         
-        /* (SỬA LỖI) Thêm quy tắc này để lật ngược hình ảnh BÊN TRONG lá bài bay */
         .flying-card-front img.reversed {
             transform: rotate(180deg);
         }
-        
-        /* --- Kết thúc CSS Hiệu Ứng Bay --- */
         
         /* --- Bộ bài --- */
         #card-spread-container {
@@ -328,15 +488,12 @@
             background-repeat: no-repeat;
             background-position: center;
             opacity: 0;
-            /* (SỬA LỖI 2) Ép tăng tốc phần cứng trên Samsung */
             transform: translateY(30px) scale(0.8) translateZ(0); 
         }
         .facedown-card:first-child { margin-left: 0; }
 
-        /* (SỬA LỖI) THÊM CLASS MỚI ĐỂ GIỮ OPACITY 1 */
         .facedown-card.is-dealt {
             opacity: 1;
-            /* (SỬA LỖI 2) Ép tăng tốc phần cứng trên Samsung */
             transform: translateY(0) scale(1) translateZ(0);
         }
 
@@ -348,15 +505,13 @@
         }
 
         .facedown-card.is-chosen {
-            opacity: 0!important; /* Giữ !important như file của bạn */
+            opacity: 0!important; 
             pointer-events: none;
         }
         
         @keyframes dealCardIn {
-            /* (SỬA LỖI) XÓA 'from' VÌ ĐÃ CÓ Ở CLASS MẶC ĐỊNH */
             to {
                 opacity: 1;
-                /* (SỬA LỖI 2) Ép tăng tốc phần cứng trên Samsung */
                 transform: translateY(0) scale(1) translateZ(0);
             }
         }
@@ -491,59 +646,60 @@
             .mobile-row {
                 display: flex;
             }
-
-            /* --- (CHỈNH SỬA) Giao diện 3 lá bài đã chọn ở trên --- */
+            
             #chosen-cards-display {
-                /* height: auto; */ /* Gỡ bỏ */
-                /* min-height: 180px; */ /* Gỡ bỏ */
                 margin-bottom: 2rem;
-                width: 100%; /* <-- ĐẶT LẠI 100% */
-                transform: none; /* <-- XÓA BỎ SCALE */
-                gap: 0.5rem; /* <-- DÙNG GAP THAY VÌ MARGIN ÂM */
-                padding: 0 0.5rem; /* Thêm chút padding cho an toàn */
+                width: 100%; 
+                transform: none; 
+                gap: 0.5rem; 
+                padding: 0 0.5rem; 
             }
 
             .chosen-card-item, .chosen-card-placeholder {
-                width: 100px; /* <-- THAY ĐỔI KÍCH THƯỚC */
-                /* height: 150px; */ /* <-- GỠ BỎ CHIỀU CAO CỐ ĐỊNH CHUNG */
+                width: 100px; 
                 flex-shrink: 0; 
             }
             
-            /* (SỬA LỖI) Chỉ đặt chiều cao cố định cho placeholder */
             .chosen-card-placeholder {
-                height: 150px; /* Đặt chiều cao tương ứng (tỷ lệ 2:3) */
+                height: 150px; 
             }
             
-            /* Xóa bỏ margin âm */
             .chosen-card-item:not(:first-child),
             .chosen-card-placeholder:not(:first-child) {
                 margin-left: 0; 
             }
 
-            /* --- (CHỈNH SỬA) Giao diện khi xem kết quả trên Mobile --- */
             #drawing-screen.results-active #chosen-cards-display {
-                width: 100%; /* <-- ĐẶT LẠI 100% */
-                transform: none; /* <-- XÓA BỎ SCALE */
+                width: 100%; 
+                transform: none; 
                 margin-bottom: 2rem;
-                gap: 0.5rem; /* <-- ĐỒNG BỘ GAP */
+                gap: 0.5rem; 
             }
             #drawing-screen.results-active .chosen-card-item {
-                width: 100px; /* <-- GIỮ KÍCH THƯỚC NHỎ ĐỂ RÕ RÀNG */
+                width: 100px; 
             }
-            /* Xóa bỏ margin âm */
             #drawing-screen.results-active .chosen-card-item:not(:first-child) {
                 margin-left: 0; 
             }
             
-            /* (CHỈNH SỬA) Đảm bảo text không bị co lại */
             #drawing-screen.results-active .chosen-card-item .card-info {
-                width: 100px; /* Giữ cho text box cùng độ rộng */
+                width: 100px; 
+            }
+            
+            #history-btn {
+                top: 0.75rem;
+                right: 0.75rem;
+                padding: 0.35rem 0.6rem;
+                font-size: 0.8rem;
             }
         }
 
     </style>
 </head>
 <body>
+
+    <!-- Nút Lịch sử -->
+    <button id="history-btn">Lịch sử</button>
 
     <!-- Màn hình 1: Đặt câu hỏi -->
     <div id="question-screen" class="screen active">
@@ -609,6 +765,21 @@
         </div>
     </div>
     
+    <!-- (CHỈNH SỬA) Modal Lịch sử -->
+    <div id="history-modal-backdrop" class="modal-backdrop"></div>
+    <div id="history-modal-content" class="modal-content">
+        <!-- (MỚI) Wrapper cho tiêu đề và nút đóng -->
+        <div class="modal-header">
+            <button id="history-modal-close-btn" class="modal-close-btn">&times;</button>
+            <h2>Lịch sử trải bài</h2>
+        </div>
+        <!-- (MỚI) Wrapper cho nội dung cuộn -->
+        <div id="history-list-wrapper" class="modal-scroll-wrapper">
+            <div id="history-list">
+                <!-- Lịch sử sẽ được render bằng JS -->
+            </div>
+        </div>
+    </div>
 
     <script>
         const N8N_WEBHOOK_URL = 'https://n8n.n8ntuanphangz.xyz/webhook/2a1c95d5-dd30-4710-9f1c-f9c45686f218'; // !!! THAY THẾ URL CỦA BẠN !!!
@@ -632,13 +803,21 @@
         const followUpContainer = document.getElementById('follow-up-question-container');
         const followUpInput = document.getElementById('follow-up-question-input');
         const followUpSubmitBtn = document.getElementById('submit-follow-up-btn');
+        
+        // DOM Elements cho Lịch sử
+        const historyBtn = document.getElementById('history-btn');
+        const historyBackdrop = document.getElementById('history-modal-backdrop');
+        const historyModal = document.getElementById('history-modal-content');
+        const historyCloseBtn = document.getElementById('history-modal-close-btn');
+        const historyList = document.getElementById('history-list');
 
 
         // State
         let cardData = [];
         let selectedCards = [];
         let userQuestion = '';
-        let isAnimating = false; // (MỚI) Thêm cờ (flag) chống spam click
+        let isAnimating = false; 
+        let readingHistory = []; 
 
         // === Functions ===
         
@@ -693,6 +872,8 @@
         }
         
         function startNewReadingFlow() {
+            sessionStorage.removeItem('tarotSession'); 
+            
             shufflingQuestionDisplay.textContent = userQuestion;
             drawingQuestionDisplay.textContent = userQuestion;
             showScreen('shuffling-screen');
@@ -730,32 +911,27 @@
                 
                 const cardElementMobile = cardElementDesktop.cloneNode(true);
                 
-                // (SỬA LỖI 1) Thay đổi logic dọn dẹp animation
                 const animationEndCallback = (e) => {
                     if (e.animationName === 'dealCardIn') {
-                        e.target.classList.add('is-dealt'); // Thêm class .is-dealt
-                        e.target.style.animation = ''; // Xóa style animation
+                        e.target.classList.add('is-dealt'); 
+                        e.target.style.animation = ''; 
                     }
                 };
                 cardElementDesktop.addEventListener('animationend', animationEndCallback);
                 cardElementMobile.addEventListener('animationend', animationEndCallback);
                 
-                // (SỬA LỖI 2) Thêm 'click' và 'touchstart' cho mobile
                 cardElementDesktop.addEventListener('click', (e) => handleCardSelection(e, cardElementDesktop));
                 cardElementMobile.addEventListener('click', (e) => handleCardSelection(e, cardElementMobile));
                 
                 cardElementDesktop.addEventListener('touchstart', (e) => handleCardSelection(e, cardElementDesktop));
                 cardElementMobile.addEventListener('touchstart', (e) => handleCardSelection(e, cardElementMobile));
 
-
-                // Phân phối cho 2 hàng desktop
                 if (i < 39) {
                     cardRow1.appendChild(cardElementDesktop);
                 } else {
                     cardRow2.appendChild(cardElementDesktop);
                 }
                 
-                // Phân phối cho 4 hàng mobile
                 if (i < 20) {
                     cardRow3.appendChild(cardElementMobile);
                 } else if (i < 40) {
@@ -768,18 +944,14 @@
             }
         }
 
-        // (CHỈNH SỬA) Đồng bộ hóa lá bài được chọn
         function handleCardSelection(event, clickedElement) {
-            // (SỬA LỖI 2) Ngăn :hover giả lập trên mobile
             event.preventDefault();
             
-            // (CHỈNH SỬA) Thêm 2 cờ kiểm tra: Đã đủ 3 lá HOẶC đang có lá bài bay
             if (selectedCards.length >= 3 || isAnimating) return;
 
             const posIndex = clickedElement.dataset.positionIndex;
             const allCardsWithIndex = document.querySelectorAll(`.facedown-card[data-position-index="${posIndex}"]`);
 
-            // Kiểm tra xem đã chọn chưa
             let alreadyChosen = false;
             allCardsWithIndex.forEach(card => {
                 if (card.classList.contains('is-chosen')) {
@@ -788,48 +960,33 @@
             });
             if (alreadyChosen) return;
 
-            // (SỬA LỖI 3 - RACE CONDITION)
-            // Đặt cờ `isAnimating` thành true NGAY LẬP TỨC
-            // để ngăn chặn cú click thứ 4 trong khi ảnh đang tải.
             isAnimating = true; 
 
-            // (MỚI) Thêm class 'is-chosen' cho cả 2 phiên bản (desktop/mobile)
             allCardsWithIndex.forEach(card => card.classList.add('is-chosen'));
 
-            // Logic chọn lá bài (như cũ)
             const availableCards = cardData.filter(card => !selectedCards.some(sc => sc.id === card.id));
             const randomCard = availableCards[Math.floor(Math.random() * availableCards.length)];
             const isReversed = Math.random() < 0.5;
             const orientation = isReversed ? 'Ngược' : 'Xuôi';
             const chosenCard = { ...randomCard, isReversed, orientation };
 
-            // (MỚI) Gọi hàm animation bay
-            // Tìm placeholder tiếp theo còn trống
             const targetPlaceholder = document.querySelectorAll('#chosen-cards-display .chosen-card-placeholder')[0];
             
             if (targetPlaceholder) {
                 animateCardFlight(clickedElement, targetPlaceholder, chosenCard);
             } else {
-                // Đề phòng trường hợp không tìm thấy placeholder (dù không thể xảy ra)
-                // Phải reset cờ lại
                 isAnimating = false;
             }
         }
 
-        // (SỬA LỖI) Hàm Animation Lá Bài Bay (với Preload)
         function animateCardFlight(startEl, endEl, cardData) {
             
-            // (MỚI) Tải trước hình ảnh
             const img = new Image();
             
             const onImageLoaded = () => {
-                // --- Toàn bộ logic cũ sẽ nằm trong này ---
-                // isAnimating = true; // (SỬA LỖI 3) Dời cờ này lên handleCardSelection
-
                 const startRect = startEl.getBoundingClientRect();
                 const endRect = endEl.getBoundingClientRect();
                 
-                // 1. Tạo lá bài bay
                 const flyingCard = document.createElement('div');
                 flyingCard.className = 'flying-card-animator';
                 
@@ -843,8 +1000,6 @@
                     </div>
                 `;
                 
-                // 2. Set vị trí ban đầu
-                // (SỬA LỖI 1) Thêm window.scrollY vào tọa độ 'top'
                 flyingCard.style.top = `${startRect.top + window.scrollY}px`;
                 flyingCard.style.left = `${startRect.left}px`;
                 flyingCard.style.width = `${startRect.width}px`;
@@ -852,31 +1007,24 @@
                 
                 document.body.appendChild(flyingCard);
                 
-                // 3. Set vị trí cuối và trigger animation
                 requestAnimationFrame(() => {
                     const inner = flyingCard.querySelector('.flying-card-inner');
                     
-                    // (SỬA LỖI 1) Thêm window.scrollY vào tọa độ 'top'
                     flyingCard.style.top = `${endRect.top + window.scrollY}px`;
                     flyingCard.style.left = `${endRect.left}px`;
                     flyingCard.style.width = `${endRect.width}px`;
                     flyingCard.style.height = `${endRect.height}px`;
                     
-                    // (SỬA LỖI 2) Thêm translateZ(0) vào JS để không bị ghi đè
                     inner.style.transform = 'rotateY(180deg) translateZ(0)';
                 });
 
-                // 4. Lắng nghe khi animation kết thúc
-                // (SỬA LỖI 4) Sửa logic transitionend bị kẹt
                 let flightHasEnded = false;
                 
                 const onFlightEnd = (event) => {
-                    // Chỉ chạy khi event từ lá bài bay (không phải 'inner')
-                    // Và chỉ chạy 1 lần duy nhất
                     if (event.target !== flyingCard || flightHasEnded) {
                         return;
                     }
-                    flightHasEnded = true; // Đánh dấu đã chạy
+                    flightHasEnded = true; 
 
                     flyingCard.removeEventListener('transitionend', onFlightEnd);
                     flyingCard.remove();
@@ -888,23 +1036,21 @@
                         transitionToResultsView();
                     }
                     
-                    isAnimating = false; // Tắt cờ, cho phép click tiếp
+                    isAnimating = false; 
                 };
                 
                 flyingCard.addEventListener('transitionend', onFlightEnd);
-                // --- Hết logic cũ ---
             };
 
-            img.onload = onImageLoaded; // Chạy khi ảnh tải xong
-            img.onerror = onImageLoaded; // Chạy ngay cả khi ảnh lỗi (để app không bị treo)
-            img.src = cardData.image; // Bắt đầu tải
+            img.onload = onImageLoaded; 
+            img.onerror = onImageLoaded; 
+            img.src = cardData.image; 
         }
 
 
-        // Cập nhật placeholder
         function updateChosenCardsDisplay() {
             chosenCardsDisplay.innerHTML = '';
-            let cardItemElements = []; // (MỚI) Mảng tạm để lưu các lá bài
+            let cardItemElements = []; 
             
             selectedCards.forEach(card => {
                 const cardItem = document.createElement('div');
@@ -918,21 +1064,16 @@
                         ${card.isReversed ? '<div class="card-orientation">(Lá bài Ngược)</div>' : ''}
                     </div>
                 `;
-                cardItemElements.push(cardItem); // Thêm vào mảng tạm
+                cardItemElements.push(cardItem); 
             });
             
-            // (CHỈNH SỬA) Thêm các lá bài vào UI
             cardItemElements.forEach(item => {
                 chosenCardsDisplay.appendChild(item);
-                // Trigger animation xuất hiện
-                // Dùng setTimeout 0 để đảm bảo nó chạy sau khi DOM được cập nhật
                 setTimeout(() => {
                     item.style.opacity = '1';
-                    /* item.style.transform = 'translateY(0)'; */ /* Tắt transform */
                 }, 0);
             });
 
-            // Thêm placeholder
             for (let i = 0; i < 3 - selectedCards.length; i++) {
                 chosenCardsDisplay.innerHTML += '<div class="chosen-card-placeholder"></div>';
             }
@@ -945,9 +1086,10 @@
             getInterpretationButton.style.display = 'inline-block'; 
             setTimeout(() => {
                 getInterpretationButton.classList.add('visible');
-            }, 300);
+            }, 300); 
         }
 
+        // (CHỈNH SỬA) Thay đổi logic lưu lịch sử
         async function handleGetInterpretation() {
             mainResultsDisplay.style.display = 'block';
             mainResultsDisplay.innerHTML = '<p>Đang luận giải, vui lòng chờ trong giây lát...</p>';
@@ -962,6 +1104,8 @@
                 cards: selectedCards.map(c => ({ name: c.name, orientation: c.orientation }))
             };
 
+            // (THAY ĐỔI) Sẽ lưu lịch sử SAU KHI fetch thành công
+
             try {
                 const response = await fetch(N8N_WEBHOOK_URL, {
                     method: 'POST',
@@ -974,8 +1118,35 @@
                 
                 if (result && result.length > 0 && result[0].interpretation) {
                     const converter = new showdown.Converter();
-                    const htmlContent = converter.makeHtml(result[0].interpretation);
+                    const markdownContent = result[0].interpretation; // Giữ markdown gốc
+                    const htmlContent = converter.makeHtml(markdownContent);
                     mainResultsDisplay.innerHTML = htmlContent; 
+
+                    // (MỚI) Chuyển đổi HTML sang Text đơn giản
+                    const tempDiv = document.createElement("div");
+                    tempDiv.innerHTML = htmlContent;
+                    const plainTextContent = (tempDiv.textContent || tempDiv.innerText || "").trim();
+
+                    // (MỚI) Tạo đối tượng Lịch sử & Session SAU KHI có nội dung
+                    const fullEntry = { 
+                        id: Date.now(), 
+                        question: userQuestion, 
+                        cards: selectedCards, // Lưu mảng đầy đủ
+                        html: htmlContent, // Lưu HTML (dự phòng)
+                        text: plainTextContent, // Lưu Text để chia sẻ
+                        markdown: markdownContent // Lưu Markdown (dự phòng)
+                    };
+
+                    // (MỚI) Lưu vào Lịch sử (localStorage)
+                    saveHistory(fullEntry);
+
+                    // (MỚI) Lưu vào Session (sessionStorage)
+                    const sessionState = {
+                        ...fullEntry, 
+                        screen: 'drawing-screen results-active'
+                    };
+                    sessionStorage.setItem('tarotSession', JSON.stringify(sessionState));
+
                 } else {
                     throw new Error("Dữ liệu trả về không đúng định dạng.");
                 }
@@ -989,8 +1160,177 @@
             followUpContainer.style.display = 'block';
         }
 
+        // === Chức năng Lịch sử ===
+        function loadHistory() {
+            const storedHistory = localStorage.getItem('tarotHistory');
+            readingHistory = storedHistory ? JSON.parse(storedHistory) : [];
+        }
+
+        function saveHistory(reading) {
+            readingHistory.unshift(reading); // Thêm vào đầu mảng
+            if (readingHistory.length > 20) { // Giới hạn 20 lần
+                readingHistory.pop();
+            }
+            localStorage.setItem('tarotHistory', JSON.stringify(readingHistory));
+        }
+
+        // (CHỈNH SỬA) Cập nhật render để thêm nút Chia sẻ
+        function renderHistoryList() {
+            historyList.innerHTML = '';
+            if (readingHistory.length === 0) {
+                historyList.innerHTML = '<p style="opacity: 0.7; text-align: center;">Chưa có lịch sử trải bài.</p>';
+                return;
+            }
+
+            readingHistory.forEach(reading => {
+                const itemEl = document.createElement('div');
+                itemEl.className = 'history-item';
+
+                let cardsHtml = '';
+                reading.cards.forEach(card => {
+                    cardsHtml += `
+                        <div class="history-card-item">
+                            <img src="${card.image}" alt="${card.name}" class="${card.isReversed ? 'reversed' : ''}">
+                            <div class="card-name">${card.name}</div>
+                            ${card.isReversed ? `<div class="card-orientation">${card.orientation}</div>` : ''}
+                        </div>
+                    `;
+                });
+
+                // (MỚI) Chỉ thêm nút Share nếu có nội dung text
+                const shareButtonHtml = reading.text ? 
+                    `<button class="history-share-btn" data-reading-id="${reading.id}">Chia sẻ</button>` :
+                    '';
+
+                itemEl.innerHTML = `
+                    <h3>${reading.question}</h3>
+                    <div class="history-date">${new Date(reading.id).toLocaleString('vi-VN')}</div>
+                    <div class="history-cards-container">
+                        ${cardsHtml}
+                    </div>
+                    ${shareButtonHtml} <!-- (MỚI) Thêm nút vào đây -->
+                `;
+                historyList.appendChild(itemEl);
+            });
+        }
+
+        function openHistoryModal() {
+            renderHistoryList();
+            historyBackdrop.style.display = 'block';
+            historyModal.style.display = 'flex'; // (THAY ĐỔI) Đổi thành 'flex'
+        }
+
+        function closeHistoryModal() {
+            historyBackdrop.style.display = 'none';
+            historyModal.style.display = 'none';
+        }
+
+        // (MỚI) Hàm xử lý click trong modal lịch sử (event delegation)
+        function handleHistoryClick(event) {
+            const shareButton = event.target.closest('.history-share-btn');
+            if (shareButton) {
+                // Vô hiệu hóa nút tạm thời
+                shareButton.disabled = true;
+
+                const readingId = shareButton.dataset.readingId;
+                const reading = readingHistory.find(r => r.id == readingId);
+                
+                if (reading && reading.text) {
+                    shareReading(reading, shareButton); // Truyền nút vào để cập nhật UI
+                } else {
+                    console.error('Không tìm thấy nội dung để chia sẻ.');
+                    updateShareButtonState(shareButton, 'Lỗi', 'error');
+                }
+            }
+        }
+        
+        // (MỚI) Hàm chia sẻ (Web Share API hoặc Clipboard)
+        async function shareReading(reading, buttonEl) {
+            const title = `Trải bài Tarot: ${reading.question}`;
+            // (MỚI) Tạo nội dung text rõ ràng hơn
+            const cardNames = reading.cards.map(c => `${c.name} ${c.isReversed ? '(Ngược)' : ''}`).join(', ');
+            const text = `Câu hỏi: ${reading.question}\nBài: ${cardNames}\n\nLuận giải:\n${reading.text}`;
+            
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: title,
+                        text: text,
+                    });
+                    console.log('Chia sẻ thành công');
+                    updateShareButtonState(buttonEl, 'Đã chia sẻ!', 'success');
+                } catch (error) {
+                    console.error('Lỗi khi chia sẻ:', error);
+                    updateShareButtonState(buttonEl, 'Chia sẻ thất bại', 'error');
+                }
+            } else {
+                // Fallback: Copy to clipboard
+                try {
+                    await navigator.clipboard.writeText(text);
+                    updateShareButtonState(buttonEl, 'Đã sao chép!', 'success');
+                } catch (err) {
+                    console.error('Lỗi khi sao chép:', err);
+                    updateShareButtonState(buttonEl, 'Lỗi sao chép', 'error');
+                }
+            }
+        }
+
+        // (MỚI) Hàm helper để cập nhật trạng thái nút chia sẻ
+        function updateShareButtonState(button, message, state) {
+            if (!button) return;
+            const originalText = 'Chia sẻ';
+            button.textContent = message;
+            if(state) button.classList.add(state); // 'success' hoặc 'error'
+            
+            // Reset sau 2 giây
+            setTimeout(() => {
+                button.textContent = originalText;
+                if(state) button.classList.remove(state);
+                button.disabled = false; // Kích hoạt lại nút
+            }, 2000);
+        }
+
+
+        // === Chức năng Session ===
+        function loadSessionState() {
+            const savedState = sessionStorage.getItem('tarotSession');
+            if (savedState) {
+                try {
+                    const state = JSON.parse(savedState);
+                    if (state.screen === 'drawing-screen results-active' && state.question && state.cards && state.html) {
+                        userQuestion = state.question;
+                        selectedCards = state.cards;
+
+                        shufflingQuestionDisplay.textContent = userQuestion;
+                        drawingQuestionDisplay.textContent = userQuestion;
+                        
+                        updateChosenCardsDisplay(); 
+                        
+                        mainResultsDisplay.innerHTML = state.html;
+                        mainResultsDisplay.style.display = 'block';
+                        
+                        document.getElementById('drawing-screen').classList.add('results-active');
+                        followUpContainer.style.display = 'block';
+                        
+                        showScreen('drawing-screen');
+                        return; 
+                    }
+                } catch (e) {
+                    console.error("Lỗi parse session:", e);
+                    sessionStorage.removeItem('tarotSession'); 
+                }
+            }
+            showScreen('question-screen');
+        }
+
+
         // === Event Listeners ===
-        document.addEventListener('DOMContentLoaded', initialize);
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initialize(); 
+            loadHistory();      
+            loadSessionState(); 
+        });
+
         submitQuestionBtn.addEventListener('click', handleQuestionSubmit);
         suggestedQuestionBtns.forEach(btn => {
             btn.addEventListener('click', () => {
@@ -999,16 +1339,16 @@
         });
         
         getInterpretationButton.addEventListener('click', handleGetInterpretation);
-        
         followUpSubmitBtn.addEventListener('click', handleFollowUpSubmit);
+        
+        // Listeners cho Modal Lịch sử
+        historyBtn.addEventListener('click', openHistoryModal);
+        historyBackdrop.addEventListener('click', closeHistoryModal);
+        historyCloseBtn.addEventListener('click', closeHistoryModal);
+        
+        // (MỚI) Listener cho các nút bên trong lịch sử
+        historyList.addEventListener('click', handleHistoryClick);
 
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
