@@ -237,7 +237,7 @@
         
         /* --- (MỚI) CSS Cho Hiệu Ứng Bay Của Lá Bài --- */
         .flying-card-animator {
-            position: fixed; /* Dùng fixed để tính toán vị trí dễ dàng */
+            position: absolute; /* (SỬA LỖI 1) Đổi từ 'fixed' sang 'absolute' */
             z-index: 1000;
             transition: all 1s ease-in-out;
             /* preserve-3d để xoay 3D */
@@ -272,12 +272,14 @@
             background-size: 40%;
             background-repeat: no-repeat;
             background-position: center;
+            transform: translateZ(0); /* (SỬA LỖI 2) Ép tăng tốc phần cứng */
         }
 
         /* Mặt trước (sẽ chứa hình ảnh) */
         .flying-card-front {
             background-color: var(--card-back-bg); /* Nền mờ */
             transform: rotateY(180deg);
+            transform: translateZ(0); /* (SỬA LỖI 2) Ép tăng tốc phần cứng */
         }
         .flying-card-front img {
             width: 100%;
@@ -324,15 +326,17 @@
             background-size: 40%;
             background-repeat: no-repeat;
             background-position: center;
-            opacity: 0;  /* <-- (SỬA LỖI) TRẢ LẠI OPACITY 0 */
-            transform: translateY(30px) scale(0.8); /* <-- (SỬA LỖI) TRẢ LẠI TRANSFORM */
+            opacity: 0;
+            /* (SỬA LỖI 2) Ép tăng tốc phần cứng trên Samsung */
+            transform: translateY(30px) scale(0.8) translateZ(0); 
         }
         .facedown-card:first-child { margin-left: 0; }
 
         /* (SỬA LỖI) THÊM CLASS MỚI ĐỂ GIỮ OPACITY 1 */
         .facedown-card.is-dealt {
             opacity: 1;
-            transform: translateY(0) scale(1);
+            /* (SỬA LỖI 2) Ép tăng tốc phần cứng trên Samsung */
+            transform: translateY(0) scale(1) translateZ(0);
         }
 
         @media (min-width: 768px){
@@ -351,7 +355,8 @@
             /* (SỬA LỖI) XÓA 'from' VÌ ĐÃ CÓ Ở CLASS MẶC ĐỊNH */
             to {
                 opacity: 1;
-                transform: translateY(0) scale(1);
+                /* (SỬA LỖI 2) Ép tăng tốc phần cứng trên Samsung */
+                transform: translateY(0) scale(1) translateZ(0);
             }
         }
         
@@ -838,7 +843,8 @@
                 `;
                 
                 // 2. Set vị trí ban đầu
-                flyingCard.style.top = `${startRect.top}px`;
+                // (SỬA LỖI 1) Thêm window.scrollY vào tọa độ 'top'
+                flyingCard.style.top = `${startRect.top + window.scrollY}px`;
                 flyingCard.style.left = `${startRect.left}px`;
                 flyingCard.style.width = `${startRect.width}px`;
                 flyingCard.style.height = `${startRect.height}px`;
@@ -849,7 +855,8 @@
                 requestAnimationFrame(() => {
                     const inner = flyingCard.querySelector('.flying-card-inner');
                     
-                    flyingCard.style.top = `${endRect.top}px`;
+                    // (SỬA LỖI 1) Thêm window.scrollY vào tọa độ 'top'
+                    flyingCard.style.top = `${endRect.top + window.scrollY}px`;
                     flyingCard.style.left = `${endRect.left}px`;
                     flyingCard.style.width = `${endRect.width}px`;
                     flyingCard.style.height = `${endRect.height}px`;
@@ -997,6 +1004,7 @@
     </script>
 </body>
 </html>
+
 
 
 
