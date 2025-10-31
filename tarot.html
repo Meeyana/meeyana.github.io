@@ -250,6 +250,7 @@
             height: 100%;
             transform-style: preserve-3d;
             transition: transform 1s ease-in-out;
+            transform: translateZ(0); /* (SỬA LỖI 1) Thêm ép render 3D cho inner */
         }
 
         /* Định nghĩa mặt trước và mặt sau */
@@ -861,8 +862,8 @@
                     flyingCard.style.width = `${endRect.width}px`;
                     flyingCard.style.height = `${endRect.height}px`;
                     
-                    // Xoay lá bài
-                    inner.style.transform = 'rotateY(180deg)';
+                    // (SỬA LỖI 2) Thêm translateZ(0) vào JS để không bị ghi đè
+                    inner.style.transform = 'rotateY(180deg) translateZ(0)';
                 });
 
                 // 4. Lắng nghe khi animation kết thúc
@@ -1004,6 +1005,7 @@
     </script>
 </body>
 </html>
+
 
 
 
