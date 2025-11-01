@@ -316,6 +316,17 @@
             margin-top: 10rem; 
         }
 
+        /* (MỚI) Thêm hướng dẫn ở màn hình xáo bài */
+        .shuffling-instruction {
+            font-family: var(--font-body);
+            font-size: 1.1rem;
+            opacity: 0.8;
+            margin-top: 2rem; /* Thêm khoảng cách */
+            max-width: 500px; /* Giới hạn chiều rộng */
+            line-height: 1.6;
+            padding: 0 1rem;
+        }
+
         .shuffle-card {
             position: absolute;
             width: 100px;
@@ -703,7 +714,8 @@
 
     <!-- Màn hình 1: Đặt câu hỏi -->
     <div id="question-screen" class="screen active">
-        <h1 class="title">Đặt câu hỏi cho trải bài Tarot</h1>
+        <!-- (THAY ĐỔI) Đổi tiêu đề -->
+        <h1 class="title">Hãy suy nghĩ và tập trung vào câu hỏi của bạn</h1>
         <div id="question-input-area" class="question-input-area">
             <textarea id="question-input" class="question-input" placeholder="Khi nào tôi sẽ gặp được tình yêu mới?"></textarea>
         </div>
@@ -724,6 +736,12 @@
             <div class="shuffle-card"></div>
             <div class="shuffle-card"></div>
         </div>
+        <!-- (MỚI) Thêm hướng dẫn tập trung -->
+        <p class="shuffling-instruction">
+            Hãy giữ tập trung vào câu hỏi của bạn.
+            <br>
+            Để có kết quả tốt nhất, bạn không nên làm việc riêng trong lúc này.
+        </p>
     </div>
 
     <!-- Màn hình 3: Chọn bài -->
@@ -1382,6 +1400,7 @@
     </script>
 </body>
 </html>
+
 
 
 
