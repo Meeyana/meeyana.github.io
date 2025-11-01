@@ -80,7 +80,7 @@
             max-height: 80vh;
             color: var(--text-color);
             /* (THAY ĐỔI) Tách layout bằng flex để sửa lỗi scrollbar */
-            display: flex;
+            /* display: flex;  <-- (XÓA DÒNG NÀY) Dòng này gây lỗi hiển thị modal khi tải trang */
             flex-direction: column;
             overflow: hidden; /* Ẩn overflow ở đây */
             padding: 0; /* Xóa padding ở đây */
@@ -818,6 +818,8 @@
         let userQuestion = '';
         let isAnimating = false; 
         let readingHistory = []; 
+        let allCardImagesLoaded = false;
+        let currentReadingId = null; // (MỚI) Thêm ID cho phiên luận giải
 
         // === Functions ===
         
@@ -841,11 +843,38 @@
                     name: row.c[0]?.v || 'Unknown Card',
                     image: row.c[1]?.v || 'https://placehold.co/200x340'
                 }));
+
+                preloadAllCardImages(); // (MỚI) Bắt đầu tải trước ảnh
             } catch (error)
             {
                 console.error("Lỗi khi tải lá bài:", error);
                 document.getElementById('card-spread-container').innerHTML = '<p>Lỗi tải bộ bài. Vui lòng tải lại trang.</p>';
             }
+        }
+
+        // (MỚI) Hàm tải trước tất cả hình ảnh lá bài
+        function preloadAllCardImages() {
+            if (!cardData || cardData.length === 0) return;
+
+            console.log("Bắt đầu tải trước 78 hình ảnh lá bài...");
+            const imagePromises = cardData.map(card => {
+                return new Promise((resolve) => { // Luôn resolve để không kẹt
+                    const img = new Image();
+                    img.src = card.image;
+                    img.onload = resolve;
+                    img.onerror = resolve; // Coi như thành công để không kẹt app
+                });
+            });
+
+            Promise.all(imagePromises)
+                .then(() => {
+                    allCardImagesLoaded = true;
+                    console.log("Tất cả 78 hình ảnh lá bài đã được tải trước!");
+                })
+                .catch(err => {
+                    console.error("Lỗi trong quá trình tải trước hình ảnh:", err);
+                    allCardImagesLoaded = true; // Vẫn set là true để app không bị kẹt
+                });
         }
 
         function handleQuestionSubmit() {
@@ -856,6 +885,7 @@
                 return;
             }
             userQuestion = questionFromInput;
+            currentReadingId = crypto.randomUUID(); // (MỚI) Tạo ID mới cho lần đọc này
             startNewReadingFlow();
         }
         
@@ -868,6 +898,7 @@
             }
             userQuestion = questionFromInput;
             followUpInput.value = '';
+            currentReadingId = crypto.randomUUID(); // (MỚI) Tạo ID mới cho lần đọc MỚI này
             startNewReadingFlow();
         }
         
@@ -877,10 +908,29 @@
             shufflingQuestionDisplay.textContent = userQuestion;
             drawingQuestionDisplay.textContent = userQuestion;
             showScreen('shuffling-screen');
-            setTimeout(() => {
-                populateCardDeck();
-                showScreen('drawing-screen');
-            }, 2500); 
+
+            // (THAY ĐỔI) Logic chờ thông minh: Chờ xáo bài VÀ tải ảnh xong
+            const shuffleTime = 2500; // Thời gian xáo bài tối thiểu 2.5s
+            const startTime = Date.now();
+
+            function checkAndProceed() {
+                const elapsedTime = Date.now() - startTime;
+                const timeRemaining = shuffleTime - elapsedTime;
+
+                // Điều kiện: Đã tải xong ẢNH VÀ đã hết thời gian xáo bài
+                if (allCardImagesLoaded && timeRemaining <= 0) {
+                    populateCardDeck();
+                    showScreen('drawing-screen');
+                } else {
+                    // Nếu chưa xong, kiểm tra lại sau 100ms
+                    // Hoặc nếu ảnh đã xong nhưng chưa hết giờ, đợi cho hết giờ
+                    const nextCheck = allCardImagesLoaded ? timeRemaining : 100;
+                    setTimeout(checkAndProceed, Math.max(nextCheck, 0)); // Đảm bảo không phải số âm
+                }
+            }
+
+            // Bắt đầu kiểm tra
+            checkAndProceed();
         }
 
         function populateCardDeck() {
@@ -1101,7 +1151,8 @@
             
             const payload = {
                 question: userQuestion,
-                cards: selectedCards.map(c => ({ name: c.name, orientation: c.orientation }))
+                cards: selectedCards.map(c => ({ name: c.name, orientation: c.orientation })),
+                readingId: currentReadingId // (MỚI) Gửi ID phiên cho n8n
             };
 
             // (THAY ĐỔI) Sẽ lưu lịch sử SAU KHI fetch thành công
@@ -1129,7 +1180,8 @@
 
                     // (MỚI) Tạo đối tượng Lịch sử & Session SAU KHI có nội dung
                     const fullEntry = { 
-                        id: Date.now(), 
+                        readingId: currentReadingId, // (THAY ĐỔI) Dùng UUID làm ID chính
+                        timestamp: Date.now(), // (MỚI) Thêm timestamp riêng
                         question: userQuestion, 
                         cards: selectedCards, // Lưu mảng đầy đủ
                         html: htmlContent, // Lưu HTML (dự phòng)
@@ -1140,12 +1192,12 @@
                     // (MỚI) Lưu vào Lịch sử (localStorage)
                     saveHistory(fullEntry);
 
-                    // (MỚI) Lưu vào Session (sessionStorage)
-                    const sessionState = {
-                        ...fullEntry, 
-                        screen: 'drawing-screen results-active'
-                    };
-                    sessionStorage.setItem('tarotSession', JSON.stringify(sessionState));
+                    // (ĐÃ XÓA) Xóa logic lưu vào Session (sessionStorage)
+                    // const sessionState = {
+                    //     ...fullEntry, 
+                    //     screen: 'drawing-screen results-active'
+                    // };
+                    // sessionStorage.setItem('tarotSession', JSON.stringify(sessionState));
 
                 } else {
                     throw new Error("Dữ liệu trả về không đúng định dạng.");
@@ -1199,12 +1251,14 @@
 
                 // (MỚI) Chỉ thêm nút Share nếu có nội dung text
                 const shareButtonHtml = reading.text ? 
-                    `<button class="history-share-btn" data-reading-id="${reading.id}">Chia sẻ</button>` :
+                    // (THAY ĐỔI) Dùng readingId
+                    `<button class="history-share-btn" data-reading-id="${reading.readingId}">Chia sẻ</button>` :
                     '';
 
                 itemEl.innerHTML = `
                     <h3>${reading.question}</h3>
-                    <div class="history-date">${new Date(reading.id).toLocaleString('vi-VN')}</div>
+                    <!-- (THAY ĐỔI) Dùng timestamp -->
+                    <div class="history-date">${new Date(reading.timestamp).toLocaleString('vi-VN')}</div>
                     <div class="history-cards-container">
                         ${cardsHtml}
                     </div>
@@ -1232,8 +1286,9 @@
                 // Vô hiệu hóa nút tạm thời
                 shareButton.disabled = true;
 
+                // (THAY ĐỔI) Dùng readingId
                 const readingId = shareButton.dataset.readingId;
-                const reading = readingHistory.find(r => r.id == readingId);
+                const reading = readingHistory.find(r => r.readingId == readingId);
                 
                 if (reading && reading.text) {
                     shareReading(reading, shareButton); // Truyền nút vào để cập nhật UI
@@ -1293,33 +1348,8 @@
 
         // === Chức năng Session ===
         function loadSessionState() {
-            const savedState = sessionStorage.getItem('tarotSession');
-            if (savedState) {
-                try {
-                    const state = JSON.parse(savedState);
-                    if (state.screen === 'drawing-screen results-active' && state.question && state.cards && state.html) {
-                        userQuestion = state.question;
-                        selectedCards = state.cards;
-
-                        shufflingQuestionDisplay.textContent = userQuestion;
-                        drawingQuestionDisplay.textContent = userQuestion;
-                        
-                        updateChosenCardsDisplay(); 
-                        
-                        mainResultsDisplay.innerHTML = state.html;
-                        mainResultsDisplay.style.display = 'block';
-                        
-                        document.getElementById('drawing-screen').classList.add('results-active');
-                        followUpContainer.style.display = 'block';
-                        
-                        showScreen('drawing-screen');
-                        return; 
-                    }
-                } catch (e) {
-                    console.error("Lỗi parse session:", e);
-                    sessionStorage.removeItem('tarotSession'); 
-                }
-            }
+            // (ĐÃ XÓA) Xóa toàn bộ logic khôi phục sessionStorage
+            // Luôn hiển thị màn hình câu hỏi khi tải lại trang
             showScreen('question-screen');
         }
 
@@ -1352,3 +1382,7 @@
     </script>
 </body>
 </html>
+
+
+
+
