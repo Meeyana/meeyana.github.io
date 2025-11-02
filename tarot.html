@@ -36,6 +36,15 @@
             overflow-x: hidden; /* Ngăn cuộn ngang */
         }
         
+        /* --- (MỚI) CSS CHO SPINNER --- */
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+        
         /* --- NÚT LỊCH SỬ --- */
         #history-btn {
             position: fixed;
@@ -246,6 +255,7 @@
             margin-bottom: 2rem;
         }
 
+        /* (THAY ĐỔI) Khu vực nhập câu hỏi */
         .question-input-area {
             width: 100%;
             max-width: 600px;
@@ -253,6 +263,7 @@
             border-radius: 12px;
             padding: 8px;
             border: 1px solid var(--card-back-border);
+            position: relative; /* (MỚI) Thêm để định vị nút gửi */
         }
 
         .question-input {
@@ -262,47 +273,137 @@
             color: var(--text-color);
             font-family: var(--font-body);
             font-size: 1rem;
-            padding: 12px;
+            /* (THAY ĐỔI) Thêm padding-right để chừa chỗ cho nút gửi */
             resize: none;
-            min-height: 80px;
+            /* (XÓA) Xóa 2 dòng này để text bắt đầu từ trên cùng */
+            /* display: grid; */
+            /* align-items: center; */
+            /* (MỚI) Thêm để ẩn thanh cuộn khi tự động dãn */
+            overflow: hidden;
+            align-content: center;
         }
         .question-input:focus { outline: none; }
 
-        .suggested-questions {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
+        /* (THAY ĐỔI) Nút gửi câu hỏi (chuyển thành icon) */
+        #submit-question-btn {
+            position: absolute;
+            right: 0.75rem; /* 12px */
+            /* (THAY ĐỔI) Chuyển về căn lề dưới */
+            bottom: 0.75rem; /* 12px */
+            /* top: 50%; */ 
+            /* transform: translateY(-50%); */
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--title-color);
+            color: var(--bg-color);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+            padding: 0;
+            margin: 0;
+            text-decoration: none; /* Xóa gạch chân cũ */
+        }
+        #submit-question-btn:hover {
+            background-color: #f0c94b; /* Màu vàng sáng hơn */
+        }
+        #submit-question-btn:disabled { /* (MỚI) CSS cho nút khi đang tải */
+            background-color: var(--button-hover-bg);
+            cursor: not-allowed;
+            color: var(--text-color);
+        }
+        
+        /* (THAY ĐỔI) Xóa CSS grid của nút gợi ý cũ */
+        /* .suggested-questions { ... } */
+
+        /* (MỚI) CSS cho Dropdown câu hỏi gợi ý */
+        .dropdown-container {
+            position: relative;
             width: 100%;
             max-width: 600px;
             margin: 1.5rem 0;
         }
-
-        .suggested-questions button {
+        .dropdown-toggle {
             background-color: var(--button-bg);
             border: 1px solid var(--card-back-border);
             color: var(--text-color);
             padding: 1rem;
             border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, border-radius 0.3s;
             font-family: var(--font-body);
-            font-size: 0.9rem;
+            font-size: 1rem; /* (THAY ĐỔI) Tăng font-size cho dễ nhìn */
             height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            text-align: left;
+        }
+        .dropdown-toggle:hover {
+            background-color: var(--button-hover-bg);
+        }
+        .dropdown-toggle.open {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+        .dropdown-toggle.open svg {
+            transform: rotate(180deg);
         }
 
-        .suggested-questions button:hover {
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% - 1px); /* Hơi chồng lên nút để che viền */
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background-color: var(--button-bg); /* (THAY ĐỔI) Cùng màu với nút */
+            border: 1px solid var(--card-back-border);
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 0.5rem;
+        }
+        .dropdown-menu.open {
+            display: block;
+        }
+        .category-title {
+            font-family: var(--font-title);
+            color: var(--title-color);
+            font-weight: 600;
+            font-size: 1rem;
+            padding: 0.75rem 0.5rem 0.25rem;
+            margin: 0;
+            margin-top: 0.5rem;
+        }
+        .category-title:first-child {
+            margin-top: 0;
+        }
+        .suggestion-item {
+            display: block;
+            width: 100%;
+            background: none;
+            border: none;
+            color: var(--text-color);
+            padding: 0.75rem 0.5rem;
+            text-align: left;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+        .suggestion-item:hover {
             background-color: var(--button-hover-bg);
         }
         
-        #submit-question-btn {
-            background: none;
-            border: none;
-            color: var(--title-color);
-            font-size: 1rem;
-            cursor: pointer;
-            margin-top: 1rem;
-            text-decoration: underline;
-        }
+        /* (THAY ĐỔI) Xóa nút gửi câu hỏi cũ (dạng text) */
+        /* #submit-question-btn { ... } */
         
         /* --- Màn hình 2: Xáo bài --- */
         #shuffling-screen {
@@ -635,12 +736,47 @@
             margin-bottom: 1rem;
             font-size: 1.5rem;
         }
+        /* (THAY ĐỔI) Nút hỏi tiếp sẽ dùng chung CSS với nút gửi icon */
         #submit-follow-up-btn {
-            display: inline-block;
+            /* display: inline-block;
             opacity: 1;
             transform: scale(1);
-            margin-top: 1rem;
+            margin-top: 1rem; */
+            
+            /* (MỚI) Tái sử dụng CSS của nút gửi chính */
+            position: absolute;
+            right: 0.75rem;
+            /* (THAY ĐỔI) Chuyển về căn lề dưới */
+            bottom: 0.75rem; /* 12px */
+            /* top: 50%; */
+            /* transform: translateY(-50%); */
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--title-color);
+            color: var(--bg-color);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s;
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
         }
+        /* (MỚI) CSS cho nút hỏi tiếp khi đang tải */
+        #submit-follow-up-btn:disabled {
+            background-color: var(--button-hover-bg);
+            cursor: not-allowed;
+            color: var(--text-color);
+        }
+        
+        /* (MỚI) Nút hỏi tiếp sẽ dùng chung CSS với nút gửi chính */
+        #follow-up-input-area {
+            position: relative; /* Thêm để định vị nút */
+        }
+
 
         /* =================================== */
         /* === MEDIA QUERY FOR MOBILE ======== */
@@ -716,16 +852,37 @@
     <div id="question-screen" class="screen active">
         <!-- (THAY ĐỔI) Đổi tiêu đề -->
         <h1 class="title">Hãy suy nghĩ và tập trung vào câu hỏi của bạn</h1>
+        
+        <!-- (THAY ĐỔI) Thêm nút gửi icon vào trong box -->
         <div id="question-input-area" class="question-input-area">
             <textarea id="question-input" class="question-input" placeholder="Khi nào tôi sẽ gặp được tình yêu mới?"></textarea>
+            <!-- (MỚI) Nút gửi dạng Icon -->
+            <button id="submit-question-btn" title="Gửi câu hỏi">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                    <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+                </svg>
+            </button>
         </div>
-        <div class="suggested-questions">
-            <button data-question="Người tiếp theo bước vào cuộc đời tôi sẽ có tính cách như thế nào?">Người tiếp theo bước vào cuộc đời tôi sẽ có tính cách như thế nào?</button>
-            <button data-question="Tôi có nên cố gắng níu kéo mối quan hệ này không?">Tôi có nên cố gắng níu kéo mối quan hệ này không?</button>
-            <button data-question="Tôi cần chuẩn bị như thế nào để đón nhận tương lai một cách tích cực?">Tôi cần chuẩn bị như thế nào để đón nhận tương lai một cách tích cực?</button>
-            <button data-question="Tôi có nên đầu tư vào dự án hoặc cơ hội này không?">Tôi có nên đầu tư vào dự án hoặc cơ hội này không?</button>
+        
+        <!-- (THAY ĐỔI) Thay 4 nút cũ bằng dropdown -->
+        <div class="dropdown-container">
+            <button id="suggested-questions-toggle" class="dropdown-toggle">
+                <span>Gợi ý câu hỏi</span>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" width="16" height="16" style="transition: transform 0.2s;">
+                    <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 10.94l3.71-3.71a.75.75 0 111.06 1.06l-4.25 4.25a.75.75 0 01-1.06 0L5.23 8.29a.75.75 0 01.02-1.06z" clip-rule="evenodd" />
+                </svg>
+            </button>
+            <div id="suggested-questions-list" class="dropdown-menu">
+                <!-- JS sẽ populate nội dung ở đây -->
+                <p style="padding: 1rem; opacity: 0.7; text-align: center;">Đang tải gợi ý...</p>
+            </div>
         </div>
-        <button id="submit-question-btn">Nhấn gửi câu hỏi để bắt đầu xáo bài</button>
+        
+        <!-- (MỚI) Khu vực hiển thị lỗi xác thực -->
+        <p id="question-error-display" style="color: #ef4444; min-height: 1.2em; font-weight: 600;"></p>
+        
+        <!-- (THAY ĐỔI) Xóa nút gửi dạng text cũ -->
+        <!-- <button id="submit-question-btn">Nhấn gửi câu hỏi để bắt đầu xáo bài</button> -->
     </div>
 
     <!-- Màn hình 2: Xáo bài -->
@@ -772,14 +929,21 @@
         
         <div id="interpretation-results-display"></div>
         
+        <!-- (THAY ĐỔI) Cập nhật khu vực hỏi tiếp để dùng icon gửi -->
         <div id="follow-up-question-container">
             <h3>Bạn có câu hỏi nào khác không?</h3>
             <div id="follow-up-input-area" class="question-input-area">
                 <textarea id="follow-up-question-input" class="question-input" placeholder="Đặt câu hỏi tiếp theo..."></textarea>
+                <!-- (MỚI) Nút gửi icon cho hỏi tiếp -->
+                <!-- (CHỈNH SỬA) Xóa class "action-button" để nút hiển thị chính xác -->
+                <button id="submit-follow-up-btn" title="Gửi câu hỏi mới">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                        <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+                    </svg>
+                </button>
             </div>
-            <button id="submit-follow-up-btn" class="action-button">
-                Xáo bài cho câu hỏi mới
-            </button>
+            <!-- (MỚI) Khu vực hiển thị lỗi xác thực hỏi tiếp -->
+            <p id="follow-up-error-display" style="color: #ef4444; min-height: 1.2em; font-weight: 600;"></p>
         </div>
     </div>
     
@@ -800,13 +964,27 @@
     </div>
 
     <script>
+        // (QUAN TRỌNG) URL Webhook để *luận giải*
         const N8N_WEBHOOK_URL = 'https://n8n.n8ntuanphangz.xyz/webhook/2a1c95d5-dd30-4710-9f1c-f9c45686f218'; // !!! THAY THẾ URL CỦA BẠN !!!
+        
+        // (MỚI - QUAN TRỌNG) URL Webhook để *kiểm tra* câu hỏi
+        const N8N_VALIDATE_URL = 'https://n8n.n8ntuanphangz.xyz/webhook/fe3c376f-62f2-472d-ac01-d39ba5496e75'; // !!! BẠN PHẢI THAY THẾ URL NÀY !!!
+        
+        // (MỚI) Di chuyển SHEET_ID ra ngoài để dùng chung
+        const SHEET_ID = '1Bqu2RBPRH-YeCOiX_5SjmQP8GETpKkqBZhMPZwqm_ig';
 
         // DOM Elements
         const screens = document.querySelectorAll('.screen');
         const questionInput = document.getElementById('question-input');
         const submitQuestionBtn = document.getElementById('submit-question-btn');
-        const suggestedQuestionBtns = document.querySelectorAll('.suggested-questions button');
+        const questionErrorDisplay = document.getElementById('question-error-display'); // (MỚI)
+        
+        // (MỚI) DOM cho dropdown
+        const suggestedQuestionsToggle = document.getElementById('suggested-questions-toggle');
+        const suggestedQuestionsList = document.getElementById('suggested-questions-list');
+        // (XÓA) Xóa DOM cho nút gợi ý cũ
+        // const suggestedQuestionBtns = document.querySelectorAll('.suggested-questions button');
+        
         const cardRow1 = document.getElementById('card-row-1');
         const cardRow2 = document.getElementById('card-row-2');
         const cardRow3 = document.getElementById('card-row-3'); 
@@ -821,6 +999,8 @@
         const followUpContainer = document.getElementById('follow-up-question-container');
         const followUpInput = document.getElementById('follow-up-question-input');
         const followUpSubmitBtn = document.getElementById('submit-follow-up-btn');
+        const followUpErrorDisplay = document.getElementById('follow-up-error-display'); // (MỚI)
+
         
         // DOM Elements cho Lịch sử
         const historyBtn = document.getElementById('history-btn');
@@ -829,6 +1009,13 @@
         const historyCloseBtn = document.getElementById('history-modal-close-btn');
         const historyList = document.getElementById('history-list');
 
+        // (MỚI) HTML cho các icon của nút
+        const sendIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+            <path d="M3.478 2.405a.75.75 0 00-.926.94l2.432 7.905H13.5a.75.75 0 010 1.5H4.984l-2.432 7.905a.75.75 0 00.926.94 60.519 60.519 0 0018.445-8.986.75.75 0 000-1.218A60.517 60.517 0 003.478 2.405z" />
+        </svg>`;
+        const spinnerIcon = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="animate-spin" width="20" height="20">
+            <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+        </svg>`;
 
         // State
         let cardData = [];
@@ -839,6 +1026,14 @@
         let allCardImagesLoaded = false;
         let currentReadingId = null; // (MỚI) Thêm ID cho phiên luận giải
 
+        // === (MỚI) Chức năng Auto-Grow Textarea ===
+        function autoGrow(element) {
+            // Đặt thành 'auto' để nó co lại nếu text bị xóa
+            element.style.height = 'auto'; 
+            // Đặt chiều cao mới bằng đúng chiều cao nội dung
+            element.style.height = (element.scrollHeight) + 'px'; 
+        }
+
         // === Functions ===
         
         function showScreen(screenId) {
@@ -847,7 +1042,7 @@
         }
 
         async function initialize() {
-            const SHEET_ID = '1Bqu2RBPRH-YeCOiX_5SjmQP8GETpKkqBZhMPZwqm_ig';
+            // (THAY ĐỔI) Đã chuyển SHEET_ID ra ngoài
             try {
                 const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=Cards&tqx=out:json&tq=SELECT%20*%20OFFSET%201`;
                 const response = await fetch(url);
@@ -868,6 +1063,56 @@
                 console.error("Lỗi khi tải lá bài:", error);
                 document.getElementById('card-spread-container').innerHTML = '<p>Lỗi tải bộ bài. Vui lòng tải lại trang.</p>';
             }
+        }
+        
+        // (MỚI) Hàm tải câu hỏi gợi ý
+        async function loadSuggestedQuestions() {
+            try {
+                // (MỚI) Dùng sheet 'Question' và chỉ lấy 2 cột A, B
+                const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?sheet=Questions&tqx=out:json&tq=SELECT%20A,%20B%20OFFSET%201`;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const text = await response.text();
+                const jsonText = text.substring(text.indexOf('(') + 1, text.lastIndexOf(')'));
+                const table = JSON.parse(jsonText).table;
+
+                // (MỚI) Lấy dữ liệu thô
+                const rawData = table.rows.map(row => ({
+                    category: row.c[0]?.v,
+                    question: row.c[1]?.v
+                }));
+
+                // (MỚI) Gom nhóm theo category
+                const grouped = {};
+                rawData.forEach(item => {
+                    if (!item.category || !item.question) return; // Bỏ qua hàng rỗng
+                    if (!grouped[item.category]) {
+                        grouped[item.category] = [];
+                    }
+                    grouped[item.category].push(item.question);
+                });
+                
+                // (MỚI) Render HTML cho dropdown
+                renderSuggestedQuestions(grouped);
+
+            } catch (error) {
+                console.error("Lỗi khi tải câu hỏi gợi ý:", error);
+                suggestedQuestionsList.innerHTML = '<p style="padding: 1rem; opacity: 0.7; text-align: center;">Không thể tải gợi ý.</p>';
+            }
+        }
+
+        // (MỚI) Hàm render HTML cho dropdown câu hỏi
+        function renderSuggestedQuestions(groupedData) {
+            let html = '';
+            for (const category in groupedData) {
+                html += `<h4 class="category-title">${category}</h4>`;
+                // (MỚI) Mã hóa dấu nháy kép để không làm hỏng thuộc tính data-question
+                groupedData[category].forEach(question => {
+                    const safeQuestion = question.replace(/"/g, '&quot;');
+                    html += `<button class="suggestion-item" data-question="${safeQuestion}">${question}</button>`;
+                });
+            }
+            suggestedQuestionsList.innerHTML = html;
         }
 
         // (MỚI) Hàm tải trước tất cả hình ảnh lá bài
@@ -895,31 +1140,158 @@
                 });
         }
 
-        function handleQuestionSubmit() {
+        // (CHỈNH SỬA) Biến hàm thành async để gọi n8n
+        async function handleQuestionSubmit() {
             const questionFromInput = questionInput.value.trim();
+            questionErrorDisplay.textContent = ''; // Xóa lỗi cũ
+            questionErrorDisplay.style.color = '#ef4444'; // (MỚI) Reset về màu lỗi
+
             if (!questionFromInput) {
-                questionInput.style.borderColor = 'red';
-                setTimeout(() => { questionInput.style.borderColor = ''; }, 2000);
+                // (THAY ĐỔI) Rung nhẹ box thay vì đổi viền đỏ
+                const inputArea = document.getElementById('question-input-area');
+                inputArea.style.animation = 'shake 0.5s ease';
+                setTimeout(() => { inputArea.style.animation = ''; }, 500);
                 return;
             }
-            userQuestion = questionFromInput;
-            currentReadingId = crypto.randomUUID(); // (MỚI) Tạo ID mới cho lần đọc này
-            startNewReadingFlow();
+            
+            // (MỚI) Hiển thị trạng thái đang tải
+            submitQuestionBtn.disabled = true;
+            submitQuestionBtn.innerHTML = spinnerIcon;
+            questionErrorDisplay.textContent = 'Đang kiểm tra câu hỏi của bạn...'; // (MỚI) Thêm text loading
+            questionErrorDisplay.style.color = '#d4af37'; // (MỚI) Đổi màu text loading (màu vàng)
+            
+            try {
+                // (MỚI) Gọi n8n để xác thực câu hỏi
+                const response = await fetch(N8N_VALIDATE_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: questionFromInput })
+                });
+
+                if (N8N_VALIDATE_URL.includes('YOUR-VALIDATION-WEBHOOK-ID')) {
+                     throw new Error('Vui lòng thay thế URL N8N_VALIDATE_URL');
+                }
+                
+                if (!response.ok) {
+                    throw new Error('Lỗi từ máy chủ xác thực.');
+                }
+
+                // (THAY ĐỔI) Đọc response gốc từ n8n
+                const n8nResponse = await response.json();
+                // (THAY ĐỔI) Trích xuất kết quả trực tiếp, vì JSON không còn key 'output'
+                const validationResult = n8nResponse;
+
+                // (THAY ĐỔI) Xử lý kết quả xác thực (so sánh với chuỗi "true" hoặc boolean true)
+                if (validationResult && (validationResult.isValid === "true" || validationResult.isValid === true)) {
+                    // Nếu hợp lệ, tiếp tục luồng
+                    userQuestion = questionFromInput;
+                    currentReadingId = crypto.randomUUID(); // Tạo ID mới cho lần đọc này
+                    startNewReadingFlow();
+                    // Reset nút (dù sẽ chuyển màn hình)
+                    submitQuestionBtn.disabled = false;
+                    submitQuestionBtn.innerHTML = sendIcon;
+                } else {
+                    // Nếu không hợp lệ, hiển thị lỗi và dừng lại
+                    questionErrorDisplay.textContent = validationResult?.reason || 'Câu hỏi không hợp lệ.';
+                    questionErrorDisplay.style.color = '#ef4444'; // (MỚI) Reset về màu lỗi
+                    submitQuestionBtn.disabled = false;
+                    submitQuestionBtn.innerHTML = sendIcon;
+                }
+
+            } catch (error) {
+                // (MỚI) Xử lý lỗi mạng hoặc lỗi fetch
+                console.error("Lỗi khi xác thực câu hỏi:", error);
+                if (error.message.includes('URL')) {
+                    questionErrorDisplay.textContent = 'Lỗi: Bạn chưa cập nhật N8N_VALIDATE_URL trong code.';
+                } else {
+                    questionErrorDisplay.textContent = 'Không thể kết nối máy chủ. Vui lòng thử lại.';
+                }
+                questionErrorDisplay.style.color = '#ef4444'; // (MỚI) Reset về màu lỗi
+                submitQuestionBtn.disabled = false;
+                submitQuestionBtn.innerHTML = sendIcon;
+            }
         }
         
-        function handleFollowUpSubmit() {
+        // (CHỈNH SỬA) Biến hàm thành async để gọi n8n
+        async function handleFollowUpSubmit() {
             const questionFromInput = followUpInput.value.trim();
+            followUpErrorDisplay.textContent = ''; // Xóa lỗi cũ
+            followUpErrorDisplay.style.color = '#ef4444'; // (MỚI) Reset về màu lỗi
+
             if (!questionFromInput) {
-                followUpInput.style.borderColor = 'red';
-                setTimeout(() => { followUpInput.style.borderColor = ''; }, 2000);
+                // (THAY ĐỔI) Rung nhẹ box
+                const inputArea = document.getElementById('follow-up-input-area');
+                inputArea.style.animation = 'shake 0.5s ease';
+                setTimeout(() => { inputArea.style.animation = ''; }, 500);
                 return;
             }
-            userQuestion = questionFromInput;
-            followUpInput.value = '';
-            currentReadingId = crypto.randomUUID(); // (MỚI) Tạo ID mới cho lần đọc MỚI này
-            startNewReadingFlow();
+            
+            // (MỚI) Hiển thị trạng thái đang tải
+            followUpSubmitBtn.disabled = true;
+            followUpSubmitBtn.innerHTML = spinnerIcon;
+            followUpErrorDisplay.textContent = 'Đang kiểm tra câu hỏi của bạn...'; // (MỚI) Thêm text loading
+            followUpErrorDisplay.style.color = '#d4af37'; // (MỚI) Đổi màu text loading (màu vàng)
+
+            try {
+                // (MỚI) Gọi n8n để xác thực câu hỏi
+                const response = await fetch(N8N_VALIDATE_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ question: questionFromInput })
+                });
+
+                if (N8N_VALIDATE_URL.includes('YOUR-VALIDATION-WEBHOOK-ID')) {
+                     throw new Error('Vui lòng thay thế URL N8N_VALIDATE_URL');
+                }
+
+                if (!response.ok) {
+                    throw new Error('Lỗi từ máy chủ xác thực.');
+                }
+
+                // (THAY ĐỔI) Đọc response gốc từ n8n
+                const n8nResponse = await response.json();
+                // (THAY ĐỔI) Trích xuất kết quả trực tiếp, vì JSON không còn key 'output'
+                const validationResult = n8nResponse;
+
+                // (THAY ĐỔI) Xử lý kết quả xác thực (so sánh với chuỗi "true" hoặc boolean true)
+                if (validationResult && (validationResult.isValid === "true" || validationResult.isValid === true)) {
+                    // Nếu hợp lệ, tiếp tục luồng
+                    userQuestion = questionFromInput;
+                    followUpInput.value = '';
+                    currentReadingId = crypto.randomUUID(); // Tạo ID mới cho lần đọc MỚI này
+                    startNewReadingFlow();
+                    // Reset nút (dù sẽ chuyển màn hình)
+                    followUpSubmitBtn.disabled = false;
+                    followUpSubmitBtn.innerHTML = sendIcon;
+                } else {
+                    // Nếu không hợp lệ, hiển thị lỗi và dừng lại
+                    followUpErrorDisplay.textContent = validationResult?.reason || 'Câu hỏi không hợp lệ.';
+                    followUpErrorDisplay.style.color = '#ef4444'; // (MỚI) Reset về màu lỗi
+                    followUpSubmitBtn.disabled = false;
+                    followUpSubmitBtn.innerHTML = sendIcon;
+                }
+
+            } catch (error) {
+                // (MỚI) Xử lý lỗi mạng hoặc lỗi fetch
+                console.error("Lỗi khi xác thực câu hỏi (hỏi tiếp):", error);
+                if (error.message.includes('URL')) {
+                    followUpErrorDisplay.textContent = 'Lỗi: Bạn chưa cập nhật N8N_VALIDATE_URL trong code.';
+                } else {
+                    followUpErrorDisplay.textContent = 'Không thể kết nối máy chủ. Vui lòng thử lại.';
+                }
+                followUpErrorDisplay.style.color = '#ef4444'; // (MỚI) Reset về màu lỗi
+                followUpSubmitBtn.disabled = false;
+                followUpSubmitBtn.innerHTML = sendIcon;
+            }
         }
         
+        // (MỚI) CSS cho hiệu ứng rung
+        const styleSheet = document.createElement("style");
+        styleSheet.type = "text/css";
+        styleSheet.innerText = `@keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }`;
+        document.head.appendChild(styleSheet);
+
+
         function startNewReadingFlow() {
             sessionStorage.removeItem('tarotSession'); 
             
@@ -970,6 +1342,8 @@
             getInterpretationButton.style.display = 'none';
             
             followUpContainer.style.display = 'none';
+            followUpInput.value = ''; // Xóa input hỏi tiếp
+            questionInput.value = ''; // Xóa input câu hỏi chính
 
             for (let i = 0; i < 78; i++) {
                 const cardElementDesktop = document.createElement('div');
@@ -1375,17 +1749,60 @@
         // === Event Listeners ===
         document.addEventListener('DOMContentLoaded', async () => {
             await initialize(); 
+            await loadSuggestedQuestions(); // (MỚI) Tải câu hỏi gợi ý
             loadHistory();      
             loadSessionState(); 
+
+            // (MỚI) Kích hoạt auto-grow cho 2 textarea
+            // Thêm 'input' event để tự động dãn/co khi gõ
+            questionInput.addEventListener('input', () => autoGrow(questionInput));
+            followUpInput.addEventListener('input', () => autoGrow(followUpInput));
+        });
+
+        // (MỚI) Gửi bằng phím Enter (không dùng Shift + Enter)
+        questionInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault(); // Ngăn xuống dòng
+                handleQuestionSubmit();
+            }
+        });
+        
+        // (MỚI) Gửi bằng phím Enter cho ô hỏi tiếp
+        followUpInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault(); // Ngăn xuống dòng
+                handleFollowUpSubmit();
+            }
         });
 
         submitQuestionBtn.addEventListener('click', handleQuestionSubmit);
-        suggestedQuestionBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                questionInput.value = btn.dataset.question;
-            });
-        });
         
+        // (XÓA) Xóa listener cho các nút cũ
+        // suggestedQuestionBtns.forEach(btn => { ... });
+        
+        // (MỚI) Listener cho dropdown câu hỏi gợi ý
+        suggestedQuestionsToggle.addEventListener('click', () => {
+            suggestedQuestionsList.classList.toggle('open');
+            suggestedQuestionsToggle.classList.toggle('open');
+        });
+
+        // (MỚI) Dùng event delegation cho các item trong dropdown
+        suggestedQuestionsList.addEventListener('click', (e) => {
+            if (e.target.classList.contains('suggestion-item')) {
+                questionInput.value = e.target.dataset.question;
+                suggestedQuestionsList.classList.remove('open');
+                suggestedQuestionsToggle.classList.remove('open');
+            }
+        });
+
+        // (MỚI) Đóng dropdown khi click ra ngoài
+        document.addEventListener('click', (e) => {
+            if (!suggestedQuestionsToggle.contains(e.target) && !suggestedQuestionsList.contains(e.target)) {
+                suggestedQuestionsList.classList.remove('open');
+                suggestedQuestionsToggle.classList.remove('open');
+            }
+        });
+
         getInterpretationButton.addEventListener('click', handleGetInterpretation);
         followUpSubmitBtn.addEventListener('click', handleFollowUpSubmit);
         
@@ -1400,8 +1817,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
