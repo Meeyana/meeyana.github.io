@@ -219,21 +219,34 @@
             z-index: 2001;
             backdrop-filter: blur(5px);
         }
+        
         .modal-content {
             display: none;
             position: fixed;
+            
+            /* (SỬA LỖI MOBILE) Căn giữa bằng cách set lề */
+            top: 10vh; /* Cách top 10% viewport height */
+            left: 5vw; /* Cách left 5% viewport width */
+            right: 5vw; /* Cách right 5% viewport width */
+            margin-left: auto; /* Tự động căn nếu max-width áp dụng */
+            margin-right: auto; /* Tự động căn nếu max-width áp dụng */
+            
+            /* Xóa kiểu cũ:
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
+            width: 90vw; 
+            */
+
             /* (CHỈNH SỬA) z-index */
             z-index: 2002;
             background-color: var(--card-back-bg);
             border: 1px solid var(--card-back-border);
             border-radius: 12px;
-            /* (SỬA LỖI MOBILE) Đổi width: 90% thành 90vw để fix lỗi tràn/lệch */
-            width: 90vw; 
-            max-width: 600px;
-            max-height: 80vh;
+            
+            max-width: 600px; /* Giới hạn chiều rộng tối đa */
+            max-height: 80vh; /* Giới hạn chiều cao tối đa */
+
             color: var(--text-color);
             flex-direction: column;
             overflow: hidden; 
@@ -426,6 +439,9 @@
             position: relative; 
             /* (MỚI) Thêm hiệu ứng mờ */
             backdrop-filter: blur(5px);
+            /* (MỚI) Thêm Flexbox để căn chỉnh */
+            display: flex;
+            align-items: center;
         }
 
         .question-input {
@@ -437,11 +453,15 @@
             font-size: 1rem;
             resize: none;
             overflow: hidden;
+            /* (XÓA) Thuộc tính này không dùng ở đây */
             align-content: center;
             /* (MỚI) Xóa text shadow khỏi input */
             text-shadow: none;
-            padding-right: 50px; /* Chừa chỗ cho nút */
+            /* (CHỈNH SỬA) Giảm padding-right, không cần 50px nữa */
+            padding-right: 8px; /* Chừa một chút chỗ */
             min-height: 56px; /* Chiều cao tối thiểu */
+            /* (MỚI) Thêm flex-grow để lấp đầy không gian */
+            flex-grow: 1;
         }
         .question-input:focus { outline: none; }
         .question-input::placeholder {
@@ -451,9 +471,14 @@
         }
 
         #submit-question-btn {
-            position: absolute;
-            right: 0.75rem; 
-            bottom: 0.75rem; 
+            /* (XÓA) Bỏ position: absolute */
+            /* position: absolute; */
+            /* right: 0.75rem;  */
+            /* bottom: 0.75rem;  */
+
+            /* (MỚI) Thêm flex-shrink để nút không bị bóp */
+            flex-shrink: 0;
+            
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -916,9 +941,14 @@
             font-size: 1.5rem;
         }
         #submit-follow-up-btn {
-            position: absolute;
-            right: 0.75rem;
-            bottom: 0.75rem; 
+            /* (XÓA) Bỏ position: absolute */
+            /* position: absolute; */
+            /* right: 0.75rem; */
+            /* bottom: 0.75rem;  */
+            
+            /* (MỚI) Thêm flex-shrink để nút không bị bóp */
+            flex-shrink: 0;
+
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -1943,3 +1973,5 @@
     </script>
 </body>
 </html>
+
+
