@@ -171,6 +171,8 @@ document.addEventListener('DOMContentLoaded', () => {
         navToggle.addEventListener('click', () => {
             navLinks.classList.toggle('open');
             navToggle.classList.toggle('open');
+            // (MỚI) Khóa/mở cuộn body
+            document.body.classList.toggle('nav-open'); 
         });
     }
     
@@ -186,6 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Nếu là link khác, đóng menu
                     navLinks.classList.remove('open');
                     navToggle.classList.remove('open');
+                    // (MỚI) Mở cuộn body
+                    document.body.classList.remove('nav-open'); 
                 }
             });
         });
@@ -200,6 +204,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (navLinks.classList.contains('open')) {
                 navLinks.classList.remove('open');
                 navToggle.classList.remove('open');
+                // (MỚI) Mở cuộn body
+                document.body.classList.remove('nav-open');
             }
         });
     }

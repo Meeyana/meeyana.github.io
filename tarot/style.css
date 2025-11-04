@@ -38,6 +38,10 @@
             /* (MỚI) Fix lỗi 2 background trên mobile */
             background-attachment: fixed;
         }
+/* (MỚI) CSS để khóa cuộn khi mở menu mobile */
+        body.nav-open {
+            overflow: hidden;
+        }
         
         /* (MỚI) CSS cho nền sao lấp lánh */
         #stars-bg {
