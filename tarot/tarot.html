@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="style.css">
 
     <style>
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
         /* --- (MỚI) CSS CHO LOADER HÀNH TINH 3D --- */
         .interpretation-loader {
             display: flex;
@@ -723,6 +726,8 @@ function populateCardDeck() {
     followUpContainer.style.display = 'none';
     followUpInput.value = ''; 
     questionInput.value = ''; 
+    if (questionErrorDisplay) questionErrorDisplay.textContent = '';
+    if (followUpErrorDisplay) followUpErrorDisplay.textContent = '';
 
     // Tạo 78 lá bài
     for (let i = 0; i < 78; i++) {
