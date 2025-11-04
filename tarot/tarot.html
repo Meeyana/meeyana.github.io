@@ -53,39 +53,51 @@
         
         /* (MỚI) CSS cho nền sao lấp lánh */
         #stars-bg {
-            position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            z-index: 0; /* Đặt sau cùng */
-            overflow: hidden;
-        }
-        #stars1, #stars2, #stars3 {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+#stars-bg::after {
+            content: '';
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background-repeat: repeat;
-            background-position: center;
-            opacity: 0;
+            top: 10%;
+            right: 15%;
+            width: 50px; /* Kích thước mặt trăng */
+            height: 50px;
+            border-radius: 50%;
+            /* Tạo hình trăng khuyết bằng box-shadow */
+            box-shadow: -10px 5px 0 0px var(--text-color);
+            opacity: 0.5;
+            /* Thêm animation mờ ảo */
+            animation: moon-glow 10s ease-in-out infinite alternate;
         }
-        /* Lớp sao nhỏ, lấp lánh nhanh */
-        #stars1 {
-            background-image: radial-gradient(1px 1px at 10px 20px, white, transparent),
-                              radial-gradient(1px 1px at 50px 70px, white, transparent);
-            background-size: 100px 100px;
-            animation: sparkle 5s linear infinite;
+ #stars-bg::before {
+            content: '';
+            position: absolute;
+            bottom: 5%;
+            left: 10%;
+            width: 200px;
+            height: 100px;
+            background: radial-gradient(ellipse at center, rgba(142, 186, 255, 0.15) 0%, rgba(142, 186, 255, 0) 70%);
+            border-radius: 50%;
+            transform: rotate(-30deg);
+            opacity: 0.5;
+            animation: moon-glow 15s ease-in-out infinite alternate;
         }
-        /* Lớp sao vừa, lấp lánh trung bình */
-        #stars2 {
-            background-image: radial-gradient(1px 1px at 30px 50px, white, transparent),
-                              radial-gradient(1.5px 1.5px at 80px 100px, white, transparent);
-            background-size: 150px 150px;
-            animation: sparkle 7s linear infinite reverse;
-        }
-        /* Lớp sao lớn, lấp lánh chậm */
-        #stars3 {
-            background-image: radial-gradient(1.5px 1.5px at 100px 120px, white, transparent);
-            background-size: 200px 200px;
-            animation: sparkle 10s linear infinite;
-        }
+.star {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    opacity: 0.6;
+    animation: twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+}
+
         @keyframes sparkle {
             0% { opacity: 0.2; }
             50% { opacity: 1; }
@@ -1044,6 +1056,10 @@
             /* (CHỈNH SỬA) Xóa CSS cũ cho #history-btn, đã gộp ở trên */
         }
 
+        /* --- Nền sao ngẫu nhiên, giữ nguyên phần JS sinh sao --- */
+
+
+
     </style>
 </head>
 <body>
@@ -1053,18 +1069,36 @@
         <div id="stars1"></div>
         <div id="stars2"></div>
         <div id="stars3"></div>
+        <div id="stars4"></div>
     </div>
+    <script>
+const starContainer = document.getElementById('stars-bg');
+for (let i = 0; i < 500; i++) {
+    const star = document.createElement('div');
+    const size = Math.random() * 2 + 1; // 1-3px
+    star.classList.add('star');
+    star.style.width = `${size}px`;
+    star.style.height = `${size}px`;
+    star.style.top = `${Math.random() * 100}%`;
+    star.style.left = `${Math.random() * 100}%`;
+    star.style.animationDuration = `${2 + Math.random() * 3}s`;
+    starContainer.appendChild(star);
+}
+</script>
+
     
     <!-- (MỚI) Menu điều hướng -->
     <nav class="main-nav">
         <div class="nav-logo">
-            <a href="#" class="nav-link logo-link">Bói bài tarot</a>
+            <a href="index.html#" class="nav-link logo-link">TAROT READER</a>
         </div>
         <div class="nav-links" id="nav-links">
-            <a href="#" class="nav-link">Về chúng tôi</a>
-            <a href="#" class="nav-link">Blogs</a>
-            <a href="#" class="nav-link">Đặt lịch</a>
-            <a href="#" class="nav-link">Liên hệ</a>
+            <a href="index.html" class="nav-link">Trang Chủ</a>
+            <a href="tarot.html" class="nav-link">Bói tarot</a>
+            <a href="index.html#" class="nav-link">Về chúng tôi</a>
+            <a href="index.html#" class="nav-link">Blogs</a>
+            <a href="index.html#" class="nav-link">Đặt lịch</a>
+            <a href="index.html#" class="nav-link">Liên hệ</a>
             <!-- (MỚI) Thêm nút Lịch sử vào menu -->
             <a href="#" id="history-nav-link" class="nav-link">Lịch sử</a>
         </div>
