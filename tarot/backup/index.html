@@ -11,11 +11,34 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
     <!-- (GIỮ NGUYÊN) Thư viện Showdown (mặc dù trang chủ không dùng) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/showdown/2.1.0/showdown.min.js"></script>
-    <link rel="stylesheet" href="style.css">
 
     <!-- (GIỮ NGUYÊN) Toàn bộ CSS cũ để giữ giao diện -->
     <style>
-        
+        :root {
+            --bg-color: #0b132b; 
+            --text-color: #f0f0ff; 
+            --title-color: #f0f0ff; 
+            --card-back-bg: rgba(20, 40, 80, 0.7);
+            --card-back-border: rgba(142, 186, 255, 0.3);
+            --button-bg: rgba(20, 40, 80, 0.5);
+            --button-hover-bg: rgba(40, 60, 100, 0.7);
+            --font-title: 'Playfair Display', serif;
+            --font-body: 'Quicksand', sans-serif;
+        }
+        * { box-sizing: border-box; }
+        body {
+            background-color: var(--bg-color); 
+            background-image: radial-gradient(circle at top, #142850 0%, #0a1f44 40%, #0b132b 100%);
+            color: var(--text-color);
+            font-family: var(--font-body);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            text-align: center;
+            overflow-x: hidden; 
+            text-shadow: 0 0 15px rgba(142, 186, 255, 0.6);
+            background-attachment: fixed;
+        }
         #stars-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -63,7 +86,55 @@
             to { opacity: 0.6; transform: rotate(5deg); }
         }
 
-        
+        /* (GIỮ NGUYÊN) CSS Menu cũ */
+        .main-nav {
+            position: relative; 
+            z-index: 1001; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            padding: 1rem 2rem;
+            background: rgba(11, 19, 43, 0.3); 
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border-bottom: 1px solid var(--card-back-border);
+        }
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            font-weight: 600;
+            transition: color 0.3s, text-shadow 0.3s;
+        }
+        .nav-link:hover {
+            color: var(--title-color);
+            text-shadow: 0 0 20px var(--title-color);
+        }
+        .nav-link.logo-link {
+            font-family: var(--font-title);
+            font-size: 1.25rem;
+            color: var(--title-color);
+            padding-left: 0;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+        }
+        .nav-toggle { display: none; }
+        .hamburger { display: block; position: relative; width: 25px; height: 3px; background: var(--text-color); border-radius: 3px; transition: all 0.3s; }
+        .hamburger::before, .hamburger::after { content: ''; position: absolute; width: 25px; height: 3px; background: var(--text-color); border-radius: 3px; transition: all 0.3s; left: 0; }
+        .hamburger::before { transform: translateY(-8px); }
+        .hamburger::after { transform: translateY(8px); }
+        @media (max-width: 768px) {
+            .main-nav { padding: 1rem; }
+            .nav-links { position: fixed; top: 0; right: 0; height: 100vh; width: 70%; max-width: 300px; background: #0b132b; flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem; transform: translateX(100%); transition: transform 0.3s ease-out; border-left: 1px solid var(--card-back-border); }
+            .nav-links.open { transform: translateX(0); }
+            .nav-toggle { display: block; background: transparent; border: none; cursor: pointer; padding: 0.5rem; z-index: 1002; }
+            .nav-toggle.open .hamburger { background: transparent; }
+            .nav-toggle.open .hamburger::before { transform: translateY(0) rotate(45deg); background: var(--title-color); }
+            .nav-toggle.open .hamburger::after { transform: translateY(0) rotate(-45deg); background: var(--title-color); }
+        }
 
         /* --- (MỚI) CSS CHO BỐ CỤC TRANG CHỦ --- */
         /* Các lớp này được thêm vào để style nội dung mới theo theme cũ */
@@ -279,29 +350,28 @@
             opacity: 0.7;
             font-size: 0.9rem;
         }
-        
-        /* === (MỚI) CSS CHO HIỆU ỨNG XOAY === */
-        @keyframes spin-clockwise {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
 
-        .spinning-wheel {
-            animation: spin-clockwise 20s linear infinite;
-        }
-        /* === (HẾT) CSS CHO HIỆU ỨNG XOAY === */
-               
     </style>
 </head>
 <body>
 
     <!-- (GIỮ NGUYÊN) Nền sao cũ -->
     <div id="stars-bg"></div>
-    <script>      
+    <script>
+        const starContainer = document.getElementById('stars-bg');
+        if (starContainer) {
+            for (let i = 0; i < 500; i++) {
+                const star = document.createElement('div');
+                const size = Math.random() * 2 + 1; // 1-3px
+                star.classList.add('star');
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.top = `${Math.random() * 100}%`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.animationDuration = `${2 + Math.random() * 3}s`;
+                starContainer.appendChild(star);
+            }
+        }
     </script>
     
     <!-- (GIỮ NGUYÊN) Menu cũ -->
@@ -318,7 +388,7 @@
             <a href="#" class="nav-link">Blogs</a>
             <a href="#" class="nav-link">Đặt lịch</a>
             <a href="#" class="nav-link">Liên hệ</a>
-            <a href="#" id="history-nav-link" class="nav-link">Lịch sử</a>
+            <a href="tarot.html" id="history-nav-link" class="nav-link">Lịch sử</a>
             
         </div>
         <button class="nav-toggle" id="nav-toggle" aria-label="toggle navigation">
@@ -345,8 +415,7 @@
                         <a href="#services" class="btn-primary">Xem Dịch Vụ</a>
                     </div>
                     <div>
-                        <!-- (CHỈNH SỬA) Đã thêm class 'spinning-wheel' vào đây -->
-                        <img src="wheel.png" alt="Vòng tròn Zodiac" class="section-image spinning-wheel" style="max-width: 400px; margin: auto; border-radius: 50%;">
+                        <img src="https://placehold.co/400x400/0b132b/8ebaff?text=Zodiac+Wheel" alt="Vòng tròn Zodiac" class="section-image" style="max-width: 400px; margin: auto; border-radius: 50%;">
                     </div>
                 </div>
             </div>
@@ -481,18 +550,36 @@
         </footer>
 
     </main>
-    <div id="history-modal-backdrop" class="modal-backdrop"></div>
-    <div id="history-modal-content" class="modal-content">
-        <div class="modal-header">
-            <button id="history-modal-close-btn" class="modal-close-btn">&times;</button>
-            <h2>Lịch sử trải bài</h2>
-        </div>
-        <div id="history-list-wrapper" class="modal-scroll-wrapper">
-            <div id="history-list">
-                </div>
-        </div>
-    </div>
     
-    <script src="common.js" defer></script>
+    <!-- (XÓA) Toàn bộ các thẻ div của app cũ (screens, modals) -->
+
+    <!-- (GIỮ NGUYÊN) Script cho menu mobile -->
+    <script>
+        const navToggle = document.getElementById('nav-toggle');
+        const navLinks = document.getElementById('nav-links');
+        if (navToggle) {
+            navToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('open');
+                navToggle.classList.toggle('open');
+            });
+        }
+        
+        // (MỚI) Đóng menu khi click vào link (cho trang 1 trang)
+        if (navLinks) {
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                     // Chỉ đóng nếu menu đang mở trên mobile
+                    if (navLinks.classList.contains('open')) { 
+                        navLinks.classList.remove('open');
+                        navToggle.classList.remove('open');
+                    }
+                });
+            });
+        }
+    </script>
+    
+    <!-- (XÓA) Toàn bộ script logic của app trải bài cũ -->
+
 </body>
 </html>
+
