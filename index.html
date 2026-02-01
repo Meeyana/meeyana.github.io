@@ -597,8 +597,7 @@ section {
             <div class="title-underline mb-4"></div>
         </div>
         <div class="row justify-content-center mt-4">
-           <!-- Form -->
-              <div class="col-lg-7">
+           <div class="col-lg-7">
                 <div class="contact-box">
                   <h5 class="contact-title display-7">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="#3b82f6" class="bi bi-envelope-fill" viewBox="0 0 16 16">
@@ -610,33 +609,32 @@ section {
                     </svg>
                     Send Message
                   </h5>
-                  <form>
+                  <form id="contactForm">
                     <div class="form-group">
                       <label class="display-4">Name</label>
-                      <input type="text" placeholder="Your full name" required="" class="display-4">
+                      <input type="text" name="name" placeholder="Your full name" required="" class="display-4">
                     </div>
                     
                     <div class="form-group">
                       <label class="display-4">Email</label>
-                      <input type="email" placeholder="your.email@example.com" required="" class="display-4">
+                      <input type="email" name="email" placeholder="your.email@example.com" required="" class="display-4">
                     </div>
                     
                     <div class="form-group">
                       <label class="display-4">Subject</label>
-                      <input type="text" placeholder="What's this about?" class="display-4">
+                      <input type="text" name="subject" placeholder="What's this about?" class="display-4">
                     </div>
                     
                     <div class="form-group">
                       <label class="display-4">Message</label>
-                      <textarea placeholder="Tell me about your project or opportunity..." rows="4" class="display-4"></textarea>
+                      <textarea name="message" placeholder="Tell me about your project or opportunity..." rows="4" class="display-4"></textarea>
                     </div>
                     
-                    <button type="submit" class="btn btn-primary display-4">Send Message</button>
+                    <button type="submit" class="btn btn-primary display-4" id="submitBtn">Send Message</button>
                   </form>
                 </div>
               </div>
 
-              <!-- Contact Info -->
               <div class="col-lg-5">
                 <div class="contact-box">
                   <h5 class="contact-title display-7">
@@ -654,7 +652,6 @@ section {
                    Phone: +84 937 507 472</p>
                 </div>
 
-                <!-- Connect -->
                 <div class="contact-box">
                   <h5 class="contact-title display-7">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-link-45deg" viewBox="0 0 16 16">
