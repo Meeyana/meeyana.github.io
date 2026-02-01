@@ -1,0 +1,2239 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>THACO Auto TPHCM - Trang Chủ</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <script src="https://cdn.scaleflex.it/plugins/js-cloudimage-360-view/2.5.0/js-cloudimage-360-view.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+  <style>
+    /* UPDATED: Set Arial as the base font */
+    body {margin:0;font-family:Roboto,sans-serif;background:#f5f7fa;color:#333;}
+header {background:#004b9b;padding:10px 40px;color:#fff;}
+.top-bar {display:flex;align-items:center;justify-content:space-between;gap:20px;}
+.logo img {height:30px;}
+.banner img{width:100%;height:auto;display:block;}
+
+/* Sort bar */
+.sort-bar {margin:2rem 3rem 1rem;font-size:14px;color:#444;}
+.sort-bar span {margin-right:10px;}
+.sort-bar a {margin:0 8px;text-decoration:none;color:#444;cursor:pointer;}
+.sort-bar a.active {color:#004b9b;font-weight:bold;}
+.sort-price {display:inline-block;position:relative;margin-left:8px;cursor:pointer;}
+.sort-price:hover .dropdown {display:block;}
+.sort-price .dropdown {
+  display:none;position:absolute;background:#fff;border:1px solid #ddd;
+  padding:5px 0;list-style:none;margin:0;top:18px;left:0;min-width:120px;z-index:10;
+}
+.sort-price .dropdown li {padding:6px 12px;cursor:pointer;font-size:13px;}
+.sort-price .dropdown li:hover {background:#f5f5f5;}
+
+/* Product grid */
+.all-cars {padding:0 20px 40px;flex:1;transition:all 0.4s ease;}
+.product-grid {
+  display:grid;
+  gap:20px;
+  transition:all 0.4s ease;
+}
+.product-card {background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.1);transition:transform .2s;position:relative;}
+.product-card:hover {transform:translateY(-5px);}
+.product-info h3 {margin:0;font-size:16px;color:#004b9b;}
+.version-tags {margin:10px 0;display:flex;flex-wrap:wrap;gap:6px;}
+.version-tag {background:#eee;color:#333;font-size:12px;padding:4px 8px;border-radius:4px;cursor:pointer;}
+.version-tag.active{background:#004b9b;color:#fff;}
+.main-price {margin-top:5px;font-size:18px;font-weight:bold;color:#004b9b;}
+.btn-group {margin-top:10px;display:flex;gap:10px;}
+.btn-estimate {flex:1;background:#004b9b;color:#fff;padding:8px 15px;border-radius:5px;text-decoration:none;font-size:14px;text-align:center;}
+.btn-contact {flex:1;background:#fff;border:2px solid #004b9b;color:#004b9b;padding:8px 15px;border-radius:5px;text-decoration:none;font-size:14px;text-align:center;}
+.tags {position:absolute;top:10px;left:10px;display:flex;gap:6px;}
+.tag {background:#004b9b;color:#fff;font-size:12px;padding:4px 8px;border-radius:4px;}
+footer{text-align:center;padding:20px;background:#004b9b;color:#fff;margin-top:40px;}
+
+/* ==== Main Layout dùng Flex ==== */
+.main-layout {
+  display: flex;
+  margin:20px;
+  transition: all 0.4s ease;
+}
+.main-layout.full-width .all-cars {
+  flex:1;
+}
+
+/* Sidebar có hiệu ứng co giãn */
+.filter-sidebar {
+  flex-basis: 24rem;
+  max-width: 30rem;
+  transition: max-width 0.2s ease, opacity 0.3s ease;
+  opacity: 1;
+  overflow: hidden;
+  padding: 0 20px;
+}
+
+/* UPDATED: Sticky sidebar wrapper */
+.sidebar-wrapper {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+    align-self: flex-start;
+}
+
+@media (max-width: 1200px){
+  .filter-sidebar {
+    flex-basis: 21rem;
+    max-width: 21rem;
+  }
+}
+
+.main-layout.full-width .filter-sidebar {
+  max-width: 0;
+  opacity: 0;
+  padding: 0;
+}
+
+/* Filter box */
+.filter-box {
+  background:#fff;border-radius:12px;padding:20px;box-shadow:0 4px 15px rgba(0,0,0,0.15);
+}
+.filter-box h3 {margin:15px 0 10px;color:#004b9b;font-size:16px;}
+.filter-options {display:flex;flex-wrap:wrap;gap:10px;margin-bottom:15px;}
+.filter-option {
+  border:2px solid #ccc;padding:8px 14px;border-radius:6px;cursor:pointer;
+  font-size:14px;transition:all 0.2s ease;
+}
+.filter-option:hover {border-color:#004b9b;}
+.filter-option.active {border-color:#004b9b;background:#e6f0ff;font-weight:bold;}
+
+#filter-brand .filter-option {border-radius:8px;width:70px;height:70px;display:flex;align-items:center;justify-content:center;background:#fff;}
+#filter-brand .filter-option img {width:100%;object-fit:contain;}
+#filter-brand .filter-option.active {border-color:#004b9b;background:#e6f0ff;}
+
+/* Toggle buttons */
+.filter-toggle-bar {
+  display:flex;
+  justify-content:flex-start;
+  padding: 0 3rem;
+}
+.toggle-btn {
+  background:#004b9b;
+  color:#fff;
+  border:none;
+  padding:8px 16px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* Responsive grid */
+/* Desktop */
+@media (min-width:1200px){
+  .product-grid{grid-template-columns:repeat(3,1fr);}
+  .main-layout.full-width .product-grid{grid-template-columns:repeat(4,1fr);}
+}
+/* Tablet */
+@media (min-width:768px) and (max-width:1199px){
+  .product-grid{grid-template-columns:repeat(2,1fr);}
+  .main-layout.full-width .product-grid{grid-template-columns:repeat(3,1fr);}
+}
+/* Mobile */
+@media (max-width:767px){
+  .main-layout{flex-direction:column;}
+  .filter-sidebar{width:100%;order:-1;}
+  .main-layout.full-width .filter-sidebar{width:0;opacity:0;}
+  .product-grid{grid-template-columns:repeat(2,1fr);}
+  .sidebar-wrapper { position: static; } /* Disable sticky on mobile */
+}
+
+.img-frame {width:100%;aspect-ratio:4/2.5;display:flex;align-items:center;justify-content:center;overflow:hidden;border-radius:8px;}
+.img-frame img {max-width:100%;max-height:100%;object-fit:contain;}
+
+/* UPDATED: Active Filters */
+.active-filters-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 0 3rem;
+    min-height: 45px; /* Reserve space */
+}
+.active-filters {
+    flex-grow: 1;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom: 1rem;
+}
+.filter-tag {display:flex;align-items:center;background:#e6f0ff;border:1px solid #004b9b;border-radius:10px;padding:5px 12px;font-size:14px;color:#004b9b;}
+.filter-tag button {margin-left:8px;border:none;background:transparent;color:#004b9b;font-size:16px;cursor:pointer;}
+.filter-tag button:hover {color:#d00;}
+.btn-reset-all {
+    background: #f1f1f1;
+    color: #333;
+    border: 1px solid #ddd;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+}
+.btn-reset-all:hover {
+    background: #e0e0e0;
+    border-color: #ccc;
+}
+
+
+  </style>
+</head>
+<body>
+  <header>
+    <div class="top-bar">
+      <div class="logo">
+        <a href="index.html"><img src="logo-thaco-hcm.png" alt="THACO AUTO Logo"></a>
+      </div>
+    </div>
+  </header>
+
+  <div class="banner">
+    <img src="web-cty-tt-01.png" alt="THACO Auto Banner">
+  </div>
+
+  <div class="sort-bar">
+    <span>Sắp xếp theo:</span>
+    <a href="#" onclick="sortSpecial(event,'highlight')" id="sort-highlight">Nổi bật</a>
+    <a href="#" onclick="sortSpecial(event,'bestseller')" id="sort-bestseller">Bán chạy</a>
+    <a href="#" onclick="sortSpecial(event,'new')" id="sort-new">Mới</a>
+    <div class="sort-price">
+      <span>Giá ▾</span>
+      <ul class="dropdown">
+        <li onclick="sortCarsByPrice('asc')">Thấp → Cao</li>
+        <li onclick="sortCarsByPrice('desc')">Cao → Thấp</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="active-filters-wrapper" id="active-filters-wrapper">
+    <div class="active-filters" id="active-filters"></div>
+    <button class="btn-reset-all" id="resetAllFilters" style="display: none;">Bỏ chọn tất cả</button>
+  </div>
+
+<div class="filter-toggle-bar">
+        <button class="toggle-btn" id="toggleFilter">
+          <i class="fa-solid fa-square-caret-left"></i>
+        </button>
+      </div>
+
+  <div class="main-layout" id="mainLayout">
+    <div class="sidebar-wrapper">
+      
+      <aside class="filter-sidebar" id="filterSidebar">
+        <div class="filter-box mb-4">
+          <h3>Thương hiệu</h3>
+          <div class="filter-options" id="filter-brand">
+            <div class="filter-option" data-filter="brand" data-value="bmw"><img src="https://thacoauto.vn/storage/brands/bmw-logo-2-1.png" alt="BMW" /></div>
+            <div class="filter-option" data-filter="brand" data-value="mini"><img src="https://thacoauto.vn/storage/brands/pngwingcom-1.png" alt="MINI" /></div>
+            <div class="filter-option" data-filter="brand" data-value="peugeot"><img src="https://thacoauto.vn/storage/brands/peugeot-logo-1.png" alt="Peugeot" /></div>
+            <div class="filter-option" data-filter="brand" data-value="mazda"><img src="https://thacoauto.vn/storage/brands/mazda-5.png" alt="Mazda" /></div>
+            <div class="filter-option" data-filter="brand" data-value="kia"><img src="https://thacoauto.vn/storage/brands/kia-motors-new-2021.png" alt="KIA" /></div>
+          </div>
+
+          <h3>Giá</h3>
+          <div class="filter-options" id="filter-price">
+            <div class="filter-option" data-filter="price" data-value="200000000-400000000">200 - 400 triệu</div>
+            <div class="filter-option" data-filter="price" data-value="400000000-600000000">400 - 600 triệu</div>
+            <div class="filter-option" data-filter="price" data-value="600000000-800000000">600 - 800 triệu</div>
+            <div class="filter-option" data-filter="price" data-value="800000000-1000000000">800 triệu - 1 tỷ</div>
+            <div class="filter-option" data-filter="price" data-value="1000000000-2000000000">1 - 2 tỷ</div>
+            <div class="filter-option" data-filter="price" data-value="2000000000+">Trên 2 tỷ</div>
+          </div>
+
+          <h3>Phân khúc xe</h3>
+          <div class="filter-options" id="filter-type">
+            <div class="filter-option" data-filter="type" data-value="Sedan">Sedan</div>
+            <div class="filter-option" data-filter="type" data-value="SUV">SUV</div>
+            <div class="filter-option" data-filter="type" data-value="Hatchback">Hatchback</div>
+          </div>
+
+          <h3>Nhiên liệu</h3>
+          <div class="filter-options" id="filter-fuel">
+            <div class="filter-option" data-filter="fuel" data-value="Xăng">Xăng</div>
+            <div class="filter-option" data-filter="fuel" data-value="Dầu">Dầu</div>
+            <div class="filter-option" data-filter="fuel" data-value="Hybrid">Hybrid</div>
+          </div>
+
+          <h3>Số chỗ ngồi</h3>
+          <div class="filter-options" id="filter-seats">
+            <div class="filter-option" data-filter="seats" data-value="5">5 chỗ</div>
+            <div class="filter-option" data-filter="seats" data-value="7">7 chỗ</div>
+            <div class="filter-option" data-filter="seats" data-value="8">8 chỗ</div>
+          </div>
+
+          <h3 class="d-none">Màu sắc</h3>
+          <div class="filter-options d-none" id="filter-color">
+            <div class="filter-option" data-filter="color" data-value="Đen">Đen</div>
+            <div class="filter-option" data-filter="color" data-value="Trắng">Trắng</div>
+            <div class="filter-option" data-filter="color" data-value="Xám">Xám</div>
+            <div class="filter-option" data-filter="color" data-value="Đỏ">Đỏ</div>
+            <div class="filter-option" data-filter="color" data-value="Bạc">Bạc</div>
+            <div class="filter-option" data-filter="color" data-value="Xanh dương">Xanh dương</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+
+    <section class="all-cars container-fluid">
+      <div class="product-grid" id="product-grid"></div>
+    </section>
+  </div>
+
+  <footer>
+    © 2025 THACO AUTO. Tất cả các quyền được bảo lưu.
+  </footer>
+
+<script>
+let carsData = [];
+let currentBrand = "all";
+let currentSort = null;
+let currentFilters = {};
+
+
+document.addEventListener("DOMContentLoaded", async () => {
+  await loadCars();
+  const grid = document.getElementById("product-grid");
+  grid.addEventListener("click", (e) => {
+    const tag = e.target.closest(".version-tag");
+    if (!tag) return;
+    const card = tag.closest(".product-card");
+    if (!card) return;
+    card.querySelectorAll(".version-tag").forEach(t => t.classList.remove("active"));
+    tag.classList.add("active");
+    const priceOriginal = parseInt(tag.dataset.original || 0, 10);
+    const priceDiscount = parseInt(tag.dataset.discount || 0, 10);
+    const priceMainEl = card.querySelector(".main-price");
+    priceMainEl.textContent = formatCurrency(priceOriginal || priceDiscount);
+  });
+});
+
+async function loadCars() {
+  var res = "";
+  // Lấy dữ liệu từ Google Sheets với câu truy vấn mới
+  await $.ajax({
+    // URL được cập nhật với "OFFSET 1" để bỏ qua hàng đầu tiên (B1)
+    url: "https://docs.google.com/spreadsheets/d/1y5_eJcBothuqDNZVvexN-FUFHL6IGYyuf-3kIXZOSiU/gviz/tq?sheet=JSON&tqx=out:html&tq=SELECT%20B%20OFFSET%201",
+    success: function(result) {
+    var $div1 = jQuery("<div id='div1' style='display:none'>" + result + "</div>");
+    jQuery("body").append($div1);
+
+    // 1. Lấy tất cả các chunk như cũ
+    var jsonChunks = jQuery('#div1 table td').map(function() {
+      return jQuery(this).text();
+    }).get();
+
+    // 2. === THAY ĐỔI TẠI ĐÂY: Lọc bỏ các chunk rỗng hoặc chỉ có khoảng trắng ===
+    var nonEmptyChunks = jsonChunks.filter(chunk => chunk.trim() !== '');
+
+    // 3. Nối các chunk đã được lọc sạch
+    var fullJsonString = nonEmptyChunks.join(',');
+
+    $div1.remove();
+
+    // 4. Bọc chuỗi kết quả trong dấu ngoặc vuông để tạo thành một mảng hợp lệ
+    var res = `[${fullJsonString}]`;
+    localStorage.setItem('newlist', res);
+  }
+  });
+
+  // Phần còn lại của hàm không thay đổi...
+  try {
+    // Lưu ý: Nếu mỗi ô là một object, bạn cần bọc chuỗi trong dấu ngoặc vuông
+    // để tạo thành một mảng JSON hợp lệ. Ví dụ: JSON.parse(`[${res}]`)
+    carsData = JSON.parse(localStorage.getItem('newlist'));
+    console.log("✅ Cars JSON loaded successfully:", carsData);
+    applyFiltersAndSort();
+  } catch (err) {
+    console.error("❌ Lỗi khi parse JSON:", err);
+    console.error("Chuỗi JSON bị lỗi:", localStorage.getItem('newlist'));
+    document.getElementById("product-grid").innerHTML =
+      "<p style='color:red'>Không tải được dữ liệu. Vui lòng kiểm tra cú pháp JSON trong Google Sheet.</p>";
+  }
+}
+
+
+function normalizeVersions(car) {
+  const raw = Array.isArray(car.versions) ? car.versions : [];
+  if (raw.length === 0) {
+    const p = toNumber(car.price);
+    return [{ name: "Tiêu chuẩn", originalPrice: p, discountPrice: p }];
+  }
+  if (typeof raw[0] === "object") {
+    return [...raw].sort((a, b) => a.originalPrice - b.originalPrice);
+  }
+  const base = toNumber(car.price);
+  return raw.map(name => ({ name, originalPrice: base, discountPrice: base }))
+            .sort((a, b) => a.discountPrice - b.discountPrice);
+}
+
+function getMinPrice(car) {
+  const versions = normalizeVersions(car);
+  return versions[0]?.originalPrice || 0;
+}
+
+function getMinOriginalPrice(car) {
+  const versions = normalizeVersions(car);
+  if (!versions || versions.length === 0) return 0;
+  // Tìm ra giá gốc thấp nhất trong tất cả các phiên bản
+  return Math.min(...versions.map(v => v.originalPrice || Infinity));
+}
+
+// === NEW HELPER FUNCTION TO GET ALL COLORS ===
+function getAllExteriorColorNames(car) {
+  const colorNames = new Set();
+  // New schema: top-level color_exterior array
+  if (Array.isArray(car.color_exterior)) {
+    car.color_exterior.forEach(color => colorNames.add(color.name));
+  }
+  // Old schema: nested in versions
+  if (Array.isArray(car.versions)) {
+    car.versions.forEach(version => {
+      if (Array.isArray(version.color_exterior)) {
+        version.color_exterior.forEach(color => colorNames.add(color.name));
+      }
+    });
+  }
+  return [...colorNames];
+}
+
+
+function applyFiltersAndSort() {
+  let filtered = [...carsData];
+  if (currentBrand !== "all") filtered = filtered.filter(c => c.brand === currentBrand);
+  if (currentFilters.brand?.length) filtered = filtered.filter(car => currentFilters.brand.includes(car.brand));
+  if (currentFilters.price?.length) {
+    filtered = filtered.filter(car => {
+      // Lấy giá gốc thấp nhất để so sánh
+      const minOriginalPrice = getMinOriginalPrice(car); 
+      return currentFilters.price.some(p => {
+        if (p.endsWith("+")) {
+          const min = parseInt(p);
+          return minOriginalPrice >= min;
+        } else {
+          const [min, max] = p.split("-").map(v => parseInt(v, 10));
+          return minOriginalPrice >= min && minOriginalPrice <= max;
+        }
+      });
+    });
+  }
+  if (currentFilters.type?.length) filtered = filtered.filter(car => currentFilters.type.some(t => (car.type || "").includes(t)));
+  if (currentFilters.fuel?.length) filtered = filtered.filter(car => Array.isArray(car.fuel) && car.fuel.some(fuel => currentFilters.fuel.includes(fuel)));
+  if (currentFilters.seats?.length) filtered = filtered.filter(car => Array.isArray(car.seats) && car.seats.some(seat => currentFilters.seats.includes(String(seat))));
+  
+  // === UPDATED COLOR FILTER LOGIC ===
+  if (currentFilters.color?.length) {
+    filtered = filtered.filter(car => {
+      const carColors = getAllExteriorColorNames(car);
+      return currentFilters.color.some(filterColor => carColors.includes(filterColor));
+    });
+  }
+
+  if (currentSort === "asc") filtered.sort((a, b) => getMinPrice(a) - getMinPrice(b));
+  else if (currentSort === "desc") filtered.sort((a, b) => getMinPrice(b) - getMinPrice(a));
+  else if (["highlight", "new", "bestseller"].includes(currentSort)) {
+    filtered.sort((a, b) => (b[currentSort] === "TRUE") - (a[currentSort] === "TRUE"));
+  }
+  else if (currentSort === "promo") filtered.sort((a, b) => {const aP = !!(a.promo && a.promo.trim() !== "");const bP = !!(b.promo && b.promo.trim() !== "");return aP === bP ? 0 : aP ? -1 : 1;});
+  
+  renderCars(filtered);
+  renderActiveFilters();
+}
+
+function renderActiveFilters() {
+    const container = document.getElementById("active-filters");
+    const resetButton = document.getElementById("resetAllFilters");
+    if (!container || !resetButton) return;
+
+    container.innerHTML = "";
+    let hasFilters = false;
+
+    // Check if there are any active filters
+    if (Object.keys(currentFilters).length > 0) {
+        Object.values(currentFilters).forEach(arr => {
+            if (arr.length > 0) hasFilters = true;
+        });
+    }
+
+    if (hasFilters) {
+        Object.keys(currentFilters).forEach(key => {
+            currentFilters[key].forEach(value => {
+                const tag = document.createElement("div");
+                tag.className = "filter-tag";
+                tag.innerHTML = `${value} <button onclick="removeFilter('${key}','${value}')">×</button>`;
+                container.appendChild(tag);
+            });
+        });
+    }
+
+    // Show/hide reset button
+    resetButton.style.display = hasFilters ? 'inline-block' : 'none';
+}
+
+function removeFilter(key, value) {
+  if (!currentFilters[key]) return;
+  currentFilters[key] = currentFilters[key].filter(v => v !== value);
+  document.querySelectorAll(`.filter-option[data-filter="${key}"][data-value="${value}"]`).forEach(opt => opt.classList.remove("active"));
+  if (currentFilters[key].length === 0) delete currentFilters[key];
+  applyFiltersAndSort();
+}
+function formatCurrency(num) {return num.toLocaleString("vi-VN") + "đ";}
+function toNumber(val) {if (typeof val === "number") return val;if (!val) return 0;return parseInt(String(val).replace(/[^\d]/g, ""), 10) || 0;}
+function slugify(name) {return String(name).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');}
+function renderCars(cars) {
+  const container = document.getElementById("product-grid");
+  container.innerHTML = "";
+  cars.forEach(car => {
+    const slug = slugify(car.name);
+    const versions = normalizeVersions(car);
+    const defaultVersion = versions[0];
+    
+    // ===== LOGIC HIỂN THỊ NHÃN ĐÃ ĐƯỢC SỬA LỖI =====
+    let tags = [];
+    if (car.highlight === "TRUE") tags.push("Nổi bật");
+    if (car.bestseller === "TRUE") tags.push("Bán chạy");
+    if (car.new === "TRUE") tags.push("Xe mới");
+    // ===============================================
+
+    const tagsHTML = tags.length ? `<div class="tags">${tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>` : "";
+    const versionTagsHTML = versions.map((v, i) => `<span class="version-tag${i===0 ? " active" : ""}" data-original="${v.originalPrice}" data-discount="${v.discountPrice}">${v.name}</span>`).join("");
+    const card = `<div class="product-card ${car.brand} p-3 d-flex flex-column">${tagsHTML}<a href="#" data-slug="${slug}" style="text-decoration:none;color:inherit"><div class="img-frame"><img src="${car.img}" alt="${car.name}"/></div></a><div class="product-info mt-2 d-flex flex-column flex-grow-1"><h3><a href="#" data-slug="${slug}" style="text-decoration:none;color:#004b9b">${car.name}</a></h3><div class="version-tags">${versionTagsHTML}</div><div class="price-block"><div class="main-price">${formatCurrency(defaultVersion.originalPrice || defaultVersion.discountPrice)}</div></div><div class="btn-group mt-2"><a class="btn-estimate" href="#" data-slug="${slug}">Dự toán</a><a class="btn-contact" href="#">Liên hệ</a></div></div></div>`;
+    container.innerHTML += card;
+  });
+}
+
+// SORT
+function sortCarsByPrice(order) {currentSort = order;setActiveSort(null);applyFiltersAndSort();}
+function sortSpecial(e, type) {if (e) e.preventDefault();currentSort = type;setActiveSort(type);applyFiltersAndSort();}
+function setActiveSort(type) {document.querySelectorAll(".sort-bar a").forEach(a => a.classList.remove("active"));if (type) {const el = document.getElementById(`sort-${type}`);if (el) el.classList.add("active");}}
+
+// UPDATED: Instant Filtering Logic
+document.querySelectorAll(".filter-options").forEach(container => {
+    container.addEventListener("click", (e) => {
+        const option = e.target.closest(".filter-option");
+        if (!option) return;
+
+        option.classList.toggle("active");
+        
+        // Rebuild filters and apply
+        currentFilters = {};
+        document.querySelectorAll(".filter-option.active").forEach(opt => {
+            const key = opt.dataset.filter;
+            const value = opt.dataset.value;
+            if (!currentFilters[key]) currentFilters[key] = [];
+            currentFilters[key].push(value);
+        });
+        applyFiltersAndSort();
+    });
+});
+
+// UPDATED: Reset All Filters Button Logic
+const resetAllBtn = document.getElementById("resetAllFilters");
+if (resetAllBtn) {
+    resetAllBtn.addEventListener("click", () => {
+        currentFilters = {};
+        document.querySelectorAll(".filter-option.active").forEach(opt => opt.classList.remove("active"));
+        applyFiltersAndSort();
+    });
+}
+
+
+// Toggle Filter
+const toggleBtn = document.getElementById("toggleFilter");
+const mainLayout = document.getElementById("mainLayout");
+const filterSidebar = document.getElementById("filterSidebar");
+
+toggleBtn.addEventListener("click", () => {
+  const icon = toggleBtn.querySelector("i");
+  mainLayout.classList.toggle("full-width");
+
+  if (mainLayout.classList.contains("full-width")) {
+    icon.classList.remove("fa-square-caret-left");
+    icon.classList.add("fa-square-caret-right");
+  } else {
+    icon.classList.remove("fa-square-caret-right");
+    icon.classList.add("fa-square-caret-left");
+  }
+});
+
+
+</script>
+
+
+  <style>
+    /* Namespaced to avoid collisions */
+    .ecat-mask {
+      position: fixed;
+      inset: 0;
+      background: #fff;       
+      display: none;
+      z-index: 9999;
+      overflow-y: auto;       
+      scroll-behavior: smooth; /* UPDATED: Smooth scroll */
+    }
+    .ecat-mask.ecat-open {
+      display: block;
+      overflow-x: hidden; 
+    }
+
+    .ecat-panel {
+      width: 100vw;
+      min-height: 100vh;
+      background: #fff;
+      border-radius: 0;
+      position: relative;
+      padding: 0; 
+      display: flex;
+      flex-direction: column;
+      overflow: visible;
+      font-family: Roboto, sans-serif; /* UPDATED: Ensure Arial font */
+      font-size: 15px; 
+      line-height: 1.6;
+    }
+    .ecat-panel p, .ecat-panel .ecat-spec-label, .ecat-panel .ecat-spec-value {
+        font-size: 15px; 
+    }
+
+    @media(max-width:1024px){.ecat-panel{width:100vw;height:95vh}}
+
+    .ecat-x {
+      position: fixed; 
+      top: 10px;
+      right: 20px;
+      z-index: 10001; 
+      background: rgba(243,244,246,0.8);
+      border: 1px solid #ddd;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      backdrop-filter: blur(3px);
+    }
+
+    .ecat-video {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      z-index: 1;
+      aspect-ratio: 16/9;   
+      background: #000;
+      border-radius: 0;     
+      overflow: hidden;
+    }
+
+    #ecatVideoHero iframe {
+      position: absolute;
+      inset: 0;
+      width: 100vw;
+      height:56.25vw;
+      border: 0;
+    }
+
+    .ecat-video::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+    }
+
+
+    .ecat-grid{
+      display:grid;
+      grid-template-columns:1.5fr 1fr;
+      gap:20px;
+      padding: 2rem 4rem;
+    }
+    @media(max-width:1200px){
+      .ecat-grid{grid-template-columns:none;}
+    }
+
+    @media(max-width:768px){
+      .ecat-grid{grid-template-columns:1fr}
+      .ecat-grid, .ecat-full { padding: 15px; }
+    }
+
+    .ecat-left .ecat-hero{
+      width:100%; aspect-ratio:16/9; background:#fff;
+      border:1px solid #eee; border-radius:12px;
+      display:flex; align-items:center; justify-content:center;
+      overflow: hidden;
+    }
+    .ecat-left img{
+      width:100%; 
+      height: 100%;
+      object-fit:contain
+    }
+
+    .ecat-section{margin-bottom:15px;}
+    .ecat-title{font-size:22px; font-weight:800; color:#004b9b; margin-bottom:15px}
+    .ecat-versions{display:grid; gap:8px}
+    .ecat-version{border:1px solid #ddd; border-radius:8px; padding:10px; display:flex; justify-content:space-between}
+    .ecat-price{color:#004b9b; font-weight:800}
+
+    .ecat-color-row{display:flex;flex-wrap:wrap;gap:8px}
+    
+    .ecat-specs {
+      margin: 15px 0;
+      display: grid;
+      gap: 10px;
+    }
+    .ecat-spec-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ecat-spec-label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #374151;
+    }
+    .ecat-spec-value {
+      font-weight: 600;
+      color: #111827;
+    }
+    .ecat-spec-label i {
+      color: #004b9b;
+    }
+
+
+    .ecat-cta {
+      margin-top: 1rem;
+    }
+
+    .ecat-cta-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .ecat-cta-row a {
+      flex: 1; 
+      text-align: center;
+    }
+
+    #ecatContact {
+      width: 100%;
+      display: block;
+      text-align: center;
+    }
+
+    .btn-primary{background:#004b9b;color:#fff;border:none;padding:10px 16px;border-radius:8px;font-weight:700;cursor:pointer}
+    .btn-outline{background:#fff;border:2px solid #004b9b;color:#004b9b;padding:9px 16px;border-radius:8px;font-weight:700;cursor:pointer;text-decoration:none}
+
+    .ecat-full{margin-top:30px}
+
+    .ecat-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 8px;
+      margin: 3px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+      background: #fff;
+    }
+    .ecat-color {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-right: 6px;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+    }
+
+    /* Similar cars in popup */
+    #similar-cars {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr); 
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 1200px) {
+      #similar-cars { 
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    @media (max-width: 768px) {
+      #similar-cars {
+        grid-template-columns: 1fr; 
+      }
+    }
+
+    #similar-cars .product-card,
+    #similar-cars .car-card {
+      width: 100%;       
+      display: block;    
+      box-sizing: border-box;
+    }
+    
+    .ecat-review-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 15px;
+    }
+    .ecat-review-item {
+        aspect-ratio: 16/9;
+        background: #e9ecef;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: #6c757d;
+        padding: 1rem;
+        text-align: center;
+    }
+    .ecat-review-item i {
+        font-size: 48px;
+    }
+    .ecat-features-list h4 {
+        font-size: 18px;
+        color: #333;
+        margin-top: 15px;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #eee;
+    }
+    .ecat-features-list p {
+        color: #666;
+        line-height: 1.6;
+    }
+
+    /* NEW/MODIFIED GALLERY STYLES */
+    .ecat-gallery-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+    .ecat-gallery-item {
+        aspect-ratio: 1 / 1;
+        border-radius: 8px;
+        overflow: hidden;
+        cursor: pointer; /* Add cursor pointer */
+    }
+    .ecat-gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+    }
+    .ecat-gallery-item:hover img {
+        transform: scale(1.05);
+    }
+    .ecat-gallery-item.hidden {
+        display: none;
+    }
+    @media (max-width: 992px) {
+        .ecat-gallery-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+    @media (max-width: 768px) {
+        .ecat-gallery-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    #ecatLoadMoreBtn {
+        display: block;
+        margin: 20px auto 0;
+        padding: 10px 25px;
+        font-size: 16px;
+        font-weight: 600;
+        background-color: #fff;
+        color: #004b9b;
+        border: 2px solid #004b9b;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+    #ecatLoadMoreBtn:hover {
+        background-color: #004b9b;
+        color: #fff;
+    }
+    #ecatLoadMoreBtn.hidden {
+        display: none;
+    }
+
+    /* === UPDATED: Menu styles === */
+    .ecat-menu {
+  display: flex;
+  justify-content: space-evenly;
+    flex-direction: row;
+
+      position: sticky; /* Stick to top */
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.95); /* White background with slight transparency */
+      z-index: 1000;
+      backdrop-filter: blur(8px); /* Frosted glass effect */
+      border-bottom: 1px solid #e5e7eb; /* Subtle border */
+      box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    }
+    .ecat-menu ul {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem; /* Increased gap */
+      margin: 0;
+      padding: 1rem 0; /* Increased padding */
+      list-style: none;
+      font-size: 1rem; /* Consistent font-size */
+    }
+    .ecat-menu a {
+      color: #374151; /* Darker gray for text */
+      font-weight: 600;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px; /* Rounded corners */
+      transition: all .2s ease-in-out;
+      position: relative;
+    }
+    .ecat-menu a:hover {
+      background: #eef2ff; /* Light blue on hover */
+      color: #004b9b;
+    }
+    .ecat-menu a.active {
+      color: #004b9b;
+      font-weight: 700;
+    }
+
+
+    /* === NEW: Styles for Content Sections === */
+    .ecat-section-title {
+        font-size: 2rem;
+        font-weight: 800;
+        color: #004b9b;
+        text-transform: uppercase;
+        text-align: center;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        letter-spacing: 1px;
+    }
+    .ecat-content-section {
+        padding: 2rem 4rem;
+        border-top: 1px solid #f3f4f6;
+    }
+    
+    /* ADDED: Styles for new headings */
+    .ecat-main-heading,
+    .ecat-car-name-heading {
+        grid-column: 1 / -1; /* Span all columns */
+        text-align: center;
+    }
+    .ecat-main-heading {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #6c757d;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.25rem;
+    }
+    .ecat-car-name-heading {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    @media(max-width:768px){
+        .ecat-content-section {
+            padding: 1.5rem 1rem;
+        }
+        .ecat-section-title {
+            font-size: 1.5rem;
+        }
+    }
+
+    @media (max-width: 1200px){
+      .ecat-right .ecat-section{
+        padding-top: 30px!important;
+      }
+    }
+
+    /* === NEW: LIGHTBOX/CAROUSEL STYLES === */
+    .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 10002; /* Higher than ecat-x */
+        display: none;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(5px);
+    }
+    .lightbox.active {
+        display: flex;
+    }
+    .lightbox-content {
+        position: relative;
+        max-width: 85vw;
+        max-height: 85vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .lightbox-content img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+    .lightbox-close {
+        position: fixed;
+        top: 2rem;
+        right: 4rem;
+        font-size: 4rem;
+        color: #fff;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+    z-index:9;
+    }
+    .lightbox-nav {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 2.5rem;
+        color: #fff;
+        background: rgba(0,0,0,0.3);
+        border: none;
+        cursor: pointer;
+        padding: 10px 20px;
+        border-radius: 8px;
+        transition: background 0.2s;
+    z-index:10;
+    }
+    .lightbox-nav:hover {
+        background: rgba(0,0,0,0.6);
+    }
+    .lightbox-prev {
+        left: 10px;
+    }
+    .lightbox-next {
+        right: 10px;
+    }
+  
+  /* === START: NEW STYLES FOR VIDEO OVERLAY === */
+    .ecat-video-hero {
+        position: relative; /* Set as the positioning context for the overlay */
+        width: 100vw;
+        height: 56.25vw; /* Maintain 16:9 Aspect Ratio */
+        background-color: #000;
+        overflow: hidden;
+    }
+    .ecat-video-hero > .ecat-video, .ecat-video-hero > video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+    .video-overlay-content {
+        position: absolute;
+        inset: 0;
+        z-index: 3; /* Ensure it's above the video's pseudo-element */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 5rem;
+        color: #fff;
+        background: linear-gradient(to right, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 70%);
+        pointer-events: none; /* Allow clicks to pass through to video controls if needed */
+    }
+    .video-overlay-content > * {
+        pointer-events: auto; /* Re-enable pointer events for all children */
+    }
+    .video-overlay-brand {
+        font-size: 2rem;
+        font-weight: 300;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin: 0;
+    }
+    .video-overlay-name {
+        font-size: 2.8rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        margin: 0 0 1.5rem 0;
+    }
+    .video-overlay-ctas {
+        display: flex;
+        gap: 15px;
+        margin-bottom: 2.5rem;
+    }
+    .video-overlay-ctas .btn-overlay-primary,
+    .video-overlay-ctas .btn-overlay-secondary {
+        padding: 12px 24px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.2s ease-in-out;
+        border: 1px solid transparent;
+    }
+    .video-overlay-ctas .btn-overlay-primary {
+        background-color: #004b9b;
+        color: #fff;
+        border-color: #004b9b;
+    }
+    .video-overlay-ctas .btn-overlay-primary:hover {
+        background-color: #003a7a;
+        border-color: #003a7a;
+    }
+    .video-overlay-ctas .btn-overlay-secondary {
+        background-color: rgba(108, 117, 125, 0.5);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.5);
+    }
+     .video-overlay-ctas .btn-overlay-secondary:hover {
+        background-color: rgba(128, 137, 145, 0.6);
+        border-color: #fff;
+    }
+    .video-overlay-info {
+        display: flex;
+        gap: 30px;
+        font-size: 1rem;
+    }
+    .video-overlay-info > div {
+        display: flex;
+        flex-direction: column;
+    }
+    .video-overlay-info span {
+        font-weight: 300;
+        opacity: 0.9;
+        font-size: 0.9rem;
+    }
+    .video-overlay-info strong {
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+    @media (max-width: 768px) {
+        .video-overlay-content {
+            padding: 1.5rem;
+            justify-content: flex-end; /* Position at the bottom for mobile */
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0) 70%);
+        }
+        .video-overlay-brand { font-size: 1.2rem; }
+        .video-overlay-name { font-size: 1.8rem; margin-bottom: 1rem; }
+        .video-overlay-ctas { margin-bottom: 1.5rem; }
+        .video-overlay-ctas .btn-overlay-primary,
+        .video-overlay-ctas .btn-overlay-secondary { padding: 8px 16px; font-size: 0.9rem; }
+    }
+    /* === END: NEW STYLES FOR VIDEO OVERLAY === */
+
+    /* THÊM ĐOẠN CSS NÀY VÀO TRONG THẺ <style> */
+
+/* === CSS MỚI CHO TRÌNH XEM 360 TƯƠNG TÁC === */
+.ecat-color-button-360 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  background: #f9f9f9;
+  margin: 4px;
+  font-size: 14px;
+}
+
+.ecat-color-button-360:hover {
+  border-color: #004b9b;
+}
+
+.ecat-color-button-360.active {
+  border-color: #004b9b;
+  background-color: #e6f0ff;
+  font-weight: bold;
+  box-shadow: 0 0 0 3px rgba(0, 75, 155, 0.4);
+  transform: scale(1.05);
+}
+
+.ecat-color-button-360 img,
+.ecat-color-button-360 .swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  object-fit: cover;
+}
+
+.ecat-color-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 2px solid #ddd;
+  border-radius: 20px;
+  transition: all 0.2s ease-in-out;
+  cursor: pointer;
+  background: #f9f9f9;
+  margin: 4px;
+  font-size: 14px;
+}
+.ecat-color-button:hover {
+  border-color: #004b9b;
+}
+.ecat-color-button.active {
+  border-color: #004b9b;
+  background-color: #e6f0ff;
+  font-weight: bold;
+  box-shadow: 0 0 0 3px rgba(0, 75, 155, 0.4);
+  transform: scale(1.05);
+}
+.ecat-color-button img,
+.ecat-color-button .swatch {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+  object-fit: cover;
+}
+
+/* DÁN ĐOẠN CSS NÀY VÀO THẺ <style> */
+
+/* === CSS MỚI CHO NÚT CHUYỂN CHẾ ĐỘ === */
+.ecat-mode-button {
+  padding: 8px 16px;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  background-color: #f8f9fa;
+  color: #333;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+.ecat-mode-button:hover {
+  background-color: #e9ecef;
+  border-color: #bbb;
+}
+.ecat-mode-button.active {
+  background-color: #004b9b;
+  color: #fff;
+  border-color: #004b9b;
+}
+
+#ecat-unified-display-area {
+    position: relative; /* Quan trọng để định vị nội dung bên trong */
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Giữ tỷ lệ khung hình video/widescreen */
+    background-color: #f8f9fa; /* Màu nền nhẹ khi đang tải */
+    border-radius: 12px;
+    overflow: hidden; /* Ẩn bất kỳ phần nào tràn ra ngoài */
+    
+    /* Dùng flexbox để căn giữa nội dung một cách đơn giản */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 2. Đảm bảo nội dung bên trong (cả tĩnh và 360) lấp đầy khung */
+#ecat-unified-display-area .ecat-hero,
+#ecat-unified-display-area .car360-container {
+    width: 100%;
+    height: 100%;
+}
+
+/* 3. Tinh chỉnh hình ảnh để luôn vừa vặn trong khung mà không bị méo */
+#ecat-unified-display-area img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Đây là thuộc tính quan trọng nhất! */
+}
+
+/* === NEW: CSS FOR 360 VIEWER PODIUM AND BUTTONS === */
+.viewer-360-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Đảm bảo kính lúp không tràn ra ngoài */
+}
+
+.viewer-360-container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    user-select: none;
+    cursor: grab;
+}
+
+.viewer-360-podium {
+    position: absolute;
+    bottom: 12%; /* Điều chỉnh vị trí dọc */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 15%; /* Chiều cao của bệ */
+    background-image: url('https://scaleflex.cloudimg.io/v7/plugins/js-cloudimage-360-view/assets/img/360.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: 1;
+    opacity: 0.7;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.viewer-360-podium.hidden {
+    opacity: 0;
+}
+
+.viewer-360-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5; /* Nằm trên cả kính lúp */
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid #ccc;
+    color: #333;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, box-shadow 0.2s;
+    backdrop-filter: blur(2px);
+}
+.viewer-360-nav:hover {
+    background: #fff;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+.viewer-360-prev {
+    left: 15px;
+}
+.viewer-360-next {
+    right: 15px;
+}
+
+/* === NEW: FULLSCREEN AND MAGNIFIER STYLES === */
+.viewer-360-controls {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 5;
+    display: flex;
+    gap: 10px;
+}
+
+.viewer-360-button {
+    width: 36px;
+    height: 36px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid #ccc;
+    border-radius: 50%;
+    cursor: pointer;
+    background-size: 60%;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: background-color 0.2s;
+}
+.viewer-360-button:hover {
+    background-color: #fff;
+}
+
+.viewer-360-magnify-button {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+}
+.viewer-360-magnify-button.active {
+    background-color: #e6f0ff;
+    border-color: #004b9b;
+}
+
+.viewer-360-fullscreen-button {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+}
+.viewer-360-wrapper:fullscreen .viewer-360-fullscreen-button {
+     background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%23333"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+}
+
+/* Kính lúp */
+.magnifier-lens {
+    position: absolute;
+    border: 2px solid #004b9b;
+    border-radius: 50%;
+    width: 150px; /* Kích thước kính lúp */
+    height: 150px;
+    cursor: crosshair;
+    display: none; /* Ẩn mặc định */
+    z-index: 4;
+    pointer-events: none; /* Cho phép click xuyên qua */
+    background: rgba(255,255,255,0.2);
+    backdrop-filter: blur(1px);
+}
+
+.viewer-360-container.magnify-active {
+    cursor: crosshair;
+}
+  </style>
+
+  <div id="ecatModal" class="ecat-mask" role="dialog" aria-modal="true" aria-hidden="true">
+  <div class="ecat-panel" role="document">
+    <button class="ecat-x" id="ecatClose" aria-label="Đóng">✕</button>
+
+    <nav class="ecat-menu">
+   <ul>
+        <li><a href="#ecatHome" id="ecatHome" style="text-transform: uppercase;"></a></li>
+    </ul>
+      <ul>
+        <li><a href="#ecatVideoHero">Giới thiệu</a></li>
+        <li><a href="#ecatVersions">Phiên bản</a></li>
+        <li><a href="#tab-features">Tính năng</a></li>
+        <li><a href="#tab-gallery">Thư viện</a></li>
+        <li><a href="#tab-reviews">Review</a></li>
+        <li><a href="#ecatRelated">Xe đề xuất</a></li>
+      </ul>
+    </nav>
+
+    <div id="ecatVideoHero" class="ecat-video-hero"></div>
+
+    <div class="ecat-grid" id="ecatIntro">
+
+      <h2 id="ecatTitle" class="text-uppercase ecat-title ecat-car-name-heading">Tên xe</h2>
+
+      <div class="ecat-left">
+
+          <div id="ecat-unified-display-area">
+              </div>
+
+          <div id="ecat-unified-controls" class="mt-3">
+              <div id="ecat-mode-toggles" class="text-center mb-3"></div>
+
+              <div id="ecat-color-selectors" class="text-center">
+                  <div id="ecatExteriorColorSelector" style="display: none;"></div>
+                  <div id="ecatInteriorColorSelector" style="display: none;"></div>
+              </div>
+          </div>
+
+      </div>
+
+      <div class="ecat-right">
+        <div class="ecat-section" id="ecatVersions">
+          <h4>Phiên bản & Giá bán</h4>
+          <div id="ecatVersionsContent" class="ecat-versions"></div>
+        </div>
+        <div class="ecat-specs">
+          <div class="ecat-spec-row">
+            <div class="ecat-spec-label"><i class="fa-solid fa-car-side"></i> Kiểu dáng</div>
+            <div class="ecat-spec-value" id="ecatStyle">Hatchback</div>
+          </div>
+          <div class="ecat-spec-row">
+            <div class="ecat-spec-label"><i class="fa-solid fa-users"></i> Số chỗ</div>
+            <div class="ecat-spec-value" id="ecatSeats">5 chỗ</div>
+          </div>
+          <div class="ecat-spec-row">
+            <div class="ecat-spec-label"><i class="fa-solid fa-gas-pump"></i> Nhiên liệu</div>
+            <div class="ecat-spec-value" id="ecatFuel">Xăng</div>
+          </div>
+        </div>
+
+        <div class="ecat-cta">
+          <div class="ecat-cta-row">
+            <a id="ecatBrochure" class="btn-outline" target="_blank">Tải brochure</a>
+            <a id="ecatWebsite" class="btn-outline" target="_blank">Xem chi tiết website</a>
+          </div>
+          <button id="ecatContact" class="btn-primary">Liên hệ tư vấn</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ecat-full">
+        <section id="tab-features" class="ecat-content-section">
+            <h2 class="ecat-section-title">Tính năng nổi bật</h2>
+            <div class="ecat-features-list">
+                <h4>Opposites United – Khởi tạo chuẩn mực mới cho MPV hiện đại</h4>
+                <p>Ngôn ngữ thiết kế mới với dải đèn Star-map lấy cảm hứng từ chòm sao, tạo nên dấu ấn thị giác mạnh mẽ, biến Carnival thành biểu tượng nhận diện ngay từ cái nhìn đầu tiên.</p>
+                
+                <h4>Âm thanh Bose 12 loa – Mỗi hành trình là một bản hòa tấu</h4>
+                <p>Công nghệ Centerpoint độc quyền từ Bose mang đến trải nghiệm âm nhạc sống động, cân bằng và bao trùm không gian, biến khoang xe thành phòng hòa nhạc di động. </p>
+
+                <h4>Khoang lái – Nơi thoải mái hóa thành nghệ thuật</h4>
+                <p>Ghế da thoáng khí, chỉnh điện đa hướng, nhớ vị trí, sưởi và làm mát… Carnival mang đến trải nghiệm như ngồi trong một lounge êm ái, nơi thư thái và sang trọng hòa làm một.</p>
+                <h4>Khung gầm N3 & ADAS 2.0 – Bản lĩnh và an toàn vượt trội</h4>
+                <p>Hệ thống treo cải tiến giúp xe vận hành ổn định, êm ái hơn, kết hợp gói hỗ trợ lái ADAS 2.0 thế hệ mới, mang lại sự an tâm trên mọi cung đường.
+</p>
+            </div>
+        </section>
+
+        <section id="tab-gallery" class="ecat-content-section">
+            <h2 class="ecat-section-title">Thư viện hình ảnh</h2>
+            <div id="ecatGalleryGrid" class="ecat-gallery-grid">
+                </div>
+            <button id="ecatLoadMoreBtn" class="hidden">Xem thêm</button>
+        </section>
+        
+        <section id="tab-reviews" class="ecat-content-section">
+            <h2 class="ecat-section-title">Review sản phẩm</h2>
+            <div class="ecat-review-grid">
+                <div class="ecat-review-item">
+                    <i class="fa-brands fa-youtube"></i>
+                    <span>Video Review 1</span>
+                </div>
+                <div class="ecat-review-item">
+                    <i class="fa-brands fa-youtube"></i>
+                     <span>Video Review 2</span>
+                </div>
+                <div class="ecat-review-item">
+                    <i class="fa-brands fa-youtube"></i>
+                     <span>Video Review 3</span>
+                </div>
+            </div>
+        </section>
+
+        <div id="ecatRelated" class="ecat-content-section">
+            <h2 class="ecat-section-title">Dòng xe tương tự</h2>
+            <div id="similar-cars" class="similar-cars"></div>
+        </div>
+    </div>
+  </div>
+</div>
+<div id="gallery-lightbox" class="lightbox">
+    <div class="lightbox-content">
+        <button class="lightbox-close">×</button>
+        <button class="lightbox-nav lightbox-prev">❮</button>
+        <img src="" alt="Hình ảnh lớn">
+        <button class="lightbox-nav lightbox-next">❯</button>
+    </div>
+</div>
+
+<script>
+(function(){
+  const slugify = (str) => (str||'')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g,'')
+    .replace(/đ/g,'d').replace(/Đ/g,'D')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g,'-')
+    .replace(/(^-|-$)/g,'');
+
+  const priceFmt = (n)=> {
+    try { return Number(n||0).toLocaleString('vi-VN') + ' ₫'; }
+    catch(_) { return n }
+  };
+
+  const $modal = document.getElementById('ecatModal');
+  const $title = document.getElementById('ecatTitle');
+  const $versionsContent = document.getElementById('ecatVersionsContent');
+  const $vidHero = document.getElementById('ecatVideoHero');
+  const $brochure = document.getElementById('ecatBrochure');
+  const $website = document.getElementById('ecatWebsite');
+  const $close = document.getElementById('ecatClose');
+  const $ecatLeft360 = document.getElementById('ecat-left-360');
+
+
+  async function getCars() {
+   return JSON.parse(localStorage.getItem('newlist'));
+  }
+
+  function colorsHtml(arr){
+    if(!arr || !arr.length) return '<span class="ecat-note">Không có dữ liệu</span>';
+    return arr.filter(c => c && c.code).map(c => {
+      let bg = Array.isArray(c.code)
+        ? `linear-gradient(90deg, ${c.code.join(",")})`
+        : c.code;
+      return `
+        <span class="ecat-chip">
+          <span class="ecat-color" style="background:${bg};"></span>
+          ${c.name || ''}
+        </span>
+      `;
+    }).join('');
+  }
+
+
+// ===================================================================
+// ==== BẮT ĐẦU KHỐI LOGIC VIEWER HỢP NHẤT ========================
+// ===================================================================
+
+let cleanupCurrent360Viewer = () => {};
+
+async function setupUnifiedViewer(carName360, allCars) {
+    const displayArea = document.getElementById('ecat-unified-display-area');
+    const modeToggles = document.getElementById('ecat-mode-toggles');
+    const exteriorSelector = document.getElementById('ecatExteriorColorSelector');
+    const interiorSelector = document.getElementById('ecatInteriorColorSelector');
+
+    displayArea.innerHTML = '<p class="p-4 text-center">Đang tải chi tiết xe...</p>';
+    modeToggles.innerHTML = '';
+    exteriorSelector.innerHTML = '';
+    interiorSelector.innerHTML = '';
+
+    try {
+        const response = await fetch(`https://thacoautotphcm.vn/api/v1/car-detail/${carName360}`);
+        if (!response.ok) throw new Error(`Lỗi API: ${response.statusText}`);
+        
+        const result = await response.json();
+        const carData = result.data;
+        if (!carData) throw new Error('Không tìm thấy dữ liệu xe.');
+
+        const exteriorColors = (carData.exterior_colors || []).filter(c => c.image || (c.images && c.images.length > 0));
+        const interiorColors = (carData.interior_colors || []).filter(c => c.image || (Array.isArray(c.images) && c.images.length > 0));
+
+        populateColorSwatches(exteriorColors, exteriorSelector);
+        populateColorSwatches(interiorColors, interiorSelector);
+
+        if (exteriorColors.length > 0) {
+            modeToggles.appendChild(createModeButton('Ngoại thất', 'exterior'));
+        }
+        if (interiorColors.length > 0) {
+            modeToggles.appendChild(createModeButton('Nội thất', 'interior'));
+        }
+        
+        if (modeToggles.firstChild) {
+            modeToggles.firstChild.click();
+        } else {
+            const originalCar = allCars.find(c => c.name_360 === carName360);
+            if (originalCar && originalCar.img) {
+                displayArea.innerHTML = `<div class="ecat-hero"><img src="${originalCar.img}" alt="${originalCar.name}"></div>`;
+            } else {
+                displayArea.innerHTML = '<p class="p-4 text-center">Không có hình ảnh cho xe này.</p>';
+            }
+        }
+
+    } catch (error) {
+        console.error('Lỗi khi thiết lập viewer:', error);
+        displayArea.innerHTML = `<p class="p-4 text-center text-danger">Không thể tải dữ liệu. <br><small>${error.message}</small></p>`;
+    }
+}
+
+function createModeButton(text, mode) {
+    const button = document.createElement('button');
+    button.className = 'ecat-mode-button';
+    button.textContent = text;
+    button.dataset.mode = mode;
+
+    button.addEventListener('click', () => {
+        document.querySelectorAll('.ecat-mode-button').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+
+        const isExterior = (mode === 'exterior');
+        document.getElementById('ecatExteriorColorSelector').style.display = isExterior ? 'block' : 'none';
+        document.getElementById('ecatInteriorColorSelector').style.display = isExterior ? 'none' : 'block';
+
+        const targetSelector = isExterior ? document.getElementById('ecatExteriorColorSelector') : document.getElementById('ecatInteriorColorSelector');
+        if (targetSelector.firstChild) targetSelector.firstChild.click();
+    });
+    return button;
+}
+
+function populateColorSwatches(colors, container) {
+    colors.forEach(color => {
+        const button = createColorButton(color);
+        button.addEventListener('click', () => {
+            renderInDisplayArea(color);
+            setActiveButton(container, button);
+        });
+        container.appendChild(button);
+    });
+}
+
+function renderInDisplayArea(color) {
+    cleanupCurrent360Viewer();
+    const displayArea = document.getElementById('ecat-unified-display-area');
+
+    if (color.images && color.images.length > 0) {
+        const sortedImages = [...color.images].sort((a, b) => {
+            const numA = parseInt((a.match(/(\d+)\.png$/) || [])[1], 10) || 0;
+            const numB = parseInt((b.match(/(\d+)\.png$/) || [])[1], 10) || 0;
+            return numA - numB;
+        });
+
+        displayArea.innerHTML = `
+            <div class="viewer-360-wrapper">
+                <div class="viewer-360-podium"></div>
+                <div class="viewer-360-controls">
+                    <button class="viewer-360-button viewer-360-magnify-button" title="Bật/tắt kính lúp"></button>
+                    <button class="viewer-360-button viewer-360-fullscreen-button" title="Xem toàn màn hình"></button>
+                </div>
+                <div class="viewer-360-container" data-images='${JSON.stringify(sortedImages)}'>
+                    <img src="${sortedImages[0]}" alt="Hình 360 ${color.name}" style="pointer-events: none;">
+                </div>
+                <button class="viewer-360-nav viewer-360-prev">❮</button>
+                <button class="viewer-360-nav viewer-360-next">❯</button>
+                <div class="magnifier-lens"></div>
+            </div>
+        `;
+        // Chú ý: Chúng ta không cần vùng result riêng biệt nữa
+        cleanupCurrent360Viewer = init360DragRotation(displayArea.querySelector('.viewer-360-container'));
+    } else {
+        const imgSrc = color.image || (color.images && color.images[0]);
+        displayArea.innerHTML = `<div class="ecat-hero"><img src="${imgSrc}" alt="${color.name}"></div>`;
+        cleanupCurrent360Viewer = () => {};
+    }
+}
+
+
+function createColorButton(color) { const button = document.createElement('button'); button.className = 'ecat-color-button'; const colorDisplay = color.image_color ? `<img src="${color.image_color}" alt="${color.name}">` : `<span class="swatch" style="background-color: ${color.code};"></span>`; button.innerHTML = `${colorDisplay} <span>${color.name}</span>`; return button; }
+function setActiveButton(container, activeButton) { container.querySelectorAll('.ecat-color-button').forEach(btn => btn.classList.remove('active')); activeButton.classList.add('active'); }
+
+function init360DragRotation(container) {
+    const wrapper = container.closest('.viewer-360-wrapper');
+    if (!wrapper) return () => {};
+
+    const images = JSON.parse(container.dataset.images);
+    const imgElement = container.querySelector('img');
+    const podium = wrapper.querySelector('.viewer-360-podium');
+    const prevBtn = wrapper.querySelector('.viewer-360-prev');
+    const nextBtn = wrapper.querySelector('.viewer-360-next');
+    const magnifyBtn = wrapper.querySelector('.viewer-360-magnify-button');
+    const fullscreenBtn = wrapper.querySelector('.viewer-360-fullscreen-button');
+    const lens = wrapper.querySelector('.magnifier-lens');
+    
+    if (!images || images.length === 0) return () => {};
+    images.forEach(src => { (new Image()).src = src; });
+
+    let isDragging = false, startX, startFrame;
+    let currentFrame = 0;
+    let magnifyActive = false;
+
+    function showFrame(frameIndex) {
+        let newIndex = frameIndex % images.length;
+        if (newIndex < 0) newIndex += images.length;
+        currentFrame = newIndex;
+        const newSrc = images[currentFrame];
+        imgElement.src = newSrc;
+        lens.style.backgroundImage = "url('" + newSrc + "')";
+    }
+
+    const startDrag = e => {
+        if (magnifyActive) return;
+        e.preventDefault();
+        isDragging = true;
+        startX = e.pageX || e.touches[0].pageX;
+        startFrame = currentFrame;
+        container.style.cursor = 'grabbing';
+        podium.classList.add('hidden');
+    };
+
+    const onDrag = e => {
+        if (!isDragging || magnifyActive) return;
+        e.preventDefault();
+        const currentX = e.pageX || e.touches[0].pageX;
+        const deltaX = currentX - startX;
+        const frameChange = Math.floor(deltaX / 25);
+        showFrame(startFrame - frameChange);
+    };
+
+    const endDrag = e => {
+        if (!isDragging) return;
+        isDragging = false;
+        container.style.cursor = 'grab';
+        podium.classList.remove('hidden');
+    };
+
+    const toggleFullScreen = () => {
+        if (!document.fullscreenElement) {
+            wrapper.requestFullscreen().catch(err => console.error(err));
+        } else {
+            document.exitFullscreen();
+        }
+    };
+
+    const moveMagnifier = (e) => {
+        if (!magnifyActive) return;
+        e.preventDefault();
+        const pos = getCursorPos(e);
+        const lensHalf = lens.offsetWidth / 2;
+        let x = pos.x - lensHalf;
+        let y = pos.y - lensHalf;
+        
+        if (x > imgElement.width - lens.offsetWidth) x = imgElement.width - lens.offsetWidth;
+        if (x < 0) x = 0;
+        if (y > imgElement.height - lens.offsetHeight) y = imgElement.height - lens.offsetHeight;
+        if (y < 0) y = 0;
+
+        lens.style.left = x + "px";
+        lens.style.top = y + "px";
+
+        const ratio = 2; // Độ phóng đại
+        lens.style.backgroundSize = (imgElement.width * ratio) + "px " + (imgElement.height * ratio) + "px";
+        lens.style.backgroundPosition = "-" + (x * ratio - lensHalf) + "px -" + (y * ratio - lensHalf) + "px";
+    };
+
+    const getCursorPos = (e) => {
+        const a = imgElement.getBoundingClientRect();
+        const x = (e.pageX || e.touches[0].pageX) - a.left - window.pageXOffset;
+        const y = (e.pageY || e.touches[0].pageY) - a.top - window.pageYOffset;
+        return { x, y };
+    };
+    
+    const toggleMagnify = () => {
+        magnifyActive = !magnifyActive;
+        magnifyBtn.classList.toggle('active');
+        container.classList.toggle('magnify-active');
+        lens.style.display = magnifyActive ? 'block' : 'none';
+        if(magnifyActive) {
+            lens.style.backgroundImage = "url('" + imgElement.src + "')";
+        }
+    };
+    
+    container.addEventListener('mousedown', startDrag);
+    document.addEventListener('mousemove', onDrag);
+    document.addEventListener('mouseup', endDrag);
+    document.addEventListener('mouseleave', endDrag);
+    container.addEventListener('touchstart', startDrag, { passive: false });
+    document.addEventListener('touchmove', onDrag, { passive: false });
+    document.addEventListener('touchend', endDrag);
+    
+    prevBtn.addEventListener('click', () => showFrame(currentFrame - 1));
+    nextBtn.addEventListener('click', () => showFrame(currentFrame + 1));
+    fullscreenBtn.addEventListener('click', toggleFullScreen);
+    magnifyBtn.addEventListener('click', toggleMagnify);
+    
+    container.addEventListener('mousemove', moveMagnifier);
+    container.addEventListener('touchmove', moveMagnifier);
+
+
+    return () => {
+        document.removeEventListener('mousemove', onDrag);
+        document.removeEventListener('mouseup', endDrag);
+        document.removeEventListener('mouseleave', endDrag);
+        document.removeEventListener('touchmove', onDrag);
+        document.removeEventListener('touchend', endDrag);
+    };
+}
+
+
+// ==========================================================
+// ==== KẾT THÚC KHỐI LOGIC VIEWER ĐÃ HỢP NHẤT =============
+// ==========================================================
+
+  function setupPopupScrolling() {
+      const menu = $modal.querySelector('.ecat-menu');
+      if (!menu) return;
+      
+      const menuLinks = menu.querySelectorAll('a');
+      const sections = Array.from(menuLinks).map(link => $modal.querySelector(link.getAttribute('href'))).filter(Boolean);
+
+      menuLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+              e.preventDefault();
+              const targetElement = $modal.querySelector(this.getAttribute('href'));
+              if (targetElement) {
+                  const topPos = targetElement.offsetTop - menu.offsetHeight;
+                  $modal.scrollTo({ top: topPos, behavior: 'smooth' });
+              }
+          });
+      });
+
+      const handleScroll = () => {
+          let current = '';
+          const scrollPosition = $modal.scrollTop + menu.offsetHeight + 50; 
+
+          for (const section of sections) {
+              if (section.offsetTop <= scrollPosition) {
+                  current = section.getAttribute('id');
+              }
+          }
+
+          menuLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href').substring(1) === current) {
+                  link.classList.add('active');
+              }
+          });
+      };
+      
+      $modal.addEventListener('scroll', handleScroll);
+  }
+
+function openModal(car, allCars) {
+    // === DỌN DẸP TRIỆT ĐỂ KHI MỞ POPUP MỚI ===
+    $vidHero.innerHTML = '';
+    document.getElementById('ecat-unified-display-area').innerHTML = '';
+    document.getElementById('ecat-mode-toggles').innerHTML = '';
+    document.getElementById('ecatExteriorColorSelector').innerHTML = '';
+    document.getElementById('ecatInteriorColorSelector').innerHTML = '';
+    document.getElementById('ecatExteriorColorSelector').style.display = 'none';
+    document.getElementById('ecatInteriorColorSelector').style.display = 'none';
+    
+    document.body.style.overflow = "hidden";
+    
+    if (car.name_360 && car.name_360.trim() !== "") {
+        setupUnifiedViewer(car.name_360, allCars);
+    } else {
+        const displayArea = document.getElementById('ecat-unified-display-area');
+        displayArea.innerHTML = `<div class="ecat-hero"><img src="${car.img || ''}" alt="${car.name}"></div>`;
+    }
+    
+    $title.textContent = car.name || '';
+    document.getElementById('ecatHome').textContent = car.name || '';
+    
+    $versionsContent.innerHTML = (car.versions || []).map(v => `
+      <div class="ecat-version"><strong>${v.name}</strong><div class="ecat-price">${priceFmt(v.originalPrice)}</div></div>
+    `).join('');
+
+    if (car.brochure) { $brochure.href = car.brochure; $brochure.style.display = 'inline-block'; } 
+    else { $brochure.style.display = 'none'; }
+
+    if (car.website || car.website_url) { $website.href = car.website || car.website_url; $website.style.display = 'inline-block'; } 
+    else { $website.style.display = 'none'; }
+
+    document.getElementById('ecatStyle').textContent = car.type || '';
+    document.getElementById('ecatSeats').textContent = car.seats ? car.seats.join(', ') + ' chỗ' : '';
+    document.getElementById('ecatFuel').textContent = car.fuel ? car.fuel.join(', ') : '';
+
+    if (car.video) {
+        const vidId = extractYouTubeId(car.video);
+        if (vidId) {
+            const embedUrl = `https://www.youtube-nocookie.com/embed/${vidId}?controls=0&autoplay=1&mute=1&loop=1&playlist=${vidId}&showinfo=0&modestbranding=1&fs=0&playsinline=1&autohide=1&rel=0`;
+            $vidHero.innerHTML = `<div class="ecat-video"><iframe src="${embedUrl}" frameborder="0" allow="autoplay; fullscreen"></iframe></div>`;
+            $vidHero.style.display = 'block';
+
+            const versions = car.versions || [];
+            const minPrice = versions.length > 0 ? Math.min(...versions.map(v => v.originalPrice || Infinity)) : 0;
+            const overlayHTML = `<div class="video-overlay-content"><h2 class="video-overlay-name">${car.name}</h2><div class="video-overlay-ctas"><a href="#" class="btn-overlay-primary">Đặt hẹn lái thử</a><a href="#" class="btn-overlay-secondary">Tư vấn chi tiết</a></div><div class="video-overlay-info"><div><span>Giá từ</span><strong>${priceFmt(minPrice)}</strong></div><div><span>Nhiên liệu</span><strong>${car.fuel ? car.fuel.join(', ') : 'N/A'}</strong></div></div></div>`;
+            $vidHero.insertAdjacentHTML('beforeend', overlayHTML);
+        } else { $vidHero.style.display = 'none'; }
+    } else { $vidHero.style.display = 'none'; }
+
+    const gridContainer = document.getElementById('ecatGalleryGrid');
+    const loadMoreBtn = document.getElementById('ecatLoadMoreBtn');
+    const gallery = car.gallery || [];
+    if (gallery.length > 0) {
+        gridContainer.innerHTML = gallery.map((id, index) => `<div class="ecat-gallery-item ${index >= 20 ? 'hidden' : ''}" data-index="${index}"><img src="https://lh3.googleusercontent.com/d/${id}=w400?authuser=0" data-large-src="https://lh3.googleusercontent.com/d/${id}=w1920?authuser=0" loading="lazy" alt="Gallery image ${index + 1}"></div>`).join('');
+        loadMoreBtn.classList.toggle('hidden', gallery.length <= 20);
+    } else {
+        gridContainer.innerHTML = '<p class="ecat-note" style="grid-column: 1 / -1; text-align:center;">Chưa có hình ảnh</p>';
+        loadMoreBtn.classList.add('hidden');
+    }
+
+    $modal.classList.add('ecat-open');
+    $modal.setAttribute('aria-hidden', 'false');
+    const u = new URL(window.location.href);
+    u.searchParams.set('id', slugify(car.name));
+    history.replaceState({}, '', u);
+    $modal.scrollTo({ top: 0, behavior: "auto" });
+    renderRecommendedCarsFlat(car.name, allCars, "similar-cars");
+}
+  
+
+  function closeModal(){
+    $modal.classList.remove('ecat-open');
+    $modal.setAttribute('aria-hidden','true');
+    const u = new URL(window.location.href);
+    u.searchParams.delete('id');
+    history.replaceState({}, '', u);
+    document.body.style.overflow = "";
+    $vidHero.innerHTML = '';
+    cleanupCurrent360Viewer();
+  }
+
+  function extractYouTubeId(url){
+    try {
+      let u = new URL(url);
+      if(u.hostname.includes('youtu.be')) return u.pathname.slice(1);
+      if(u.searchParams.get('v')) return u.searchParams.get('v');
+      let m = u.pathname.match(/\/embed\/([^/?]+)/);
+      return m ? m[1] : null;
+    } catch(e){ return null; }
+  }
+  
+  const loadMoreBtn = document.getElementById('ecatLoadMoreBtn');
+  if (loadMoreBtn) {
+      loadMoreBtn.addEventListener('click', () => {
+          document.querySelectorAll('#ecatGalleryGrid .ecat-gallery-item.hidden').forEach(item => {
+              item.classList.remove('hidden');
+          });
+          loadMoreBtn.classList.add('hidden');
+      });
+  }
+
+  $close.addEventListener('click', closeModal);
+  $modal.addEventListener('click', (e)=>{ if(e.target === $modal) closeModal(); });
+  document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape' && $modal.classList.contains('ecat-open')) closeModal(); });
+
+   window.CarPopupDetail = {
+    openBySlug: async (slug) => {
+      const cars = await getCars();
+      const car = cars.find(c => slugify(c.name) === slug);
+      if(car) openModal(car, cars);
+    },
+    openByName: async (name) => {
+      const cars = await getCars();
+      const car = cars.find(c => c.name === name);
+      if(car) openModal(car, cars);
+    }
+  };
+
+  document.addEventListener("click", async (e) => {
+    const a = e.target.closest("a[data-slug]");
+    if (!a) return;
+    e.preventDefault();
+    const slug = a.dataset.slug;
+    const cars = await getCars();
+    const hit = cars.find(c => slugify(c.name) === slug);
+    if (hit) openModal(hit, cars);
+  });
+  
+  setupPopupScrolling();
+
+    const lightbox = document.getElementById('gallery-lightbox');
+    const lightboxImg = lightbox.querySelector('img');
+    const lightboxClose = lightbox.querySelector('.lightbox-close');
+    const lightboxPrev = lightbox.querySelector('.lightbox-prev');
+    const lightboxNext = lightbox.querySelector('.lightbox-next');
+    const galleryGrid = document.getElementById('ecatGalleryGrid');
+    
+    let currentImageIndex = 0;
+    let galleryImages = [];
+
+    function openLightbox(index) {
+        galleryImages = Array.from(galleryGrid.querySelectorAll('.ecat-gallery-item:not(.hidden) img'));
+        if (galleryImages.length === 0 || index < 0 || index >= galleryImages.length) return;
+        
+        currentImageIndex = index;
+        updateLightboxImage();
+        lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('active');
+        if($modal.classList.contains('ecat-open')) {
+             document.body.style.overflow = 'hidden';
+        } else {
+             document.body.style.overflow = '';
+        }
+    }
+
+    function showPrevImage() {
+        if (currentImageIndex > 0) {
+            currentImageIndex--;
+            updateLightboxImage('prev');
+        }
+    }
+
+    function showNextImage() {
+        if (currentImageIndex < galleryImages.length - 1) {
+            currentImageIndex++;
+            updateLightboxImage('next');
+        }
+    }
+
+    function updateLightboxImage(direction) {
+        const slideOutDirection = direction === 'next' ? '-50px' : '50px';
+        const slideInDirection = direction === 'next' ? '50px' : '-50px';
+        lightboxImg.style.opacity = '0';
+        lightboxImg.style.transform = `translateX(${slideOutDirection})`;
+        setTimeout(() => {
+            lightboxImg.style.transition = 'none';
+            lightboxImg.style.transform = `translateX(${slideInDirection})`;
+            const imgElement = galleryImages[currentImageIndex];
+            const largeSrc = imgElement.dataset.largeSrc || imgElement.src;
+            lightboxImg.src = largeSrc;
+            lightboxImg.onload = () => {
+                setTimeout(() => {
+                    lightboxImg.style.transition = 'transform 0.3s ease-in-out, opacity 0.3s ease-in-out';
+                    lightboxImg.style.opacity = '1';
+                    lightboxImg.style.transform = 'translateX(0)';
+                }, 20); 
+            };
+        }, 300);
+        lightboxPrev.style.display = (currentImageIndex === 0) ? 'none' : 'block';
+        lightboxNext.style.display = (currentImageIndex === galleryImages.length - 1) ? 'none' : 'block';
+    }
+
+    galleryGrid.addEventListener('click', e => {
+        const item = e.target.closest('.ecat-gallery-item');
+        if (item) {
+            const visibleItems = Array.from(galleryGrid.querySelectorAll('.ecat-gallery-item:not(.hidden)'));
+            const visibleIndex = visibleItems.indexOf(item);
+            if (visibleIndex > -1) {
+               openLightbox(visibleIndex);
+            }
+        }
+    });
+
+    lightboxClose.addEventListener('click', closeLightbox);
+    lightboxPrev.addEventListener('click', showPrevImage);
+    lightboxNext.addEventListener('click', showNextImage);
+    lightbox.addEventListener('click', e => {
+        if (e.target === lightbox) {
+            closeLightbox();
+        }
+    });
+
+    document.addEventListener('keydown', e => {
+        if (lightbox.classList.contains('active')) {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowLeft') showPrevImage();
+            if (e.key === 'ArrowRight') showNextImage();
+        }
+    });
+  
+    let touchstartX = 0;
+    let touchendX = 0;
+    const slider = document.getElementById('gallery-lightbox');
+
+    function handleSwipe() {
+        const swipeThreshold = 50; 
+        if (touchendX < touchstartX - swipeThreshold) {
+            showNextImage();
+        }
+        if (touchendX > touchstartX + swipeThreshold) {
+            showPrevImage();
+        }
+    }
+
+    slider.addEventListener('touchstart', e => {
+        touchstartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    slider.addEventListener('touchend', e => {
+        touchendX = e.changedTouches[0].screenX;
+        handleSwipe();
+    });
+
+  window.addEventListener('DOMContentLoaded', async ()=>{
+    const id = new URL(window.location.href).searchParams.get('id');
+    if(id){ window.CarPopupDetail.openBySlug(id); }
+  });
+})();
+
+function getSimilarCarsTiered(carName, carsData) {
+  const currentCar = carsData.find(
+    c => c.name.toLowerCase() === carName.toLowerCase()
+  );
+  if (!currentCar) {
+    return { perfectMatch: [], goodAlternative: [], stretchOptions: [] };
+  }
+
+  const prices = currentCar.versions.map(v => v.originalPrice);
+  const minPrice = Math.min(...prices);
+  const maxPrice = Math.max(...prices);
+  const currentType = normalizeType(currentCar.type);
+  const sedanHatch = ["Sedan", "Hatchback"];
+  const isSedanHatch = sedanHatch.includes(currentType);
+
+  function sameGroup(c) {
+    const t = normalizeType(c.type);
+    if (isSedanHatch) return sedanHatch.includes(t);
+    return t === currentType;
+  }
+  function inPrice(c, factor) {
+    const carPrices = c.versions.map(v => v.originalPrice);
+    const carMin = Math.min(...carPrices);
+    const carMax = Math.max(...carPrices);
+    return (
+      carMin <= maxPrice * (1 + factor) &&
+      carMax >= minPrice * (1 - factor)
+    );
+  }
+  const perfectMatch = carsData.filter(c =>
+    c.name !== currentCar.name &&
+    sameGroup(c) &&
+    JSON.stringify(c.fuel) === JSON.stringify(currentCar.fuel) &&
+    inPrice(c, 0.15)
+  );
+  const goodAlternative = carsData.filter(c => {
+    if (c.name === currentCar.name) return false;
+    const ct = normalizeType(c.type);
+    const samePurpose =
+      (isSedanHatch && ["Sedan", "Hatchback", "Crossover"].includes(ct)) ||
+      ct === currentType;
+    return (
+      (samePurpose && inPrice(c, 0.25)) ||
+      (sameGroup(c) && inPrice(c, 0.35))
+    );
+  });
+  const stretchOptions = carsData.filter(c => {
+    if (c.name === currentCar.name) return false;
+    const carPrices = c.versions.map(v => v.originalPrice);
+    const carMin = Math.min(...carPrices);
+    const carMax = Math.max(...carPrices);
+    const upsell = carMin >= maxPrice * 1.3 && carMin <= maxPrice * 1.5;
+    const value = carMax <= minPrice * 0.8 && carMax >= minPrice * 0.6;
+    const fuelAlt = JSON.stringify(c.fuel) !== JSON.stringify(currentCar.fuel);
+    return upsell || value || fuelAlt;
+  });
+  return { perfectMatch, goodAlternative, stretchOptions };
+}
+
+function renderCarCard(car) {
+  const slug = slugify(car.name);
+  const versions = car.versions || [];
+  const minPrice = Math.min(...versions.map(v => v.originalPrice));
+  let tags = [];
+  if (car.highlight) tags.push("Nổi bật");
+  if (car.bestseller) tags.push("Bán chạy");
+  if (car.new) tags.push("Xe mới");
+  const tagsHTML = tags.length ? `<div class="tags">${tags.map(t => `<span class="tag">${t}</span>`).join("")}</div>` : "";
+  return `
+    <div class="product-card ${car.brand} p-3 d-flex flex-column">
+      ${tagsHTML}
+      <a href="#" data-slug="${slug}" style="text-decoration:none;color:inherit">
+        <div class="img-frame"><img src="${car.img}" alt="${car.name}"/></div>
+      </a>
+      <div class="product-info mt-2 d-flex flex-column flex-grow-1">
+        <h3><a href="#" data-slug="${slug}" style="text-decoration:none;color:#004b9b">${car.name}</a></h3>
+        <div class="price-block"><div class="main-price">${formatCurrency(minPrice)}</div></div>
+        <div class="btn-group mt-2">
+          <a class="btn-estimate" href="#" data-slug="${slug}">Dự toán</a>
+          <a class="btn-contact" href="#">Liên hệ</a>
+        </div>
+      </div>
+    </div>
+  `;
+}
+function normalizeType(type) {
+  if (!type) return "";
+  const t = type.toLowerCase();
+  if (t.includes("suv")) return "SUV";
+  if (t.includes("sedan")) return "Sedan";
+  if (t.includes("hatchback")) return "Hatchback";
+  if (t.includes("crossover")) return "Crossover";
+  if (t.includes("mpv")) return "MPV";
+  if (t.includes("pickup")) return "Pickup";
+  return type;
+}
+function renderRecommendedCarsFlat(carName, carsData, containerId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const tiers = getSimilarCarsTiered(carName, carsData);
+  console.log("==== ĐỀ XUẤT 3 TẦNG CHO:", carName, "====");
+  console.log("Perfect Match:", tiers.perfectMatch.map(c => c.name));
+  console.log("Good Alternative:", tiers.goodAlternative.map(c => c.name));
+  console.log("Stretch Options:", tiers.stretchOptions.map(c => c.name));
+  console.log("=====================================");
+  let all = [...tiers.perfectMatch, ...tiers.goodAlternative, ...tiers.stretchOptions];
+  const seen = new Set();
+  all = all.filter(c => {
+    if (seen.has(c.name)) return false;
+    seen.add(c.name);
+    return true;
+  });
+  const cars = all.slice(0, 4);
+  if (cars.length === 0) {
+    container.innerHTML = "<p class='ecat-note'>Không tìm thấy xe gợi ý.</p>";
+    return;
+  }
+  container.innerHTML = cars.map(renderCarCard).join("");
+}
+
+</script>
+</body>
+</html>
