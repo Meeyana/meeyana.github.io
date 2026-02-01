@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tạo QR Code Tách Nền</title>
+    <!-- Import thư viện QRCode -->
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <!-- Tailwind CSS cho giao diện đẹp -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Nền trắng cho khung xem trước để dễ nhìn */
+        .white-preview {
+            background-color: white;
+        }
+        /* CSS ép kích thước hiển thị nhưng không ảnh hưởng file tải về */
+        #qr-canvas {
+            width: 300px !important;
+            height: 300px !important;
+            max-width: 100%; /* Đảm bảo responsive trên mobile */
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="bg-white rounded-xl shadow-lg p-8 w-full max-w-md">
+        <h1 class="text-2xl font-bold text-center text-gray-800 mb-6">Tạo QR Code (Tách Nền)</h1>
+
+        <!-- Input Area -->
+        <div class="mb-4">
+            <label class="block text-gray-700 text-sm font-bold mb-2" for="url-input">
+                Nhập đường link:
+            </label>
+            <input 
+                type="text" 
+                id="url-input" 
+                placeholder="https://example.com"
+                class="shadow appearance-none border rounded w-full py-3 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+        </div>
+
+        <button 
+            onclick="generateQR()" 
+            class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline transition duration-200"
+        >
+            Tạo Mã QR
+        </button>
+
+        <!-- Preview Area -->
+        <div id="preview-container" class="hidden mt-8 flex flex-col items-center">
+            <p class="text-gray-600 mb-2 text-sm">Xem trước (300px):</p>
+            
+            <!-- Container bọc canvas -->
+            <div class="white-preview p-2 border-2 border-gray-300 rounded-lg shadow-sm flex justify-center">
+                <!-- Canvas này sẽ có width="500" height="500" (thực tế) nhưng hiển thị bị CSS ép xuống 300px -->
+                <canvas id="qr-canvas"></canvas>
+            </div>
+            
+            <p class="text-gray-400 text-xs mt-2">File tải về sẽ nét hơn (500x500 px)</p>
+
+            <button 
+                onclick="downloadQR()" 
+                class="mt-4 w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded focus:outline-none focus:shadow-outline flex items-center justify-center gap-2 transition duration-200"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                Tải về máy (HD 500px)
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('qr-canvas');
+        const urlInput = document.getElementById('url-input');
+        const previewContainer = document.getElementById('preview-container');
+
+        function generateQR() {
+            const url = urlInput.value.trim();
+
+            if (!url) {
+                alert("Vui lòng nhập đường link trước!");
+                return;
+            }
+
+            // Gọi thư viện QRCode để vẽ lên Canvas
+            QRCode.toCanvas(canvas, url, {
+                width: 500,        // Độ phân giải thực của ảnh là 500px
+                margin: 1,         // Lề nhỏ
+                color: {
+                    dark: '#000000FF',  // Màu đen
+                    light: '#00000000'  // Nền trong suốt
+                }
+            }, function (error) {
+                if (error) {
+                    console.error(error);
+                    alert("Có lỗi xảy ra khi tạo QR!");
+                } else {
+                    // Hiển thị khung xem trước
+                    previewContainer.classList.remove('hidden');
+                    console.log('QR code generated successfully!');
+                }
+            });
+        }
+
+        function downloadQR() {
+            const link = document.createElement('a');
+            link.download = 'qrcode-tach-nen-HD.png';
+            // Lấy dữ liệu gốc từ canvas (500x500) bất kể CSS đang hiển thị bao nhiêu
+            link.href = canvas.toDataURL('image/png');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
+</body>
+</html>
