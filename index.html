@@ -611,31 +611,32 @@ section {
                     Send Message
                   </h5>
                   
-                  <form name="submit-to-google-sheet" id="contactForm">
-                    <div class="form-group">
-                      <label class="display-4">Name</label>
-                      <input type="text" name="Name" placeholder="Your full name" required="" class="display-4">
-                    </div>
-                    
-                    <div class="form-group">
-                      <label class="display-4">Email</label>
-                      <input type="email" name="Email" placeholder="your.email@example.com" required="" class="display-4">
-                    </div>
-                    
-                    <div class="form-group">
-                      <label class="display-4">Subject</label>
-                      <input type="text" name="Subject" placeholder="What's this about?" class="display-4">
-                    </div>
-                    
-                    <div class="form-group">
-                      <label class="display-4">Message</label>
-                      <textarea name="Message" placeholder="Tell me about your project or opportunity..." rows="4" class="display-4"></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-primary display-4" id="submitBtn">Send Message</button>
-                    
-                    <div id="status-message" style="display: none; margin-top: 15px; padding: 10px; border-radius: 5px; text-align: center;"></div>
-                  </form>
+                  <form id="google-sheet-form" onsubmit="return false;">
+      
+      <div class="form-group">
+        <label class="display-4">Name</label>
+        <input type="text" name="Name" id="inpName" placeholder="Your full name" required="" class="display-4">
+      </div>
+      
+      <div class="form-group">
+        <label class="display-4">Email</label>
+        <input type="email" name="Email" id="inpEmail" placeholder="your.email@example.com" required="" class="display-4">
+      </div>
+      
+      <div class="form-group">
+        <label class="display-4">Subject</label>
+        <input type="text" name="Subject" placeholder="What's this about?" class="display-4">
+      </div>
+      
+      <div class="form-group">
+        <label class="display-4">Message</label>
+        <textarea name="Message" placeholder="Tell me about your project or opportunity..." rows="4" class="display-4"></textarea>
+      </div>
+      
+      <button type="button" class="btn btn-primary display-4" id="btnSubmit" onclick="subForm()">Send Message</button>
+      
+      <div id="msg-status" style="display:none; margin-top:10px; padding:10px; border-radius:5px; text-align:center;"></div>
+    </form>
                 </div>
               </div>
 
@@ -733,6 +734,72 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 </script>
-  
+  <script>
+// --- CẤU HÌNH URL CỦA BẠN ---
+const scriptURL = 'https://script.google.com/macros/s/AKfycbxhtzfv9vlefJw2taidCkMKMR3I-tD8_OBqYG8lHM4fK3Kmib4W7jDboX66SzcGbX8x/exec';
+// ----------------------------
+
+function subForm() {
+    console.log("🚀 Nút gửi đã được bấm!");
+
+    const form = document.getElementById('google-sheet-form');
+    const btn = document.getElementById('btnSubmit');
+    const msg = document.getElementById('msg-status');
+    const nameInp = document.getElementById('inpName');
+    const emailInp = document.getElementById('inpEmail');
+
+    // 1. Tự kiểm tra dữ liệu rỗng (Vì type="button" không tự check required)
+    if (!nameInp.value || !emailInp.value) {
+        alert("Please fill in Name and Email!");
+        console.log("❌ Thiếu thông tin bắt buộc");
+        return;
+    }
+
+    // 2. Hiệu ứng đang gửi
+    const originalText = btn.innerText;
+    btn.innerHTML = 'Sending...';
+    btn.disabled = true;
+    msg.style.display = 'none';
+
+    // 3. Chuẩn bị dữ liệu
+    const formData = new FormData(form);
+    
+    // Log dữ liệu để kiểm tra
+    console.log("📦 Dữ liệu chuẩn bị gửi:");
+    for (var pair of formData.entries()) {
+        console.log(pair[0] + ': ' + pair[1]);
+    }
+
+    // 4. Gửi đi
+    fetch(scriptURL, { method: 'POST', body: formData })
+        .then(response => {
+             console.log("📩 Phản hồi từ Server:", response);
+             return response.json();
+        })
+        .then(data => {
+            console.log("🎉 Kết quả:", data);
+            if (data.result === 'success') {
+                msg.innerHTML = "✅ Message sent successfully!";
+                msg.style.backgroundColor = "#d4edda"; // Xanh lá
+                msg.style.color = "#155724";
+                msg.style.display = "block";
+                form.reset();
+            } else {
+                throw new Error("Google Script báo lỗi: " + JSON.stringify(data));
+            }
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        })
+        .catch(error => {
+            console.error('❌ Lỗi Fetch:', error);
+            msg.innerHTML = "❌ Error! Check Console for details.";
+            msg.style.backgroundColor = "#f8d7da"; // Đỏ
+            msg.style.color = "#721c24";
+            msg.style.display = "block";
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        });
+}
+</script>
 </body>
 </html>
