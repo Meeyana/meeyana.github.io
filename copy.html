@@ -10,6 +10,10 @@
         body { font-family: 'Inter', sans-serif; background-color: #f3f4f6; }
         .hidden { display: none; }
         pre { font-family: 'Inter', sans-serif; }
+        /* Hiệu ứng chuyển động cho phần thu gọn */
+        .content-transition {
+            transition: max-height 0.3s ease-out;
+        }
     </style>
 </head>
 <body class="p-4 sm:p-8">
@@ -66,7 +70,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
                 Nội dung nhận được
             </div>
-            <div id="messages-container" class="space-y-4">
+            <div id="messages-container" class="space-y-4 pb-20">
                 <div class="text-center py-12 text-gray-400 border-2 border-dashed border-gray-200 rounded-3xl">
                     Chờ dữ liệu từ thiết bị khác...
                 </div>
@@ -113,13 +117,12 @@
             btn.innerText = 'Đang gửi...';
 
             try {
-                // ntfy.sh tự động chuyển body thành file nếu > 4096 bytes
                 await fetch(`${NTFY_URL}/${roomId}`, {
                     method: 'POST',
                     body: content,
                     headers: { 
                         'Title': 'QuickShare Copy',
-                        'Filename': 'content.txt' // Đặt tên file gợi ý cho server
+                        'Filename': 'content.txt'
                     }
                 });
                 input.value = '';
@@ -138,7 +141,6 @@
                 const data = JSON.parse(event.data);
                 if (data.event !== 'message') return;
 
-                // Kiểm tra xem có phải là file đính kèm (văn bản dài) không
                 if (data.attachment && data.attachment.url) {
                     try {
                         const response = await fetch(data.attachment.url);
@@ -165,24 +167,75 @@
                 container.innerHTML = '';
             }
 
-            const messageDiv = document.createElement('div');
-            messageDiv.className = 'bg-white p-6 rounded-2xl shadow-sm border border-gray-100 animate-in fade-in slide-in-from-bottom-2 duration-300';
-            
             const msgId = 'msg-' + Math.random().toString(36).substr(2, 9);
+            const wrapperId = 'wrap-' + msgId;
+            const btnToggleId = 'btn-toggle-' + msgId;
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'bg-white rounded-2xl shadow-sm border border-gray-100 animate-in fade-in slide-in-from-bottom-2 duration-300 overflow-hidden';
             
             messageDiv.innerHTML = `
-                <div class="flex justify-between items-start mb-3">
+                <!-- Header của card -->
+                <div class="flex justify-between items-center p-4 bg-gray-50/50 border-b border-gray-100">
                     <span class="text-[10px] font-extrabold text-blue-500 uppercase tracking-widest">Nhận lúc ${timeStr}</span>
-                    <button onclick="copyToClipboard('${msgId}')" class="text-gray-400 hover:text-blue-600 flex items-center gap-1 transition-all">
-                        <span id="copy-status-${msgId}" class="text-xs font-bold hidden text-green-500">Đã chép!</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    </button>
+                    <div class="flex items-center gap-3">
+                        <button onclick="copyToClipboard('${msgId}')" class="text-gray-400 hover:text-blue-600 flex items-center gap-1 transition-all">
+                            <span id="copy-status-${msgId}" class="text-xs font-bold hidden text-green-500">Đã chép!</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                    </div>
                 </div>
-                <pre id="${msgId}" class="text-gray-700 whitespace-pre-wrap text-md leading-relaxed break-words">${escapeHtml(text)}</pre>
+
+                <!-- Nội dung thu gọn -->
+                <div id="${wrapperId}" class="max-h-24 overflow-hidden relative content-transition">
+                    <div class="p-6 pt-4">
+                        <pre id="${msgId}" class="text-gray-700 whitespace-pre-wrap text-md leading-relaxed break-words">${escapeHtml(text)}</pre>
+                    </div>
+                    <!-- Lớp phủ mờ khi thu gọn -->
+                    <div id="overlay-${msgId}" class="absolute bottom-0 left-0 w-full h-12 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+                </div>
+
+                <!-- Nút điều khiển Xem thêm -->
+                <button id="${btnToggleId}" onclick="toggleContent('${msgId}')" class="w-full py-2 text-xs font-bold text-gray-400 hover:bg-gray-50 border-t border-gray-50 transition-all flex items-center justify-center gap-1">
+                    <span>XEM THÊM</span>
+                    <svg id="icon-${msgId}" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="transition-transform duration-300"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                </button>
             `;
             
             container.insertBefore(messageDiv, container.firstChild);
+
+            // Kiểm tra nếu nội dung quá ngắn thì ẩn nút "Xem thêm"
+            setTimeout(() => {
+                const preElement = document.getElementById(msgId);
+                const wrapper = document.getElementById(wrapperId);
+                if (preElement.offsetHeight <= 96) { // 96px tương đương max-h-24
+                    document.getElementById(btnToggleId).classList.add('hidden');
+                    document.getElementById(`overlay-${msgId}`).classList.add('hidden');
+                    wrapper.classList.remove('max-h-24');
+                }
+            }, 50);
         }
+
+        window.toggleContent = (id) => {
+            const wrapper = document.getElementById('wrap-' + id);
+            const btn = document.getElementById('btn-toggle-' + id);
+            const overlay = document.getElementById('overlay-' + id);
+            const icon = document.getElementById('icon-' + id);
+            
+            if (wrapper.classList.contains('max-h-24')) {
+                wrapper.classList.remove('max-h-24');
+                wrapper.style.maxHeight = wrapper.scrollHeight + "px";
+                btn.querySelector('span').innerText = 'THU GỌN';
+                overlay.classList.add('opacity-0');
+                icon.classList.add('rotate-180');
+            } else {
+                wrapper.style.maxHeight = "96px";
+                wrapper.classList.add('max-h-24');
+                btn.querySelector('span').innerText = 'XEM THÊM';
+                overlay.classList.remove('opacity-0');
+                icon.classList.remove('rotate-180');
+            }
+        };
 
         window.copyToClipboard = (id) => {
             const text = document.getElementById(id).innerText;
